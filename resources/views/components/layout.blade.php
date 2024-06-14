@@ -11,10 +11,6 @@
     <header>
         @include('partials.header')
     </header>
-    
-    <nav>
-        @include('partials.nav')
-    </nav>
 
     <main>
         {{ $slot }}
