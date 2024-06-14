@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\View;
 
 class GalleryController extends Controller
 {

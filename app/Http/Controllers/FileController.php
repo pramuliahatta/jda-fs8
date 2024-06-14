@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\file;
+use App\Models\File;
 use Illuminate\Http\Request;
 
-use Illuminate\Routing\Route;
+// use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Route;
+
 use function PHPUnit\Framework\fileExists;
 
 class FileController extends Controller
@@ -16,18 +19,15 @@ class FileController extends Controller
      */
     public function index()
     {
-        // get all files data in database
-        $files = File::all();
-        $viewData = [
-            'files' => $files
-        ];
-
-        if (Route::current()->getName() == 'dashboard.file') {
-            // for view dashboard
-            return view('dashboard', $viewData);
+        $response = Http::get('http://jda-fs8.test/api/files');
+        if ($response->successful()) {
+            $data = $response->json();
+            // if (Route::current()->getName() == 'landingpage') {
+            //     return view('form.formuser', compact('data'));
+            // }
+            return compact('data');
         }
-        // for view landingpage
-        return view('landingpage.file', $viewData);
+        return abort(404, 'Data tidak ada!');
     }
 
     /**
@@ -44,24 +44,21 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        // validation data
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|max:255',
-            'file' => 'required|mimes:pdf|max:2048'
+            'file' => 'required|mimes:pdf|max:2048',
         ]);
 
-        // store file in public directory
-        $uploadedFile = $request->file('file');
-        $uploadedFileName = time() . '.' . $uploadedFile->getClientOriginalExtension();
-        $uploadedFile->move(public_path('/file/upload'), $uploadedFile);
-
-        // make new data in database
-        $file = new File;
-
-        // store file data in database
-        $file->name = $validatedData['name'];
-        $file->file = '/file/upload/' . $uploadedFileName;
-        $file->save();
+        $response = Http::asMultipart()->post(
+            'http://jda-fs8.test/api/files',
+            [
+                'name'      => $request->name,
+            ]
+        )->attach(
+            'file',
+            $request->file('file')->get(),
+            $request->file('file')->getClientOriginalName()
+        );
 
         // stay in the page and return success message
         return back()->with('success', 'File berhasil disimpan!');
