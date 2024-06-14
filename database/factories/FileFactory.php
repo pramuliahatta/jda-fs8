@@ -17,7 +17,8 @@ class FileFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->word(),
+            'file' => 'test.pdf',
         ];
     }
 }
