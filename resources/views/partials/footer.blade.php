@@ -1,14 +1,15 @@
-<!-- resources/views/partials/footer.blade.php -->
-{{-- <footer>
-    <p> My Application. All rights reserved.</p>
-</footer> --}}
-
 <footer class="p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
     <div class="mx-auto max-w-screen-xl text-center">
         <a href="#" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg"
-                class="mr-3 h-6 sm:h-9" alt="logo" />
-            Desa Cidadap
+                class="mr-3 h-12" alt="logo" />
+            <span class="self-center text-left text-xs font-semibold whitespace-nowrap dark:text-white">
+                PEMERINTAH KABUPATEN MAJALENGKA
+                <br />
+                KECAMATAN CINGAMBUL
+                <br />
+                DESA CIDADAP
+            </span>
         </a>
         <p class="my-6 text-gray-500 dark:text-gray-400">
             Jl. Desa Cidadap No. 1 Desa Cidadap, Kecamatan Cingambul, Kabupaten Majalengka, Provinsi Jawa Barat, Kode

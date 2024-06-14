@@ -2,8 +2,14 @@
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
         <a href="https://flowbite.com" class="flex items-center">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg"
-                class="mr-3 h-6 sm:h-9" alt="logo" />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Desa Cidadap</span>
+                class="mr-3 h-12" alt="logo" />
+            <span class="self-center text-xs font-semibold whitespace-nowrap dark:text-white">
+                PEMERINTAH KABUPATEN MAJALENGKA
+                <br />
+                KECAMATAN CINGAMBUL
+                <br />
+                DESA CIDADAP
+            </span>
         </a>
         <div class="flex items-center lg:order-2">
 
