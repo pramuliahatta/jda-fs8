@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use Illuminate\Http\Request;
 
+use Illuminate\Routing\Route;
+use App\Http\Controllers\Controller;
+use function PHPUnit\Framework\fileExists;
+
 class FileController extends Controller
 {
     /**
@@ -12,7 +16,18 @@ class FileController extends Controller
      */
     public function index()
     {
-        
+        // get all files data in database
+        $files = File::all();
+        $viewData = [
+            'files' => $files
+        ];
+
+        if (Route::current()->getName() == 'dashboard.file') {
+            // for view dashboard
+            return view('dashboard', $viewData);
+        }
+        // for view landingpage
+        return view('landingpage.file', $viewData);
     }
 
     /**
@@ -20,7 +35,8 @@ class FileController extends Controller
      */
     public function create()
     {
-        //
+        // view create page 
+        return view('dashboard.file-create');
     }
 
     /**
@@ -28,7 +44,27 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation data
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'file' => 'required|mimes:pdf|max:2048'
+        ]);
+
+        // store file in public directory
+        $uploadedFile = $request->file('file');
+        $uploadedFileName = time() . '.' . $uploadedFile->getClientOriginalExtension();
+        $uploadedFile->move(public_path('/file/upload'), $uploadedFile);
+
+        // make new data in database
+        $file = new File;
+
+        // store file data in database
+        $file->name = $validatedData['name'];
+        $file->file = '/file/upload/' . $uploadedFileName;
+        $file->save();
+
+        // stay in the page and return success message
+        return back()->with('success', 'File berhasil disimpan!');
     }
 
     /**
@@ -36,7 +72,6 @@ class FileController extends Controller
      */
     public function show(file $file)
     {
-        //
     }
 
     /**
@@ -44,22 +79,68 @@ class FileController extends Controller
      */
     public function edit(file $file)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, file $file)
+    public function update(Request $request, $id)
     {
-        //
+        // get file data in database
+        $file = File::find($id);
+        if (!$file) {
+            return back()->with('error', 'File tidak ditemukan!');
+        }
+
+        // validation input data
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'file' => 'required|mimes:pdf|max:2048'
+        ]);
+
+        if ($request->hasFile('file')) {
+            // store file in public directory
+            $uploadedFile = $request->file('file');
+            $uploadedFileName = time() . '.' . $uploadedFile->getClientOriginalExtension();
+            $uploadedFile->move(public_path('/file/upload'), $uploadedFile);
+
+            // remove old file in public directory
+            $oldFilePath = public_path($file->file);
+            if (file_exists($oldFilePath)) {
+                @unlink($oldFilePath);
+            }
+
+            // store file data (file) in database
+            $file->file = 'file/upload/' . $uploadedFileName;
+        }
+
+        // store file data (name) in database
+        $file->name = $validatedData['name'];
+        $file->save();
+
+        // stay in the page and return success message
+        return back()->with('success', 'File berhasil disimpan!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(file $file)
+    public function destroy(string $id)
     {
-        //
+        // get file data in database
+        $file = File::find($id);
+
+        if ($file) {
+            // remove file in public directory
+            $filePath = public_path($file->file);
+            if (fileExists($filePath)) {
+                @unlink($filePath);
+            }
+
+            // remove file data in database
+            $file->delete();
+            return back()->with('success', 'File berhasil dihapus!');
+        }
+        return back()->with('error', 'File tidak ditemukan!');
     }
 }
