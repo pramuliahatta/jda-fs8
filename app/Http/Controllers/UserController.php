@@ -104,20 +104,46 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // $validatedData = $request->validate([
-        //     'name' => [
-        //         'required',
-        //         'max:255',
-        //     ],
-        // ]);
+        //cek jika route 'dashboard.user.update' yang mana digunakan untuk dashboard maka ganti langsung password ke default. jika tidak ganti nomor/password sesuai dengan form yang diisi user
+        if(Route::current()->getName() == 'dashboard.user.update') {
+            //pembuatan password default ke var validateData dengan kunci password
+            $validatedData['password'] = Hash::make('12345');
 
-        // $updatedData = User::where('id', $user->id)
-        //     ->update($validatedData);
-        // if ($updatedData) {
-        //     return back()->with('success', 'User updated successfully');
-        // }
+            $updatedData = User::where('id', $user->id)
+            ->update($validatedData);
+
+            //pengecekan jika user berhasil diupdate
+            if ($updatedData) {
+                return back()->with('success', 'User updated successfully');
+            }
         
-        // return back()->with('error', 'Error.');
+            return back()->with('error', 'Error.');
+        }
+
+        //pengecekan data dari form yang diisi oleh user
+        $validatedData = $request->validate([
+            'phone_number' => [
+                'required',
+                'min:7',
+                'max:20',
+            ],
+            'password' => [
+                'required',
+                'min:4',
+                'max:20',
+                'confirmed',
+            ]
+        ]);
+
+        $updatedData = User::where('id', $user->id)
+        ->update($validatedData);
+
+        //pengecekan jika user berhasil diupdate
+        if ($updatedData) {
+            return back()->with('success', 'User updated successfully');
+        }
+        
+        return back()->with('error', 'Error.');
     }
 
     /**
@@ -126,6 +152,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user = User::destroy($user->id);
+
+        //pengecekan jika user berhasil dihapus
         if ($user) {
             return back()->with('success', 'User deleted successfully');
         }
@@ -134,6 +162,7 @@ class UserController extends Controller
     }
 
     public function adminCheck(User $user) {
+        //cek jika role user sama dengan 'admin'
         if($user->role == 'admin') {
             return true;
         }
@@ -141,12 +170,19 @@ class UserController extends Controller
     }
 
     public function authenticate(Request $request) {
+
+        //pengecekan validasi form yang diisi pada form login
         $credentials = $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
+
+        //cek jika email dan password sesuai dengan apa yang ada di database
         if (Auth::attempt($credentials)) {
+            //buat session baru
             $request->session()->regenerate();
+
+            //jika user admin maka arahkan user ke menu dashboard, jika user adalah pengguna biasa maka arahkan user ke halaman awal
             if(Auth::user()->role == 'admin') {
                 return redirect()->intended(route('dashboard.index'));
                 }
