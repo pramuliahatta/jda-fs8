@@ -11,9 +11,7 @@
 
 <body>
     @unless (request()->routeIs('login'))
-        <header>
-            @include('partials.header')
-        </header>
+        @include('partials.header')
     @endunless
 
     <main>
