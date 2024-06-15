@@ -1,4 +1,4 @@
-<header class="absolute w-full">
+<header>
     @if (auth()->check() && auth()->user()->isAdmin())
         @include('partials.admin_nav')
     @else
