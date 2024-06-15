@@ -10,3 +10,11 @@ Route::view('/login', 'auth.login');
 Route::view('/form', 'form.formuser');
 Route::view('/products', 'products.index');
 Route::view('/details', 'products.detail');
+
+Route::get('/articles', function () {
+    return view('articles.index');
+});
+
+Route::get('/articles/{id}', function () {
+    return view('articles.detail');
+});
