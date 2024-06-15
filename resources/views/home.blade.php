@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot name="title">Home</x-slot>
+    <x-slot name="title">Beranda</x-slot>
 
     {{-- HERO SECTION --}}
     <section class="bg-white dark:bg-gray-900">
