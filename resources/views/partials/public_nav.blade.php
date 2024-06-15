@@ -79,7 +79,7 @@
 
 <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg" class="h-12"
                 alt="logo" />
             <span class="self-center hidden xl:block text-xs font-semibold whitespace-nowrap dark:text-white">
@@ -115,7 +115,7 @@
         <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
             <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                 <li>
-                    <a href="#"
+                    <a href="{{ route('home') }}"
                         class="block py-2 pr-4 pl-3 text-white rounded bg-blue-700 lg:bg-transparent lg:text-blue-700 lg:p-0 dark:text-white"
                         aria-current="page">Beranda</a>
                 </li>
