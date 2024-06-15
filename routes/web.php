@@ -22,4 +22,7 @@ Route::get('/products/{id}', function () {
     return view('products.detail');
 })->name('productsDetail');
 
+Route::get('/gallery', function () {
+    return view('gallery.index');
+})->name('gallery');
 
