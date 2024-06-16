@@ -103,10 +103,10 @@
                     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
                         <img class="mb-4 rounded-lg h-56 w-full object-cover"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/google-hq.png"
-                            alt="Google HQ">
+                            src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
+                            alt="road-construction">
                     </a>
-                    <div class="flex justify-between items-center mb-5 text-gray-500">
+                    <div class="flex justify-between items-center mb-2 text-gray-500">
                         <span
                             class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
@@ -154,10 +154,10 @@
                     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
                         <img class="mb-4 rounded-lg h-56 w-full object-cover"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/google-hq.png"
-                            alt="Google HQ">
+                            src="https://images.pexels.com/photos/713644/pexels-photo-713644.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="festivals">
                     </a>
-                    <div class="flex justify-between items-center mb-5 text-gray-500">
+                    <div class="flex justify-between items-center mb-2 text-gray-500">
                         <span
                             class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
@@ -235,10 +235,10 @@
                     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
                         <img class="mb-4 rounded-lg h-56 w-full object-cover"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/google-hq.png"
-                            alt="Google HQ">
+                            src="https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="rice-fields">
                     </a>
-                    <div class="flex justify-between items-center mb-5 text-gray-500">
+                    <div class="flex justify-between items-center mb-2 text-gray-500">
                         <span
                             class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
@@ -287,10 +287,10 @@
                     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
                         <img class="mb-4 rounded-lg h-56 w-full object-cover"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/google-hq.png"
-                            alt="Google HQ">
+                            src="https://images.pexels.com/photos/10333242/pexels-photo-10333242.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="cooking-festivals">
                     </a>
-                    <div class="flex justify-between items-center mb-5 text-gray-500">
+                    <div class="flex justify-between items-center mb-2 text-gray-500">
                         <span
                             class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
@@ -378,11 +378,11 @@
             </div>
             <div class="grid grid-cols-2 gap-4 mt-8">
                 <img class="w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png"
-                    alt="office content 1">
+                    src="https://images.pexels.com/photos/4197987/pexels-photo-4197987.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="traditional-food">
                 <img class="mt-4 w-full lg:mt-10 rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
-                    alt="office content 2">
+                    src="https://images.pexels.com/photos/5090650/pexels-photo-5090650.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="handcraft">
             </div>
         </div>
     </section>
