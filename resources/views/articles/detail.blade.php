@@ -1,9 +1,5 @@
 <x-layout>
-    <!--
-Install the "flowbite-typography" NPM package to apply styles and format the article content:
-
-URL: https://flowbite.com/docs/components/typography/
--->
+    <x-slot name="title">Artikel</x-slot>
 
     <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
         <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
@@ -16,180 +12,173 @@ URL: https://flowbite.com/docs/components/typography/
                                 src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
                             <div>
                                 <a href="#" rel="author"
-                                    class="text-xl font-bold text-gray-900 dark:text-white">Jese Leos</a>
-                                <p class="text-base text-gray-500 dark:text-gray-400">Graphic Designer, educator & CEO
-                                    Flowbite</p>
-                                <p class="text-base text-gray-500 dark:text-gray-400"><time pubdate
-                                        datetime="2022-02-08" title="February 8th, 2022">Feb. 8, 2022</time></p>
+                                    class="text-xl font-bold text-gray-900 dark:text-white">
+                                    Hendra, S.Pd
+                                </a>
+                                <p class="text-base text-gray-500 dark:text-gray-400">
+                                    Kepala Desa Cidadap
+                                </p>
+                                <p class="text-base text-gray-500 dark:text-gray-400">
+                                    <time pubdate datetime="2024-06-12" title="June 12th, 2024">
+                                        Feb. 6, 2024
+                                    </time>
+                                </p>
                             </div>
                         </div>
                     </address>
                     <h1
                         class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
-                        Best practices for successful prototypes</h1>
+                        Pembangunan Jalan Desa Baru
+                    </h1>
                 </header>
-                <p class="lead">Flowbite is an open-source library of UI components built with the utility-first
-                    classes from Tailwind CSS. It also includes interactive elements such as dropdowns, modals,
-                    datepickers.</p>
-                <p>Before going digital, you might benefit from scribbling down some ideas in a sketchbook. This way,
-                    you can think things through before committing to an actual design project.</p>
-                <p>But then I found a <a href="https://flowbite.com">component library based on Tailwind CSS called
-                        Flowbite</a>. It comes with the most commonly used UI components, such as buttons, navigation
-                    bars, cards, form elements, and more which are conveniently built with the utility classes from
-                    Tailwind CSS.</p>
-                <figure><img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png"
-                        alt="">
-                    <figcaption>Digital art by Anonymous</figcaption>
-                </figure>
-                <h2>Getting started with Flowbite</h2>
-                <p>First of all you need to understand how Flowbite works. This library is not another framework.
-                    Rather, it is a set of components based on Tailwind CSS that you can just copy-paste from the
-                    documentation.</p>
-                <p>It also includes a JavaScript file that enables interactive components, such as modals, dropdowns,
-                    and datepickers which you can optionally include into your project via CDN or NPM.</p>
-                <p>You can check out the <a href="https://flowbite.com/docs/getting-started/quickstart/">quickstart
-                        guide</a> to explore the elements by including the CDN files into your project. But if you want
-                    to build a project with Flowbite I recommend you to follow the build tools steps so that you can
-                    purge and minify the generated CSS.</p>
-                <p>You'll also receive a lot of useful application UI, marketing UI, and e-commerce pages that can help
-                    you get started with your projects even faster. You can check out this <a
-                        href="https://flowbite.com/docs/components/tables/">comparison table</a> to better understand
-                    the differences between the open-source and pro version of Flowbite.</p>
-                <h2>When does design come in handy?</h2>
-                <p>While it might seem like extra work at a first glance, here are some key moments in which prototyping
-                    will come in handy:</p>
-                <ol>
-                    <li><strong>Usability testing</strong>. Does your user know how to exit out of screens? Can they
-                        follow your intended user journey and buy something from the site you’ve designed? By running a
-                        usability test, you’ll be able to see how users will interact with your design once it’s live;
-                    </li>
-                    <li><strong>Involving stakeholders</strong>. Need to check if your GDPR consent boxes are displaying
-                        properly? Pass your prototype to your data protection team and they can test it for real;</li>
-                    <li><strong>Impressing a client</strong>. Prototypes can help explain or even sell your idea by
-                        providing your client with a hands-on experience;</li>
-                    <li><strong>Communicating your vision</strong>. By using an interactive medium to preview and test
-                        design elements, designers and developers can understand each other — and the project — better.
-                    </li>
-                </ol>
-                <h3>Laying the groundwork for best design</h3>
-                <p>Before going digital, you might benefit from scribbling down some ideas in a sketchbook. This way,
-                    you can think things through before committing to an actual design project.</p>
-                <p>Let's start by including the CSS file inside the <code>head</code> tag of your HTML.</p>
-                <h3>Understanding typography</h3>
-                <h4>Type properties</h4>
-                <p>A typeface is a collection of letters. While each letter is unique, certain shapes are shared across
-                    letters. A typeface represents shared patterns across a collection of letters.</p>
-                <h4>Baseline</h4>
-                <p>A typeface is a collection of letters. While each letter is unique, certain shapes are shared across
-                    letters. A typeface represents shared patterns across a collection of letters.</p>
-                <h4>Measurement from the baseline</h4>
-                <p>A typeface is a collection of letters. While each letter is unique, certain shapes are shared across
-                    letters. A typeface represents shared patterns across a collection of letters.</p>
-                <h3>Type classification</h3>
-                <h4>Serif</h4>
-                <p>A serif is a small shape or projection that appears at the beginning or end of a stroke on a letter.
-                    Typefaces with serifs are called serif typefaces. Serif fonts are classified as one of the
-                    following:</p>
-                <h4>Old-Style serifs</h4>
-                <ul>
-                    <li>Low contrast between thick and thin strokes</li>
-                    <li>Diagonal stress in the strokes</li>
-                    <li>Slanted serifs on lower-case ascenders</li>
-                </ul><img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-2.png"
-                    alt="">
-                <ol>
-                    <li>Low contrast between thick and thin strokes</li>
-                    <li>Diagonal stress in the strokes</li>
-                    <li>Slanted serifs on lower-case ascenders</li>
-                </ol>
-                <h3>Laying the best for successful prototyping</h3>
-                <p>A serif is a small shape or projection that appears at the beginning:</p>
-                <blockquote>
-                    <p>Flowbite is just awesome. It contains tons of predesigned components and pages starting from
-                        login screen to complex dashboard. Perfect choice for your next SaaS application.</p>
-                </blockquote>
-                <h4>Code example</h4>
-                <p>A serif is a small shape or projection that appears at the beginning or end of a stroke on a letter.
-                    Typefaces with serifs are called serif typefaces. Serif fonts are classified as one of the
-                    following:</p>
-                <pre><code class="language-html">&lt;dl class="grid grid-cols-2 gap-8 max-w-screen-md text-gray-900 sm:grid-cols-3 dark:text-white"&gt;
-  &lt;div class="flex flex-col justify-center items-center"&gt;
-    &lt;dt class="mb-2 text-3xl font-extrabold"&gt;73M+&lt;/dt&gt;
-    &lt;dd class="text-lg font-normal text-gray-500 dark:text-gray-400"&gt;developers&lt;/dd&gt;
-  &lt;/div&gt;
-  &lt;div class="flex flex-col justify-center items-center"&gt;
-    &lt;dt class="mb-2 text-3xl font-extrabold"&gt;1B+&lt;/dt&gt;
-    &lt;dd class="text-lg font-normal text-gray-500 dark:text-gray-400"&gt;contributors&lt;/dd&gt;
-  &lt;/div&gt;
-  &lt;div class="flex flex-col justify-center items-center"&gt;
-    &lt;dt class="mb-2 text-3xl font-extrabold"&gt;4M+&lt;/dt&gt;
-    &lt;dd class="text-lg font-normal text-gray-500 dark:text-gray-400"&gt;organizations&lt;/dd&gt;
-  &lt;/div&gt;
-  &lt;/dl&gt;
-  </code></pre>
-                <h4>Table example</h4>
-                <p>A serif is a small shape or projection that appears at the beginning or end of a stroke on a letter.
-                </p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Country</th>
-                            <th>Date &amp; Time</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>United States</td>
-                            <td>April 21, 2021</td>
-                            <td><strong>$2,300</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Canada</td>
-                            <td>May 31, 2021</td>
-                            <td><strong>$300</strong></td>
-                        </tr>
-                        <tr>
-                            <td>United Kingdom</td>
-                            <td>June 3, 2021</td>
-                            <td><strong>$2,500</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Australia</td>
-                            <td>June 23, 2021</td>
-                            <td><strong>$3,543</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Germany</td>
-                            <td>July 6, 2021</td>
-                            <td><strong>$99</strong></td>
-                        </tr>
-                        <tr>
-                            <td>France</td>
-                            <td>August 23, 2021</td>
-                            <td><strong>$2,540</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <h3>Best practices for setting up your prototype</h3>
-                <p><strong>Low fidelity or high fidelity?</strong> Fidelity refers to how close a prototype will be to
-                    the real deal. If you’re simply preparing a quick visual aid for a presentation, a low-fidelity
-                    prototype — like a wireframe with placeholder images and some basic text — would be more than
-                    enough. But if you’re going for more intricate usability testing, a high-fidelity prototype — with
-                    on-brand colors, fonts and imagery — could help get more pointed results.</p>
-                <p><strong>Consider your user</strong>. To create an intuitive user flow, try to think as your user
-                    would when interacting with your product. While you can fine-tune this during beta testing,
-                    considering your user’s needs and habits early on will save you time by setting you on the right
-                    path.</p>
-                <p><strong>Start from the inside out</strong>. A nice way to both organize your tasks and create more
-                    user-friendly prototypes is by building your prototypes ‘inside out’. Start by focusing on what will
-                    be important to your user, like a Buy now button or an image gallery, and list each element by order
-                    of priority. This way, you’ll be able to create a prototype that puts your users’ needs at the heart
-                    of your design.</p>
-                <p>And there you have it! Everything you need to design and share prototypes — right in Flowbite Figma.
+                <p class="lead">
+                    Proyek pembangunan jalan desa baru telah resmi dimulai minggu ini. Pembangunan ini merupakan salah
+                    satu program unggulan pemerintah Desa Cidadap untuk meningkatkan kualitas infrastruktur dan
+                    kesejahteraan masyarakat. Jalan baru ini diharapkan akan membawa berbagai manfaat signifikan bagi
+                    warga desa.
                 </p>
 
+                <figure>
+                    <img class="w-full h-96 rounded-lg object-cover"
+                        src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
+                        alt="road-construction">
+                    <figcaption>Pembangunan Jalan Baru</figcaption>
+                </figure>
+                <h2>Tujuan dan Manfaat Pembangunan Jalan Desa Baru</h2>
+                <p>
+                    Tujuan utama dari pembangunan jalan ini adalah untuk meningkatkan aksesibilitas dan kenyamanan bagi
+                    warga Desa Cidadap. Selama ini, kondisi jalan yang kurang memadai sering kali menjadi hambatan dalam
+                    kegiatan sehari-hari warga, terutama dalam hal mobilitas dan transportasi. Dengan adanya jalan baru
+                    ini, diharapkan warga dapat menikmati perjalanan yang lebih lancar dan aman.
+                </p>
+                <p>
+                    Selain itu, pembangunan jalan baru ini juga bertujuan untuk mempermudah transportasi hasil pertanian
+                    dan produk lokal. Desa Cidadap dikenal dengan hasil pertanian yang melimpah serta produk-produk
+                    lokal yang berkualitas. Dengan akses jalan yang lebih baik, distribusi hasil pertanian dan produk
+                    lokal akan menjadi lebih efisien, sehingga dapat meningkatkan perekonomian desa secara keseluruhan.
+                </p>
+                <h2>Tujuan dan Manfaat Pembangunan Jalan Desa Baru</h2>
+                <p>
+                    Proyek pembangunan jalan desa ini melibatkan berbagai pihak, termasuk pemerintah desa, kontraktor
+                    lokal, dan warga setempat. Pemerintah desa telah melakukan koordinasi dengan berbagai pihak terkait
+                    untuk memastikan proses pembangunan berjalan lancar dan tepat waktu. Selain itu, warga desa juga
+                    turut berpartisipasi dalam proyek ini, baik melalui gotong royong maupun memberikan masukan yang
+                    konstruktif.
+                </p>
+                <p>
+                    Kepala Desa Cidadap, Bapak Ahmad Syahroni, menyampaikan apresiasinya atas partisipasi aktif warga
+                    dalam proyek ini. "Kami sangat menghargai dukungan dan partisipasi warga Desa Cidadap dalam
+                    pembangunan jalan desa baru ini. Ini adalah bukti nyata semangat gotong royong dan kebersamaan kita
+                    dalam membangun desa yang lebih baik," ujarnya.
+                </p>
+                <h2>Harapan untuk Masa Depan</h2>
+                <p>
+                    Dengan dimulainya proyek pembangunan jalan desa baru ini, pemerintah desa berharap bahwa berbagai
+                    hambatan yang selama ini dirasakan oleh warga dapat teratasi. Jalan baru ini tidak hanya akan
+                    meningkatkan mobilitas dan transportasi, tetapi juga diharapkan dapat mendorong pertumbuhan ekonomi
+                    desa.
+                </p>
+                <p>
+                    Pembangunan jalan desa baru ini juga merupakan bagian dari rencana jangka panjang pemerintah Desa
+                    Cidadap untuk meningkatkan kualitas hidup warganya. Ke depan, pemerintah desa berencana untuk terus
+                    mengembangkan infrastruktur dan fasilitas publik lainnya guna menciptakan desa yang lebih maju dan
+                    sejahtera.
+                </p>
+
+                <h2>Kesimpulan</h2>
+                <p>Proyek pembangunan jalan desa baru di Desa Cidadap adalah langkah penting dalam meningkatkan
+                    aksesibilitas dan kenyamanan bagi warga, serta mempermudah transportasi hasil pertanian dan produk
+                    lokal. Dengan partisipasi aktif dari warga dan dukungan penuh dari pemerintah desa, diharapkan
+                    proyek ini dapat selesai tepat waktu dan memberikan manfaat yang besar bagi seluruh masyarakat Desa
+                    Cidadap.
+                </p>
+                <p>
+                    Untuk informasi lebih lanjut mengenai perkembangan proyek ini, warga desa dapat mengunjungi kantor
+                    desa atau mengakses situs web resmi Desa Cidadap. Mari kita bersama-sama mendukung pembangunan ini
+                    demi kemajuan dan kesejahteraan Desa Cidadap.
+                </p>
             </article>
         </div>
     </main>
+
+    <aside aria-label="Related articles" class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
+        <div class="px-4 mx-auto max-w-screen-xl">
+            <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Artikel Terkait</h2>
+            <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+                <article class="max-w-xs">
+                    <a href="#">
+                        <img class="mb-5 h-44 w-full object-cover rounded-lg"src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
+                            alt="road-construction">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="#">Pembangunan Jalan Desa Baru</a>
+                    </h2>
+                    <p class="mb-4 text-gray-500 dark:text-gray-400">
+                        Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
+                        meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
+                        pertanian dan produk lokal.
+                    </p>
+                    <a href="#"
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        Baca Selengkapnya
+                    </a>
+                </article>
+                <article class="max-w-xs">
+                    <a href="#">
+                        <img class="mb-5 h-44 w-full object-cover rounded-lg"
+                            src="https://images.pexels.com/photos/713644/pexels-photo-713644.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="festivals">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="#">Festival Budaya Tahunan</a>
+                    </h2>
+                    <p class="mb-4  text-gray-500 dark:text-gray-400">
+                        Festival budaya tahunan Desa Cidadap akan diselenggarakan bulan depan. Acara ini akan
+                        menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan
+                        khas daerah.
+                    </p>
+                    <a href="#"
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        Baca Selengkapnya
+                    </a>
+                </article>
+                <article class="max-w-xs">
+                    <a href="#">
+                        <img class="mb-5 h-44 w-full object-cover rounded-lg"
+                            src="https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="rice-fields">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="#"> Gotong Royong Desa</a>
+                    </h2>
+                    <p class="mb-4  text-gray-500 dark:text-gray-400">
+                        Ayo bersama-sama membersihkan
+                        lingkungan desa dalam kegiatan gotong royong. Ini adalah kesempatan untuk mempererat silaturahmi
+                        dan menjaga kebersihan desa kita.
+                    </p>
+                    <a href="#"
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        Baca Selengkapnya
+                    </a>
+                </article>
+                <article class="max-w-xs">
+                    <a href="#">
+                        <img class="mb-5 h-44 w-full object-cover rounded-lg"
+                            src="https://images.pexels.com/photos/10333242/pexels-photo-10333242.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="cooking-festivals">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="#">Lomba Memasak Tradisional</a>
+                    </h2>
+                    <p class="mb-4  text-gray-500 dark:text-gray-400">Ikuti lomba memasak dengan resep-resep tradisional
+                        Desa Cidadap. Acara ini terbuka untuk semua
+                        warga desa dan pemenang akan mendapatkan hadiah menarik.</p>
+                    <a href="#"
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        Baca Selengkapnya
+                    </a>
+                </article>
+            </div>
+        </div>
+    </aside>
 </x-layout>

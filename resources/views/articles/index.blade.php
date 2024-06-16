@@ -1,4 +1,6 @@
 <x-layout>
+    <x-slot name="title">Artikel</x-slot>
+
     {{-- NEWS SECTION --}}
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
