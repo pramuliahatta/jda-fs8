@@ -101,9 +101,14 @@
             <div class="grid gap-8 lg:grid-cols-2">
                 <article
                     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <a href="#">
+                        <img class="mb-4 rounded-lg h-56 w-full object-cover"
+                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/google-hq.png"
+                            alt="Google HQ">
+                    </a>
                     <div class="flex justify-between items-center mb-5 text-gray-500">
                         <span
-                            class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -147,9 +152,14 @@
                 </article>
                 <article
                     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <a href="#">
+                        <img class="mb-4 rounded-lg h-56 w-full object-cover"
+                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/google-hq.png"
+                            alt="Google HQ">
+                    </a>
                     <div class="flex justify-between items-center mb-5 text-gray-500">
                         <span
-                            class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -166,7 +176,7 @@
                         </a>
                     </h2>
                     <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
-                        Festival budaya tahunan Desa Cibabad akan diselenggarakan bulan depan. Acara ini akan
+                        Festival budaya tahunan Desa Cidadap akan diselenggarakan bulan depan. Acara ini akan
                         menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan
                         khas daerah.
                     </p>
@@ -216,16 +226,21 @@
                     Acara Mendatang
                 </h2>
                 <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">
-                    Jangan lewatkan berbagai acara menarik yang akan berlangsung di Desa Cibabad. Bergabunglah dalam
+                    Jangan lewatkan berbagai acara menarik yang akan berlangsung di Desa Cidadap. Bergabunglah dalam
                     kegiatan-kegiatan kami dan rasakan kebersamaan serta kekayaan budaya desa.
                 </p>
             </div>
             <div class="grid gap-8 lg:grid-cols-2">
                 <article
                     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <a href="#">
+                        <img class="mb-4 rounded-lg h-56 w-full object-cover"
+                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/google-hq.png"
+                            alt="Google HQ">
+                    </a>
                     <div class="flex justify-between items-center mb-5 text-gray-500">
                         <span
-                            class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -270,9 +285,14 @@
                 </article>
                 <article
                     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <a href="#">
+                        <img class="mb-4 rounded-lg h-56 w-full object-cover"
+                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/google-hq.png"
+                            alt="Google HQ">
+                    </a>
                     <div class="flex justify-between items-center mb-5 text-gray-500">
                         <span
-                            class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -290,7 +310,7 @@
                         </a>
                     </h2>
                     <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
-                        Ikuti lomba memasak dengan resep-resep tradisional Desa Cibabad. Acara ini terbuka untuk semua
+                        Ikuti lomba memasak dengan resep-resep tradisional Desa Cidadap. Acara ini terbuka untuk semua
                         warga desa dan pemenang akan mendapatkan hadiah menarik."
 
                     </p>
