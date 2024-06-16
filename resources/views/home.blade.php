@@ -59,10 +59,10 @@
         <div
             class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
             <img class="w-full dark:hidden rounded-lg"
-                src="https://images.pexels.com/photos/668279/pexels-photo-668279.jpeg?auto=compress&cs=tinysrgb&w=600"
+                src="https://images.pexels.com/photos/6457521/pexels-photo-6457521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="dashboard image">
             <img class="w-full hidden dark:block rounded-lg"
-                src="https://images.pexels.com/photos/668279/pexels-photo-668279.jpeg?auto=compress&cs=tinysrgb&w=600"
+                src="https://images.pexels.com/photos/6457521/pexels-photo-6457521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="dashboard image">
             <div class="mt-4 md:mt-0">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
