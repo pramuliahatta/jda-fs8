@@ -62,14 +62,6 @@
                     </div>
                 </div> 
             </div>
-<<<<<<< HEAD
         </section>
     </body>
 </html>
-=======
-        </div>
-    </section>
-</body>
-
-</html>
->>>>>>> fc7897009b97a299b1e33c876976670480038349
