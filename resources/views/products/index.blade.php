@@ -1,4 +1,5 @@
 <x-layout>
+    <x-slot name="title">Pasar Desa</x-slot>
 
     <section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
         <div class="max-w-screen-xl px-4 mx-auto lg:px-12 w-full">
