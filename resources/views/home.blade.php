@@ -204,7 +204,7 @@
                     </div>
                 </article>
             </div>
-            <div class="flex justify-end my-4">
+            <div class="flex justify-end my-8">
                 <a href="#"
                     class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Berita
@@ -338,7 +338,7 @@
                     </div>
                 </article>
             </div>
-            <div class="flex justify-end my-4">
+            <div class="flex justify-end my-8">
                 <a href="#"
                     class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Acara
@@ -495,7 +495,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-end my-4">
+            <div class="flex justify-end my-8">
                 <a href="#"
                     class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Galeri
