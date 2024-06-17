@@ -14,3 +14,12 @@ Route::view('/details', 'products.detail');
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->name('dashboard');
+
+Route::get('/articles', function () {
+    return view('articles.index');
+})->name('articles');
+
+Route::get('/articles/{id}', function () {
+    return view('articles.detail');
+})->name('articlesDetail');
+
