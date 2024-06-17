@@ -2,8 +2,8 @@
     <x-slot name="title">Pengguna</x-slot>
 
     <!-- Start block -->
-    <section class="bg-gray-50 dark:bg-gray-900 p-4 md:ml-64 h-auto pt-20 antialiased">
-        <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+    <section class="p-4 md:ml-64 h-auto pt-20 antialiased">
+        <div>
             <!-- Start coding here -->
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                 <div
