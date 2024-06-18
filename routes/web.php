@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,9 +11,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/login', [UserController::class, 'index'])->name('login');
-Route::post('/login', [UserController::class, 'authenticate'])->name('authenticate');
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/services', function () {
     return view('form.formuser');
@@ -26,9 +27,7 @@ Route::get('/products/{id}', function () {
     return view('products.detail');
 })->name('products.detail');
 
-Route::get('/gallery', function () {
-    return view('gallery.index');
-})->name('gallery');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/articles', function () {
     return view('articles.index');
