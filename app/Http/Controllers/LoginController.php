@@ -28,7 +28,7 @@ class LoginController extends Controller
             if(Auth::user()->role == 'admin') {
                 return redirect()->intended(route('dashboard.index'));
                 }
-            return redirect()->intended('/');
+            return redirect()->intended(route('home'));
         }
 
         return back()->with('error', 'Login Failed');
@@ -38,6 +38,6 @@ class LoginController extends Controller
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect()->intended('/dashboard');
+        return redirect()->intended(route('home'));
     }
 }
