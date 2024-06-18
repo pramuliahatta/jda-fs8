@@ -22,7 +22,7 @@ Route::get('/products', function () {
 
 Route::get('/products/{id}', function () {
     return view('products.detail');
-})->name('productsDetail');
+})->name('products.detail');
 
 Route::get('/gallery', function () {
     return view('gallery.index');
@@ -34,7 +34,7 @@ Route::get('/articles', function () {
 
 Route::get('/articles/{id}', function () {
     return view('articles.detail');
-})->name('articlesDetail');
+})->name('articles.detail');
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', function () {
@@ -57,6 +57,4 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
 });
-
-
 
