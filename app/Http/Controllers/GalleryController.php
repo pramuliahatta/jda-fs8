@@ -8,6 +8,7 @@ use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 
+
 class GalleryController extends Controller
 {
     /**

@@ -9,7 +9,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
 Route::apiResources([
     "galleries" => GalleryController::class,
     "files" => FileController::class,

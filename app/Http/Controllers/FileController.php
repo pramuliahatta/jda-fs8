@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Route;
 
 use function PHPUnit\Framework\fileExists;
 
+use Illuminate\Routing\Route;
+use App\Http\Controllers\Controller;
+use function PHPUnit\Framework\fileExists;
+
 class FileController extends Controller
 {
     /**
@@ -42,21 +46,24 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // validation data
+        $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'file' => 'required|mimes:pdf|max:2048',
+            'file' => 'required|mimes:pdf|max:2048'
         ]);
 
-        $response = Http::asMultipart()->post(
-            'http://jda-fs8.test/api/files',
-            [
-                'name'      => $request->name,
-            ]
-        )->attach(
-            'file',
-            $request->file('file')->get(),
-            $request->file('file')->getClientOriginalName()
-        );
+        // store file in public directory
+        $uploadedFile = $request->file('file');
+        $uploadedFileName = time() . '.' . $uploadedFile->getClientOriginalExtension();
+        $uploadedFile->move(public_path('/file/upload'), $uploadedFile);
+
+        // make new data in database
+        $file = new File;
+
+        // store file data in database
+        $file->name = $validatedData['name'];
+        $file->file = '/file/upload/' . $uploadedFileName;
+        $file->save();
 
         // stay in the page and return success message
         return back()->with('success', 'File berhasil disimpan!');
