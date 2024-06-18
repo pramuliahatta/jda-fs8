@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Illuminate\Http\Request;
-
-// use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -22,10 +20,10 @@ class FileController extends Controller
         $response = Http::get('http://jda-fs8.test/api/files');
         if ($response->successful()) {
             $data = $response->json();
-            // if (Route::current()->getName() == 'landingpage') {
-            //     return view('form.formuser', compact('data'));
-            // }
-            return compact('data');
+            if (Route::current()->getName() == 'landingpage') {
+                return view('form.formuser', compact('data'));
+            }
+            return view('dashboard.form', compact('data'));
         }
         return abort(404, 'Data tidak ada!');
     }

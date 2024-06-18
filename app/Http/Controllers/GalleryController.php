@@ -6,6 +6,7 @@ use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 
 class GalleryController extends Controller
 {
@@ -14,17 +15,15 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        // get all galleries data in database
-        $photos = Gallery::all();
-        $view_data = [
-            'photos' => $photos,
-        ];
-        if (Route::current()->getName() == 'dashboard.gallery') {
-            // for view dashboard
-            return view('dashboard.gallery', $view_data);
+        $response = Http::get('http://jda-fs8.test/api/galleries');
+        if ($response->successful()) {
+            $data = $response->json();
+            if (Route::current()->getName() == 'dashboard.gallery.index') {
+                return view('dashboard.gallery.index', compact('data'));
+            }
+            return view('gallery.index', compact('data'));
         }
-        // for view landingpage
-        return view('landingpage.gallery', $view_data);
+        return abort(404, 'Data tidak ada!');
     }
 
 
