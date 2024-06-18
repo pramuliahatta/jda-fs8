@@ -26,3 +26,10 @@ Route::get('/gallery', function () {
     return view('gallery.index');
 })->name('gallery');
 
+Route::get('/articles', function () {
+    return view('articles.index');
+})->name('articles');
+
+Route::get('/articles/{id}', function () {
+    return view('articles.detail');
+})->name('articlesDetail');

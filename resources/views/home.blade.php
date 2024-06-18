@@ -25,7 +25,9 @@
                 </a>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup">
+                <img class="rounded-lg"
+                    src="https://images.pexels.com/photos/161275/santorini-travel-holidays-vacation-161275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    alt="mockup">
             </div>
         </div>
     </section>
@@ -56,11 +58,11 @@
     <section class="bg-white dark:bg-gray-900">
         <div
             class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-            <img class="w-full dark:hidden"
-                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup.svg"
+            <img class="w-full dark:hidden rounded-lg"
+                src="https://images.pexels.com/photos/6457521/pexels-photo-6457521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="dashboard image">
-            <img class="w-full hidden dark:block"
-                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup-dark.svg"
+            <img class="w-full hidden dark:block rounded-lg"
+                src="https://images.pexels.com/photos/6457521/pexels-photo-6457521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="dashboard image">
             <div class="mt-4 md:mt-0">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
@@ -89,7 +91,7 @@
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+                <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Berita & Update Desa
                 </h2>
                 <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">
@@ -98,92 +100,121 @@
                     pengunjung.
                 </p>
             </div>
-            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-
-                <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="grid gap-8 lg:grid-cols-2">
+                <article
+                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
-                        <img class="rounded-t-lg h-80 object-cover w-full"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="" />
+                        <img class="mb-4 rounded-lg h-56 w-full object-cover"
+                            src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
+                            alt="road-construction">
                     </a>
-                    <div class="p-5">
+                    <div class="flex justify-between items-center mb-2 text-gray-500">
+                        <span
+                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z">
+                                </path>
+                            </svg>
+                            Berita
+                        </span>
+                        <span class="text-sm">14 days ago</span>
+                    </div>
+                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                Pembangunan Jalan Desa Baru
-                            </h5>
+                            Pembangunan Jalan Desa Baru
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                            Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
-                            meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi
-                            hasil pertanian dan produk lokal.
-                        </p>
+                    </h2>
+                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+                        Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
+                        meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
+                        pertanian dan produk lokal.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <img class="w-7 h-7 rounded-full"
+                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
+                                alt="Jese Leos avatar" />
+                            <span class="font-medium dark:text-white">
+                                Jese Leos
+                            </span>
+                        </div>
                         <a href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
                             </svg>
                         </a>
                     </div>
-                </div>
-
-                <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                </article>
+                <article
+                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
-                        <img class="rounded-t-lg h-80 object-cover w-full"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="" />
+                        <img class="mb-4 rounded-lg h-56 w-full object-cover"
+                            src="https://images.pexels.com/photos/713644/pexels-photo-713644.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="festivals">
                     </a>
-                    <div class="p-5">
+                    <div class="flex justify-between items-center mb-2 text-gray-500">
+                        <span
+                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z">
+                                </path>
+                            </svg>
+                            Berita
+                        </span>
+                        <span class="text-sm">14 days ago</span>
+                    </div>
+                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                Festival Budaya Tahunan
-                            </h5>
+                            Festival Budaya Tahunan
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                            Festival budaya tahunan Desa Cidadap akan diselenggarakan bulan depan. Acara ini akan
-                            menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar
-                            makanan khas daerah.
-                        </p>
+                    </h2>
+                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+                        Festival budaya tahunan Desa Cidadap akan diselenggarakan bulan depan. Acara ini akan
+                        menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan
+                        khas daerah.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <img class="w-7 h-7 rounded-full"
+                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                                alt="Bonnie Green avatar" />
+                            <span class="font-medium dark:text-white">
+                                Bonnie Green
+                            </span>
+                        </div>
                         <a href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
                             </svg>
                         </a>
                     </div>
-                </div>
-
-                <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                        <img class="rounded-t-lg h-80 w-full object-cover"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="" />
-                    </a>
-                    <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                Program Pelatihan Pertanian Modern
-                            </h5>
-                        </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                            Program pelatihan pertanian modern yang bertujuan untuk meningkatkan produktivitas petani
-                            desa akan dimulai minggu depan. Program ini mencakup teknik pertanian terbaru, penggunaan
-                            teknologi, dan manajemen lahan.
-                        </p>
-                        <a href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Baca Selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
+                </article>
+            </div>
+            <div class="flex justify-end my-8">
+                <a href="#"
+                    class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
+                    Lihat Semua Berita
+                    <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
@@ -191,9 +222,9 @@
 
     {{-- NEXT EVENT SECTION --}}
     <section class="bg-white dark:bg-gray-900">
-        <div class="bg-gray-100 rounded-lg py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+                <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Acara Mendatang
                 </h2>
                 <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">
@@ -201,93 +232,128 @@
                     kegiatan-kegiatan kami dan rasakan kebersamaan serta kekayaan budaya desa.
                 </p>
             </div>
-            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-
-                <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="grid gap-8 lg:grid-cols-2">
+                <article
+                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
-                        <img class="rounded-t-lg h-80 object-cover w-full"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="" />
+                        <img class="mb-4 rounded-lg h-56 w-full object-cover"
+                            src="https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="rice-fields">
                     </a>
-                    <div class="p-5">
+                    <div class="flex justify-between items-center mb-2 text-gray-500">
+                        <span
+                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                                    clip-rule="evenodd"></path>
+                                <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path>
+                            </svg>
+                            Acara
+                        </span>
+                        <span class="text-sm">14 days ago</span>
+                    </div>
+                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                Lomba Memasak Tradisional
-                            </h5>
+                            Gotong Royong Desa
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                            Ikuti lomba memasak dengan resep-resep tradisional Desa Cidadap. Acara ini terbuka untuk
-                            semua warga desa dan pemenang akan mendapatkan hadiah menarik.
-                        </p>
+                    </h2>
+                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+                        Ayo bersama-sama membersihkan
+                        lingkungan desa dalam kegiatan gotong royong. Ini adalah kesempatan untuk mempererat silaturahmi
+                        dan menjaga kebersihan desa kita.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <img class="w-7 h-7 rounded-full"
+                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
+                                alt="Jese Leos avatar" />
+                            <span class="font-medium dark:text-white">
+                                Jese Leos
+                            </span>
+                        </div>
                         <a href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
                             </svg>
                         </a>
                     </div>
-                </div>
-
-                <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                </article>
+                <article
+                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
-                        <img class="rounded-t-lg h-80 object-cover w-full"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="" />
+                        <img class="mb-4 rounded-lg h-56 w-full object-cover"
+                            src="https://images.pexels.com/photos/10333242/pexels-photo-10333242.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="cooking-festivals">
                     </a>
-                    <div class="p-5">
+                    <div class="flex justify-between items-center mb-2 text-gray-500">
+                        <span
+                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                                    clip-rule="evenodd"></path>
+                                <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path>
+                            </svg>
+                            Acara
+                        </span>
+                        <span class="text-sm">14 days ago</span>
+                    </div>
+                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                Gotong Royong Desa
-                            </h5>
+                            Lomba Memasak Tradisional
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                            Ayo bersama-sama membersihkan lingkungan desa dalam kegiatan gotong royong. Ini adalah
-                            kesempatan untuk mempererat silaturahmi dan menjaga kebersihan desa kita.
-                        </p>
+                    </h2>
+                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+                        Ikuti lomba memasak dengan resep-resep tradisional Desa Cidadap. Acara ini terbuka untuk semua
+                        warga desa dan pemenang akan mendapatkan hadiah menarik."
+
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <img class="w-7 h-7 rounded-full"
+                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                                alt="Bonnie Green avatar" />
+                            <span class="font-medium dark:text-white">
+                                Bonnie Green
+                            </span>
+                        </div>
                         <a href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
                             </svg>
                         </a>
                     </div>
-                </div>
-
-                <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                        <img class="rounded-t-lg h-80 w-full object-cover"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="" />
-                    </a>
-                    <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                Bazar Produk Lokal
-                            </h5>
-                        </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                            Bazar yang menjual produk-produk lokal hasil karya warga desa akan diadakan di alun-alun
-                            desa. Dukung ekonomi lokal dengan membeli produk-produk berkualitas dari tetangga Anda.
-                        </p>
-                        <a href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Baca Selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
+                </article>
+            </div>
+            <div class="flex justify-end my-8">
+                <a href="#"
+                    class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
+                    Lihat Semua Acara
+                    <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
     {{-- NEXT EVENT SECTION END --}}
+
 
     {{-- MARKETPLACE SECTION --}}
     <section class="bg-white dark:bg-gray-900">
@@ -314,11 +380,11 @@
             </div>
             <div class="grid grid-cols-2 gap-4 mt-8">
                 <img class="w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png"
-                    alt="office content 1">
+                    src="https://images.pexels.com/photos/4197987/pexels-photo-4197987.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="traditional-food">
                 <img class="mt-4 w-full lg:mt-10 rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
-                    alt="office content 2">
+                    src="https://images.pexels.com/photos/5090650/pexels-photo-5090650.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="handcraft">
             </div>
         </div>
     </section>
@@ -358,9 +424,7 @@
                     Lihatlah keindahan dan kehidupan sehari-hari di Desa Cidadap melalui galeri foto kami.
                 </p>
             </div>
-            <div class="grid gap-8 mb-6 lg:mb-16">
-
-
+            <div class="grid gap-8">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="grid gap-4">
                         <div>
@@ -430,7 +494,18 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+            <div class="flex justify-end my-8">
+                <a href="#"
+                    class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
+                    Lihat Semua Galeri
+                    <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
