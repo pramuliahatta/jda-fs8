@@ -118,7 +118,7 @@
                         meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
                         pertanian dan produk lokal.
                     </p>
-                    <a href="#"
+                    <a href="{{ route('articles.detail', 5) }}"
                         class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
@@ -137,7 +137,7 @@
                         menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan
                         khas daerah.
                     </p>
-                    <a href="#"
+                    <a href="{{ route('articles.detail', 6) }}"
                         class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
@@ -156,7 +156,7 @@
                         lingkungan desa dalam kegiatan gotong royong. Ini adalah kesempatan untuk mempererat silaturahmi
                         dan menjaga kebersihan desa kita.
                     </p>
-                    <a href="#"
+                    <a href="{{ route('articles.detail', 7) }}"
                         class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
@@ -173,7 +173,7 @@
                     <p class="mb-4  text-gray-500 dark:text-gray-400">Ikuti lomba memasak dengan resep-resep tradisional
                         Desa Cidadap. Acara ini terbuka untuk semua
                         warga desa dan pemenang akan mendapatkan hadiah menarik.</p>
-                    <a href="#"
+                    <a href="{{ route('articles.detail', 8) }}"
                         class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
