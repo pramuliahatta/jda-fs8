@@ -22,12 +22,12 @@ class FileController extends Controller
             'files' => $files
         ];
 
-        if (Route::current()->getName() == 'dashboard.file') {
+        if (Route::current()->getName() == 'form.formuser') {
             // for view dashboard
-            return view('dashboard', $viewData);
+            return view('form.formuser', $viewData);
         }
         // for view landingpage
-        return view('landingpage.file', $viewData);
+        return view('dashboard.forms.index', $viewData);
     }
 
     /**
@@ -36,7 +36,7 @@ class FileController extends Controller
     public function create()
     {
         // view create page 
-        return view('dashboard.file-create');
+        return view('dashboard.forms.create');
     }
 
     /**
