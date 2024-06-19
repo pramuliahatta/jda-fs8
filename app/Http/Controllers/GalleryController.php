@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 
@@ -16,15 +15,14 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $response = Http::get('http://127.0.0.1:8081/api/galleries');
+        $response = Http::get('http://jda-fs8.test/api/galleries');
         if ($response->successful()) {
             $data = $response->json();
             $data = $data['data'];
-            // dd($data);
-            return view('gallery.index', compact('data'));
-            if (Route::current()->getName() == 'dashboard.gallery.index') {
+            if (request()->route()->getName() == 'dashboard.gallery.index') {
                 return view('dashboard.gallery.index', compact('data'));
             }
+            return view('gallery.index', compact('data'));
         }
         return abort(404, 'Data tidak ada!');
     }

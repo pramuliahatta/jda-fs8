@@ -46,9 +46,7 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.articles.index');
     })->name('dashboard.articles.index');
 
-    Route::get('/gallery', function () {
-        return view('dashboard.gallery.index');
-    })->name('dashboard.gallery.index');
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('dashboard.gallery.index');
 
     Route::get('/forms', function () {
         return view('dashboard.forms.index');

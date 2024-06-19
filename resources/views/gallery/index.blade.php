@@ -14,10 +14,10 @@
             <div class="grid gap-8 mb-6 lg:mb-16">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="grid gap-4">
-                        @foreach($data as $item)
-                        <div>
-                            <p>{{ $item['title'] }}</p>
-                        </div>
+                        @foreach ($data as $item)
+                            <div>
+                                <p>{{ $item['title'] }}</p>
+                            </div>
                         @endforeach
                         <div>
                             <img class="h-auto max-w-full rounded-lg gallery-item"
