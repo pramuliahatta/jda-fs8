@@ -152,17 +152,21 @@
                             <tr>
                                 <th scope="col" class="px-4 py-4">Foto</th>
                                 <th scope="col" class="px-4 py-3">Judul</th>
-                                <th scope="col" class="px-4 py-3">Actions</th>
+                                <th scope="col" class="px-4 py-3">
+                                    <span class="sr-only">Actions</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="border-b dark:border-gray-700">
                                 <th scope="row"
-                                    class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">Apple
-                                    iMac 27&#34;</th>
+                                    class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <img src="https://images.pexels.com/photos/94693/pexels-photo-94693.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                        class="w-8 h-8 rounded-lg object-cover" alt="">
+                                </th>
                                 <td class="px-4 py-3 max-w-[12rem] truncate">What is a product description? A product
                                     description describes a product.</td>
-                                <td class="px-4 py-3 flex items-center">
+                                <td class="px-4 py-3 flex items-center justify-end">
                                     <button id="apple-imac-27-dropdown-button"
                                         data-dropdown-toggle="apple-imac-27-dropdown"
                                         class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
