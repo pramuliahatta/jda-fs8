@@ -56,7 +56,17 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users', function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
+
 });
+
+Route::get('/createproducts', function () {
+    return view('products.create');
+})->name('products.create');
+
+Route::get('/dashboardproducts', function () {
+    return view('products.dashboard');
+})->name('products.dashboard');
+
 
 
 
