@@ -45,6 +45,18 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.articles.index');
     })->name('dashboard.articles.index');
 
+    Route::get('/articles/create', function () {
+        return view('dashboard.articles.create');
+    })->name('dashboard.articles.create');
+
+    Route::get('/articles/edit/{id}', function () {
+        return view('dashboard.articles.edit');
+    })->name('dashboard.articles.edit');
+
+    Route::get('/articles/{id}', function () {
+        return view('dashboard.articles.detail');
+    })->name('dashboard.articles.detail');
+
     Route::get('/gallery', function () {
         return view('dashboard.gallery.index');
     })->name('dashboard.gallery.index');
