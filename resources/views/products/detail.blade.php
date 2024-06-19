@@ -6,7 +6,7 @@
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
                 <div class="shrink-0 max-w-md lg:max-w-lg ">
                     <div class="container mx-auto ">
-                        {{-- <div class="flex flex-col items-center"> --}}
+
                             <!-- main Product galery -->
                             <div id="custom-controls-gallery" class="relative w-full" 
                             data-carousel="static"
@@ -83,13 +83,13 @@
               <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
     
               {{-- description --}}
-              <p class="mb-6 text-gray-500 dark:text-gray-400">
+              <p class="mb-6 text-gray-700 dark:text-gray-700">
                 Studio quality three mic array for crystal clear calls and voice
                 recordings. Six-speaker sound system for a remarkably robust and
                 high-quality audio experience. Up to 256GB of ultrafast SSD storage.
               </p>
     
-              <p class="text-gray-500 dark:text-gray-400">
+              <p class="text-gray-700 dark:text-gray-700">
                 Two Thunderbolt USB 4 ports and up to two USB 3 ports. Ultrafast
                 Wi-Fi 6 and Bluetooth 5.0 wireless. Color matched Magic Mouse with
                 Magic Keyboard or Magic Keyboard with Touch ID.
