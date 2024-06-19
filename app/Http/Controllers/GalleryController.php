@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Http;
+
 
 class GalleryController extends Controller
 {
@@ -16,17 +16,17 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        // get all galleries data in database
-        $photos = Gallery::all();
-        $view_data = [
-            'photos' => $photos,
-        ];
-        if (Route::current()->getName() == 'dashboard.gallery') {
-            // for view dashboard
-            return view('dashboard.gallery', $view_data);
+        $response = Http::get('http://127.0.0.1:8081/api/galleries');
+        if ($response->successful()) {
+            $data = $response->json();
+            $data = $data['data'];
+            // dd($data);
+            return view('gallery.index', compact('data'));
+            if (Route::current()->getName() == 'dashboard.gallery.index') {
+                return view('dashboard.gallery.index', compact('data'));
+            }
         }
-        // for view landingpage
-        return view('landingpage.gallery', $view_data);
+        return abort(404, 'Data tidak ada!');
     }
 
 
