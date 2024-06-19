@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\View;
 
 class GalleryController extends Controller
 {
@@ -21,12 +19,12 @@ class GalleryController extends Controller
         $view_data = [
             'photos' => $photos,
         ];
-        if (Route::current()->getName() == 'dashboard.gallery') {
+        if (Route::current()->getName() == 'dashboard.gallery.index') {
             // for view dashboard
-            return view('dashboard.gallery', $view_data);
+            return view('dashboard.gallery.index', $view_data);
         }
         // for view landingpage
-        return view('landingpage.gallery', $view_data);
+        return view('gallery.index', $view_data);
     }
 
 
@@ -60,14 +58,14 @@ class GalleryController extends Controller
         // store photo in public directory
         $image = $request->file('photo');
         $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('img/upload'), $imageName);
+        $image->move(public_path('upload/gallery'), $imageName);
 
         // make new data in database
         $gallery = new Gallery;
 
         // store gallery data in database
         $gallery->title = $validatedData['title'];
-        $gallery->photo = 'img/upload/' . $imageName;
+        $gallery->photo = 'upload/gallery/' . $imageName;
         $gallery->save();
 
         return back()->with('success', "Photo berhasil ditambahkan!");
