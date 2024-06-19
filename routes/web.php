@@ -45,9 +45,29 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.articles.index');
     })->name('dashboard.articles.index');
 
+    Route::get('/articles/create', function () {
+        return view('dashboard.articles.create');
+    })->name('dashboard.articles.create');
+
+    Route::get('/articles/edit/{id}', function () {
+        return view('dashboard.articles.edit');
+    })->name('dashboard.articles.edit');
+
     Route::get('/gallery', function () {
         return view('dashboard.gallery.index');
     })->name('dashboard.gallery.index');
+
+    Route::get('/gallery/create', function () {
+        return view('dashboard.gallery.create');
+    })->name('dashboard.gallery.create');
+
+    Route::get('/gallery/edit/{id}', function () {
+        return view('dashboard.gallery.edit');
+    })->name('dashboard.gallery.edit');
+
+    Route::get('/gallery/detail/{id}', function () {
+        return view('dashboard.gallery.detail');
+    })->name('dashboard.gallery.detail');
 
     Route::get('/forms', function () {
         return view('dashboard.forms.index');
