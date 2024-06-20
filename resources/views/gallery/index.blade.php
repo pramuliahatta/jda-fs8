@@ -14,11 +14,11 @@
             <div class="grid gap-8 mb-6 lg:mb-16">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="grid gap-4">
+                        @foreach($data as $item)
                         <div>
-                            <img class="h-auto max-w-full rounded-lg gallery-item"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg"
-                                data-title="Image Title 1" alt="Image Title 1">
+                            <p>{{ $item['title'] }}</p>
                         </div>
+                        @endforeach
                         <div>
                             <img class="h-auto max-w-full rounded-lg gallery-item"
                                 src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg"
