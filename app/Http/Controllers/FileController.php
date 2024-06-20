@@ -7,12 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-
 use function PHPUnit\Framework\fileExists;
 
-use Illuminate\Routing\Route;
-use App\Http\Controllers\Controller;
-use function PHPUnit\Framework\fileExists;
+
 
 class FileController extends Controller
 {

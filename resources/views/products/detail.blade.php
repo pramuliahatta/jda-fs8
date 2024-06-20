@@ -45,7 +45,7 @@
                 {{-- name of product --}}
                 <div class="mt-6 sm:mt-8 lg:mt-0">
                     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-                        JANGKRIK (Jamu Organik)
+                        Studio Display
                     </h1>
                     {{-- price --}}
                     <div class="mt-4 sm:items-center sm:gap-4 sm:flex">

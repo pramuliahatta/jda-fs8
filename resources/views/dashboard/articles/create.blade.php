@@ -196,3 +196,7 @@
     </div>
 
 </x-layout>
+
+<script>
+    CKEDITOR.replace('editor');
+</script>

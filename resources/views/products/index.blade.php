@@ -118,19 +118,18 @@
 
                                 {{-- product name --}}
                                 <a href="#"
-                                    class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">JANGKRIK”</a>
+                                    class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">Studio
+                                    Display</a>
 
                                 {{-- description products --}}
-                                <p class="mt-2 text-base font-normal text-gray-500 dark:text-gray-400">Jamu yang terbuat
-                                    dari 100% bahan organik</p>
+                                <p class="mt-2 text-base font-normal text-gray-500 dark:text-gray-400">This generation
+                                    has some improvements, including a longer continuous battery life.</p>
                             </div>
                             <div>
-                                {{-- discount price
-                      <p class="text-lg font-bold text-gray-900 dark:text-white">
-                        <span class="line-through"> Rp.30.000 </span>
-                      </p> --}}
-                                {{-- real price --}}
-                                <p class="text-lg font-bold leading-tight text-red-600 dark:text-red-500">Rp.20.000</p>
+                                <p class="text-lg font-bold text-gray-900 dark:text-white">
+                                    <span class="line-through"> $1799,99 </span>
+                                </p>
+                                <p class="text-lg font-bold leading-tight text-red-600 dark:text-red-500">$1199</p>
                             </div>
 
                             <div class="mt-6 flex items-center gap-2.5">
