@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,31 +11,30 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/login', [UserController::class, 'index'])->name('login');
-Route::post('/login', [UserController::class, 'authenticate'])->name('authenticate');
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/services', function () {
-    return view('form.formuser');
-})->name('services');
+// Route::get('/services', function () {
+//     return view('form.formuser');
+// })->name('services');
+Route::get('/services', [FileController::class, 'index'])->name('services');
 
 Route::get('/products', function () {
     return view('products.index');
 })->name('products');
 
-Route::get('/products/{id}', function () {
+Route::get('/products/{product}', function () {
     return view('products.detail');
 })->name('products.detail');
 
-Route::get('/gallery', function () {
-    return view('gallery.index');
-})->name('gallery');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/articles', function () {
     return view('articles.index');
 })->name('articles');
 
-Route::get('/articles/{id}', function () {
+Route::get('/articles/{article}', function () {
     return view('articles.detail');
 })->name('articles.detail');
 
@@ -76,5 +78,5 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users', function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
-});
-
+})
+->middleware('auth');

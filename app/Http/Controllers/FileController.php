@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Illuminate\Http\Request;
-
-use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Route;
 use function PHPUnit\Framework\fileExists;
 
 class FileController extends Controller
@@ -16,18 +16,17 @@ class FileController extends Controller
      */
     public function index()
     {
-        // get all files data in database
-        $files = File::all();
-        $viewData = [
-            'files' => $files
-        ];
-
-        if (Route::current()->getName() == 'dashboard.file') {
-            // for view dashboard
-            return view('dashboard', $viewData);
+        $response = Http::get('http://127.0.0.1:8081/api/files');
+        if ($response->successful()) {
+            $data = $response->json();
+            $data = $data['data'];
+            return view('form.formuser', compact('data'));
+            if (Route::current()->getName() == 'landingpage') {
+                return view('form.formuser', compact('data'));
+            }
+            return view('dashboard.form', compact('data'));
         }
-        // for view landingpage
-        return view('landingpage.file', $viewData);
+        return abort(404, 'Data tidak ada!');
     }
 
     /**
