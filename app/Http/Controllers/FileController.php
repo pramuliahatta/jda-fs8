@@ -7,12 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-
 use function PHPUnit\Framework\fileExists;
 
-use Illuminate\Routing\Route;
-use App\Http\Controllers\Controller;
-use function PHPUnit\Framework\fileExists;
 
 class FileController extends Controller
 {
@@ -23,11 +19,11 @@ class FileController extends Controller
     {
         $response = Http::get('http://jda-fs8.test/api/files');
         if ($response->successful()) {
-            $data = $response->json();
-            if (Route::current()->getName() == 'landingpage') {
+            $data = $response->json()['data'];
+            if (request()->route()->getName() == 'services') {
                 return view('form.formuser', compact('data'));
             }
-            return view('dashboard.form', compact('data'));
+            return view('dashboard.forms.index', compact('data'));
         }
         return abort(404, 'Data tidak ada!');
     }

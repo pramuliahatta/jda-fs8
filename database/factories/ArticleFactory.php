@@ -18,7 +18,8 @@ class ArticleFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
-            'body' => fake()->paragraph(),
+            'body' => fake()->paragraph(50),
+            'category' => fake()->randomElement(['berita', 'event']),
             'photo' => 'test.jpg',
         ];
     }

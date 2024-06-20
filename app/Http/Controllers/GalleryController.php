@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Gallery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
 
 
@@ -15,16 +15,30 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $response = Http::get('http://jda-fs8.test/api/galleries');
-        if ($response->successful()) {
-            $data = $response->json();
-            $data = $data['data'];
+        $client = new Client();
+        $apiUrl = "http://jda-fs8.test/api/galleries";
+
+        try {
+            $response = $client->get($apiUrl);
+            $data = json_decode($response->getBody(), true)['data'];
             if (request()->route()->getName() == 'dashboard.gallery.index') {
-                return view('dashboard.gallery.index', compact('data'));
+                return view('dashboard.gallery.index', ['galleryData' => $data]);
             }
-            return view('gallery.index', compact('data'));
+            return view('gallery.index', ['galleryData' => $data]);
+        } catch (\Exception $e) {
+            return view('api_error', ['error' => $e->getMessage()]);
         }
-        return abort(404, 'Data tidak ada!');
+
+        // $response = Http::get('http://jda-fs8.test/api/galleries');
+        // if ($response->successful()) {
+        //     $data = $response->json();
+        //     $data = $data['data'];
+        //     if (request()->route()->getName() == 'dashboard.gallery.index') {
+        //         return view('dashboard.gallery.index', compact('data'));
+        //     }
+        //     return view('gallery.index', compact('data'));
+        // }
+        // return abort(404, 'Data tidak ada!');
     }
 
 
@@ -33,7 +47,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.gallery-create');
+        return view('dashboard.gallery.create');
     }
 
     /**
@@ -43,32 +57,37 @@ class GalleryController extends Controller
     {
         // validation data
         $validatedData = $request->validate([
-            'title' => [
-                'required',
-                'max:255'
-            ],
-            'photo' => [
-                'required',
-                'image',
-                'mimes:jpeg,png,jpg',
-                'max:2048'
-            ],
+            'title' => 'required|max:255',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // store photo in public directory
-        $image = $request->file('photo');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('img/upload'), $imageName);
+        $client = new Client();
+        $apiUrl = "http://jda-fs8.test/api/galleries";
 
-        // make new data in database
-        $gallery = new Gallery;
+        try {
+            $multipart = [
+                [
+                    'name' => 'title',
+                    'contents' => $validatedData['title']
+                ],
+            ];
 
-        // store gallery data in database
-        $gallery->title = $validatedData['title'];
-        $gallery->photo = 'img/upload/' . $imageName;
-        $gallery->save();
+            if ($request->hasFile('photo')) {
+                $multipart[] = [
+                    'name' => 'photo',
+                    'contents' => fopen($request->file('photo')->getPathname(), 'r'),
+                    'filename' => $request->file('photo')->getClientOriginalName(),
+                ];
+            }
 
-        return back()->with('success', "Photo berhasil ditambahkan!");
+            $response = $client->put($apiUrl, [
+                'multipart' => $multipart,
+            ]);
+
+            return back()->with('success', "Photo berhasil ditambahkan!");
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => "Photo berhasil ditambahkan!" . $e->getMessage()]);
+        }
     }
 
     /**
@@ -76,7 +95,7 @@ class GalleryController extends Controller
      */
     public function show(string $id)
     {
-        // return view('dashboard.detail-gallery', Gallery::find($id));
+        //
     }
 
     /**
@@ -84,7 +103,17 @@ class GalleryController extends Controller
      */
     public function edit(string $id)
     {
-        return view('dashboard.edit-gallery', Gallery::find($id));
+        $client = new Client();
+        $apiUrl = "http://jda-fs8.test/api/galleries/{$id}";
+
+        try {
+            $response = $client->get($apiUrl);
+            $data = json_decode($response->getBody(), true)['data'];
+
+            return view('dashboard.gallery.update', ['galleryData' => $data]);
+        } catch (\Exception $e) {
+            return view('api_error', ['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -92,12 +121,6 @@ class GalleryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // get gallery data in database
-        $gallery = Gallery::find($id);
-        if (!$gallery) {
-            return back()->with('error', "Photo tidak ditemukan!");
-        }
-
         // validation input data
         $validatedData = $request->validate([
             'title' => [
@@ -112,27 +135,31 @@ class GalleryController extends Controller
             ],
         ]);
 
-        if ($request->hasFile('photo')) {
-            // store photo in public directory
-            $image = $request->file('photo');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('img/upload'), $imageName);
+        $client = new Client();
+        $apiUrl = "http://jda-fs8.test/api/galleries/{$id}";
 
-            // remove old photo in public directory
-            $oldPhotoPath = public_path($gallery->photo);
-            if (file_exists($oldPhotoPath)) {
-                @unlink($oldPhotoPath);
+        try {
+            $multipart = [
+                [
+                    'name' => 'title',
+                    'contents' => $validatedData['title']
+                ],
+            ];
+
+            if ($request->hasFile('photo')) {
+                $multipart[] = [
+                    'name' => 'photo',
+                    'contents' => fopen($request->file('photo')->getPathname(), 'r'),
+                    'filename' => $request->file('photo')->getClientOriginalName(),
+                ];
             }
 
-            // store gallery data (photo) in database
-            $gallery->photo = 'img/upload/' . $imageName;
+            $response = $client->put($apiUrl, [
+                'multipart' => $multipart,
+            ]);
+        } catch (\Exception $e) {
+            return view('api_error', ['error' => $e->getMessage()]);
         }
-
-        // store gallery data (title) in database
-        $gallery->title = $validatedData['title'];
-        $gallery->save();
-
-        return back()->with('success', "Photo berhasil diubah!");
     }
 
     /**
@@ -140,20 +167,15 @@ class GalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        // get gallery data in database
-        $gallery = Gallery::find($id);
+        $client = new Client();
+        $apiUrl = "http://jda-fs8.test/api/galleries/{$id}";
 
-        if ($gallery) {
-            // remove photo in public directory
-            $imagePath = public_path($gallery->photo);
-            if (file_exists($imagePath)) {
-                @unlink($imagePath);
-            }
+        try {
+            $response = $client->delete($apiUrl);
 
-            // remove gallery data in database
-            $gallery->delete();
-            return back()->with('success', "Photo berhasil dihapus!");
+            return back()->with('success', "Photo berhasil ditambahkan!");
+        } catch (\Exception $e) {
+            return view('api_error', ['error' => $e->getMessage()]);
         }
-        return back()->with('error', "Photo tidak ditemukan!");
     }
 }

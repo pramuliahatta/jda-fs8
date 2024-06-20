@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\UserController;
+use App\Models\File;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -15,9 +16,7 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/services', function () {
-    return view('form.formuser');
-})->name('services');
+Route::get('/services', [FileController::class, 'index'])->name('services');
 
 Route::get('/products', function () {
     return view('products.index');
