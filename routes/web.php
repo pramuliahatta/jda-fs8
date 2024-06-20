@@ -53,6 +53,19 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.forms.index');
     })->name('dashboard.forms.index');
 
+    Route::get('/forms/create', function () {
+        return view('dashboard.forms.create');
+    })->name('dashboard.forms.create');
+
+    Route::get('/forms/edit', function () {
+        return view('dashboard.forms.edit');
+    })->name('dashboard.forms.edit');
+
+    Route::get('/forms/detail', function () {
+        return view('dashboard.forms.detail');
+    })->name('dashboard.forms.detail');
+
+
     Route::get('/users', function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
