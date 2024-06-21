@@ -205,7 +205,7 @@
                 </article>
             </div>
             <div class="flex justify-end my-8">
-                <a href="#"
+                <a href="{{ route('articles') }}"
                     class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Berita
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -339,7 +339,7 @@
                 </article>
             </div>
             <div class="flex justify-end my-8">
-                <a href="#"
+                <a href="{{ route('articles') }}"
                     class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Acara
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -367,7 +367,7 @@
                     tradisional yang dibuat oleh warga desa. Dukung ekonomi lokal dengan berbelanja di sini.
                 </p>
 
-                <a href="#"
+                <a href="{{ route('products') }}"
                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Kunjungi Sekarang
                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
@@ -389,7 +389,7 @@
         </div>
     </section>
 
-    <section class="bg-white dark:bg-gray-900">
+    {{-- <section class="bg-white dark:bg-gray-900">
         <div class="bg-gray-100 rounded-lg py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-sm text-center">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
@@ -410,7 +410,7 @@
                 </a>
             </div>
         </div>
-    </section>
+    </section> --}}
     {{-- MARKETPLACE SECTION END --}}
 
     {{-- GALLERY SECTION --}}
@@ -496,7 +496,7 @@
                 </div>
             </div>
             <div class="flex justify-end my-8">
-                <a href="#"
+                <a href="{{ route('gallery') }}"
                     class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Galeri
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"

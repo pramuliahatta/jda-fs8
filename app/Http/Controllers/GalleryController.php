@@ -16,29 +16,19 @@ class GalleryController extends Controller
     public function index()
     {
         $client = new Client();
-        $apiUrl = "http://jda-fs8.test/api/galleries";
+        $apiUrl = "http://127.0.0.1:8001/api/galleries";
 
         try {
             $response = $client->get($apiUrl);
-            $data = json_decode($response->getBody(), true)['data'];
+            $content = json_decode($response->getBody(), true);
+            $data = $content['data'];
             if (request()->route()->getName() == 'dashboard.gallery.index') {
-                return view('dashboard.gallery.index', ['galleryData' => $data]);
+                return view('dashboard.gallery.index', ['data' => $data]);
             }
-            return view('gallery.index', ['galleryData' => $data]);
+            return view('gallery.index', ['data' => $data]);
         } catch (\Exception $e) {
             return view('api_error', ['error' => $e->getMessage()]);
         }
-
-        // $response = Http::get('http://jda-fs8.test/api/galleries');
-        // if ($response->successful()) {
-        //     $data = $response->json();
-        //     $data = $data['data'];
-        //     if (request()->route()->getName() == 'dashboard.gallery.index') {
-        //         return view('dashboard.gallery.index', compact('data'));
-        //     }
-        //     return view('gallery.index', compact('data'));
-        // }
-        // return abort(404, 'Data tidak ada!');
     }
 
 
@@ -62,7 +52,7 @@ class GalleryController extends Controller
         ]);
 
         $client = new Client();
-        $apiUrl = "http://jda-fs8.test/api/galleries";
+        $apiUrl = "http://127.0.0.1:8001/api/galleries";
 
         try {
             $multipart = [
@@ -80,13 +70,17 @@ class GalleryController extends Controller
                 ];
             }
 
-            $response = $client->put($apiUrl, [
+            $response = $client->post($apiUrl, [
                 'multipart' => $multipart,
             ]);
 
+            // if(){
+
+            // }
+
             return back()->with('success', "Photo berhasil ditambahkan!");
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => "Photo berhasil ditambahkan!" . $e->getMessage()]);
+            return view('api_error', ['error' => $e->getMessage()]);
         }
     }
 
@@ -95,7 +89,21 @@ class GalleryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $client = new Client();
+        $apiUrl = "http://127.0.0.1:8001/api/galleries/$id";
+
+        try {
+            $response = $client->get($apiUrl);
+            $content = json_decode($response->getBody(), true);
+            $data = $content['data'];
+
+            return view('dashboard.gallery.detail', ['data' => $data]);
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            // Handle client exceptions (4xx responses)
+            $responseBody = json_decode($e->getResponse()->getBody()->getContents(), true);
+            $errorMessage = $responseBody['message'] ?? 'Server error occurred.';
+            return redirect()->route('dashboard.gallery.index')->withErrors($errorMessage);
+        }
     }
 
     /**
@@ -104,13 +112,14 @@ class GalleryController extends Controller
     public function edit(string $id)
     {
         $client = new Client();
-        $apiUrl = "http://jda-fs8.test/api/galleries/{$id}";
+        $apiUrl = "http://127.0.0.1:8001/api/galleries/$id";
 
         try {
             $response = $client->get($apiUrl);
-            $data = json_decode($response->getBody(), true)['data'];
+            $content = json_decode($response->getBody(), true);
+            $data = $content['data'];
 
-            return view('dashboard.gallery.update', ['galleryData' => $data]);
+            return view('dashboard.gallery.edit', ['data' => $data]);
         } catch (\Exception $e) {
             return view('api_error', ['error' => $e->getMessage()]);
         }
@@ -128,7 +137,7 @@ class GalleryController extends Controller
                 'max:255'
             ],
             'photo' => [
-                'required',
+                'nullable',
                 'image',
                 'mimes:jpeg,png,jpg',
                 'max:2048'
@@ -136,7 +145,7 @@ class GalleryController extends Controller
         ]);
 
         $client = new Client();
-        $apiUrl = "http://jda-fs8.test/api/galleries/{$id}";
+        $apiUrl = "http://127.0.0.1:8001/api/galleries/$id";
 
         try {
             $multipart = [
@@ -144,6 +153,10 @@ class GalleryController extends Controller
                     'name' => 'title',
                     'contents' => $validatedData['title']
                 ],
+                [
+                    'name' => '_method',
+                    'contents' => 'PUT'
+                ]
             ];
 
             if ($request->hasFile('photo')) {
@@ -152,13 +165,15 @@ class GalleryController extends Controller
                     'contents' => fopen($request->file('photo')->getPathname(), 'r'),
                     'filename' => $request->file('photo')->getClientOriginalName(),
                 ];
+                dd($multipart);
             }
 
-            $response = $client->put($apiUrl, [
+            $response = $client->post($apiUrl, [
                 'multipart' => $multipart,
             ]);
         } catch (\Exception $e) {
-            return view('api_error', ['error' => $e->getMessage()]);
+            // return view('api_error', ['error' => $e->getMessage()]);
+            return $e->getMessage();
         }
     }
 
@@ -168,7 +183,7 @@ class GalleryController extends Controller
     public function destroy(string $id)
     {
         $client = new Client();
-        $apiUrl = "http://jda-fs8.test/api/galleries/{$id}";
+        $apiUrl = "http://127.0.0.1:8001/api/galleries/{$id}";
 
         try {
             $response = $client->delete($apiUrl);

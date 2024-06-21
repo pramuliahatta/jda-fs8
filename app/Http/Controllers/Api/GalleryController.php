@@ -86,7 +86,7 @@ class GalleryController extends Controller
         // validation
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
-            'photo' => 'required|image|mimes:jpeg,jpg,png|max:2048'
+            'photo' => 'nullable|image|mimes:jpeg,jpg,png|max:2048'
         ]);
 
         // response if fails

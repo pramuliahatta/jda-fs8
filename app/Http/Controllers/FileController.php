@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use function PHPUnit\Framework\fileExists;
 
-
 class FileController extends Controller
 {
     /**
@@ -17,7 +16,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        $response = Http::get('http://jda-fs8.test/api/files');
+        $response = Http::get('http://127.0.0.1:8081/api/files');
         if ($response->successful()) {
             $data = $response->json()['data'];
             if (request()->route()->getName() == 'services') {
