@@ -24,6 +24,8 @@ Route::get('/products/{id}', function () {
     return view('products.detail');
 })->name('productsDetail');
 
+
+
 Route::get('/gallery', function () {
     return view('gallery.index');
 })->name('gallery');
@@ -61,11 +63,39 @@ Route::prefix('dashboard')->group(function () {
 
 Route::get('/createproducts', function () {
     return view('products.create');
-})->name('products.create');
+})->name('productsCreate');
 
 Route::get('/dashboardproducts', function () {
     return view('products.dashboard');
-})->name('products.dashboard');
+})->name('productsDashboard');
+
+Route::get('/editproducts', function () {
+    return view('products.edit');
+})->name('productsEdit');
+
+Route::get('/previewproducts', function () {
+    return view('products.preview');
+})->name('productsPreview');
+
+// Route::prefix('products')->group(function () {
+//     Route::get('/', function () {
+//         return view('products.index');
+//     })->name('product.index');
+
+//     Route::get('/{id}', function () {
+//         return view('products.detail');
+//     })->name('product.details');
+
+//     Route::get('/create', function () {
+//         return view('products.create');
+//     })->name('product.create');
+
+//     Route::get('/edit', function () {
+//         return view('products.edit');
+//     })->name('product.edit');
+
+// });
+
 
 
 

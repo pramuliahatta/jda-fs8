@@ -107,8 +107,8 @@
                         <div
                             class="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                             <a href="#" class="overflow-hidden rounded">
-                                <img class="mx-auto h-44 w-44 dark:hidden"
-                                    src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
+                                <img class="mx-auto h-46 w-full dark:hidden rounded-lg object-cover"
+                                    src="https://th.bing.com/th/id/OIP.KcoR6hnI68f62LbHEMzP8wHaE8?rs=1&pid=ImgDetMain"
                                     alt="imac image" />
                                 <img class="mx-auto hidden h-44 w-44 dark:block"
                                     src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
