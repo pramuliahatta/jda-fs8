@@ -23,6 +23,12 @@
                             <input type="text" name="title" id="title" value="{{ old('title', $title) }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Judul foto" required="">
+                            @error('title')
+                                <div class="error-message">
+                                    <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span
+                                            class="font-medium">Upps!</span> {{ $message }}</p>
+                                </div>
+                            @enderror
                         </div>
                         {{-- <div>
                             <div class="flex items-center justify-center w-full">
@@ -60,6 +66,12 @@
                             <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                 id="photo" name="photo" type="file">
+                            @error('photo')
+                                <div class="error-message">
+                                    <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span
+                                            class="font-medium">Upps!</span> {{ $message }}</p>
+                                </div>
+                            @enderror
 
                         </div>
                     </div>
@@ -121,14 +133,14 @@
                         class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan
                     </button>
-                    {{-- <form action="{{ route('dashboard.gallery.destroy', $id) }}" method="POST">
+                    <form action="{{ route('dashboard.gallery.destroy', $id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
                             class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
                             Hapus
                         </button>
-                    </form> --}}
+                    </form>
                 </div>
             </div>
         </div>

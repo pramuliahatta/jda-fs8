@@ -17,9 +17,10 @@
                         <img class="w-full h-70 h-96 object-cover rounded-lg" src="/{{ $photo }}" alt="">
                     </dd>
                 </dl>
+
                 <div class="flex justify-between items-center">
                     <div class="flex items-center space-x-3 sm:space-x-4">
-                        <a href="{{ route('dashboard.gallery.edit', 1) }}" type="button"
+                        <a href="{{ route('dashboard.gallery.edit', $id) }}" type="button"
                             class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                             <svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -75,14 +76,14 @@
                     <button data-modal-toggle="deleteModal" type="button"
                         class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan</button>
-                    {{-- <form action="{{ route('dashboard.gallery.destroy', $id) }}" method="POST">
+                    <form action="{{ route('dashboard.gallery.destroy', $id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
                             class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
                             Hapus
                         </button>
-                    </form> --}}
+                    </form>
 
                 </div>
             </div>

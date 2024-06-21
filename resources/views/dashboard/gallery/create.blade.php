@@ -19,7 +19,13 @@
                                 class="block w-full mb-2 text-sm font-medium text-gray-900 dark:text-white">Judul</label>
                             <input type="text" name="title" id="title"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Judul foto" required="">
+                                placeholder="Judul foto">
+                            @error('title')
+                                <div class="error-message">
+                                    <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span
+                                            class="font-medium">Upps!</span> {{ $message }}</p>
+                                </div>
+                            @enderror
                         </div>
                         {{-- <div>
                             <div class="flex items-center justify-center w-full">
@@ -50,7 +56,12 @@
                             <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                 id="photo" name="photo" type="file">
-
+                            @error('photo')
+                                <div class="error-message">
+                                    <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span
+                                            class="font-medium">Upps!</span> {{ $message }}</p>
+                                </div>
+                            @enderror
                         </div>
                     </div>
                     <button type="submit"
