@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
+// use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Route;
 
 class GalleryController extends Controller
 {
@@ -20,11 +20,11 @@ class GalleryController extends Controller
         if ($response->successful()) {
             $data = $response->json();
             $data = $data['data'];
-            // dd($data);
-            return view('gallery.index', compact('data'));
+            // dd(Route::current()->getName());
             if (Route::current()->getName() == 'dashboard.gallery.index') {
                 return view('dashboard.gallery.index', compact('data'));
             }
+            return view('gallery.index', compact('data'));
         }
         return abort(404, 'Data tidak ada!');
     }
@@ -35,7 +35,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.gallery-create');
+        return view('dashboard.gallery.create');
     }
 
     /**
@@ -78,7 +78,8 @@ class GalleryController extends Controller
      */
     public function show(string $id)
     {
-        // return view('dashboard.detail-gallery', Gallery::find($id));
+        $photo = Gallery::find($id);
+        return view('dashboard.gallery.show', $photo);
     }
 
     /**
@@ -86,7 +87,8 @@ class GalleryController extends Controller
      */
     public function edit(string $id)
     {
-        return view('dashboard.edit-gallery', Gallery::find($id));
+        $photo = Gallery::find($id);
+        return view('dashboard.gallery.edit', $photo);
     }
 
     /**

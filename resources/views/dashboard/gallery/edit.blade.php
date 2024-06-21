@@ -11,16 +11,20 @@
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Edit Foto</h3>
                 </div>
                 <!-- Modal body -->
-                <form action="#">
+
+                <form action="{{ route('dashboard.gallery.update', $id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
                     <div class="grid gap-4 mb-4 grid-cols-1">
                         <div>
                             <label for="title"
                                 class="block w-full mb-2 text-sm font-medium text-gray-900 dark:text-white">Judul</label>
-                            <input type="text" name="title" id="title"
+                            <input type="text" name="title" id="title" value="{{ old('title', $title) }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Judul foto" required="">
                         </div>
-                        <div>
+                        {{-- <div>
                             <div class="flex items-center justify-center w-full">
                                 <label for="photo"
                                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -40,6 +44,23 @@
                                     <input id="photo" type="file" name="photo" class="hidden" />
                                 </label>
                             </div>
+                        </div> --}}
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Saat
+                                Ini</label>
+                            <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
+                                <img class="w-full h-70 h-96 object-cover rounded-lg" src="/{{ $photo }}"
+                                    alt="">
+                            </dd>
+                        </div>
+                        <div>
+
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="photo">Ganti Foto</label>
+                            <input
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                id="photo" name="photo" type="file">
+
                         </div>
                     </div>
                     <div class="flex justify-between items-center space-x-4">
@@ -100,9 +121,14 @@
                         class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan
                     </button>
-                    <button type="submit"
-                        class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-                        Hapus</button>
+                    {{-- <form action="{{ route('dashboard.gallery.destroy', $id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                            Hapus
+                        </button>
+                    </form> --}}
                 </div>
             </div>
         </div>

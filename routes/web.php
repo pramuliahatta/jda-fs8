@@ -55,21 +55,16 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.articles.edit');
     })->name('dashboard.articles.edit');
 
-    Route::get('/gallery', function () {
-        return view('dashboard.gallery.index');
-    })->name('dashboard.gallery.index');
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('dashboard.gallery.index');
+    Route::get('/gallery/create', [GalleryController::class, 'create'])->name('dashboard.gallery.create');
+    Route::post('/gallery', [GalleryController::class, 'store'])->name('dashboard.gallery.store');
+    Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('dashboard.gallery.show');
+    Route::get('/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('dashboard.gallery.edit');
+    Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('dashboard.gallery.update');
+    Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('dashboard.gallery.destroy');
 
-    Route::get('/gallery/create', function () {
-        return view('dashboard.gallery.create');
-    })->name('dashboard.gallery.create');
 
-    Route::get('/gallery/edit/{id}', function () {
-        return view('dashboard.gallery.edit');
-    })->name('dashboard.gallery.edit');
 
-    Route::get('/gallery/detail/{id}', function () {
-        return view('dashboard.gallery.detail');
-    })->name('dashboard.gallery.detail');
 
     Route::get('/forms', function () {
         return view('dashboard.forms.index');
@@ -79,4 +74,4 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
 })
-->middleware('auth');
+    ->middleware('auth');

@@ -9,14 +9,12 @@
                 <!-- Modal header -->
                 <div class="flex justify-between mb-4 rounded-t sm:mb-5">
                     <div class="text-lg text-gray-900 md:text-xl dark:text-white">
-                        <h3 class="font-semibold ">Foto 1</h3>
+                        <h3 class="font-semibold ">{{ $title }}</h3>
                     </div>
                 </div>
                 <dl>
                     <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
-                        <img class="w-full h-70 h-96 object-cover rounded-lg"
-                            src="https://images.pexels.com/photos/681334/pexels-photo-681334.jpeg?auto=compress&cs=tinysrgb&w=600"
-                            alt="">
+                        <img class="w-full h-70 h-96 object-cover rounded-lg" src="/{{ $photo }}" alt="">
                     </dd>
                 </dl>
                 <div class="flex justify-between items-center">
@@ -77,10 +75,15 @@
                     <button data-modal-toggle="deleteModal" type="button"
                         class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan</button>
-                    <button type="submit"
-                        class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-                        Hapus
-                    </button>
+                    {{-- <form action="{{ route('dashboard.gallery.destroy', $id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                            Hapus
+                        </button>
+                    </form> --}}
+
                 </div>
             </div>
         </div>
