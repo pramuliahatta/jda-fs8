@@ -160,13 +160,4 @@ class UserController extends Controller
 
         return back()->with('error', 'Error.');
     }
-
-    public function adminCheck(User $user)
-    {
-        //cek jika role user sama dengan 'admin'
-        if ($user->role == 'admin') {
-            return true;
-        }
-        return false;
-    }
 }

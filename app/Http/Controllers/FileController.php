@@ -8,8 +8,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use function PHPUnit\Framework\fileExists;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 89cf98ca73be8129b1bcefac207325407dde8271
 
 class FileController extends Controller
 {
@@ -18,9 +21,11 @@ class FileController extends Controller
      */
     public function index()
     {
-        $response = Http::get('http://jda-fs8.test/api/files');
+        $response = Http::get('http://127.0.0.1:8081/api/files');
         if ($response->successful()) {
             $data = $response->json();
+            $data = $data['data'];
+            return view('form.formuser', compact('data'));
             if (Route::current()->getName() == 'landingpage') {
                 return view('form.formuser', compact('data'));
             }

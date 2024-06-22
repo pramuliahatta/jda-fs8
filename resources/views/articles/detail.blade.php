@@ -110,7 +110,7 @@
                         <img class="mb-5 h-44 w-full object-cover rounded-lg"src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
                             alt="road-construction">
                     </a>
-                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Pembangunan Jalan Desa Baru</a>
                     </h2>
                     <p class="mb-4 text-gray-500 dark:text-gray-400">
@@ -129,7 +129,7 @@
                             src="https://images.pexels.com/photos/713644/pexels-photo-713644.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt="festivals">
                     </a>
-                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Festival Budaya Tahunan</a>
                     </h2>
                     <p class="mb-4  text-gray-500 dark:text-gray-400">
@@ -148,7 +148,7 @@
                             src="https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt="rice-fields">
                     </a>
-                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#"> Gotong Royong Desa</a>
                     </h2>
                     <p class="mb-4  text-gray-500 dark:text-gray-400">
@@ -167,10 +167,11 @@
                             src="https://images.pexels.com/photos/10333242/pexels-photo-10333242.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt="cooking-festivals">
                     </a>
-                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Lomba Memasak Tradisional</a>
                     </h2>
-                    <p class="mb-4  text-gray-500 dark:text-gray-400">Ikuti lomba memasak dengan resep-resep tradisional
+                    <p class="mb-4  text-gray-500 dark:text-gray-400">Ikuti lomba memasak dengan resep-resep
+                        tradisional
                         Desa Cidadap. Acara ini terbuka untuk semua
                         warga desa dan pemenang akan mendapatkan hadiah menarik.</p>
                     <a href="{{ route('articles.detail', 8) }}"

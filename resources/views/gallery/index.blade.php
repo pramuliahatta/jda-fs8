@@ -13,13 +13,14 @@
             </div>
             <div class="grid gap-8 mb-6 lg:mb-16">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="grid gap-4">
-                        @foreach($data as $item)
+                    {{-- <div class="grid gap-4"> --}}
+                    @foreach ($data as $item)
                         <div>
-                            <p>{{ $item['title'] }}</p>
+                            <img class="h-auto max-w-full rounded-lg gallery-item" src="/{{ $item['photo'] }}"
+                                data-title="{{ $item['title'] }}" alt="{{ $item['title'] }}">
                         </div>
-                        @endforeach
-                        <div>
+                    @endforeach
+                    {{-- <div>
                             <img class="h-auto max-w-full rounded-lg gallery-item"
                                 src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg"
                                 data-title="Image Title 2" alt="Image Title 2">
@@ -28,8 +29,8 @@
                             <img class="h-auto max-w-full rounded-lg gallery-item"
                                 src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg"
                                 data-title="Image Title 3" alt="Image Title 3">
-                        </div>
-                    </div>
+                        </div> --}}
+                    {{-- </div>
                     <div class="grid gap-4">
                         <div>
                             <img class="h-auto max-w-full rounded-lg gallery-item"
@@ -80,7 +81,7 @@
                                 src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg"
                                 data-title="Image Title 12" alt="Image Title 12">
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <nav aria-label="Page navigation example">
@@ -142,7 +143,7 @@
             </button>
             <img id="lightbox-img" src="" alt=""
                 class="w-56 h-56 sm:w-96 sm:h-96 object-cover rounded-lg">
-            <h2 id="lightbox-title" class="text-center text-xl mt-4"></h2>
+            <h2 id="lightbox-title" class="text-center text-xl mt-4 w-96"></h2>
             <div class="flex justify-center mt-4">
                 <button id="prev"
                     class="px-4 py-2 bg-white text-black mr-2 flex items-center gap-2 hover:bg-gray-100 w-10 h-10 rounded-full">
