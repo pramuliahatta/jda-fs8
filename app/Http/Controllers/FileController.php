@@ -8,11 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use function PHPUnit\Framework\fileExists;
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 89cf98ca73be8129b1bcefac207325407dde8271
 
 class FileController extends Controller
 {
