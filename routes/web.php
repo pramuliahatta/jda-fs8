@@ -48,9 +48,14 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.articles.create');
     })->name('dashboard.articles.create');
 
-    Route::get('/articles/edit/{id}', function () {
+    Route::get('/articles/{id}', function () {
+        return view('dashboard.articles.show');
+    })->name('dashboard.articles.show');
+
+    Route::get('/articles/{id}/edit/', function () {
         return view('dashboard.articles.edit');
     })->name('dashboard.articles.edit');
+
 
     Route::get('/gallery', [GalleryController::class, 'index'])->name('dashboard.gallery.index');
     Route::get('/gallery/create', [GalleryController::class, 'create'])->name('dashboard.gallery.create');

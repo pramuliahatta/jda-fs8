@@ -197,7 +197,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('dashboard.articles.detail', 1) }}"
+                                                <a href="{{ route('dashboard.articles.show', 1) }}"
                                                     class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                     <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                         viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
