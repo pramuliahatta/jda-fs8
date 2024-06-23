@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductPhoto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -12,10 +16,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        return view('dashboard', [
-            'products' => $product
-        ]);
+        $fetchData = Http::get('http://127.0.0.1:8081/api/products');
+        $response = $fetchData->json();
+        $data = $response['data'];
+        return view('products.index', compact('data'));
+        // if($fetchData->successful()) {
+        //     $response = $fetchData->json();
+        //     $data = $response['data'];
+        //     return view('products.index', compact('data'));
+        // }
     }
 
     /**
@@ -23,7 +32,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -31,7 +40,29 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category' => 'required|string',
+            'price' => 'required',
+            'photos' => 'array|max:3',
+            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        if($validatedData) {
+            $fetchData = Http::post('http://127.0.0.1:8081/api/products', $request);
+            $response = $fetchData->json();
+            $data = $response['data'];
+            return redirect()->intended(route('products.index', compact('data')));
+            // if($fetchData->successful()) {
+            //     $response = $fetchData->json();
+            //     $data = $response['data'];
+            //     return redirect()->intended(route('products.index', $data));
+            // }
+        }
+
+        // Redirect or return response
+        // return redirect()->route('products.create')->with('success', 'Product created successfully.');
     }
 
     /**
@@ -39,7 +70,15 @@ class ProductController extends Controller
      */
     public function show(product $product)
     {
-        //
+        $fetchData = Http::get('http://127.0.0.1:8081/api/products/' . $product->id);
+        $response = $fetchData->json();
+        $data = $response['data'];
+        return view('products.show', compact('data'));
+        // if($fetchData->successful()) {
+        //     $response = $fetchData->json();
+        //     $data = $response['data'];
+        //     return view('products.show', compact('data'));
+        // }
     }
 
     /**
@@ -47,7 +86,10 @@ class ProductController extends Controller
      */
     public function edit(product $product)
     {
-        //
+        $fetchData = Http::get('http://127.0.0.1:8081/api/products/' . $product->id);
+        $response = $fetchData->json();
+        $data = $response['data'];
+        return view('products.edit', compact('data'));
     }
 
     /**
@@ -55,7 +97,29 @@ class ProductController extends Controller
      */
     public function update(Request $request, product $product)
     {
-        //
+        // Validate the request
+        $validatedData = $request->validate([
+            'name' => 'sometimes|required|string|max:255',
+            'description' => 'required|string',
+            'category' => 'required|string',
+            'price' => 'required',
+            'photos' => 'array|max:3',
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        if($validatedData) {
+            $fetchData = Http::put('http://127.0.0.1:8081/api/products/' . $product->id, $request);
+            $response = $fetchData->json();
+            $data = $response['data'];
+            return redirect()->intended(route('products.index', compact('data')));
+            // if($fetchData->successful()) {
+            //     $response = $fetchData->json();
+            //     $data = $response['data'];
+            //     return redirect()->intended(route('products.index', compact('data')));
+            // }
+        }
+        // Redirect or return response
+        // return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
     /**
@@ -63,6 +127,13 @@ class ProductController extends Controller
      */
     public function destroy(product $product)
     {
-        //
+        // Delete associated photos
+        $fetchData = Http::delete('http://127.0.0.1:8081/api/products/' . $product->id);
+        $response = $fetchData->json();
+        $data = $response['data'];
+        return redirect()->intended(route('products.index', compact('data')));
+
+        // Redirect or return response
+        // return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 }
