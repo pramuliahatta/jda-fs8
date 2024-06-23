@@ -185,7 +185,10 @@
                     Tambah
                 </button>
             </form> --}}
-            <x-article-editor />
+            <div class="form-group">
+                <label for="body">Body:</label>
+                <textarea class="form-control" id="body" name="body" rows="5" required></textarea>
+            </div>
 
         </div>
         {{-- <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">

@@ -8,6 +8,7 @@
     <link rel="icon" type="image/svg+xml"
         href="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -42,6 +43,10 @@
             @include('partials.footer')
         </footer>
     @endunless
+    <script>
+        CKEDITOR.replace('body');
+    </script>
+
 </body>
 
 </html>

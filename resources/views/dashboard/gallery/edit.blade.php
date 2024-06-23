@@ -14,39 +14,15 @@
 
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
-                        <div class="sm:col-span-2">
-                            <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Judul Foto
-                            </label>
-                            <input type="text" name="title" id="title"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Masukkan judul foto" value="{{ old('title', $title) }}">
-                        </div>
-                        @error('title')
-                            <div class="error-message">
-                                <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
-                                    <span class="font-medium">Upps!</span> {{ $message }}
-                                </p>
-                            </div>
-                        @enderror
+                        <x-input-field label="Judul Foto" name="title" id="title" placeholder="Masukkan judul foto"
+                            value="{{ old('title', $title ?? '') }}" />
+                        <x-error-message field="title" />
                     </div>
 
                     <div>
-                        <div class="sm:col-span-2">
-                            <label for="photo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Foto
-                            </label>
-                            <input type="file" name="photo" id="photo"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Masukkan judul foto">
-                        </div>
-                        @error('photo')
-                            <div class="error-message">
-                                <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
-                                    <span class="font-medium">Upps!</span> {{ $message }}
-                                </p>
-                            </div>
-                        @enderror
+                        <x-image-uploader-viewer name="photo" id="photo" imagePath="{{ $photo ?? '' }}"
+                            altText="Judul Foto" />
+                        <x-error-message field="photo" />
                     </div>
                 </div>
                 <button type="submit"
