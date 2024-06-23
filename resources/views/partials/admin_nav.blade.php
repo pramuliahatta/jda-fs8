@@ -175,16 +175,17 @@
                 </div>
                 <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
                     <li>
-                        
+
                         {{-- <a href="#"
                             class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign
                             out</a> --}}
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="w-full text-left block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                    Log Out
-                                </button>
-                            </form>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit"
+                                class="w-full text-left block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                Log Out
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -215,78 +216,59 @@
             </div>
         </form>
         <ul class="space-y-2">
-            <li>
-                <a href="{{ route('dashboard.index') }}"
-                    class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 6.025A7.5 7.5 0 1 0 17.975 14H10V6.025Z" />
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13.5 3c-.169 0-.334.014-.5.025V11h7.975c.011-.166.025-.331.025-.5A7.5 7.5 0 0 0 13.5 3Z" />
-                    </svg>
+            <x-sidebar-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
+                <svg class="w-6 h-6 dark:text-white {{ request()->routeIs('dashboard.index') ? 'text-blue-700' : 'text-gray-800 dark:text-white' }}"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6.025A7.5 7.5 0 1 0 17.975 14H10V6.025Z" />
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13.5 3c-.169 0-.334.014-.5.025V11h7.975c.011-.166.025-.331.025-.5A7.5 7.5 0 0 0 13.5 3Z" />
+                </svg>
+                <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
+            </x-sidebar-link>
 
+            <x-sidebar-link href="{{ route('dashboard.articles.index') }}" :active="request()->routeIs('dashboard.articles.*')">
+                <svg class="w-6 h-6 dark:text-white {{ request()->routeIs('dashboard.articles.*') ? 'text-blue-700' : 'text-gray-800 dark:text-white' }}"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7h1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h11.5M7 14h6m-6 3h6m0-10h.5m-.5 3h.5M7 7h3v3H7V7Z" />
+                </svg>
+                <span class="flex-1 ml-3 whitespace-nowrap">Artikel</span>
+            </x-sidebar-link>
 
-                    <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
-                </a>
-            </li>
+            <x-sidebar-link href="{{ route('dashboard.gallery.index') }}" :active="request()->routeIs('dashboard.gallery.*')">
+                <svg class="w-6 h-6 dark:text-white {{ request()->routeIs('dashboard.gallery.*') ? 'text-blue-700' : 'text-gray-800 dark:text-white' }}"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m3 16 5-7 6 6.5m6.5 2.5L16 13l-4.286 6M14 10h.01M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
+                </svg>
+                <span class="flex-1 ml-3 whitespace-nowrap">Galeri</span>
+            </x-sidebar-link>
 
-            <li>
-                <a href="{{ route('dashboard.articles.index') }}"
-                    class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M19 7h1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h11.5M7 14h6m-6 3h6m0-10h.5m-.5 3h.5M7 7h3v3H7V7Z" />
-                    </svg>
+            <x-sidebar-link href="{{ route('dashboard.forms.index') }}" :active="request()->routeIs('dashboard.forms.*')">
+                <svg class="w-6 h-6 dark:text-white {{ request()->routeIs('dashboard.forms.*') ? 'text-blue-700' : 'text-gray-800 dark:text-white' }}"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
+                </svg>
+                <span class="flex-1 ml-3 whitespace-nowrap">Formulir</span>
+            </x-sidebar-link>
 
-                    <span class="flex-1 ml-3 whitespace-nowrap">Artikel</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('dashboard.gallery.index') }}"
-                    class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m3 16 5-7 6 6.5m6.5 2.5L16 13l-4.286 6M14 10h.01M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
-                    </svg>
-                    <span class="flex-1 ml-3 whitespace-nowrap">Galeri</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('dashboard.forms.index') }}"
-                    class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
-                    </svg>
-
-                    <span class="flex-1 ml-3 whitespace-nowrap">Formulir</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('dashboard.users.index') }}"
-                    class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-
-                    <span class="flex-1 ml-3 whitespace-nowrap">Pengguna</span>
-                </a>
-            </li>
+            <x-sidebar-link href="{{ route('dashboard.users.index') }}" :active="request()->routeIs('dashboard.users.*')">
+                <svg class="w-6 h-6 dark:text-white {{ request()->routeIs('dashboard.users.*') ? 'text-blue-700' : 'text-gray-800 dark:text-white' }}"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                        d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+                <span class="flex-1 ml-3 whitespace-nowrap">Pengguna</span>
+            </x-sidebar-link>
         </ul>
+
 
     </div>
 

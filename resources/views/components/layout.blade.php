@@ -7,7 +7,6 @@
     <title>{{ $title ?? 'Title' }} - Pemerintah Desa Cidadap</title>
     <link rel="icon" type="image/svg+xml"
         href="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg">
-    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
