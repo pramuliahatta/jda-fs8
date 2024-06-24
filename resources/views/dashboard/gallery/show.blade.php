@@ -7,16 +7,16 @@
         <!-- Modal header -->
         <dl>
             <figure class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
-                <img class="w-full object-cover rounded-lg" src="/{{ $photo }}" alt="">
+                <img class="w-full object-cover rounded-lg" src="/{{ $data['photo'] }}" alt="">
                 <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400 capitalize">
-                    {{ $title }}
+                    {{ $data['title'] }}
                 </figcaption>
             </figure>
         </dl>
 
         <div class="flex justify-between items-center">
             <div class="flex items-center space-x-3 sm:space-x-4 mt-4">
-                <a href="{{ route('dashboard.gallery.edit', $id) }}" type="button"
+                <a href="{{ route('dashboard.gallery.edit', $data['id']) }}" type="button"
                     class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                     <svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@
                 </a>
             </div>
             <button type="button" data-modal-target="deleteModal" data-modal-toggle="deleteModal"
-                data-id="{{ $id }}"
+                data-id="{{ $data['id'] }}"
                 class="delete-button text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                 <svg aria-hidden="true" class="w-5 h-5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +70,7 @@
                     <button data-modal-toggle="deleteModal" type="button"
                         class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan</button>
-                    <form action="{{ route('dashboard.gallery.destroy', $id) }}" method="POST">
+                    <form action="{{ route('dashboard.gallery.destroy', $data['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit"

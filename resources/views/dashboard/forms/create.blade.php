@@ -1,3 +1,4 @@
+
 <x-layout>
     <x-slot name="title">Formulir</x-slot>
     <!-- Create modal -->
@@ -27,3 +28,4 @@
         </div>
     </x-dashboard-section>
 </x-layout>
+
