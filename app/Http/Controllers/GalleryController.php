@@ -2,33 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Http;
-
+use App\Http\Requests\StoreGalleryRequest;
+use App\Http\Requests\UpdateGalleryRequest;
+use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Log;
 
 class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, Client $client)
     {
-        $client = new Client();
-        $apiUrl = "http://127.0.0.1:8001/api/galleries";
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "galleries";
+        // Determine the view based on route
+        $viewName = $request->route()->getName() == 'dashboard.gallery.index' ? 'dashboard.gallery.index' : 'gallery.index';
 
         try {
+            // Get data from the API
             $response = $client->get($apiUrl);
             $content = json_decode($response->getBody(), true);
             $data = $content['data'];
-            if (request()->route()->getName() == 'dashboard.gallery.index') {
-                return view('dashboard.gallery.index', ['data' => $data]);
-            }
-            return view('gallery.index', ['data' => $data]);
         } catch (\Exception $e) {
-            return view('api_error', ['error' => $e->getMessage()]);
+            // If fail data is empty and log error
+            Log::error('Failed to get gallery data:' . $e->getMessage());
+            $data = [];
         }
+        // Return view and data
+        return view($viewName, ['data' => $data]);
     }
 
 
@@ -43,154 +48,139 @@ class GalleryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreGalleryRequest $request, Client $client)
     {
-        // validation data
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-        $client = new Client();
-        $apiUrl = "http://127.0.0.1:8001/api/galleries";
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "galleries";
 
         try {
-            $multipart = [
-                [
-                    'name' => 'title',
-                    'contents' => $validatedData['title']
-                ],
-            ];
-
-            if ($request->hasFile('photo')) {
-                $multipart[] = [
-                    'name' => 'photo',
-                    'contents' => fopen($request->file('photo')->getPathname(), 'r'),
-                    'filename' => $request->file('photo')->getClientOriginalName(),
-                ];
-            }
-
+            // Store data using API
             $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
                 'multipart' => $multipart,
             ]);
-
-            // if(){
-
-            // }
-
-            return back()->with('success', "Photo berhasil ditambahkan!");
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.gallery.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->withErrors($errorMessage);
         } catch (\Exception $e) {
-            return view('api_error', ['error' => $e->getMessage()]);
+            // Another fails
+            Log::error('Failed to store gallery:' . $e->getMessage());
+            return redirect()->route('dashboard.gallery.index')->withErrors('Terjadi kesalahan pada server');
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, Client $client)
     {
-        $client = new Client();
-        $apiUrl = "http://127.0.0.1:8001/api/galleries/$id";
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "galleries/$id";
 
         try {
+            // Get the data from the API
             $response = $client->get($apiUrl);
             $content = json_decode($response->getBody(), true);
             $data = $content['data'];
-
+            // If success, return view and data
             return view('dashboard.gallery.detail', ['data' => $data]);
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
-            // Handle client exceptions (4xx responses)
-            $responseBody = json_decode($e->getResponse()->getBody()->getContents(), true);
-            $errorMessage = $responseBody['message'] ?? 'Server error occurred.';
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
             return redirect()->route('dashboard.gallery.index')->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to get gallery data:' . $e->getMessage());
+            return redirect()->route('dashboard.gallery.index')->withErrors('Terjadi kesalahan pada server');
         }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, Client $client)
     {
-        $client = new Client();
-        $apiUrl = "http://127.0.0.1:8001/api/galleries/$id";
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "galleries/$id";
 
         try {
+            // Get the data from the API
             $response = $client->get($apiUrl);
             $content = json_decode($response->getBody(), true);
             $data = $content['data'];
-
+            // If success, return view and data
             return view('dashboard.gallery.edit', ['data' => $data]);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route('dashboard.gallery.index')->withErrors($errorMessage);
         } catch (\Exception $e) {
-            return view('api_error', ['error' => $e->getMessage()]);
+            // Another fails
+            Log::error('Failed to get gallery data:' . $e->getMessage());
+            return redirect()->route('dashboard.gallery.index')->withErrors('Terjadi kesalahan pada server');
         }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateGalleryRequest $request, string $id, Client $client)
     {
-        // validation input data
-        $validatedData = $request->validate([
-            'title' => [
-                'required',
-                'max:255'
-            ],
-            'photo' => [
-                'nullable',
-                'image',
-                'mimes:jpeg,png,jpg',
-                'max:2048'
-            ],
-        ]);
-
-        $client = new Client();
-        $apiUrl = "http://127.0.0.1:8001/api/galleries/$id";
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "galleries/$id";
 
         try {
-            $multipart = [
-                [
-                    'name' => 'title',
-                    'contents' => $validatedData['title']
-                ],
-                [
-                    'name' => '_method',
-                    'contents' => 'PUT'
-                ]
-            ];
-
-            if ($request->hasFile('photo')) {
-                $multipart[] = [
-                    'name' => 'photo',
-                    'contents' => fopen($request->file('photo')->getPathname(), 'r'),
-                    'filename' => $request->file('photo')->getClientOriginalName(),
-                ];
-                dd($multipart);
-            }
-
             $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
                 'multipart' => $multipart,
             ]);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.gallery.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->withErrors($errorMessage);
         } catch (\Exception $e) {
-            // return view('api_error', ['error' => $e->getMessage()]);
-            return $e->getMessage();
+            // Another fails
+            Log::error('Failed to update gallery:' . $e->getMessage());
+            return redirect()->route('dashboard.gallery.index')->withErrors('Terjadi kesalahan pada server');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Client $client)
     {
-        $client = new Client();
-        $apiUrl = "http://127.0.0.1:8001/api/galleries/{$id}";
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "galleries/$id";
 
         try {
             $response = $client->delete($apiUrl);
-
-            return back()->with('success', "Photo berhasil ditambahkan!");
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.gallery.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route('dashboard.gallery.index')->withErrors($errorMessage);
         } catch (\Exception $e) {
-            return view('api_error', ['error' => $e->getMessage()]);
+            // Another fails
+            Log::error('Failed to delete gallery:' . $e->getMessage());
+            return redirect()->route('dashboard.gallery.index')->withErrors('Terjadi kesalahan pada server');
         }
     }
 }

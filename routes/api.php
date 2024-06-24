@@ -16,3 +16,5 @@ Route::apiResources([
     "files" => FileController::class,
     "articles" => ArticleController::class,
 ]);
+
+// Route::post("/galleries/edit/{id}", [GalleryController::class, "update"]);

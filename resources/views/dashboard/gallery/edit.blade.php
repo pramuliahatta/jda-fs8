@@ -11,9 +11,9 @@
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Edit Foto</h3>
                 </div>
                 <!-- Modal body -->
-                <form action="{{ route('dashboard.gallery.update', $data['id']) }}" method="POST">
+                <form action="{{ route('dashboard.gallery.update', $data['id']) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
-                    @method('POST')
                     <div class="grid gap-4 mb-4 grid-cols-1">
                         <div>
                             <label for="title"
@@ -26,7 +26,7 @@
                             <div class="flex items-center justify-center w-full">
                                 <label for="photo"
                                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    {{-- <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                         <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -38,7 +38,7 @@
                                         </p>
                                         <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG atau JPEG (MAKS.
                                             2MB)</p>
-                                    </div>
+                                    </div> --}}
                                     <input id="photo" type="file" name="photo" class="" />
                                 </label>
                             </div>
