@@ -77,6 +77,11 @@ Route::get('/previewproducts', function () {
     return view('products.preview');
 })->name('productsPreview');
 
+
+Route::get('/about', function () {
+    return view('about.index');
+})->name('about');
+
 // Route::prefix('products')->group(function () {
 //     Route::get('/', function () {
 //         return view('products.index');

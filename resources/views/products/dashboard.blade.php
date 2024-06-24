@@ -47,7 +47,7 @@
                                         Rp 10.000
                                     </div>
                                 </td>
-                                <td class="px-4 py-2 font-small text-gray-700 break-words dark:text-white">
+                                <td class="px-4 py-2 font-small text-gray-700 break-words dark:text-white ">
                                    
                                     Studio quality three mic array for crystal clear calls and voice
                                     recordings. Six-speaker sound system for a remarkably robust and
