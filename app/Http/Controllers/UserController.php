@@ -136,7 +136,7 @@ class UserController extends Controller
                 return back()->with('success', $data['message']);
             }
         }
-        
+
         return back()->with('error', 'Error.');
     }
 
@@ -151,7 +151,6 @@ class UserController extends Controller
             if($data['status'] == true) {
                 return back()->with('success', $data['message']);
             }
-
         return back()->with('error', 'Error.');
     }
 
