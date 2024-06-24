@@ -1,0 +1,86 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+
+class StoreFileRequest extends FormRequest
+{
+    protected $multipart = [];
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'file' => 'required|mimes:pdf|max:2048',
+        ];
+    }
+
+    protected function prepareForValidation()
+    {
+        if ($this->has('title')) {
+            $this->merge([
+                'title' => ucwords(strtolower($this->input('title')))
+            ]);
+        }
+    }
+
+    protected function passedValidation()
+    {
+        $this->multipart = [
+            [
+                'name'      => 'name',
+                'contents'   => $this->validated()['name'],
+            ]
+        ];
+
+        if ($this->hasFile('file')) {
+            $this->multipart[] = [
+                'name' => 'file',
+                'contents' => fopen($this->file('file')->getPathname(), 'r'),
+                'filename' => $this->file('file')->getClientOriginalName(),
+            ];
+        }
+    }
+
+    public function getMultipart()
+    {
+        return $this->multipart;
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Harap masukan nama file',
+            'name.string' => 'Format nama tidak valid',
+            'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
+            'file.required' => 'Harap unggah file',
+            'file.image' => 'Format file tidak valid',
+            'file.mimes' => 'Format file tidak valid',
+            'file.max' => 'Photo maksimal 2 MB',
+        ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        if ($this->expectsJson()) {
+            throw new HttpResponseException(fails($validator->errors(), 422));
+        }
+
+        parent::failedValidation($validator);
+    }
+}

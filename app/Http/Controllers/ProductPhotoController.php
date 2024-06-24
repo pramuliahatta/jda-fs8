@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\productPhoto;
+use App\Models\ProductPhoto;
 use Illuminate\Http\Request;
 
 class ProductPhotoController extends Controller

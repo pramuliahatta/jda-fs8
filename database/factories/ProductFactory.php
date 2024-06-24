@@ -17,7 +17,11 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => rand(1,10),
+            'name' => fake()->word(),
+            'category' => 'Event',
+            'price' => rand(10000,100000),
+            'description' => fake()->paragraph(),
         ];
     }
 }

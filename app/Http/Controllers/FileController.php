@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\file;
+use App\Models\File;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-
-use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 use function PHPUnit\Framework\fileExists;
 
 class FileController extends Controller
@@ -14,20 +15,25 @@ class FileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, Client $client)
     {
-        // get all files data in database
-        $files = File::all();
-        $viewData = [
-            'files' => $files
-        ];
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "files";
+        // Determine the view based on route
+        $viewName = $request->route()->getName() == 'dashboard.forms.index' ? 'dashboard.forms.index' : 'form.formuser';
 
-        if (Route::current()->getName() == 'form.formuser') {
-            // for view dashboard
-            return view('form.formuser', $viewData);
+        try {
+            // Get data from the API
+            $response = $client->get($apiUrl);
+            $content = json_decode($response->getBody(), true);
+            $data = $content['data'];
+        } catch (\Exception $e) {
+            // If fail data is empty and log error
+            Log::error('Failed to get files data:' . $e->getMessage());
+            $data = [];
         }
-        // for view landingpage
-        return view('dashboard.forms.index', $viewData);
+        // Return view and data
+        return view($viewName, ['data' => $data]);
     }
 
     /**
@@ -77,8 +83,20 @@ class FileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(file $file)
+    public function edit(string $id)
     {
+        $client = new Client();
+        $apiUrl = "http://127.0.0.1:8001/api/files/$id";
+
+        try {
+            $response = $client->get($apiUrl);
+            $content = json_decode($response->getBody(), true);
+            $data = $content['data'];
+
+            return view('dashboard.forms.edit', ['data' => $data]);
+        } catch (\Exception $e) {
+            return view('api_error', ['error' => $e->getMessage()]);
+        }
     }
 
     /**

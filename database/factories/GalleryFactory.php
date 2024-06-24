@@ -17,7 +17,8 @@ class GalleryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->sentence(),
+            'photo' => 'test.jpg',
         ];
     }
 }
