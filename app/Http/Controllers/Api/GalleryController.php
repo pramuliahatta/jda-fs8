@@ -16,9 +16,10 @@ class GalleryController extends Controller
      */
     public function index()
     {
+        $perPage = 10;
         try {
             // get all data in database
-            $gallery = Gallery::all();
+            $gallery = Gallery::paginate($perPage);
             // response if success
             return success($gallery, 'Gallery berhasil ditemukan');
         } catch (\Exception $e) {

@@ -19,21 +19,36 @@ class GalleryController extends Controller
     {
         // Define endpoint
         $apiUrl = env('BASE_URL_API') . "galleries";
+        if ($request->input('page') != '') {
+            $apiUrl .= '?page=' . $request->input('page');
+        }
         // Determine the view based on route
         $viewName = $request->route()->getName() == 'dashboard.gallery.index' ? 'dashboard.gallery.index' : 'gallery.index';
 
         try {
             // Get data from the API
             $response = $client->get($apiUrl);
-            $content = json_decode($response->getBody(), true);
+            $content = json_decode($response->getBody(), true)['data'];
             $data = $content['data'];
+            $link = $content['links'];
+            $page = [
+                'from' => $content['from'],
+                'to' => $content['to'],
+                'total' => $content['total'],
+            ];
+            // For add link2
+            foreach ($link as $key => $value) {
+                $link[$key]['url2'] = str_replace(env('BASE_URL_API') . "galleries", url()->current(), $value['url']);
+            }
+            // dd($link);
         } catch (\Exception $e) {
             // If fail data is empty and log error
             Log::error('Failed to get gallery data:' . $e->getMessage());
             $data = [];
         }
-        // Return view and data
-        return view($viewName, ['data' => $data]);
+        // Return view and data ($data for data | $pageLinks for link2, label, & isActive | 
+        // $pageInfo for showing information)
+        return view($viewName, ['data' => $data, 'pageLinks' => $link, 'pageInfo' => $page]);
     }
 
 
