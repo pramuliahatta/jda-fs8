@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot name="title">Artikel</x-slot>
+    <x-slot name="title">Pengguna</x-slot>
     <!-- Modal content -->
     <x-dashboard-section route="dashboard.articles.index">
         <!-- Modal header -->

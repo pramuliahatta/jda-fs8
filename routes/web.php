@@ -72,5 +72,17 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users', function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
+
+    Route::get('/users/create', function () {
+        return view('dashboard.users.create');
+    })->name('dashboard.users.create');
+
+    Route::get('/users/{id}', function () {
+        return view('dashboard.users.show');
+    })->name('dashboard.users.show');
+
+    Route::get('/users/{id}/edit/', function () {
+        return view('dashboard.users.edit');
+    })->name('dashboard.users.edit');
 })
     ->middleware('auth');
