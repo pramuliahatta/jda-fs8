@@ -39,6 +39,6 @@ class LoginController extends Controller
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect()->intended('/dashboard');
+        return redirect()->intended(route('home'));
     }
 }
