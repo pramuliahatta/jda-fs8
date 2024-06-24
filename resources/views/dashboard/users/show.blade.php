@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot name="title">Artikel</x-slot>
+    <x-slot name="title">Pengguna</x-slot>
     <x-dashboard-section route='dashboard.articles.index'>
         <article
             class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
@@ -131,3 +131,14 @@
         </div>
     </x-dashboard-section>
 </x-layout>
+
+<script>
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const itemId = button.getAttribute('data-id');
+
+            document.getElementById('delete-form').setAttribute('action',
+                `/dashboard/gallery/${itemId}`);
+        })
+    })
+</script>

@@ -40,9 +40,10 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-4 py-3">Judul</th>
-                        <th scope="col" class="px-4 py-4">Foto</th>
-                        <th scope="col" class="px-4 py-3">Artikel</th>
+                        <th scope="col" class="px-4 py-3">Nama</th>
+                        <th scope="col" class="px-4 py-4">Email</th>
+                        <th scope="col" class="px-4 py-3">Nomor WA</th>
+                        <th scope="col" class="px-4 py-3">Password</th>
                         <th scope="col" class="px-4 py-3">
                             <span class="sr-only">Actions</span>
                         </th>
@@ -51,14 +52,18 @@
                 <tbody>
                     <tr class="border-b dark:border-gray-700">
                         <th scope="row"
-                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">Apple
-                            iMac 27&#34;</th>
+                            class="px-4 py-3 font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">
+                            Ignasius Yuda Adhitia
+                        </th>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
-                            <img src="https://images.pexels.com/photos/94693/pexels-photo-94693.jpeg?auto=compress&cs=tinysrgb&w=600"
-                                class="w-8 h-8 rounded-lg object-cover" alt="">
+                            ignasius.yuda.adhitia@gmail.com
                         </td>
-                        <td class="px-4 py-3 max-w-[12rem] truncate">What is a product description? A product
-                            description describes a product.</td>
+                        <td class="px-4 py-3 max-w-[12rem] truncate">
+                            +628882204001
+                        </td>
+                        <td class="px-4 py-3 max-w-[12rem] truncate">
+                            p******d
+                        </td>
                         <td class="px-4 py-3 flex items-center justify-end">
                             <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown"
                                 class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
@@ -199,16 +204,29 @@
                         d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                         clip-rule="evenodd" />
                 </svg>
-                <p class="mb-4 text-gray-500 dark:text-gray-300">Are you sure you want to delete this item?</p>
+                <p class="mb-4 text-gray-500 dark:text-gray-300">Apakah Anda yakin ingin menghapus item ini?</p>
                 <div class="flex justify-center items-center space-x-4">
                     <button data-modal-toggle="deleteModal" type="button"
-                        class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
-                        cancel</button>
+                        class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        Batalkan
+                    </button>
                     <button type="submit"
-                        class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Yes,
-                        I'm sure</button>
+                        class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                        Hapus
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </x-layout>
+
+<script>
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const itemId = button.getAttribute('data-id');
+
+            document.getElementById('delete-form').setAttribute('action',
+                `/dashboard/gallery/${itemId}`);
+        })
+    })
+</script>
