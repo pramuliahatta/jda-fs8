@@ -78,6 +78,27 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
 
+    Route::get('/createproducts', function () {
+        return view('products.create');
+    })->name('productsCreate');
+
+    Route::get('/dashboardproducts', function () {
+        return view('products.dashboard');
+    })->name('productsDashboard');
+
+    Route::get('/editproducts', function () {
+        return view('products.edit');
+    })->name('productsEdit');
+
+    Route::get('/previewproducts', function () {
+        return view('products.preview');
+    })->name('productsPreview');
+
+
+    Route::get('/about', function () {
+        return view('about.index');
+    })->name('about');
+
     Route::get('/users/create', function () {
         return view('dashboard.users.create');
     })->name('dashboard.users.create');
@@ -90,3 +111,4 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.users.edit');
     })->name('dashboard.users.edit');
 })->middleware('auth');
+
