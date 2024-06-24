@@ -22,12 +22,12 @@ Route::get('/services', [FileController::class, 'index'])->name('services');
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 
 
+
 Route::get('/products/{product}', function () {
     return view('products.detail');
 })->name('productsDetail');
 
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.detail');
-
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
@@ -97,6 +97,7 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
 
+
     Route::get('/users/create', function () {
         return view('dashboard.users.create');
     })->name('dashboard.users.create');
@@ -112,23 +113,27 @@ Route::prefix('dashboard')->group(function () {
 
 
 
-Route::get('/createproducts', function () {
-    return view('products.create');
-})->name('productsCreate');
+    Route::get('/createproducts', function () {
+        return view('products.create');
+    })->name('productsCreate');
 
-Route::get('/dashboardproducts', function () {
-    return view('products.dashboard');
-})->name('productsDashboard');
+    Route::get('/dashboardproducts', function () {
+        return view('products.dashboard');
+    })->name('productsDashboard');
 
-Route::get('/editproducts', function () {
-    return view('products.edit');
-})->name('productsEdit');
+    Route::get('/editproducts', function () {
+        return view('products.edit');
+    })->name('productsEdit');
 
-Route::get('/previewproducts', function () {
-    return view('products.preview');
-})->name('productsPreview');
+    Route::get('/previewproducts', function () {
+        return view('products.preview');
+    })->name('productsPreview');
 
-Route::get('/about', function () {
-    return view('about.index');
-})->name('about');
+
+
+    Route::get('/about', function () {
+        return view('about.index');
+    })->name('about');
+
+   
 

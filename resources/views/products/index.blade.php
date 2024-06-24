@@ -107,11 +107,11 @@
             {{-- list products --}}
             <div class="mt-2 sm:mt-2 md:gap-6 lg:flex lg:items-start xl:gap-8">
                 <div class="xl:block">
-                    <div class="mt-6 grid grid-cols-3 gap-4 sm:mt-8">
+                    <div class="mt-6 grid grid-cols-3 gap-4
 
                         @foreach ($data as $product)
                             <div
-                                class="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                                class="space-y-6 overflow-hidden rounded-lg border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                                 <a href="#" class="overflow-hidden rounded">
                                     @if (!empty($product['product_photo']))
                                         @foreach ($product['product_photo'] as $productPhoto)
