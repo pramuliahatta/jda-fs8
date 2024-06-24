@@ -1,105 +1,53 @@
 <x-layout>
     <x-slot name="title">Pengguna</x-slot>
-    <x-dashboard-section route='dashboard.articles.index'>
-        <article
-            class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-            <header class="mb-4 lg:mb-6 not-format">
-                <address class="flex items-center mb-6 not-italic">
-                    <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                        <img class="mr-4 w-16 h-16 rounded-full"
-                            src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
-                        <div>
-                            <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">
-                                Hendra, S.Pd
-                            </a>
-                            <p class="text-base text-gray-500 dark:text-gray-400">
-                                Kepala Desa Cidadap
-                            </p>
-                            <p class="text-base text-gray-500 dark:text-gray-400">
-                                <time pubdate datetime="2024-06-12" title="June 12th, 2024">
-                                    Feb. 6, 2024
-                                </time>
-                            </p>
-                        </div>
+    <x-dashboard-section route='dashboard.users.index'>
+
+        <div class="w-full flex justify-center">
+            <div
+                class="flex flex-col gap-4 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 p-4">
+                <div class="rounded-full bg-green-200">
+                    <svg class="w-48 h-48 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-width="1"
+                            d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                </div>
+
+                <div class="flex flex-col justify-between p-4 leading-normal">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        Ignasius Yuda Adhitia
+                    </h5>
+                    <div class="flex items-center gap-4 font-normal text-gray-700 dark:text-gray-400">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                d="m3.5 5.5 7.893 6.036a1 1 0 0 0 1.214 0L20.5 5.5M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
+                        </svg>
+
+                        <span class="block">ignasius.yuda.adhitia@gmail.com</span>
                     </div>
-                </address>
-                <h1
-                    class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
-                    Pembangunan Jalan Desa Baru
-                </h1>
-            </header>
-            <p class="lead">
-                Proyek pembangunan jalan desa baru telah resmi dimulai minggu ini. Pembangunan ini merupakan salah
-                satu program unggulan pemerintah Desa Cidadap untuk meningkatkan kualitas infrastruktur dan
-                kesejahteraan masyarakat. Jalan baru ini diharapkan akan membawa berbagai manfaat signifikan bagi
-                warga desa.
-            </p>
 
-            <figure>
-                <img class="w-full h-96 rounded-lg object-cover"
-                    src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
-                    alt="road-construction">
-                <figcaption>Pembangunan Jalan Baru</figcaption>
-            </figure>
-            <h2>Tujuan dan Manfaat Pembangunan Jalan Desa Baru</h2>
-            <p>
-                Tujuan utama dari pembangunan jalan ini adalah untuk meningkatkan aksesibilitas dan kenyamanan bagi
-                warga Desa Cidadap. Selama ini, kondisi jalan yang kurang memadai sering kali menjadi hambatan dalam
-                kegiatan sehari-hari warga, terutama dalam hal mobilitas dan transportasi. Dengan adanya jalan baru
-                ini, diharapkan warga dapat menikmati perjalanan yang lebih lancar dan aman.
-            </p>
-            <p>
-                Selain itu, pembangunan jalan baru ini juga bertujuan untuk mempermudah transportasi hasil pertanian
-                dan produk lokal. Desa Cidadap dikenal dengan hasil pertanian yang melimpah serta produk-produk
-                lokal yang berkualitas. Dengan akses jalan yang lebih baik, distribusi hasil pertanian dan produk
-                lokal akan menjadi lebih efisien, sehingga dapat meningkatkan perekonomian desa secara keseluruhan.
-            </p>
-            <h2>Tujuan dan Manfaat Pembangunan Jalan Desa Baru</h2>
-            <p>
-                Proyek pembangunan jalan desa ini melibatkan berbagai pihak, termasuk pemerintah desa, kontraktor
-                lokal, dan warga setempat. Pemerintah desa telah melakukan koordinasi dengan berbagai pihak terkait
-                untuk memastikan proses pembangunan berjalan lancar dan tepat waktu. Selain itu, warga desa juga
-                turut berpartisipasi dalam proyek ini, baik melalui gotong royong maupun memberikan masukan yang
-                konstruktif.
-            </p>
-            <p>
-                Kepala Desa Cidadap, Bapak Ahmad Syahroni, menyampaikan apresiasinya atas partisipasi aktif warga
-                dalam proyek ini. "Kami sangat menghargai dukungan dan partisipasi warga Desa Cidadap dalam
-                pembangunan jalan desa baru ini. Ini adalah bukti nyata semangat gotong royong dan kebersamaan kita
-                dalam membangun desa yang lebih baik," ujarnya.
-            </p>
-            <h2>Harapan untuk Masa Depan</h2>
-            <p>
-                Dengan dimulainya proyek pembangunan jalan desa baru ini, pemerintah desa berharap bahwa berbagai
-                hambatan yang selama ini dirasakan oleh warga dapat teratasi. Jalan baru ini tidak hanya akan
-                meningkatkan mobilitas dan transportasi, tetapi juga diharapkan dapat mendorong pertumbuhan ekonomi
-                desa.
-            </p>
-            <p>
-                Pembangunan jalan desa baru ini juga merupakan bagian dari rencana jangka panjang pemerintah Desa
-                Cidadap untuk meningkatkan kualitas hidup warganya. Ke depan, pemerintah desa berencana untuk terus
-                mengembangkan infrastruktur dan fasilitas publik lainnya guna menciptakan desa yang lebih maju dan
-                sejahtera.
-            </p>
+                    <div class="flex items-center gap-4 font-normal text-gray-700 dark:text-gray-400">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18.427 14.768 17.2 13.542a1.733 1.733 0 0 0-2.45 0l-.613.613a1.732 1.732 0 0 1-2.45 0l-1.838-1.84a1.735 1.735 0 0 1 0-2.452l.612-.613a1.735 1.735 0 0 0 0-2.452L9.237 5.572a1.6 1.6 0 0 0-2.45 0c-3.223 3.2-1.702 6.896 1.519 10.117 3.22 3.221 6.914 4.745 10.12 1.535a1.601 1.601 0 0 0 0-2.456Z" />
+                        </svg>
+                        <span class="block">+628882204001</span>
+                    </div>
 
-            <h2>Kesimpulan</h2>
-            <p>Proyek pembangunan jalan desa baru di Desa Cidadap adalah langkah penting dalam meningkatkan
-                aksesibilitas dan kenyamanan bagi warga, serta mempermudah transportasi hasil pertanian dan produk
-                lokal. Dengan partisipasi aktif dari warga dan dukungan penuh dari pemerintah desa, diharapkan
-                proyek ini dapat selesai tepat waktu dan memberikan manfaat yang besar bagi seluruh masyarakat Desa
-                Cidadap.
-            </p>
-            <p>
-                Untuk informasi lebih lanjut mengenai perkembangan proyek ini, warga desa dapat mengunjungi kantor
-                desa atau mengakses situs web resmi Desa Cidadap. Mari kita bersama-sama mendukung pembangunan ini
-                demi kemajuan dan kesejahteraan Desa Cidadap.
-            </p>
-        </article>
+                </div>
+            </div>
+
+        </div>
 
         <div class="flex justify-between items-center">
             <div class="flex items-center space-x-3 sm:space-x-4 mt-4">
                 <a href="{{ route(
-                    'dashboard.articles.edit',
+                    'dashboard.users.edit',
                     1,
                     // $id
                 ) }}"
