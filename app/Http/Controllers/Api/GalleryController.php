@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Gallery;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGalleryRequest;
@@ -14,9 +15,10 @@ class GalleryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $perPage = 10;
+        $perPage = $request->query('per_page', 10);
+
         try {
             // get all data in database
             $gallery = Gallery::paginate($perPage);
