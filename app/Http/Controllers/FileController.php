@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
@@ -18,13 +19,11 @@ class FileController extends Controller
     {
         $response = Http::get('http://127.0.0.1:8081/api/files');
         if ($response->successful()) {
-            $data = $response->json();
-            $data = $data['data'];
-            return view('form.formuser', compact('data'));
-            if (Route::current()->getName() == 'landingpage') {
+            $data = $response->json()['data'];
+            if (request()->route()->getName() == 'services') {
                 return view('form.formuser', compact('data'));
             }
-            return view('dashboard.form', compact('data'));
+            return view('dashboard.forms.index', compact('data'));
         }
         return abort(404, 'Data tidak ada!');
     }
@@ -76,8 +75,20 @@ class FileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(file $file)
+    public function edit(string $id)
     {
+        $client = new Client();
+        $apiUrl = "http://127.0.0.1:8001/api/files/$id";
+
+        try {
+            $response = $client->get($apiUrl);
+            $content = json_decode($response->getBody(), true);
+            $data = $content['data'];
+
+            return view('dashboard.forms.edit', ['data' => $data]);
+        } catch (\Exception $e) {
+            return view('api_error', ['error' => $e->getMessage()]);
+        }
     }
 
     /**

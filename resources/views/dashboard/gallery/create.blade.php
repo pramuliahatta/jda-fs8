@@ -1,6 +1,7 @@
 <x-layout>
     <x-slot name="title">Galeri</x-slot>
     <!-- Create modal -->
+
     <x-dashboard-section route="dashboard.gallery.index">
         <!-- Modal header -->
         <div class="max-w-2xl">

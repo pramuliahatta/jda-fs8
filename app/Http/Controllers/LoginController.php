@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index() {
-        return view('auth.login', [
-        ]);
+    public function index()
+    {
+        return view('auth.login', []);
     }
 
-    public function authenticate(Request $request) {
+    public function authenticate(Request $request)
+    {
 
         //pengecekan validasi form yang diisi pada form login
         $credentials = $request->validate([
@@ -26,16 +27,17 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             //jika user admin maka arahkan user ke menu dashboard, jika user adalah pengguna biasa maka arahkan user ke halaman awal
-            if(Auth::user()->role == 'admin') {
+            if (Auth::user()->role == 'admin') {
                 return redirect()->intended(route('dashboard.index'));
-                }
+            }
             return redirect()->intended('/');
         }
 
         return back()->with('error', 'Login Failed');
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
