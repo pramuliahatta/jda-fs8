@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone_number',
+        'role',
     ];
 
     /**
@@ -47,5 +49,14 @@ class User extends Authenticatable
 
     public function product() {
         return $this->hasMany(Product::class);
+    }
+
+    public function isAdmin()
+    {
+        //cek jika role user sama dengan 'admin'
+        if (auth()->user()->role == 'admin') {
+            return true;
+        }
+        return false;
     }
 }

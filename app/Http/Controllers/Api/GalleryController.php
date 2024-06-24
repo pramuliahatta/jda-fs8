@@ -20,10 +20,10 @@ class GalleryController extends Controller
             // get all data in database
             $gallery = Gallery::all();
             // response if success
-            return success($gallery, 'Gallery ditemukan');
+            return success($gallery, 'Gallery berhasil ditemukan');
         } catch (\Exception $e) {
-            Log::error("Fail get gallery data:" . $e->getMessage());
-            return fails('Gagal mendapatkan data', 500);
+            Log::error("Failed to get gallery data:" . $e->getMessage());
+            return fails('Gagal mendapatkan data gallery', 500);
         }
     }
 
@@ -55,8 +55,8 @@ class GalleryController extends Controller
             return fails($e->errors(), 422);
         } catch (\Exception $e) {
             // response if fails
-            Log::error('Fail to store gallery:' . $e->getMessage());
-            return fails('Galleri gagal ditambahkan', 500);
+            Log::error('Failed to store gallery:' . $e->getMessage());
+            return fails('Gagal menambahkan gallery', 500);
         }
     }
 
@@ -71,15 +71,15 @@ class GalleryController extends Controller
 
             if ($gallery) {
                 // response if success
-                return success($gallery, 'Galleri ditemukan');
+                return success($gallery, 'Gallery berhasil ditemukan');
             } else {
                 // response if fails
                 return fails('Galleri tidak ditemukan', 404);
             }
         } catch (\Exception $e) {
             // response if fails
-            Log::error('Fail get gallery data:' . $e->getMessage());
-            return fails('Gagal mendapatkan data', 500);
+            Log::error('Failed to get gallery data:' . $e->getMessage());
+            return fails('Gagal mendapatkan data gallery', 500);
         }
     }
 
@@ -123,8 +123,8 @@ class GalleryController extends Controller
             return fails($e->errors(), 422);
         } catch (\Exception $e) {
             // response if fails
-            Log::error('Fail to update gallery:' . $e->getMessage());
-            return fails('Galleri gagal diupdate', 500);
+            Log::error('Failed to update gallery:' . $e->getMessage());
+            return fails('Gagal mengubah gallery', 500);
         }
     }
 
@@ -153,8 +153,8 @@ class GalleryController extends Controller
             return fails('Galleri tidak ditemukan', 404);
         } catch (\Exception $e) {
             // response if fails
-            Log::error('Fail get gallery data:' . $e->getMessage());
-            return fails('Gagal mendapatkan data', 500);
+            Log::error('Failed to delete gallery:' . $e->getMessage());
+            return fails('Gagal menghapus gallery', 500);
         }
     }
 }
