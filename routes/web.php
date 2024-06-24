@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,33 +11,29 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/login', [UserController::class, 'index'])->name('login');
-Route::post('/login', [UserController::class, 'authenticate'])->name('authenticate');
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/services', function () {
-    return view('form.formuser');
-})->name('services');
+Route::get('/services', [FileController::class, 'index'])->name('services');
 
 Route::get('/products', function () {
     return view('products.index');
 })->name('products');
 
-Route::get('/products/{id}', function () {
+Route::get('/products/{product}', function () {
     return view('products.detail');
 })->name('productsDetail');
 
-Route::get('/gallery', function () {
-    return view('gallery.index');
-})->name('gallery');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/articles', function () {
     return view('articles.index');
 })->name('articles');
 
-Route::get('/articles/{id}', function () {
+Route::get('/articles/{article}', function () {
     return view('articles.detail');
-})->name('articlesDetail');
+})->name('articles.detail');
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', function () {
@@ -45,9 +44,26 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.articles.index');
     })->name('dashboard.articles.index');
 
-    Route::get('/gallery', function () {
-        return view('dashboard.gallery.index');
-    })->name('dashboard.gallery.index');
+    Route::get('/articles/create', function () {
+        return view('dashboard.articles.create');
+    })->name('dashboard.articles.create');
+
+    Route::get('/articles/{id}', function () {
+        return view('dashboard.articles.show');
+    })->name('dashboard.articles.show');
+
+    Route::get('/articles/{id}/edit/', function () {
+        return view('dashboard.articles.edit');
+    })->name('dashboard.articles.edit');
+
+
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('dashboard.gallery.index');
+    Route::get('/gallery/create', [GalleryController::class, 'create'])->name('dashboard.gallery.create');
+    Route::post('/gallery', [GalleryController::class, 'store'])->name('dashboard.gallery.store');
+    Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('dashboard.gallery.show');
+    Route::get('/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('dashboard.gallery.edit');
+    Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('dashboard.gallery.update');
+    Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('dashboard.gallery.destroy');
 
     Route::get('/forms', function () {
         return view('dashboard.forms.index');
@@ -61,25 +77,35 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.forms.edit');
     })->name('dashboard.forms.edit');
 
-    Route::get('/forms/detail', function () {
-        return view('dashboard.forms.detail');
-    })->name('dashboard.forms.detail');
+    Route::get('/forms/show', function () {
+        return view('dashboard.forms.show');
+    })->name('dashboard.forms.show');
 
 
     Route::get('/users', function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
-
 });
 
 Route::get('/createproducts', function () {
     return view('products.create');
-})->name('products.create');
+})->name('productsCreate');
 
 Route::get('/dashboardproducts', function () {
     return view('products.dashboard');
-})->name('products.dashboard');
+})->name('productsDashboard');
+
+Route::get('/editproducts', function () {
+    return view('products.edit');
+})->name('productsEdit');
+
+Route::get('/previewproducts', function () {
+    return view('products.preview');
+})->name('productsPreview');
 
 
+Route::get('/about', function () {
+    return view('about.index');
+})->name('about');
 
 

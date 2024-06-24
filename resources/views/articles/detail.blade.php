@@ -110,7 +110,7 @@
                         <img class="mb-5 h-44 w-full object-cover rounded-lg"src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
                             alt="road-construction">
                     </a>
-                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Pembangunan Jalan Desa Baru</a>
                     </h2>
                     <p class="mb-4 text-gray-500 dark:text-gray-400">
@@ -118,7 +118,7 @@
                         meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
                         pertanian dan produk lokal.
                     </p>
-                    <a href="#"
+                    <a href="{{ route('articles.detail', 5) }}"
                         class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
@@ -129,7 +129,7 @@
                             src="https://images.pexels.com/photos/713644/pexels-photo-713644.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt="festivals">
                     </a>
-                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Festival Budaya Tahunan</a>
                     </h2>
                     <p class="mb-4  text-gray-500 dark:text-gray-400">
@@ -137,7 +137,7 @@
                         menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan
                         khas daerah.
                     </p>
-                    <a href="#"
+                    <a href="{{ route('articles.detail', 6) }}"
                         class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
@@ -148,7 +148,7 @@
                             src="https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt="rice-fields">
                     </a>
-                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#"> Gotong Royong Desa</a>
                     </h2>
                     <p class="mb-4  text-gray-500 dark:text-gray-400">
@@ -156,7 +156,7 @@
                         lingkungan desa dalam kegiatan gotong royong. Ini adalah kesempatan untuk mempererat silaturahmi
                         dan menjaga kebersihan desa kita.
                     </p>
-                    <a href="#"
+                    <a href="{{ route('articles.detail', 7) }}"
                         class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
@@ -167,13 +167,14 @@
                             src="https://images.pexels.com/photos/10333242/pexels-photo-10333242.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt="cooking-festivals">
                     </a>
-                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Lomba Memasak Tradisional</a>
                     </h2>
-                    <p class="mb-4  text-gray-500 dark:text-gray-400">Ikuti lomba memasak dengan resep-resep tradisional
+                    <p class="mb-4  text-gray-500 dark:text-gray-400">Ikuti lomba memasak dengan resep-resep
+                        tradisional
                         Desa Cidadap. Acara ini terbuka untuk semua
                         warga desa dan pemenang akan mendapatkan hadiah menarik.</p>
-                    <a href="#"
+                    <a href="{{ route('articles.detail', 8) }}"
                         class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>

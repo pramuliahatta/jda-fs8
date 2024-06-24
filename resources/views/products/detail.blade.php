@@ -45,7 +45,7 @@
                 {{-- name of product --}}
                 <div class="mt-6 sm:mt-8 lg:mt-0">
                     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-                        JANGKRIK (Jamu Organik)
+                        Studio Display
                     </h1>
                     {{-- price --}}
                     <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
@@ -87,7 +87,7 @@
                 </a> --}}
 
                         {{-- seller contact --}}
-                        <a href="#" title=""
+                        <a href="https://wa.me/6285724507434?text=Hallo%20kak,%20saya%20ingin%20bertanya%20tentang%20produknya" title=""
                             class="text-white mt-4 sm:mt-0 bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
                             role="button">
                             <svg class="w-6 h-6 text-white-800 dark:text-white -ms-2 me-2" aria-hidden="true"
