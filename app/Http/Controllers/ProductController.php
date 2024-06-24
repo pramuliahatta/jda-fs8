@@ -19,6 +19,7 @@ class ProductController extends Controller
         $fetchData = Http::get('http://127.0.0.1:8081/api/products');
         $response = $fetchData->json();
         $data = $response['data'];
+        // return $data[0];         
         return view('products.index', compact('data'));
         // if($fetchData->successful()) {
         //     $response = $fetchData->json();
@@ -73,7 +74,7 @@ class ProductController extends Controller
         $fetchData = Http::get('http://127.0.0.1:8081/api/products/' . $product->id);
         $response = $fetchData->json();
         $data = $response['data'];
-        return view('products.show', compact('data'));
+        return view('products.detail', compact('data'));
         // if($fetchData->successful()) {
         //     $response = $fetchData->json();
         //     $data = $response['data'];

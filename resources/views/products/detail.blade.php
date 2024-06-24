@@ -9,21 +9,39 @@
                         <div class="flex flex-col items-center">
                             <!-- main Product galery -->
                             <div class="mb-4">
+
+                                @if(!empty($data['product_photo']))
+                                @foreach ($data['product_photo'] as $productPhoto)
+                                @if ($loop->first)
                                 <img class="w-full dark:hidden"
-                                    src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
+                                    src="/upload/product/{{ $productPhoto['photo'] }}"
                                     alt="" />
                                 <img class="w-full hidden dark:block"
                                     src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
                                     alt="" />
+                                @endif
+                                @endforeach
+                                @else
+                                <img class="w-full dark:hidden"
+                                    src="/upload/product/noimage.jpg"
+                                    alt="" />
+                                <img class="w-full hidden dark:block"
+                                    src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
+                                    alt="" />
+                                    @endif
                             </div>
 
                             <!--  Thumbnail galery  -->
                             <div class="mt-6 flex space-x-4">
-                                <a href="#" onclick="changeImage('https://via.placeholder.com/300')">
-                                    <img src="https://via.placeholder.com/100" alt="Thumbnail 1"
+                                @if(!empty($data['product_photo']) && sizeof($data['product_photo']) != 1)
+                                @foreach ($data['product_photo'] as $productPhoto)
+                                <a href="#" onclick="changeImage('/upload/product/{{ $productPhoto['photo'] }}')">
+                                    <img src="/upload/product/{{ $productPhoto['photo'] }}" alt="Thumbnail 1"
                                         class="thumbnail w-16 h-16 object-cover border-2 border-gray-300">
                                 </a>
-                                <a href="#"
+                                @endforeach
+                                @endif
+                                {{-- <a href="#"
                                     onclick="changeImage('https://via.placeholder.com/300/FF0000/FFFFFF')">
                                     <img src="https://via.placeholder.com/100/FF0000/FFFFFF" alt="Thumbnail 2"
                                         class="thumbnail w-16 h-16 object-cover border-2 border-gray-300">
@@ -32,7 +50,7 @@
                                     onclick="changeImage('https://via.placeholder.com/300/00FF00/FFFFFF')">
                                     <img src="https://via.placeholder.com/100/00FF00/FFFFFF" alt="Thumbnail 3"
                                         class="thumbnail w-16 h-16 object-cover border-2 border-gray-300">
-                                </a>
+                                </a> --}}
                                 {{-- <a href="#" onclick="changeImage('https://via.placeholder.com/300/0000FF/FFFFFF')">
                         <img src="https://via.placeholder.com/100/0000FF/FFFFFF" alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover border-2 border-gray-300">
                     </a> --}}
@@ -45,12 +63,12 @@
                 {{-- name of product --}}
                 <div class="mt-6 sm:mt-8 lg:mt-0">
                     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-                        JANGKRIK (Jamu Organik)
+                        {{ $data['name'] }}
                     </h1>
                     {{-- price --}}
                     <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
                         <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-                            Rp. 20.000/pack
+                            Rp. {{ number_format($data['price'], 0, ',', '.') }}/pack
                         </p>
 
                         <div class="flex items-center gap-2 mt-2 sm:mt-0">
@@ -107,16 +125,14 @@
 
                     {{-- description --}}
                     <p class="mb-6 text-gray-500 dark:text-gray-400">
-                        Studio quality three mic array for crystal clear calls and voice
-                        recordings. Six-speaker sound system for a remarkably robust and
-                        high-quality audio experience. Up to 256GB of ultrafast SSD storage.
+                        {{ $data['description'] }}
                     </p>
 
-                    <p class="text-gray-500 dark:text-gray-400">
+                    {{-- <p class="text-gray-500 dark:text-gray-400">
                         Two Thunderbolt USB 4 ports and up to two USB 3 ports. Ultrafast
                         Wi-Fi 6 and Bluetooth 5.0 wireless. Color matched Magic Mouse with
                         Magic Keyboard or Magic Keyboard with Touch ID.
-                    </p>
+                    </p> --}}
                 </div>
             </div>
         </div>
