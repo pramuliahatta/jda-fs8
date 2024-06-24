@@ -5,7 +5,7 @@
         <!-- Modal header -->
         <div class="max-w-2xl">
             <div class="flex justify-between items-center rounded-t sm:mb-5 dark:border-gray-600">
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white">Ubah Foto</h2>
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white">Ubah Artikel</h2>
             </div>
             <!-- Modal body -->
             <form action="" method="POST">
@@ -14,52 +14,30 @@
 
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
-                        <div class="sm:col-span-2">
-                            <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Judul Foto
-                            </label>
-                            <input type="text" name="title" id="title"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Masukkan judul foto" {{-- value="{{ old('title', $title) }}" --}}>
-                        </div>
-                        @error('title')
-                            <div class="error-message">
-                                <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
-                                    <span class="font-medium">Upps!</span> {{ $message }}
-                                </p>
-                            </div>
-                        @enderror
+                        <x-input-field label="Judul" name="title" id="title" placeholder="Masukkan judul artikel"
+                            value="{{ old('title', $photo->title ?? '') }}" />
+                        <x-error-message field="title" />
                     </div>
 
                     <div>
-                        <div class="sm:col-span-2">
-                            <label for="photo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Foto
-                            </label>
-                            <input type="file" name="photo" id="photo"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Masukkan judul foto">
-                        </div>
-                        @error('photo')
-                            <div class="error-message">
-                                <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
-                                    <span class="font-medium">Upps!</span> {{ $message }}
-                                </p>
-                            </div>
-                        @enderror
+                        <x-image-uploader-viewer name="photo" id="photo"
+                            imagePath="{{ $photo->image_path ?? '' }}" altText="Foto" />
+                        <x-error-message field="photo" />
+                    </div>
+
+                    <div>
+                        @php
+                            // Example values
+                            $article = [
+                                'body' => 'Your previous article content here...',
+                            ];
+                        @endphp
+                        <x-textarea-editor id="body" name="body" label="Artikel"
+                            value="{{ old('body', $article['body']) }}" />
+                        <x-error-message field="body" />
                     </div>
                 </div>
-                <button type="submit"
-                    class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                    <svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                        <path fill-rule="evenodd"
-                            d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    Ubah
-                </button>
+                <x-edit-button />
             </form>
         </div>
     </x-dashboard-section>

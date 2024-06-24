@@ -43,10 +43,6 @@
             @include('partials.footer')
         </footer>
     @endunless
-    <script>
-        CKEDITOR.replace('body');
-    </script>
-
 </body>
 
 </html>
