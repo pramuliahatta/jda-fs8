@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\ProductController;
@@ -14,4 +15,5 @@ Route::apiResources([
     "galleries" => GalleryController::class,
     "files" => FileController::class,
     "products" => ProductController::class,
+    "users" => UserController::class
 ]);

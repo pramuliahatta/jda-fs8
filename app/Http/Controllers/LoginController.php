@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index() {
-        return view('auth.login', [
-        ]);
+        return view('auth.login');
     }
 
     public function authenticate(Request $request) {
@@ -29,7 +28,7 @@ class LoginController extends Controller
             if(Auth::user()->role == 'admin') {
                 return redirect()->intended(route('dashboard.index'));
                 }
-            return redirect()->intended('/');
+            return redirect()->intended(route('home'));
         }
 
         return back()->with('error', 'Login Failed');
