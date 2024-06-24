@@ -89,5 +89,4 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users/{id}/edit/', function () {
         return view('dashboard.users.edit');
     })->name('dashboard.users.edit');
-})
-    ->middleware('auth');
+})->middleware('auth');
