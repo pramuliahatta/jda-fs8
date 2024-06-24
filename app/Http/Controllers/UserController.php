@@ -15,15 +15,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        //cek nama route, jika 'dashboard.user.index' ke dashboard admin menu user, jika bukan ke login
-        if (Route::current()->getName() == 'dashboard.user.index') {
-            return view('dashboard.user.index', [
+        //cek nama route, jika 'dashboard.users.index' ke dashboard admin menu user, jika bukan ke login
+        if (Route::current()->getName() == 'dashboard.users.index') {
+            return view('dashboard.users.index', [
                 // 'title' => 'Users',
                 'users' => User::all(),
             ]);
         }
 
-        return view('auth.login', [
+        return view('profile', [
             // 'title' => 'Users',
             'users' => User::all(),
         ]);
@@ -35,7 +35,7 @@ class UserController extends Controller
     public function create()
     {
         //mengembalikan tampilan dashboard admin menu user
-        return view('dashboard.user.create', [
+        return view('dashboard.users.create', [
             // 'title' => 'Users',
         ]);
     }
@@ -82,7 +82,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('dashboard.user.detail', [
+        return view('dashboard.users.detail', [
             // 'title' => 'Users',
             'user' => $user
         ]);
@@ -93,7 +93,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('dashboard.user.edit', [
+        return view('dashboard.users.edit', [
             // 'title' => 'Users',
             'user' => $user
         ]);
@@ -104,8 +104,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //cek jika route 'dashboard.user.update' yang mana digunakan untuk dashboard maka ganti langsung password ke default. jika tidak ganti nomor/password sesuai dengan form yang diisi user
-        if (Route::current()->getName() == 'dashboard.user.update') {
+        //cek jika route 'dashboard.users.update' yang mana digunakan untuk dashboard maka ganti langsung password ke default. jika tidak ganti nomor/password sesuai dengan form yang diisi user
+        if (Route::current()->getName() == 'dashboard.users.update') {
             //pembuatan password default ke var validateData dengan kunci password
             $validatedData['password'] = Hash::make('12345');
 
@@ -159,46 +159,5 @@ class UserController extends Controller
         }
 
         return back()->with('error', 'Error.');
-    }
-
-    public function adminCheck(User $user)
-    {
-        //cek jika role user sama dengan 'admin'
-        if ($user->role == 'admin') {
-            return true;
-        }
-        return false;
-    }
-
-    public function authenticate(Request $request)
-    {
-
-        //pengecekan validasi form yang diisi pada form login
-        $credentials = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        //cek jika email dan password sesuai dengan apa yang ada di database
-        if (Auth::attempt($credentials)) {
-            //buat session baru
-            $request->session()->regenerate();
-
-            //jika user admin maka arahkan user ke menu dashboard, jika user adalah pengguna biasa maka arahkan user ke halaman awal
-            if (Auth::user()->role == 'admin') {
-                return redirect()->intended(route('dashboard.index'));
-            }
-            return redirect()->intended('/');
-        }
-
-        return back()->with('error', 'Login Failed');
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
-        return redirect()->intended('/dashboard');
     }
 }

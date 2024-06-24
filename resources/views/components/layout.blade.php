@@ -8,6 +8,7 @@
     <link rel="icon" type="image/svg+xml"
         href="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -16,6 +17,24 @@
     @endunless
 
     <main>
+        <div class="w-full flex justify-center">
+            @if (session('success'))
+                <div class="p-4 mt-8 w-4/4 top-0 z-50 fixed text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                    role="alert">
+                    <span class="font-medium">Berhasil!</span>
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="p-4 mt-8 w-4/4 top-0 z-50 fixed text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                    role="alert">
+                    <span class="font-medium">Upps!</span>
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+
         {{ $slot }}
     </main>
 

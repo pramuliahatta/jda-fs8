@@ -62,8 +62,5 @@ export default {
             ],
         },
     },
-    theme: {
-        extend: {},
-    },
     plugins: [require("flowbite/plugin"), require("flowbite-typography")],
 };

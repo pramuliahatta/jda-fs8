@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Route;
+// use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Route;
 
 class GalleryController extends Controller
 {
@@ -16,17 +16,17 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        // get all galleries data in database
-        $photos = Gallery::all();
-        $view_data = [
-            'photos' => $photos,
-        ];
-        if (Route::current()->getName() == 'dashboard.gallery') {
-            // for view dashboard
-            return view('dashboard.gallery', $view_data);
+        $response = Http::get('http://127.0.0.1:8081/api/galleries');
+        if ($response->successful()) {
+            $data = $response->json();
+            $data = $data['data'];
+            // dd(Route::current()->getName());
+            if (Route::current()->getName() == 'dashboard.gallery.index') {
+                return view('dashboard.gallery.index', compact('data'));
+            }
+            return view('gallery.index', compact('data'));
         }
-        // for view landingpage
-        return view('landingpage.gallery', $view_data);
+        return abort(404, 'Data tidak ada!');
     }
 
 
@@ -35,7 +35,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.gallery-create');
+        return view('dashboard.gallery.create');
     }
 
     /**
@@ -70,7 +70,7 @@ class GalleryController extends Controller
         $gallery->photo = 'img/upload/' . $imageName;
         $gallery->save();
 
-        return back()->with('success', "Photo berhasil ditambahkan!");
+        return back()->with('success', "Foto berhasil ditambahkan!");
     }
 
     /**
@@ -78,7 +78,8 @@ class GalleryController extends Controller
      */
     public function show(string $id)
     {
-        // return view('dashboard.detail-gallery', Gallery::find($id));
+        $photo = Gallery::find($id);
+        return view('dashboard.gallery.show', $photo);
     }
 
     /**
@@ -86,7 +87,8 @@ class GalleryController extends Controller
      */
     public function edit(string $id)
     {
-        return view('dashboard.edit-gallery', Gallery::find($id));
+        $photo = Gallery::find($id);
+        return view('dashboard.gallery.edit', $photo);
     }
 
     /**
@@ -97,22 +99,23 @@ class GalleryController extends Controller
         // get gallery data in database
         $gallery = Gallery::find($id);
         if (!$gallery) {
-            return back()->with('error', "Photo tidak ditemukan!");
+            return back()->with('error', "Foto tidak ditemukan!");
         }
 
         // validation input data
         $validatedData = $request->validate([
             'title' => [
-                'required',
+                'nullable',
                 'max:255'
             ],
             'photo' => [
-                'required',
+                'nullable',
                 'image',
                 'mimes:jpeg,png,jpg',
                 'max:2048'
             ],
         ]);
+
 
         if ($request->hasFile('photo')) {
             // store photo in public directory
@@ -131,10 +134,11 @@ class GalleryController extends Controller
         }
 
         // store gallery data (title) in database
-        $gallery->title = $validatedData['title'];
+        $gallery->title = $request->title;
+        // return $gallery;
         $gallery->save();
 
-        return back()->with('success', "Photo berhasil diubah!");
+        return back()->with('success', "Foto berhasil diubah!");
     }
 
     /**
@@ -154,8 +158,8 @@ class GalleryController extends Controller
 
             // remove gallery data in database
             $gallery->delete();
-            return back()->with('success', "Photo berhasil dihapus!");
+            return back()->with('success', "Foto berhasil dihapus!");
         }
-        return back()->with('error', "Photo tidak ditemukan!");
+        return back()->with('error', "Foto tidak ditemukan!");
     }
 }

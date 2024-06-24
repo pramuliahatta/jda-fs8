@@ -54,7 +54,7 @@
                                 Jese Leos
                             </span>
                         </div>
-                        <a href="{{ route('articlesDetail', 1) }}"
+                        <a href="{{ route('articles.detail', 1) }}"
                             class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
                             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
@@ -105,7 +105,7 @@
                                 Bonnie Green
                             </span>
                         </div>
-                        <a href="{{ route('articlesDetail', 1) }}"
+                        <a href="{{ route('articles.detail', 1) }}"
                             class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
                             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
