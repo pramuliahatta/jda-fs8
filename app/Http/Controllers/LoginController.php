@@ -7,9 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+<<<<<<< HEAD
     public function index()
     {
         return view('auth.login', []);
+=======
+    public function index() {
+        return view('auth.login');
+>>>>>>> d7854813727753eeba7c1d172fa485e8c6681d3e
     }
 
     public function authenticate(Request $request)
@@ -29,8 +34,13 @@ class LoginController extends Controller
             //jika user admin maka arahkan user ke menu dashboard, jika user adalah pengguna biasa maka arahkan user ke halaman awal
             if (Auth::user()->role == 'admin') {
                 return redirect()->intended(route('dashboard.index'));
+<<<<<<< HEAD
             }
             return redirect()->intended('/');
+=======
+                }
+            return redirect()->intended(route('home'));
+>>>>>>> d7854813727753eeba7c1d172fa485e8c6681d3e
         }
 
         return back()->with('error', 'Login Failed');
