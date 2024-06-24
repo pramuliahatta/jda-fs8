@@ -12,4 +12,5 @@ class Gallery extends Model
     protected $guarded = [
         'id',
     ];
+    protected $fillable = ['title', 'photo'];
 }

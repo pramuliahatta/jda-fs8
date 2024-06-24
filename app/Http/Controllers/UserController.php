@@ -15,15 +15,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        $fetchData = Http::get('http://127.0.0.1:8081/api/users');
-        if($fetchData->successful()) {
+        $fetchData = Http::get('http://127.0.0.1:8001/api/users');
+        if ($fetchData->successful()) {
             $response = $fetchData->json();
             $data = $response['data'];
         }
 
         //cek nama route, jika 'dashboard.users.index' ke dashboard admin menu user, jika bukan ke login
-        if(Route::current()->getName() == 'dashboard.users.index') {
-                return view('dashboard.users.index', compact('data'));
+        if (Route::current()->getName() == 'dashboard.users.index') {
+            return view('dashboard.users.index', compact('data'));
         }
 
         return view('home', compact('data'));
@@ -62,11 +62,11 @@ class UserController extends Controller
             ],
         ]);
 
-        if($validatedData) {
-            $fetchData = Http::post('http://127.0.0.1:8081/api/users', $request);
+        if ($validatedData) {
+            $fetchData = Http::post('http://127.0.0.1:8001/api/users', $request);
             $response = $fetchData->json();
             $data = $response['data'];
-            if($data['status'] == true) {
+            if ($data['status'] == true) {
                 return back()->with('success', $data['message']);
             }
         }
@@ -78,7 +78,7 @@ class UserController extends Controller
         // if ($storeData) {
         //     return back()->with('success', 'User added successfully');
         // }
-        
+
         // return back()->with('error', 'Error.');
     }
 
@@ -87,8 +87,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $fetchData = Http::get('http://127.0.0.1:8081/api/users/' + $user->id);
-        if($fetchData->successful()) {
+        $fetchData = Http::get('http://127.0.0.1:8001/api/users/' + $user->id);
+        if ($fetchData->successful()) {
             $response = $fetchData->json();
             $data = $response['data'];
         }
@@ -100,8 +100,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $fetchData = Http::get('http://127.0.0.1:8081/api/users/' + $user->id);
-        if($fetchData->successful()) {
+        $fetchData = Http::get('http://127.0.0.1:8001/api/users/' + $user->id);
+        if ($fetchData->successful()) {
             $response = $fetchData->json();
             $data = $response['data'];
         }
@@ -128,11 +128,11 @@ class UserController extends Controller
             ]
         ]);
 
-        if($validatedData) {
-            $fetchData = Http::put('http://127.0.0.1:8081/api/users/' + $user->id, $request);
+        if ($validatedData) {
+            $fetchData = Http::put('http://127.0.0.1:8001/api/users/' + $user->id, $request);
             $response = $fetchData->json();
             $data = $response['data'];
-            if($data['status'] == true) {
+            if ($data['status'] == true) {
                 return back()->with('success', $data['message']);
             }
         }
@@ -145,18 +145,19 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $fetchData = Http::delete('http://127.0.0.1:8081/api/users/' + $user->id);
-            $response = $fetchData->json();
-            $data = $response['data'];
-            if($data['status'] == true) {
-                return back()->with('success', $data['message']);
-            }
+        $fetchData = Http::delete('http://127.0.0.1:8001/api/users/' + $user->id);
+        $response = $fetchData->json();
+        $data = $response['data'];
+        if ($data['status'] == true) {
+            return back()->with('success', $data['message']);
+        }
         return back()->with('error', 'Error.');
     }
 
-    public function adminCheck(User $user) {
+    public function adminCheck(User $user)
+    {
         //cek jika role user sama dengan 'admin'
-        if($user->role == 'admin') {
+        if ($user->role == 'admin') {
             return true;
         }
         return false;

@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $fetchData = Http::get('http://127.0.0.1:8081/api/products');
+        $fetchData = Http::get('http://127.0.0.1:8001/api/products');
         $response = $fetchData->json();
         $data = $response['data'];
         // return $data[0];         
@@ -50,8 +50,8 @@ class ProductController extends Controller
             'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        if($validatedData) {
-            $fetchData = Http::post('http://127.0.0.1:8081/api/products', $request);
+        if ($validatedData) {
+            $fetchData = Http::post('http://127.0.0.1:8001/api/products', $request);
             $response = $fetchData->json();
             $data = $response['data'];
             return redirect()->intended(route('products.index', compact('data')));
@@ -71,7 +71,7 @@ class ProductController extends Controller
      */
     public function show(product $product)
     {
-        $fetchData = Http::get('http://127.0.0.1:8081/api/products/' . $product->id);
+        $fetchData = Http::get('http://127.0.0.1:8001/api/products/' . $product->id);
         $response = $fetchData->json();
         $data = $response['data'];
         return view('products.detail', compact('data'));
@@ -87,7 +87,7 @@ class ProductController extends Controller
      */
     public function edit(product $product)
     {
-        $fetchData = Http::get('http://127.0.0.1:8081/api/products/' . $product->id);
+        $fetchData = Http::get('http://127.0.0.1:8001/api/products/' . $product->id);
         $response = $fetchData->json();
         $data = $response['data'];
         return view('products.edit', compact('data'));
@@ -108,8 +108,8 @@ class ProductController extends Controller
             'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        if($validatedData) {
-            $fetchData = Http::put('http://127.0.0.1:8081/api/products/' . $product->id, $request);
+        if ($validatedData) {
+            $fetchData = Http::put('http://127.0.0.1:8001/api/products/' . $product->id, $request);
             $response = $fetchData->json();
             $data = $response['data'];
             return redirect()->intended(route('products.index', compact('data')));
@@ -129,7 +129,7 @@ class ProductController extends Controller
     public function destroy(product $product)
     {
         // Delete associated photos
-        $fetchData = Http::delete('http://127.0.0.1:8081/api/products/' . $product->id);
+        $fetchData = Http::delete('http://127.0.0.1:8001/api/products/' . $product->id);
         $response = $fetchData->json();
         $data = $response['data'];
         return redirect()->intended(route('products.index', compact('data')));
