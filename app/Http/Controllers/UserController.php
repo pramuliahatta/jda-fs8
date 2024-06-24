@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
@@ -15,18 +15,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        //cek nama route, jika 'dashboard.users.index' ke dashboard admin menu user, jika bukan ke login
-        if (Route::current()->getName() == 'dashboard.users.index') {
-            return view('dashboard.users.index', [
-                // 'title' => 'Users',
-                'users' => User::all(),
-            ]);
+        $fetchData = Http::get('http://127.0.0.1:8001/api/users');
+        if ($fetchData->successful()) {
+            $response = $fetchData->json();
+            $data = $response['data'];
         }
 
-        return view('profile', [
-            // 'title' => 'Users',
-            'users' => User::all(),
-        ]);
+        //cek nama route, jika 'dashboard.users.index' ke dashboard admin menu user, jika bukan ke login
+        if (Route::current()->getName() == 'dashboard.users.index') {
+            return view('dashboard.users.index', compact('data'));
+        }
+
+        return view('home', compact('data'));
     }
 
     /**
@@ -35,9 +35,7 @@ class UserController extends Controller
     public function create()
     {
         //mengembalikan tampilan dashboard admin menu user
-        return view('dashboard.users.create', [
-            // 'title' => 'Users',
-        ]);
+        return view('dashboard.users.create');
     }
 
     /**
@@ -64,17 +62,24 @@ class UserController extends Controller
             ],
         ]);
 
-        //menambahkan data role dan password secara manual
-        $validatedData['role'] = 'member';
-        $validatedData['password'] = Hash::make('12345');
-
-        //menambah data ke user dengan data yang sudah divalidasi. jika sukses kembalikan pesan sukses, jika tidak kembalikan pesan error.
-        $storeData = User::create($validatedData);
-        if ($storeData) {
-            return back()->with('success', 'User added successfully');
+        if ($validatedData) {
+            $fetchData = Http::post('http://127.0.0.1:8001/api/users', $request);
+            $response = $fetchData->json();
+            $data = $response['data'];
+            if ($data['status'] == true) {
+                return back()->with('success', $data['message']);
+            }
         }
 
         return back()->with('error', 'Error.');
+
+        //menambah data ke user dengan data yang sudah divalidasi. jika sukses kembalikan pesan sukses, jika tidak kembalikan pesan error.
+        // $storeData = User::create($validatedData);
+        // if ($storeData) {
+        //     return back()->with('success', 'User added successfully');
+        // }
+
+        // return back()->with('error', 'Error.');
     }
 
     /**
@@ -82,10 +87,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('dashboard.users.detail', [
-            // 'title' => 'Users',
-            'user' => $user
-        ]);
+        $fetchData = Http::get('http://127.0.0.1:8001/api/users/' + $user->id);
+        if ($fetchData->successful()) {
+            $response = $fetchData->json();
+            $data = $response['data'];
+        }
+        return view('dashboard.users.detail', compact('data'));
     }
 
     /**
@@ -93,10 +100,12 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('dashboard.users.edit', [
-            // 'title' => 'Users',
-            'user' => $user
-        ]);
+        $fetchData = Http::get('http://127.0.0.1:8001/api/users/' + $user->id);
+        if ($fetchData->successful()) {
+            $response = $fetchData->json();
+            $data = $response['data'];
+        }
+        return view('dashboard.users.edit', compact('data'));
     }
 
     /**
@@ -104,22 +113,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //cek jika route 'dashboard.users.update' yang mana digunakan untuk dashboard maka ganti langsung password ke default. jika tidak ganti nomor/password sesuai dengan form yang diisi user
-        if (Route::current()->getName() == 'dashboard.users.update') {
-            //pembuatan password default ke var validateData dengan kunci password
-            $validatedData['password'] = Hash::make('12345');
-
-            $updatedData = User::where('id', $user->id)
-                ->update($validatedData);
-
-            //pengecekan jika user berhasil diupdate
-            if ($updatedData) {
-                return back()->with('success', 'User updated successfully');
-            }
-
-            return back()->with('error', 'Error.');
-        }
-
         //pengecekan data dari form yang diisi oleh user
         $validatedData = $request->validate([
             'phone_number' => [
@@ -128,19 +121,20 @@ class UserController extends Controller
                 'max:20',
             ],
             'password' => [
-                'required',
+                'nullable',
                 'min:4',
                 'max:20',
                 'confirmed',
             ]
         ]);
 
-        $updatedData = User::where('id', $user->id)
-            ->update($validatedData);
-
-        //pengecekan jika user berhasil diupdate
-        if ($updatedData) {
-            return back()->with('success', 'User updated successfully');
+        if ($validatedData) {
+            $fetchData = Http::put('http://127.0.0.1:8001/api/users/' + $user->id, $request);
+            $response = $fetchData->json();
+            $data = $response['data'];
+            if ($data['status'] == true) {
+                return back()->with('success', $data['message']);
+            }
         }
 
         return back()->with('error', 'Error.');
@@ -151,13 +145,21 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user = User::destroy($user->id);
-
-        //pengecekan jika user berhasil dihapus
-        if ($user) {
-            return back()->with('success', 'User deleted successfully');
+        $fetchData = Http::delete('http://127.0.0.1:8001/api/users/' + $user->id);
+        $response = $fetchData->json();
+        $data = $response['data'];
+        if ($data['status'] == true) {
+            return back()->with('success', $data['message']);
         }
-
         return back()->with('error', 'Error.');
+    }
+
+    public function adminCheck(User $user)
+    {
+        //cek jika role user sama dengan 'admin'
+        if ($user->role == 'admin') {
+            return true;
+        }
+        return false;
     }
 }

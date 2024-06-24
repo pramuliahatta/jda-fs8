@@ -1,4 +1,5 @@
 <x-layout>
+
     <x-slot name="title">Galeri</x-slot>
     <!-- Modal content -->
     <x-dashboard-section route="dashboard.gallery.index">
@@ -8,22 +9,24 @@
                 <h2 class="text-xl font-bold text-gray-900 dark:text-white">Ubah Foto</h2>
             </div>
             <!-- Modal body -->
-            <form action="{{ route('dashboard.gallery.update', $id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('dashboard.gallery.update', $data['id']) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
                         <x-input-field label="Judul Foto" name="title" id="title" placeholder="Masukkan judul foto"
-                            value="{{ old('title', $title ?? '') }}" />
+                            value="{{ old('title', $data['title'] ?? '') }}" />
                         <x-error-message field="title" />
                     </div>
 
                     <div>
-                        <x-image-uploader-viewer name="photo" id="photo" imagePath="{{ $photo ?? '' }}"
+                        <x-image-uploader-viewer name="photo" id="photo" imagePath="{{ $data['photo'] ?? '' }}"
                             altText="Judul Foto" />
                         <x-error-message field="photo" />
                     </div>
+
                 </div>
                 <x-edit-button />
             </form>

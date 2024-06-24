@@ -3,7 +3,9 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Models\File;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -17,13 +19,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/services', [FileController::class, 'index'])->name('services');
 
-Route::get('/products', function () {
-    return view('products.index');
-})->name('products');
+Route::get('/products', [ProductController::class, 'index'])->name('products');
 
-Route::get('/products/{product}', function () {
-    return view('products.detail');
-})->name('productsDetail');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.detail');
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
@@ -44,6 +42,14 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.articles.index');
     })->name('dashboard.articles.index');
 
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('dashboard.gallery.index');
+    Route::get('/gallery/create', [GalleryController::class, 'create'])->name('dashboard.gallery.create');
+    Route::post('/gallery', [GalleryController::class, 'store'])->name('dashboard.gallery.store');
+    Route::get('/gallery/detail/{id}', [GalleryController::class, 'show'])->name('dashboard.gallery.detail');
+    Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit'])->name('dashboard.gallery.edit');
+    Route::post('/gallery/edit/{id}', [GalleryController::class, 'update'])->name('dashboard.gallery.update');
+    Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('dashboard.gallery.delete');
+
     Route::get('/articles/create', function () {
         return view('dashboard.articles.create');
     })->name('dashboard.articles.create');
@@ -55,7 +61,6 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/articles/{id}/edit/', function () {
         return view('dashboard.articles.edit');
     })->name('dashboard.articles.edit');
-
 
     Route::get('/gallery', [GalleryController::class, 'index'])->name('dashboard.gallery.index');
     Route::get('/gallery/create', [GalleryController::class, 'create'])->name('dashboard.gallery.create');
@@ -72,27 +77,36 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users', function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
-});
 
-Route::get('/createproducts', function () {
-    return view('products.create');
-})->name('productsCreate');
+    Route::get('/createproducts', function () {
+        return view('products.create');
+    })->name('productsCreate');
 
-Route::get('/dashboardproducts', function () {
-    return view('products.dashboard');
-})->name('productsDashboard');
+    Route::get('/dashboardproducts', function () {
+        return view('products.dashboard');
+    })->name('productsDashboard');
 
-Route::get('/editproducts', function () {
-    return view('products.edit');
-})->name('productsEdit');
+    Route::get('/editproducts', function () {
+        return view('products.edit');
+    })->name('productsEdit');
 
-Route::get('/previewproducts', function () {
-    return view('products.preview');
-})->name('productsPreview');
-
-
-Route::get('/about', function () {
-    return view('about.index');
-})->name('about');
+    Route::get('/previewproducts', function () {
+        return view('products.preview');
+    })->name('productsPreview');
 
 
+    Route::get('/about', function () {
+        return view('about.index');
+    })->name('about');
+
+    Route::get('/users/create', function () {
+        return view('dashboard.users.create');
+    })->name('dashboard.users.create');
+
+    Route::get('/users/{id}', function () {
+        return view('dashboard.users.show');
+    })->name('dashboard.users.show');
+
+    Route::get('/users/{id}/edit/', function () {
+        return view('dashboard.users.edit');
+    })->name('dashboard.users.edit');
