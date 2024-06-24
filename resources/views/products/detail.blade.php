@@ -55,12 +55,12 @@
                 {{-- name of product --}}
                 <div class="mt-6 sm:mt-8 lg:mt-0">
                     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-                        JANGKRIK (Jamu Organik)
+                        {{ $data['name'] }}
                     </h1>
                     {{-- price --}}
                     <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
                         <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-                            Rp. 20.000/pack
+                            Rp. {{ number_format($data['price'], 0, ',', '.') }}/pack
                         </p>
                     </div>
 
@@ -94,9 +94,6 @@
                 Wi-Fi 6 and Bluetooth 5.0 wireless. Color matched Magic Mouse with
                 Magic Keyboard or Magic Keyboard with Touch ID.
               </p>
-              
-
-                        
                 </div>
             </div>
         </div>
