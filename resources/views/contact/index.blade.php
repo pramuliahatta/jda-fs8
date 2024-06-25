@@ -14,8 +14,8 @@
                 </p>
             </div>
 
-            <div class="gap-8py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-                <iframe class="rounded-lg"
+            <div class="gap-8 py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+                <iframe class="w-full dark:hidden rounded-lg"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15839.586445383591!2d108.31783277483001!3d-7.021437883142489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f3927c7378d13%3A0xf09d80b7c3496e64!2sCidadap%2C%20Cingambul%2C%20Majalengka%20Regency%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1719290610168!5m2!1sen!2sid"
                     width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
