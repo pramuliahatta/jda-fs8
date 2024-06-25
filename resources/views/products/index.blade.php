@@ -133,7 +133,7 @@
                                     class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white capitalize truncate">{{ $product['name'] }}</a>
                                 <p class="text-md text-gray-600">{{ substr($product['description'], 0, 75) }}...</p>
                                 {{-- real price --}}
-                                <p class="text-2xl font-semibold leading-tight text-gray-800 dark:text-white">
+                                <p class="text-2xl font-semibold leading-tight text-gray-600 dark:text-white">
                                     {{ 'Rp. ' . number_format($product['price'], 0, ',', '.') }},-</p>
                             </div>
 
