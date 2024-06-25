@@ -13,9 +13,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/about', function () {
+    return view('about.index');
+})->name('about');
 
 Route::get('/services', [FileController::class, 'index'])->name('services');
 
@@ -32,6 +32,14 @@ Route::get('/articles', function () {
 Route::get('/articles/{article}', function () {
     return view('articles.detail');
 })->name('articles.detail');
+
+Route::get('/contact', function () {
+    return view('contact.index');
+})->name('contact');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', function () {
@@ -93,11 +101,6 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/previewproducts', function () {
         return view('products.preview');
     })->name('productsPreview');
-
-
-    Route::get('/about', function () {
-        return view('about.index');
-    })->name('about');
 
     Route::get('/users/create', function () {
         return view('dashboard.users.create');

@@ -46,12 +46,12 @@
         <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
             <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                 <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">Beranda</x-nav-link>
-                <x-nav-link href="#">Tentang Kami</x-nav-link>
+                <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">Tentang Kami</x-nav-link>
                 <x-nav-link href="{{ route('services') }}" :active="request()->routeIs('services')">Layanan</x-nav-link>
                 <x-nav-link href="{{ route('products') }}" :active="request()->routeIs('products')">Pasar Desa</x-nav-link>
                 <x-nav-link href="{{ route('gallery') }}" :active="request()->routeIs('gallery')">Galeri</x-nav-link>
                 <x-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles')">Artikel</x-nav-link>
-                <x-nav-link href="#">Kontak Kami</x-nav-link>
+                <x-nav-link href="{{ route('contact') }}" :active="request()->routeIs('contact')">Kontak Kami</x-nav-link>
             </ul>
         </div>
     </div>

@@ -7,7 +7,7 @@
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                 Pasar Desa
             </h2>
-            <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
+            <p class="font-light text-gray-700 lg:mb-16 sm:text-xl dark:text-gray-400">
                 Pasar Desa hadir sebagai wadah yang menghubungkan pembeli dengan produk-produk unggulan dari pengusaha
                 kecil dan menengah (UKM) warga Desa Cidadap.
             </p>
@@ -22,7 +22,7 @@
                             <label for="simple-search" class="sr-only">Search</label>
                             <div class="relative w-full">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-700 dark:text-gray-400"
                                         fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
                                             d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
@@ -115,43 +115,40 @@
                                     @if (!empty($product['product_photo']))
                                         @foreach ($product['product_photo'] as $productPhoto)
                                             @if ($loop->first)
-                                                <img class="mx-auto h-44 w-44 dark:hidden"
+                                                <img class="mx-auto h-64 w-full rounded-lg object-cover dark:hidden"
                                                     src="/upload/product/{{ $productPhoto['photo'] }}"
                                                     alt="imac image" />
-                                                {{-- <img class="mx-auto hidden h-44 w-44 dark:block"
-                                    src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
-                                    alt="imac image" /> --}}
                                             @endif
                                         @endforeach
                                     @else
-                                        <img class="mx-auto h-44 w-44 dark:hidden" src="/upload/product/noimage.jpg"
-                                            alt="imac image" />
+                                        <img class="mx-auto h-64 w-full rounded-lg object-cover dark:hidden"
+                                            src="/upload/product/noimage.jpg" alt="imac image" />
                                         <img class="mx-auto hidden h-44 w-44 dark:block"
                                             src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
                                             alt="imac image" />
                                     @endif
                                 </a>
-                                <div>
+                                <div class="flex flex-col gap-3">
 
                                     {{-- product name --}}
                                     <a href="#"
-                                        class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">{{ $product['name'] }}</a>
+                                        class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white capitalize">{{ $product['name'] }}</a>
 
                                     {{-- description products --}}
-                                    <p class="mt-2 text-base font-normal text-gray-700 dark:text-gray-400">
-                                        {{ strlen($product['description']) > 100 ? substr($product['description'], 0, 100) . '...' : $product['description'] }}
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                        {{ strlen($product['description']) > 100 ? substr($product['description'], 0, 75) . '...' : $product['description'] }}
                                     </p>
                                 </div>
                                 <div>
 
                                     {{-- real price --}}
-                                    <p class="text-lg font-bold leading-tight text-red-600 dark:text-red-500">
-                                        {{ 'Rp. ' . number_format($product['price'], 0, ',', '.') }}</p>
+                                    <p class="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">
+                                        {{ 'Rp. ' . number_format($product['price'], 0, ',', '.') }},-</p>
                                 </div>
 
                                 <div class="mt-6 flex items-center gap-2.5">
                                     <a type="button" href="{{ route('products.detail', $product['id']) }}"
-                                        class="inline-flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium  text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                        class="inline-flex w-full items-center justify-center rounded-lg bg-green-500 px-5 py-2.5 text-sm font-medium  text-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-200 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                         Detail Produk
                                     </a>
                                 </div>
@@ -162,13 +159,13 @@
             </div>
             <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"
                 aria-label="Table navigation">
-                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span
+                <span class="text-sm font-normal text-gray-700 dark:text-gray-400">Showing <span
                         class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span
                         class="font-semibold text-gray-900 dark:text-white">1000</span></span>
                 <ul class="inline-flex items-stretch -space-x-px">
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-700 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <span class="sr-only">Previous</span>
                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -180,11 +177,11 @@
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
                     </li>
                     <li>
                         <a href="#" aria-current="page"
@@ -192,15 +189,15 @@
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-700 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <span class="sr-only">Next</span>
                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
