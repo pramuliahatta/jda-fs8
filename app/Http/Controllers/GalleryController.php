@@ -117,7 +117,7 @@ class GalleryController extends Controller
             $content = json_decode($response->getBody(), true);
             $data = $content['data'];
             // If success, return view and data
-            return view('dashboard.gallery.detail', ['data' => $data]);
+            return view('dashboard.gallery.show', ['data' => $data]);
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];

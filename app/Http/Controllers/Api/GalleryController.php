@@ -75,10 +75,9 @@ class GalleryController extends Controller
             if ($gallery) {
                 // response if success
                 return success($gallery, 'Gallery berhasil ditemukan');
-            } else {
-                // response if fails
-                return fails('Galleri tidak ditemukan', 404);
             }
+            // response if fails
+            return fails('Galleri tidak ditemukan', 404);
         } catch (\Exception $e) {
             // response if fails
             Log::error('Failed to get gallery data:' . $e->getMessage());
