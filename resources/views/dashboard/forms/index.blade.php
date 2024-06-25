@@ -223,7 +223,7 @@
                                                         </a>
                                                     </li>
                                                     {{-- <li>
-                                                        <a href="{{ route('dashboard.gallery.detail', $item['id']) }}"
+                                                        <a href="{{ route('dashboard.forms.detail', $item['id']) }}"
                                                             class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                             <svg class="w-4 h-4 mr-2"
                                                                 xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20"
@@ -337,7 +337,7 @@
                         class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan
                     </button>
-                    <form action="{{ route('dashboard.gallery.delete', $item['id'] ?? '') }}" method="POST">
+                    <form action="{{ route('dashboard.forms.destroy', $item['id'] ?? '') }}" method="POST">
                         @csrf
                         @method('delete')
                         <button type="submit" name="submit"

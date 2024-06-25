@@ -75,6 +75,7 @@ Route::prefix('dashboard')->group(function () {
     Route::post('/forms/create', [FileController::class, 'store'])->name('dashboard.forms.store');
     Route::get('/forms/edit/{id}', [FileController::class, 'edit'])->name('dashboard.forms.edit');
     Route::post('/forms/edit/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
+    Route::delete('/forms/{id}', [FileController::class, 'destroy'])->name('dashboard.forms.destroy');
 
     Route::get('/users', function () {
         return view('dashboard.users.index');
