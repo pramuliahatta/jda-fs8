@@ -206,7 +206,7 @@
                 </article>
             </div>
             <div class="flex justify-end my-8">
-                <a href="{{ route('articles') }}"
+                <a href="{{ route('articles.index') }}"
                     class="inline-flex items-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Berita
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -243,7 +243,7 @@
                     </a>
                     <div class="flex justify-between items-center mb-2 text-gray-700">
                         <span
-                            class="bg-green-100 text-green-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-red-100 text-red-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -295,7 +295,7 @@
                     </a>
                     <div class="flex justify-between items-center mb-2 text-gray-700">
                         <span
-                            class="bg-green-100 text-green-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-red-100 text-red-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -340,7 +340,7 @@
                 </article>
             </div>
             <div class="flex justify-end my-8">
-                <a href="{{ route('articles') }}"
+                <a href="{{ route('articles.index') }}"
                     class="inline-flex items-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Acara
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -368,7 +368,7 @@
                     tradisional yang dibuat oleh warga desa. Dukung ekonomi lokal dengan berbelanja di sini.
                 </p>
 
-                <a href="{{ route('products') }}"
+                <a href="{{ route('products.index') }}"
                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-200 dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-600">
                     Kunjungi Sekarang
                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
