@@ -19,10 +19,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/services', [FileController::class, 'index'])->name('services');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products');
-
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.detail');
-
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/articles', function () {
@@ -90,23 +86,42 @@ Route::prefix('dashboard')->group (function () {
         return view('dashboard.users.edit');
     })->name('dashboard.users.edit');
 
+    Route::get('/products', function () {
+        return view('dashboard.products.index');
+    })->name('dashboard.products.index');
+
+    Route::get('/products/{id}/edit/', function () {
+        return view('dashboard.products.edit');
+    })->name('dashboard.products.edit');
+
+    Route::get('/products/{id}', function () {
+        return view('dashboard.products.show');
+    })->name('dashboard.products.show');
+
 });
 
-    Route::get('/createproducts', function () {
-        return view('products.create');
-    })->name('productsCreate');
 
-    Route::get('/dashboardproducts', function () {
+Route::prefix('products')->group (function () {
+    Route::get('/', [ProductController::class, 'index'])->name('products');
+
+    Route::get('/dashboard', function () {
         return view('products.dashboard');
-    })->name('productsDashboard');
+    })->name('products.dashboard');
 
-    Route::get('/editproducts', function () {
+    Route::get('/create', function () {
+        return view('products.create');
+    })->name('products.create');
+
+    Route::get('/{product}', [ProductController::class, 'show'])->name('products.detail');
+
+    Route::get('/{id}/edit', function () {
         return view('products.edit');
-    })->name('productsEdit');
+    })->name('products.edit');
 
-    Route::get('/previewproducts', function () {
-        return view('products.preview');
-    })->name('productsPreview');
+    Route::get('/show/{id}', function () {
+        return view('products.show');
+    })->name('products.show');
+});
 
 
     Route::get('/about', function () {
