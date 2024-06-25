@@ -28,14 +28,14 @@
                     </div>
                     <div
                         class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <a href="{{ route('dashboard.gallery.create') }}"
+                        <a href="{{ route('dashboard.forms.create') }}"
                             class="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-primary-800">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd"
                                     d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                             </svg>
-                            Tambah foto
+                            Tambah file
                         </a>
                         <div class="flex items-center space-x-3 w-full md:w-auto">
                             <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
@@ -163,8 +163,8 @@
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-4 py-4">Foto</th>
-                                <th scope="col" class="px-4 py-3">Judul</th>
+                                <th scope="col" class="px-4 py-4">File</th>
+                                <th scope="col" class="px-4 py-3">Nama</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
@@ -175,7 +175,7 @@
                                 <tr class="border-b dark:border-gray-700">
                                     <th scope="row" colspan="3"
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Gallery kosong
+                                        File kosong
                                     </th>
                                     <td class="px-4 py-3 max-w-[12rem] truncate"></td>
                                     <td class="px-4 py-3 flex items-center justify-end">
@@ -186,12 +186,13 @@
                                     <tr class="border-b dark:border-gray-700">
                                         <th scope="row"
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <img src="{{ asset($item['photo']) }}"
+                                            {{-- <img src="{{ asset($item['file']) }}"
                                                 class="w-8
                                             h-8 rounded-lg object-cover"
-                                                alt="">
+                                                alt=""> --}}
+                                            <a href="{{ asset($item['file']) }}"></a>
                                         </th>
-                                        <td class="px-4 py-3 max-w-[12rem] truncate">{{ $item['title'] }}</td>
+                                        <td class="px-4 py-3 max-w-[12rem] truncate">{{ $item['name'] }}</td>
                                         <td class="px-4 py-3 flex items-center justify-end">
                                             <button id="{{ $item['id'] }}-dropdown-button"
                                                 data-dropdown-toggle="{{ $item['id'] }}-dropdown"
@@ -208,7 +209,7 @@
                                                 <ul class="py-1 text-sm"
                                                     aria-labelledby="{{ $item['id'] }}-dropdown-button">
                                                     <li>
-                                                        <a href="{{ route('dashboard.gallery.edit', $item['id']) }}"
+                                                        <a href="{{ route('dashboard.forms.edit', $item['id']) }}"
                                                             class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                             <svg class="w-4 h-4 mr-2"
                                                                 xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20"
@@ -221,7 +222,7 @@
                                                             Edit
                                                         </a>
                                                     </li>
-                                                    <li>
+                                                    {{-- <li>
                                                         <a href="{{ route('dashboard.gallery.detail', $item['id']) }}"
                                                             class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                             <svg class="w-4 h-4 mr-2"
@@ -233,7 +234,7 @@
                                                             </svg>
                                                             Pratinjau
                                                         </a>
-                                                    </li>
+                                                    </li> --}}
                                                     <li>
                                                         <button type="button" data-modal-target="deleteModal"
                                                             data-modal-toggle="deleteModal"
@@ -262,13 +263,14 @@
                     aria-label="Table navigation">
                     <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                         Showing
-                        <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
+                        <span
+                            class="font-semibold text-gray-900 dark:text-white">{{ $pageInfo['from'] . '-' . $pageInfo['to'] }}</span>
                         of
-                        <span class="font-semibold text-gray-900 dark:text-white">1000</span>
+                        <span class="font-semibold text-gray-900 dark:text-white">{{ $pageInfo['total'] }}</span>
                     </span>
                     <ul class="inline-flex items-stretch -space-x-px">
                         <li>
-                            <a href="#"
+                            <a href="{{ reset($pageLinks)['url'] }}"
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                 <span class="sr-only">Previous</span>
                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
@@ -279,28 +281,17 @@
                                 </svg>
                             </a>
                         </li>
+                        @php
+                            $middleElements = array_slice($pageLinks, 1, count($pageLinks) - 2);
+                        @endphp
+                        @foreach ($middleElements as $el)
+                            <li>
+                                <a href="{{ $el['url'] }}"
+                                    class="flex items-center justify-center text-sm py-2 px-3 leading-tight border {{ $el['active'] == false ? 'text-gray-500 bg-white  border-gray-300' : 'text-blue-500 bg-blue  border-blue-300' }} hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $el['label'] }}</a>
+                            </li>
+                        @endforeach
                         <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                        </li>
-                        <li>
-                            <a href="#" aria-current="page"
-                                class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-blue-50 border border-primary-300 hover:bg-blue-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-                        </li>
-                        <li>
-                            <a href="#"
+                            <a href="{{ end($pageLinks)['url'] }}"
                                 class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                 <span class="sr-only">Next</span>
                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
@@ -317,7 +308,6 @@
         </div>
     </section>
     <!-- End block -->
-
     <!-- Delete modal -->
     <div id="deleteModal" tabindex="-1" aria-hidden="true"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">

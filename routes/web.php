@@ -73,12 +73,11 @@ Route::prefix('dashboard')->group(function () {
     //     return view('dashboard.gallery.detail');
     // })->name('dashboard.gallery.detail');
 
-    Route::get('/forms', function () {
-        return view('dashboard.forms.index');
-    })->name('dashboard.forms.index');
+    Route::get('/forms', [FileController::class, 'index'])->name('dashboard.forms.index');
+    Route::get('/forms/create', [FileController::class, 'create'])->name('dashboard.forms.create');
+    Route::post('/forms/create', [FileController::class, 'store'])->name('dashboard.forms.store');
+    Route::get('/forms/edit/{id}', [FileController::class, 'edit'])->name('dashboard.forms.edit');
+    Route::post('/forms/edit/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
 
-    Route::get('/users', function () {
-        return view('dashboard.users.index');
-    })->name('dashboard.users.index');
-})
-    ->middleware('auth');
+    Route::get('/users', [GalleryController::class, 'index'])->name('dashboard.users.index');
+});

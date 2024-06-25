@@ -32,9 +32,9 @@ class StoreFileRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if ($this->has('title')) {
+        if ($this->has('name')) {
             $this->merge([
-                'title' => ucwords(strtolower($this->input('title')))
+                'name' => ucwords(strtolower($this->input('name')))
             ]);
         }
     }
@@ -69,9 +69,8 @@ class StoreFileRequest extends FormRequest
             'name.string' => 'Format nama tidak valid',
             'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
             'file.required' => 'Harap unggah file',
-            'file.image' => 'Format file tidak valid',
-            'file.mimes' => 'Format file tidak valid',
-            'file.max' => 'Photo maksimal 2 MB',
+            'file.mimes' => 'Pastikan mengunggah file berbentuk PDF',
+            'file.max' => 'File maksimal 2 MB',
         ];
     }
 
