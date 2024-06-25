@@ -106,55 +106,45 @@
 
             {{-- list products --}}
             <div class="mt-2 sm:mt-2 md:gap-6 lg:flex lg:items-start xl:gap-8">
-                <div class="xl:block">
-                    <div class="mt-6 grid grid-cols-3 gap-4 sm:mt-8">
-                        @foreach ($data as $product)
-                            <div
-                                class="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                                <a href="#" class="overflow-hidden rounded">
-                                    @if (!empty($product['product_photo']))
-                                        @foreach ($product['product_photo'] as $productPhoto)
-                                            @if ($loop->first)
-                                                <img class="mx-auto h-64 w-full rounded-lg object-cover dark:hidden"
-                                                    src="/upload/product/{{ $productPhoto['photo'] }}"
-                                                    alt="imac image" />
-                                            @endif
-                                        @endforeach
-                                    @else
-                                        <img class="mx-auto h-64 w-full rounded-lg object-cover dark:hidden"
-                                            src="/upload/product/noimage.jpg" alt="imac image" />
-                                        <img class="mx-auto hidden h-44 w-44 dark:block"
-                                            src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
-                                            alt="imac image" />
-                                    @endif
-                                </a>
-                                <div class="flex flex-col gap-3">
+                <div class="w-full mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:mt-8">
+                    @foreach ($data as $product)
+                        <div
+                            class="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                            <a href="#" class="overflow-hidden rounded">
+                                @if (!empty($product['product_photo']))
+                                    @foreach ($product['product_photo'] as $productPhoto)
+                                        @if ($loop->first)
+                                            <img class="mx-auto h-64 w-full rounded-lg object-cover dark:hidden"
+                                                src="/upload/product/{{ $productPhoto['photo'] }}" alt="imac image" />
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <img class="mx-auto h-64 w-full rounded-lg object-cover dark:hidden"
+                                        src="/upload/product/noimage.jpg" alt="imac image" />
+                                    <img class="mx-auto hidden h-44 w-44 dark:block"
+                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
+                                        alt="imac image" />
+                                @endif
+                            </a>
+                            <div class="flex flex-col gap-3">
 
-                                    {{-- product name --}}
-                                    <a href="#"
-                                        class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white capitalize">{{ $product['name'] }}</a>
-
-                                    {{-- description products --}}
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                                        {{ strlen($product['description']) > 100 ? substr($product['description'], 0, 75) . '...' : $product['description'] }}
-                                    </p>
-                                </div>
-                                <div>
-
-                                    {{-- real price --}}
-                                    <p class="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">
-                                        {{ 'Rp. ' . number_format($product['price'], 0, ',', '.') }},-</p>
-                                </div>
-
-                                <div class="mt-6 flex items-center gap-2.5">
-                                    <a type="button" href="{{ route('products.detail', $product['id']) }}"
-                                        class="inline-flex w-full items-center justify-center rounded-lg bg-green-500 px-5 py-2.5 text-sm font-medium  text-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-200 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                        Detail Produk
-                                    </a>
-                                </div>
+                                {{-- product name --}}
+                                <a href="#"
+                                    class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white capitalize truncate">{{ $product['name'] }}</a>
+                                <p class="text-md text-gray-600">{{ substr($product['description'], 0, 75) }}</p>
+                                {{-- real price --}}
+                                <p class="text-2xl font-semibold leading-tight text-gray-800 dark:text-white">
+                                    {{ 'Rp. ' . number_format($product['price'], 0, ',', '.') }},-</p>
                             </div>
-                        @endforeach
-                    </div>
+
+                            <div class="mt-6 flex items-center gap-2.5">
+                                <a type="button" href="{{ route('products.detail', $product['id']) }}"
+                                    class="inline-flex w-full items-center justify-center rounded-lg bg-green-500 px-5 py-2.5 text-sm font-medium  text-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-200 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                    Lihat Produk
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"

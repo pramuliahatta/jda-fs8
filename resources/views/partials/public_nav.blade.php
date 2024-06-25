@@ -48,9 +48,9 @@
                 <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">Beranda</x-nav-link>
                 <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">Tentang Kami</x-nav-link>
                 <x-nav-link href="{{ route('services') }}" :active="request()->routeIs('services')">Layanan</x-nav-link>
-                <x-nav-link href="{{ route('products') }}" :active="request()->routeIs('products')">Pasar Desa</x-nav-link>
+                <x-nav-link href="{{ route('products') }}" :active="request()->routeIs('products.*')">Pasar Desa</x-nav-link>
                 <x-nav-link href="{{ route('gallery') }}" :active="request()->routeIs('gallery')">Galeri</x-nav-link>
-                <x-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles')">Artikel</x-nav-link>
+                <x-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles.*')">Artikel</x-nav-link>
                 <x-nav-link href="{{ route('contact') }}" :active="request()->routeIs('contact')">Kontak Kami</x-nav-link>
             </ul>
         </div>
