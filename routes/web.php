@@ -78,27 +78,6 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
 
-    Route::get('/createproducts', function () {
-        return view('products.create');
-    })->name('productsCreate');
-
-    Route::get('/dashboardproducts', function () {
-        return view('products.dashboard');
-    })->name('productsDashboard');
-
-    Route::get('/editproducts', function () {
-        return view('products.edit');
-    })->name('productsEdit');
-
-    Route::get('/previewproducts', function () {
-        return view('products.preview');
-    })->name('productsPreview');
-
-
-    Route::get('/about', function () {
-        return view('about.index');
-    })->name('about');
-
     Route::get('/users/create', function () {
         return view('dashboard.users.create');
     })->name('dashboard.users.create');
@@ -110,4 +89,21 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users/{id}/edit/', function () {
         return view('dashboard.users.edit');
     })->name('dashboard.users.edit');
+
+    Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
+
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+
+    Route::post('/products', [ProductController::class, 'store'])->name('products.stores');
+
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+
+    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
+
+    Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
+
+    Route::get('/about', function () {
+        return view('about.index');
+    })->name('about');
+
 })->middleware('auth');
