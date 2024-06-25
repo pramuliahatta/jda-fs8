@@ -16,19 +16,19 @@
     </p>
     <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
         <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6 ">Tentang Kami</a>
+            <a href="{{ route('about') }}" class="mr-4 hover:underline md:mr-6 ">Tentang Kami</a>
         </li>
         <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6">Galeri</a>
+            <a href="{{ route('gallery') }}" class="mr-4 hover:underline md:mr-6">Galeri</a>
         </li>
         <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6">Artikel</a>
+            <a href="{{ route('articles.index') }}" class="mr-4 hover:underline md:mr-6">Artikel</a>
         </li>
         <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6">Marketplace</a>
+            <a href="{{ route('products.index') }}" class="mr-4 hover:underline md:mr-6">Pasar Desa</a>
         </li>
         <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6">Kontak Kami</a>
+            <a href="{{ route('contact') }}" class="mr-4 hover:underline md:mr-6">Kontak Kami</a>
         </li>
 
     </ul>
