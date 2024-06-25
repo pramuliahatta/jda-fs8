@@ -84,11 +84,11 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.forms.create');
     })->name('dashboard.forms.create');
 
-    Route::get('/forms/edit', function () {
+    Route::get('/forms/{id}/edit', function () {
         return view('dashboard.forms.edit');
     })->name('dashboard.forms.edit');
 
-    Route::get('/forms/show', function () {
+    Route::get('/forms/{id}', function () {
         return view('dashboard.forms.show');
     })->name('dashboard.forms.show');
 

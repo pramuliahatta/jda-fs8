@@ -107,11 +107,10 @@
             {{-- list products --}}
             <div class="mt-2 sm:mt-2 md:gap-6 lg:flex lg:items-start xl:gap-8">
                 <div class="xl:block">
-                    <div class="mt-6 grid grid-cols-3 gap-4
-
+                    <div class="mt-6 grid grid-cols-3 gap-4 sm:mt-8">
                         @foreach ($data as $product)
                             <div
-                                class="space-y-6 overflow-hidden rounded-lg border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                                class="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                                 <a href="#" class="overflow-hidden rounded">
                                     @if (!empty($product['product_photo']))
                                         @foreach ($product['product_photo'] as $productPhoto)
@@ -119,6 +118,9 @@
                                                 <img class="mx-auto h-44 w-44 dark:hidden"
                                                     src="/upload/product/{{ $productPhoto['photo'] }}"
                                                     alt="imac image" />
+                                                {{-- <img class="mx-auto hidden h-44 w-44 dark:block"
+                                    src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
+                                    alt="imac image" /> --}}
                                             @endif
                                         @endforeach
                                     @else

@@ -14,7 +14,7 @@
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
                         <x-input-field label="Nama Formulir" name="name" id="name" placeholder="Masukkan formulir"
-                            value="{{ old('title', $photo->title ?? '') }}" />
+                            value="{{ old('name', $data->name ?? '') }}" />
                         <x-error-message field="name" />
                     </div>
 

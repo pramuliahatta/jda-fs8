@@ -9,7 +9,9 @@
                 <h2 class="text-xl font-bold text-gray-900 dark:text-white">Ubah File</h2>
             </div>
             <!-- Modal body -->
-            <form action="{{ route('dashboard.forms.edit', $id) }}" method="POST" enctype="multipart/form-data">
+            <form 
+            {{-- action="{{ route('dashboard.forms.edit', 1) }}"  --}}
+            method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
