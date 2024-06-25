@@ -19,7 +19,7 @@ Route::get('/about', function () {
 
 Route::get('/services', [FileController::class, 'index'])->name('services');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.detail');
 
@@ -27,7 +27,7 @@ Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/articles', function () {
     return view('articles.index');
-})->name('articles');
+})->name('articles.index');
 
 Route::get('/articles/{article}', function () {
     return view('articles.detail');
