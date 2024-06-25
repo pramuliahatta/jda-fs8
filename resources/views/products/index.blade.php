@@ -59,6 +59,8 @@
                                 </svg>
                             </button>
                             <!-- Dropdown menu -->
+                            <form method="GET" action="{{ route('products') }}">
+
                             <div id="filterDropdown"
                                 class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
                                 <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
@@ -66,39 +68,41 @@
                                 </h6>
                                 <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
                                     <li class="flex items-center">
-                                        <input id="apple" type="checkbox" value=""
+                                        <input id="categories" name="categories[]" type="checkbox" value="Makanan" {{ isset($data['categories'])? (in_array('Makanan', $data['categories']) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="apple"
+                                        <label for="categories"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Apple (56)
+                                            Makanan
                                         </label>
                                     </li>
                                     <li class="flex items-center">
-                                        <input id="fitbit" type="checkbox" value=""
+                                        <input id="categories" name="categories[]" type="checkbox" value="Pakaian" {{ isset($data['categories'])? (in_array('Pakaian', $data['categories']) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="fitbit"
+                                        <label for="categories"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Fitbit (56)
+                                            Pakaian
                                         </label>
                                     </li>
                                     <li class="flex items-center">
-                                        <input id="dell" type="checkbox" value=""
+                                        <input id="categories" name="categories[]" type="checkbox" value="Minuman" {{ isset($data['categories'])? (in_array('Minuman', $data['categories']) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="dell"
+                                        <label for="categories"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Dell (56)
+                                            Minuman
                                         </label>
                                     </li>
                                     <li class="flex items-center">
-                                        <input id="asus" type="checkbox" value="" checked
+                                        <input id="categories" name="categories[]" type="checkbox" value="Elektronik" {{ isset($data['categories'])? (in_array('Elektronik', $data['categories']) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="asus"
+                                        <label for="categories"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Asus (97)
+                                            Elektronik
                                         </label>
                                     </li>
                                 </ul>
+                                <button type="submit">Filter</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -108,7 +112,7 @@
             <div class="mt-2 sm:mt-2 md:gap-6 lg:flex lg:items-start xl:gap-8">
                 <div class="xl:block">
                     <div class="mt-6 grid grid-cols-3 gap-4 sm:mt-8">
-                        @foreach ($data as $product)
+                        @foreach ($data['data'] as $product)
                             <div
                                 class="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                                 <a href="#" class="overflow-hidden rounded">
@@ -163,12 +167,12 @@
             <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"
                 aria-label="Table navigation">
                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span
-                        class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span
-                        class="font-semibold text-gray-900 dark:text-white">1000</span></span>
+                        class="font-semibold text-gray-900 dark:text-white">{{ count($data['data']) }}</span> of <span
+                        class="font-semibold text-gray-900 dark:text-white">{{ $data['total'] }}</span></span>
                 <ul class="inline-flex items-stretch -space-x-px">
                     <li>
-                        <a href="#"
-                            class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <a href="{{ $data['prev_page_url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $data['prev_page_url']) }}"
+                        class="flex items-center justify-center h-full py-1.5 px-3 leading-tight rounded-r-lg border text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <span class="sr-only">Previous</span>
                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -179,15 +183,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                    </li>
+                    @foreach (array_slice($data['links'], 1, count($data['links']) - 2) as $index=>$link)
                     <li>
-                        <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                        <a href="{{ $link['url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $link['url']) }}&{{ http_build_query(['categories' => $data['categories']]) }}" aria-current="page"
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight border {{ $link['active']? 'z-10 text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700'}} dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $index + 1 }}</a>
                     </li>
-                    <li>
-                        <a href="#" aria-current="page"
+                    @endforeach
+                    {{-- <li>
+                        <a href="#" 
                             class="z-10 flex items-center justify-center px-3 py-2 text-sm leading-tight border text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
                     </li>
                     <li>
@@ -197,10 +200,10 @@
                     <li>
                         <a href="#"
                             class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-                    </li>
+                    </li> --}}
                     <li>
-                        <a href="#"
-                            class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <a href="{{ $data['next_page_url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $data['next_page_url']) }}"
+                            class="flex items-center justify-center h-full py-1.5 px-3 leading-tight rounded-r-lg border text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <span class="sr-only">Next</span>
                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">

@@ -17,8 +17,16 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::with('productPhoto')->get();
+        $pageSize = $request->input('pageSize', 10); // Default page size
+        $categories = $request->input('categories', []); // Get categories from request
         
+        $query = Product::with('productPhoto');
+
+        if (!empty($categories)) {
+            $query->whereIn('category', $categories); // Adjust field name if needed
+        }
+
+        $products = $query->paginate($pageSize);
 
         if($products) {
             return success($products, 'Data fetched succesfully');
