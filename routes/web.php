@@ -13,13 +13,13 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/about', function () {
+    return view('about.index');
+})->name('about');
 
 Route::get('/services', [FileController::class, 'index'])->name('services');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.detail');
 
@@ -27,11 +27,19 @@ Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/articles', function () {
     return view('articles.index');
-})->name('articles');
+})->name('articles.index');
 
 Route::get('/articles/{article}', function () {
     return view('articles.detail');
 })->name('articles.detail');
+
+Route::get('/contact', function () {
+    return view('contact.index');
+})->name('contact');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', function () {
@@ -78,6 +86,7 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
 
+
     Route::get('/users/create', function () {
         return view('dashboard.users.create');
     })->name('dashboard.users.create');
@@ -91,15 +100,10 @@ Route::prefix('dashboard')->group(function () {
     })->name('dashboard.users.edit');
 
     Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
-
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-
     Route::post('/products', [ProductController::class, 'store'])->name('products.stores');
-
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
-
     Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
 
     Route::get('/about', function () {
@@ -107,3 +111,4 @@ Route::prefix('dashboard')->group(function () {
     })->name('about');
 
 })->middleware('auth');
+
