@@ -53,7 +53,7 @@ class UserController extends Controller
             return success(null, 'User created successfully');
         }
 
-        return fails('Error', 400);
+        return fails('Failed to create data', 400);
     }
 
     /**
@@ -66,7 +66,7 @@ class UserController extends Controller
             return success($user, 'Data fetched successfully');
         }
 
-        return fails('Error', 400);
+        return fails('Failed to fetch data', 400);
     }
 
     /**
@@ -94,12 +94,12 @@ class UserController extends Controller
 
         $updatedData = false;
         
-        if($user->phone_number != $request->phone_number) {
-            $updatedData = User::where('id', $id)
-            ->update([
-                'phone_number' => $request->phone_number,
-            ]);
-        }
+        // if($user->phone_number != $request->phone_number) {
+        //     $updatedData = User::where('id', $id)
+        //     ->update([
+        //         'phone_number' => $request->phone_number,
+        //     ]);
+        // }
         
         if($request->password) {
             $updatedData = User::where('id', $id)
@@ -154,7 +154,7 @@ class UserController extends Controller
 
         $token = $user->createToken(uniqid())->plainTextToken;
 
-        return success($user, 'Login Success');
+        return success($token, 'Login Success');
 
     }
 }

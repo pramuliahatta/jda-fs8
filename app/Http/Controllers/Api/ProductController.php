@@ -8,7 +8,6 @@ use App\Models\ProductPhoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -16,10 +15,10 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $products = Product::all();
         $products = Product::with('productPhoto')->get();
+        
 
         if($products) {
             return success($products, 'Data fetched succesfully');
@@ -37,53 +36,40 @@ class ProductController extends Controller
             'description' => 'required|string',
             'category' => 'required|string',
             'price' => 'required',
-            'photos' => 'array|max:3',
-            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            // 'photos' => 'array|max:3',
+            // 'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         if ($validator->fails()) {
-            return fails($validator->errors(), 422);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        // $user = new User;
-        // $user->name = $request->post('name');
-        // $user->phone_number = $request->post('phone_number');
-        // $user->email = $request->post('email');
-        // $user->role = 'member';
-        // $user->password = Hash::make('12345');
+        try {
+            // Create product
+            $product = Product::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'category' => $request->category,
+                'price' => $request->price,
+                'user_id' => $request->user_id, // Assuming user_id is passed in request
+            ]);
 
-        $product = Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'category' => $request->category,
-            'price' => $request->price,
-            // 'user_id' => Auth::id(),
-            'user_id' => $request->user_id,
-        ]);
-
-        $productPhoto = false;
-
-        if ($request->hasFile('photos')) {
+            // Handle product photos
             foreach ($request->file('photos') as $file) {
-                // Store the file and get the photo
-                $uploadedFile = $file;
-                // $uploadedFileName = time() . '.' . $uploadedFile->getClientOriginalExtension();
-                $uploadedFileName = generateUniqueString('product_photos', 'photo', $uploadedFile->getClientOriginalExtension());
-                $uploadedFile->move(public_path('upload/product'), $uploadedFileName);
+                $uploadedFileName = generateUniqueString('product_photos', 'photo', $file->getClientOriginalExtension());
+                $file->move(public_path('upload/product'), $uploadedFileName);
 
-                // Save the file photo in the database
-                $productPhoto = ProductPhoto::create([
+                ProductPhoto::create([
                     'product_id' => $product->id,
                     'photo' => $uploadedFileName,
                 ]);
             }
 
-            if($productPhoto) {
-                return success(null, 'Product created successfully');
-            }
+            return success(null, 'Produk berhasil dibuat');
+        } catch (\Exception $e) {
+            // Handle exceptions
+            return fails('Produk gagal dibuat', 500);
         }
-        
-        return fails('Failed to create data', 400);
     }
 
     /**
@@ -119,43 +105,49 @@ class ProductController extends Controller
 
         $product = Product::find($id);
 
-        // $user = new User;
-        // $user->name = $request->post('name');
-        // $user->phone_number = $request->post('phone_number');
-        // $user->email = $request->post('email');
-        // $user->role = 'member';
-        // $user->password = Hash::make('12345');
+        $updatedData = $product
+            ->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'category' => $request->category,
+                'price' => $request->price,
+            ]);
 
         $productPhoto = false;
 
-        if ($request->hasFile('photos')) {
+        if($request->hasFile('photos')) {
+            if(sizeOf($request->file('photos')) > 0) {
 
-            foreach ($product->productPhoto as $productPhoto) {
-                if (File::exists(public_path('upload/product'), $productPhoto->photo)){
-                    unlink(public_path('upload/product/') . $productPhoto->photo);
+                foreach ($product->productPhoto as $productPhoto) {
+                    if (File::exists(public_path('upload/product'), $productPhoto->photo)){
+                        unlink(public_path('upload/product/') . $productPhoto->photo);
+                    }
+                    $productPhoto->delete();
                 }
-                // Storage::disk('public')->delete($productPhoto->photo);
-                $productPhoto->delete();
-            }
-
-            foreach ($request->file('photos') as $file) {
-                // Store the file and get the photo
-                $uploadedFile = $file;
-                // $uploadedFileName = time() . '.' . $uploadedFile->getClientOriginalExtension();
-                $uploadedFileName = generateUniqueString('product_photos', 'photo', $uploadedFile->getClientOriginalExtension());
-                $uploadedFile->move(public_path('upload/product'), $uploadedFileName);
-
-                // Save the file photo in the database
-                $productPhoto = ProductPhoto::create([
-                    'product_id' => $product->id,
-                    'photo' => $uploadedFileName,
-                ]);
-            }
-
-            if($productPhoto) {
-                return success(null, 'Product updated successfully');
-            }
+    
+                foreach ($request->file('photos') as $file) {
+                    // Store the file and get the photo
+                    $uploadedFile = $file;
+                    $uploadedFileName = generateUniqueString('product_photos', 'photo', $uploadedFile->getClientOriginalExtension());
+                    $uploadedFile->move(public_path('upload/product'), $uploadedFileName);
+    
+                    // Save the file photo in the database
+                    $productPhoto = ProductPhoto::create([
+                        'product_id' => $product->id,
+                        'photo' => $uploadedFileName,
+                    ]);
+                }
+    
+                if($productPhoto) {
+                    return success(null, 'Product updated successfully');
+                }
+            } 
         }
+
+        if($updatedData) {
+            return success(null, 'Product updated successfully');
+        }
+
         return fails('Failed to update data', 400);
     }
 
@@ -174,7 +166,6 @@ class ProductController extends Controller
             if (File::exists(public_path('upload/product'), $productPhoto->photo)){
                 unlink(public_path('upload/product/') . $productPhoto->photo);
             }
-            // Storage::disk('public')->delete($productPhoto->photo);
             $productPhoto->delete();
         }
 
