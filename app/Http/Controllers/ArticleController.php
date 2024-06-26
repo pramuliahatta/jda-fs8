@@ -38,18 +38,9 @@ class ArticleController extends Controller
                     'search' => $request->input('search'),
                 ]
             ]);
-            $content = json_decode($response->getBody(), true)['data'];
+            $content = json_decode($response->getBody(), true);
             $data = $content['data'];
-            $link = $content['links'];
-            $page = [
-                'from' => $content['from'],
-                'to' => $content['to'],
-                'total' => $content['total'],
-            ];
-            // For change the link
-            foreach ($link as $key => $value) {
-                $link[$key]['url'] = str_replace(env('BASE_URL_API') . "articles", url()->current(), $value['url']);
-            }
+            dd($content);
         } catch (\Exception $e) {
             // If fail data is empty and log error
             Log::error('Failed to get article data:' . $e->getMessage());

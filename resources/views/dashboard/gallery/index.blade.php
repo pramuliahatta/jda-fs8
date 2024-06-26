@@ -54,7 +54,7 @@
                         <tr class="border-b dark:border-gray-700">
                             <th scope="row"
                                 class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <img src="/{{ $item['photo'] }}" class="w-8 h-8 rounded-lg object-cover"
+                                <img src="{{ $item['photo'] }}" class="w-8 h-8 rounded-lg object-cover"
                                     alt="{{ $item['title'] }}">
                             </th>
                             <td class="px-4 py-3 max-w-[12rem] truncate">

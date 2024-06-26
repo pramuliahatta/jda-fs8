@@ -34,7 +34,7 @@ class ArticleController extends Controller
                         ->orWhere('body', 'like', '%' . $search . '%');
                 });
             }
-            $article = $query->paginate($perPage)->appends($request->query());;
+            $article = $query->get();
             // response if success
             return success($article, 'Artikel berhasil ditemukan');
         } catch (\Exception $e) {

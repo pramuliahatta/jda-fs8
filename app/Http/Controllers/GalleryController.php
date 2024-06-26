@@ -19,9 +19,6 @@ class GalleryController extends Controller
     {
         // Define endpoint
         $apiUrl = env('BASE_URL_API') . "galleries";
-        if ($request->input('page') != '') {
-            $apiUrl .= '?page=' . $request->input('page');
-        }
         // Determine the view and perpage based on route
         $viewName =  'gallery.index';
         $perPage = 12;
