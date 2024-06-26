@@ -11,19 +11,9 @@
                 @csrf
                 @method('PUT')
 
-                    <div class="flex items-center justify-center w-full ">
-                        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 md:h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                                  </svg>
-                                  
-                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Upload Gambar</span></p>
-                                <p class="text-xs text-gray-500 dark:text-gray-400 px-6">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                            </div>
-                            <input id="dropzone-file" type="file" class="hidden" />
-                        </label>
-                    </div> 
+                <input type="hidden" name="user_id" value="5">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar Produk</label>
+                <input id="photos" name="photos[]" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" multiple required>
                 
 
                     <div class="w-full mt mb-2">

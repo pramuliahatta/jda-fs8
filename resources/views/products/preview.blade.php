@@ -61,8 +61,8 @@
 
 
                 {{-- name of product --}}
-                <div class="mt-6 sm:mt-8 lg:mt-0">
-                    {{-- <div class="bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                {{-- <div class="mt-6 sm:mt-8 lg:mt-0">
+                    <div class="bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
                         <x-icon-link route="{{route('products.dashboard')}}" text="Kembali" />
                     </div> --}}
 

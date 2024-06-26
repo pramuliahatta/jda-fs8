@@ -173,11 +173,11 @@ class ProductController extends Controller
         if(Route::current()->getName() == 'products.preview') {
             return view('products.preview', compact('data'));
         }
-        if(Route::current()->getName() == 'products.detail') {
-            return view('products.detail', compact('data'));
+        if(Route::current()->getName() == 'dashboard.products.show') {
+            return view('dashboard.products.show', compact('data'));
         }
     
-        return view('dashboard.products.show', compact('data'));
+        return view('products.detail', compact('data'));
     }
 
     /**
