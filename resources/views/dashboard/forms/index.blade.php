@@ -57,7 +57,6 @@
                             <tr>
                                 <th scope="col" class="px-4 py-3">No</th>
                                 <th scope="col" class="px-4 py-4">Jenis Formulir</th>
-                                <th scope="col" class="px-4 py-3">Formulir</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
@@ -73,7 +72,6 @@
                                     <td class="px-4 py-3 max-w-[12rem] truncate">
                                         {{ $item['name'] }}
                                     </td>
-                                    <td class="px-4 py-3 max-w-[12rem] truncate">{{ $item['file'] }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
                                         <button id="{{ $item['id'] }}-dropdown-button"
                                             data-dropdown-toggle="{{ $item['id'] }}-dropdown"

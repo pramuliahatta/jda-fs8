@@ -1,7 +1,6 @@
 <x-layout>
     <x-slot name="title">Formulir</x-slot>
     <x-dashboard-section route="dashboard.forms.index"> 
-        {{dd($item)}}
      <x-pdf-viewer pdfUrl="/upload/file/{{ $item['file'] }}" />
      <div class="flex justify-between items-center">
         <div class="flex items-center space-x-3 sm:space-x-4 mt-4">

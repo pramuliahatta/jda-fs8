@@ -25,7 +25,7 @@
                     </div>
 
                     <div>
-                        <x-pdf-uploader/>
+                        <x-pdf-file-input :document-url="$documentUrl" />
                         <x-error-message field="file" />
                     </div>
                 </div>

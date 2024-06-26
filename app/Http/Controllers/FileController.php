@@ -162,7 +162,17 @@ class FileController extends Controller
             Log::error('Failed to get file data:' . $e->getMessage());
             return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
         }
+        
+        $document = Document::find($id);
+        $documentUrl = $document ? asset('storage/' . $document->file_path) : null; // Adjust the path as necessary
+        return view('your-view', ['documentUrl' => $documentUrl]);
     }
+
+
+     
+
+
+    
 
     /**
      * Update the specified resource in storage.
