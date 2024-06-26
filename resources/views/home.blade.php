@@ -7,14 +7,16 @@
             <div class="mr-auto place-self-center lg:col-span-7">
                 <h1
                     class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
-                    Selamat Datang di Desa Cidadap
+                    Selamat Datang
+                    <br />
+                    di <span class="text-green-500">Desa Cidadap</span>
                 </h1>
-                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                    Desa Cidadap, sebuah desa yang kaya akan budaya dan tradisi, siap menyambut Anda dengan kehangatan
-                    dan keindahannya.
+                <p class="max-w-2xl mb-6 font-light text-gray-700 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                    Desa tertua di Kecamatan Cingambul yang kaya akan sejarah dan budaya. Jelajahi pesona alam dan
+                    kehidupan masyarakat kami yang harmonis. Temukan lebih lanjut tentang keunikan desa kami.
                 </p>
                 <a href="#"
-                    class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                    class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 dark:focus:ring-primary-900">
                     Pelajari Lebih Lanjut
                     <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -25,8 +27,7 @@
                 </a>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img class="rounded-lg"
-                    src="https://images.pexels.com/photos/161275/santorini-travel-holidays-vacation-161275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                <img class="rounded-lg w-full h-96 object-cover" src="{{ asset('upload/gallery/1719277756.jpg') }}"
                     alt="mockup">
             </div>
         </div>
@@ -35,19 +36,19 @@
 
     {{-- STATISTICS SECTION --}}
     <section class="bg-white dark:bg-gray-900">
-        <div class="bg-gray-100 rounded-lg max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
+        <div class="bg-green-50 rounded-lg max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
             <dl class="grid max-w-screen-md gap-8 mx-auto text-gray-900 sm:grid-cols-3 dark:text-white">
                 <div class="flex flex-col items-center justify-center">
-                    <dt class="mb-2 text-3xl md:text-4xl font-extrabold">5000+</dt>
-                    <dd class="font-light text-gray-500 dark:text-gray-400">penduduk</dd>
+                    <dt class="mb-2 text-3xl md:text-4xl font-extrabold">2.785+</dt>
+                    <dd class="font-light text-gray-700 dark:text-gray-400">jumlah penduduk</dd>
                 </div>
                 <div class="flex flex-col items-center justify-center">
-                    <dt class="mb-2 text-3xl md:text-4xl font-extrabold">150km<sup>2</sup></dt>
-                    <dd class="font-light text-gray-500 dark:text-gray-400">luas wilayah</dd>
+                    <dt class="mb-2 text-3xl md:text-4xl font-extrabold">274.548,5 Ha</dt>
+                    <dd class="font-light text-gray-700 dark:text-gray-400">luas wilayah</dd>
                 </div>
                 <div class="flex flex-col items-center justify-center">
-                    <dt class="mb-2 text-3xl md:text-4xl font-extrabold">10 RT/5 RW</dt>
-                    <dd class="font-light text-gray-500 dark:text-gray-400">jumlah RT/RW</dd>
+                    <dt class="mb-2 text-3xl md:text-4xl font-extrabold">826</dt>
+                    <dd class="font-light text-gray-700 dark:text-gray-400">jumlah KK</dd>
                 </div>
             </dl>
         </div>
@@ -68,12 +69,12 @@
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Layanan Masyarakat
                 </h2>
-                <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
+                <p class="mb-6 font-light text-gray-700 md:text-lg dark:text-gray-400">
                     Kami menyediakan berbagai layanan untuk memenuhi kebutuhan masyarakat Desa Cidadap. Unduh formulir
                     yang diperlukan dan datang langsung ke kantor desa.
                 </p>
                 <a href="{{ route('services') }}"
-                    class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
+                    class="inline-flex items-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Unduh Formulir
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +95,7 @@
                 <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Berita & Update Desa
                 </h2>
-                <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">
+                <p class="font-light text-gray-700 sm:text-xl dark:text-gray-400">
                     Temukan berita dan informasi terbaru tentang berbagai kegiatan dan perkembangan di Desa Cidadap.
                     Kami selalu berupaya untuk memberikan informasi yang akurat dan terkini untuk warga desa dan
                     pengunjung.
@@ -108,9 +109,9 @@
                             src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
                             alt="road-construction">
                     </a>
-                    <div class="flex justify-between items-center mb-2 text-gray-500">
+                    <div class="flex justify-between items-center mb-2 text-gray-700">
                         <span
-                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-green-100 text-green-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -126,7 +127,7 @@
                             Pembangunan Jalan Desa Baru
                         </a>
                     </h2>
-                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+                    <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
                         Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
                         meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
                         pertanian dan produk lokal.
@@ -141,7 +142,7 @@
                             </span>
                         </div>
                         <a href="#"
-                            class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
+                            class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
                             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -159,9 +160,9 @@
                             src="https://images.pexels.com/photos/713644/pexels-photo-713644.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt="festivals">
                     </a>
-                    <div class="flex justify-between items-center mb-2 text-gray-500">
+                    <div class="flex justify-between items-center mb-2 text-gray-700">
                         <span
-                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-green-100 text-green-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -177,7 +178,7 @@
                             Festival Budaya Tahunan
                         </a>
                     </h2>
-                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+                    <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
                         Festival budaya tahunan Desa Cidadap akan diselenggarakan bulan depan. Acara ini akan
                         menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan
                         khas daerah.
@@ -192,7 +193,7 @@
                             </span>
                         </div>
                         <a href="#"
-                            class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
+                            class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
                             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -205,8 +206,8 @@
                 </article>
             </div>
             <div class="flex justify-end my-8">
-                <a href="{{ route('articles') }}"
-                    class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
+                <a href="{{ route('articles.index') }}"
+                    class="inline-flex items-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Berita
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -227,7 +228,7 @@
                 <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Acara Mendatang
                 </h2>
-                <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">
+                <p class="font-light text-gray-700 sm:text-xl dark:text-gray-400">
                     Jangan lewatkan berbagai acara menarik yang akan berlangsung di Desa Cidadap. Bergabunglah dalam
                     kegiatan-kegiatan kami dan rasakan kebersamaan serta kekayaan budaya desa.
                 </p>
@@ -240,9 +241,9 @@
                             src="https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt="rice-fields">
                     </a>
-                    <div class="flex justify-between items-center mb-2 text-gray-500">
+                    <div class="flex justify-between items-center mb-2 text-gray-700">
                         <span
-                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-red-100 text-red-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -259,7 +260,7 @@
                             Gotong Royong Desa
                         </a>
                     </h2>
-                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+                    <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
                         Ayo bersama-sama membersihkan
                         lingkungan desa dalam kegiatan gotong royong. Ini adalah kesempatan untuk mempererat silaturahmi
                         dan menjaga kebersihan desa kita.
@@ -274,7 +275,7 @@
                             </span>
                         </div>
                         <a href="#"
-                            class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
+                            class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
                             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -292,9 +293,9 @@
                             src="https://images.pexels.com/photos/10333242/pexels-photo-10333242.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt="cooking-festivals">
                     </a>
-                    <div class="flex justify-between items-center mb-2 text-gray-500">
+                    <div class="flex justify-between items-center mb-2 text-gray-700">
                         <span
-                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-red-100 text-red-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -311,7 +312,7 @@
                             Lomba Memasak Tradisional
                         </a>
                     </h2>
-                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+                    <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
                         Ikuti lomba memasak dengan resep-resep tradisional Desa Cidadap. Acara ini terbuka untuk semua
                         warga desa dan pemenang akan mendapatkan hadiah menarik."
 
@@ -326,7 +327,7 @@
                             </span>
                         </div>
                         <a href="#"
-                            class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
+                            class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
                             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -339,8 +340,8 @@
                 </article>
             </div>
             <div class="flex justify-end my-8">
-                <a href="{{ route('articles') }}"
-                    class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
+                <a href="{{ route('articles.index') }}"
+                    class="inline-flex items-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Acara
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -358,7 +359,7 @@
     {{-- MARKETPLACE SECTION --}}
     <section class="bg-white dark:bg-gray-900">
         <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
-            <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
+            <div class="font-light text-gray-700 sm:text-lg dark:text-gray-400">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Pasar Desa
                 </h2>
@@ -367,8 +368,8 @@
                     tradisional yang dibuat oleh warga desa. Dukung ekonomi lokal dengan berbelanja di sini.
                 </p>
 
-                <a href="{{ route('products') }}"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <a href="{{ route('products.index') }}"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-200 dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-600">
                     Kunjungi Sekarang
                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -395,12 +396,12 @@
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Ingin menjual produk Anda di Pasar Desa Cidadap?
                 </h2>
-                <p class="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">
+                <p class="mb-6 font-light text-gray-700 dark:text-gray-400 md:text-lg">
                     Daftar sekarang dan mulai menjual produk lokal Anda kepada lebih banyak orang. Bergabunglah dengan
                     komunitas penjual kami dan dukung ekonomi desa.
                 </p>
                 <a href="#"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-200 dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-600">
                     Daftar Sebagai Penjual
                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -420,84 +421,33 @@
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Jelajahi Desa Kami
                 </h2>
-                <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
+                <p class="font-light text-gray-700 lg:mb-16 sm:text-xl dark:text-gray-400">
                     Lihatlah keindahan dan kehidupan sehari-hari di Desa Cidadap melalui galeri foto kami.
                 </p>
             </div>
             <div class="grid gap-8">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="grid gap-4">
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg"
-                                alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg"
-                                alt="">
-                        </div>
+                    <div>
+                        <img class="h-auto max-w-full rounded-lg"
+                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
                     </div>
-                    <div class="grid gap-4">
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg"
-                                alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg"
-                                alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg"
-                                alt="">
-                        </div>
+                    <div>
+                        <img class="h-auto max-w-full rounded-lg"
+                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
                     </div>
-                    <div class="grid gap-4">
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg"
-                                alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg"
-                                alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg"
-                                alt="">
-                        </div>
+                    <div>
+                        <img class="h-auto max-w-full rounded-lg"
+                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="">
                     </div>
-                    <div class="grid gap-4">
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg"
-                                alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg"
-                                alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg"
-                                alt="">
-                        </div>
+                    <div>
+                        <img class="h-auto max-w-full rounded-lg"
+                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="">
                     </div>
                 </div>
             </div>
             <div class="flex justify-end my-8">
                 <a href="{{ route('gallery') }}"
-                    class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
+                    class="inline-flex items-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Galeri
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -518,7 +468,7 @@
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Apa Kata Warga Kami
                 </h2>
-                <p class="mb-8 font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
+                <p class="mb-8 font-light text-gray-700 lg:mb-16 sm:text-xl dark:text-gray-400">
                     Dengar langsung dari warga Desa Cidadap tentang pengalaman dan kesan mereka mengenai desa kita.
                     Testimoni ini menunjukkan bagaimana desa kami selalu berusaha memberikan yang terbaik untuk semua
                     warganya.
@@ -526,8 +476,8 @@
             </div>
             <div class="grid mb-8 lg:mb-12 lg:grid-cols-2">
                 <figure
-                    class="flex flex-col justify-center items-center p-8 text-center bg-gray-50 border-b border-gray-200 md:p-12 lg:border-r dark:bg-gray-800 dark:border-gray-700">
-                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-500 dark:text-gray-400">
+                    class="flex flex-col justify-center items-center p-8 text-center bg-green-50 border-b border-gray-200 md:p-12 lg:border-r dark:bg-gray-800 dark:border-gray-700">
+                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-700 dark:text-gray-400">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             Pelayanan Terbaik untuk Warga
                         </h3>
@@ -545,15 +495,15 @@
                             <div>
                                 Nurul Cahyani
                             </div>
-                            <div class="text-sm font-light text-gray-500 dark:text-gray-400">
+                            <div class="text-sm font-light text-gray-700 dark:text-gray-400">
                                 Warga Desa Cidadap
                             </div>
                         </div>
                     </figcaption>
                 </figure>
                 <figure
-                    class="flex flex-col justify-center items-center p-8 text-center bg-gray-50 border-b border-gray-200 md:p-12 dark:bg-gray-800 dark:border-gray-700">
-                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-500 dark:text-gray-400">
+                    class="flex flex-col justify-center items-center p-8 text-center bg-green-50 border-b border-gray-200 md:p-12 dark:bg-gray-800 dark:border-gray-700">
+                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-700 dark:text-gray-400">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             Festival Budaya yang Mengesankan
                         </h3>
@@ -571,15 +521,15 @@
                             <div>
                                 Siti Aminah
                             </div>
-                            <div class="text-sm font-light text-gray-500 dark:text-gray-400">
+                            <div class="text-sm font-light text-gray-700 dark:text-gray-400">
                                 Warga Desa Cidadap
                             </div>
                         </div>
                     </figcaption>
                 </figure>
                 <figure
-                    class="flex flex-col justify-center items-center p-8 text-center bg-gray-50 border-b border-gray-200 lg:border-b-0 md:p-12 lg:border-r dark:bg-gray-800 dark:border-gray-700">
-                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-500 dark:text-gray-400">
+                    class="flex flex-col justify-center items-center p-8 text-center bg-green-50 border-b border-gray-200 lg:border-b-0 md:p-12 lg:border-r dark:bg-gray-800 dark:border-gray-700">
+                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-700 dark:text-gray-400">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             Produk Lokal Berkualitas
                         </h3>
@@ -597,15 +547,15 @@
                             alt="profile picture">
                         <div class="space-y-0.5 font-medium dark:text-white text-left">
                             <div>Andi Pratama</div>
-                            <div class="text-sm font-light text-gray-500 dark:text-gray-400">
+                            <div class="text-sm font-light text-gray-700 dark:text-gray-400">
                                 Warga Desa Cidadap
                             </div>
                         </div>
                     </figcaption>
                 </figure>
                 <figure
-                    class="flex flex-col justify-center items-center p-8 text-center bg-gray-50 border-gray-200 md:p-12 dark:bg-gray-800 dark:border-gray-700">
-                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-500 dark:text-gray-400">
+                    class="flex flex-col justify-center items-center p-8 text-center bg-green-50 border-gray-200 md:p-12 dark:bg-gray-800 dark:border-gray-700">
+                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-700 dark:text-gray-400">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             Pelatihan Pertanian yang Bermanfaat
                         </h3>
@@ -623,7 +573,7 @@
                             <div>
                                 Rina Wulandari
                             </div>
-                            <div class="text-sm font-light text-gray-500 dark:text-gray-400">
+                            <div class="text-sm font-light text-gray-700 dark:text-gray-400">
                                 Warga Desa Cidadap
                             </div>
                         </div>

@@ -1,12 +1,11 @@
 <x-layout>
-    <x-slot name="title">Login</x-slot>
+<x-slot name="title">Login</x-slot>
     <section class="bg-gray-50 dark:bg-gray-900">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg" class="h-12, w-12"
             alt="logo" />
             <div
                 class="w-full bg-white rounded-lg shadow dark:border md:mt-8 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                {{-- <div class = "p-2 space-y-4 md:space-y-6 sm:p-8"></div> --}}
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <div class="flex justify-center items-center">
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
