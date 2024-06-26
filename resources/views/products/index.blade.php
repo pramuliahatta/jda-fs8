@@ -18,7 +18,7 @@
                 <div
                     class="flex flex-col items-center justify-between p-3 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                     <div class="w-full md:w-1/2">
-                        <form class="flex items-center">
+                        <form method="GET" action="{{ route('products') }}" class="flex items-center">
                             <label for="simple-search" class="sr-only">Search</label>
                             <div class="relative w-full">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -29,9 +29,12 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <input type="text" id="simple-search"
+                                <input type="text" id="simple-search" name="search"
                                     class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Search" required="">
+                                    @foreach($data['categories'] as $categories)
+                                    <input name="categories[]" type="hidden" value="{{ $categories }}">
+                                    @endforeach
                             </div>
                         </form>
                     </div>
@@ -116,7 +119,7 @@
             {{-- list products --}}
             <div class="mt-2 sm:mt-2 md:gap-6 lg:flex lg:items-start xl:gap-8">
                 <div class="w-full mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:mt-8">
-                    @foreach ($data['data'] as $product)
+                    @foreach ($data['current_items'] as $product)
                         <div
                             class="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                             <a href="#" class="overflow-hidden rounded">
@@ -155,183 +158,9 @@
                     @endforeach
                 </div>
             </div>
-            {{-- <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"
-                aria-label="Table navigation">
-                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span
-                        class="font-semibold text-gray-900 dark:text-white">{{ $data['from'] . ' - ' . $data['to'] }}</span> of <span
-                        class="font-semibold text-gray-900 dark:text-white">{{ $data['total'] }}</span></span>
-                <ul class="inline-flex items-stretch -space-x-px">
-                    <li>
-                        <a href="{{ $data['prev_page_url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $data['prev_page_url']) }}"
-                            class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-700 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                            <span class="sr-only">Previous</span>
-                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                    @foreach (array_slice($data['links'], 1, count($data['links']) - 2) as $index => $link)
-                    <li>
-                        <a href="{{ $link['url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $link['url']) }}&{{ http_build_query(['categories' => $data['categories']]) }}" aria-current="{{ $link['active']? 'page' : '' }}"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight border {{ $link['active']? 'z-10 text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700'}} dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $index + 1 }}</a>
-                    </li>
-                    @endforeach
-                     <li>
-                        <a href="#" 
-                            class="z-10 flex items-center justify-center px-3 py-2 text-sm leading-tight border text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-                    </li>
-            <li>
-                <a href="{{ $data['next_page_url'] == null ? '#' : str_replace(env('BASE_URL_API') . 'products', url()->current(), $data['next_page_url']) }}"
-                    class="flex items-center justify-center h-full py-1.5 px-3 leading-tight rounded-r-lg border text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                    <span class="sr-only">Next</span>
-                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </a>
-            </li>
-            </ul>
-            </nav> --}}
 
             <div class="space-y-3 md:space-y-0 py-4" aria-label="Table navigation">
-                @php
-                    // TODO: DELETE LATER
-                    $users = collect([
-                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
-                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
-                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
-                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
-                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
-                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
-                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
-                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
-                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
-                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
-                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
-                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
-                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
-                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
-                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
-                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
-                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
-                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
-                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
-                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
-                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
-                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
-                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
-                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
-                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
-                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
-                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
-                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
-                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
-                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
-                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
-                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
-                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
-                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
-                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
-                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
-                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
-                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
-                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
-                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
-                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
-                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
-                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
-                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
-                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
-                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
-                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
-                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
-                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
-                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
-                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
-                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
-                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
-                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
-                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
-                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
-                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
-                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
-                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
-                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
-                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
-                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
-                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
-                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
-                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
-                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
-                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
-                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
-                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
-                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
-                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
-                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
-                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
-                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
-                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
-                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
-                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
-                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
-                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
-                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
-                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
-                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
-                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
-                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
-                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
-                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
-                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
-                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
-                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
-                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
-                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
-                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
-                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
-                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
-                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
-                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
-                    ]);
-
-                    // Determine the current page
-                    $currentPage = request()->get('page', 1);
-
-                    // Define the number of items per page
-                    $perPage = 4;
-
-                    // Slice the users collection to get the items to display in the current page
-                    $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
-
-                    // Create the paginator
-                    $paginatedUsers = new Illuminate\Pagination\LengthAwarePaginator(
-                        $currentPageItems,
-                        $users->count(),
-                        $perPage,
-                        $currentPage,
-                        [
-                            'path' => request()->url(),
-                            'query' => request()->query(),
-                        ],
-                    );
-                @endphp
-
-                {{ $paginatedUsers->links('vendor.pagination.custom') }}
+                {{ $data['paginator']->links('vendor.pagination.custom') }}
             </div>
         </div>
 

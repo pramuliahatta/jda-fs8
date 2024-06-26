@@ -38,7 +38,6 @@
                         </div>
                     </div>
 
-
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
                             <thead
