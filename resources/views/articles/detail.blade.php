@@ -13,10 +13,10 @@
                             <div>
                                 <a href="#" rel="author"
                                     class="text-xl font-bold text-gray-900 dark:text-white">
-                                    Hendra, S.Pd
+                                    Admin
                                 </a>
                                 <p class="text-base text-gray-700 dark:text-gray-400">
-                                    Kepala Desa Cidadap
+                                    Pemerintah Desa Cidadap
                                 </p>
                                 <p class="text-base text-gray-700 dark:text-gray-400">
                                     <time pubdate datetime="2024-06-12" title="June 12th, 2024">
@@ -117,8 +117,8 @@
                     <p class="mb-4 text-gray-700 dark:text-gray-400">
                         {{ substr(
                             'Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
-                                                                                                                                                                                                                                                                                                                                                                                                                        meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
-                                                                                                                                                                                                                                                                                                                                                                                                                        pertanian dan produk lokal.',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
+                                                                                                                                                                                                                                                                                                                                                                                                                                                pertanian dan produk lokal.',
                             0,
                             50,
                         ) }}...
@@ -182,8 +182,8 @@
                     <p class="mb-4  text-gray-700 dark:text-gray-400">
                         {{ substr(
                             'Ikuti lomba memasak dengan resep-resep tradisional
-                                                                                                                                                                                                Desa Cidadap. Acara ini terbuka untuk semua warga desa dan pemenang akan mendapatkan hadiah
-                                                                                                                                                                                                menarik.',
+                                                                                                                                                                                                                        Desa Cidadap. Acara ini terbuka untuk semua warga desa dan pemenang akan mendapatkan hadiah
+                                                                                                                                                                                                                        menarik.',
                             0,
                             50,
                         ) }}...

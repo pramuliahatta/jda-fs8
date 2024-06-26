@@ -50,7 +50,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($data as $user)
+                    {{-- @foreach ($data as $user) --}}
                     <tr class="border-b dark:border-gray-700">
                         <th scope="row"
                             class="px-4 py-3 font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">
@@ -60,7 +60,8 @@
                             Ignasius Yuda Adhitia
                         </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
-                            {{ $user['email'] }}
+                            {{-- {{ $user['email'] }} --}}
+                            ignasius.yuda.adhitia@gmail.com
                         </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
                             +628882204001
@@ -122,7 +123,7 @@
                             </div>
                         </td>
                     </tr>
-                    @endforeach
+                    {{-- @endforeach --}}
                 </tbody>
             </table>
         </div>

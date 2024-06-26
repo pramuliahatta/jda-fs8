@@ -146,8 +146,7 @@
                         ],
                     );
                 @endphp
-                {{ dd($pageLinks) }}
-                {{ $pageLinks->links('vendor.pagination.custom') }}
+                {{ $paginatedUsers->links('vendor.pagination.custom') }}
     </section>
     {{-- GALLERY SECTION END --}}
 

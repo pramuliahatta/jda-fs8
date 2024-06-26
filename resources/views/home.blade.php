@@ -27,7 +27,7 @@
                 </a>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img class="rounded-lg w-full h-96 object-cover" src="{{ asset('upload/gallery/1719277756.jpg') }}"
+                <img class="rounded-lg w-full h-96 object-cover" src="{{ asset('img/static/hero.jpg') }}"
                     alt="mockup">
             </div>
         </div>
@@ -389,29 +389,6 @@
             </div>
         </div>
     </section>
-
-    {{-- <section class="bg-white dark:bg-gray-900">
-        <div class="bg-gray-100 rounded-lg py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-            <div class="mx-auto max-w-screen-sm text-center">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-                    Ingin menjual produk Anda di Pasar Desa Cidadap?
-                </h2>
-                <p class="mb-6 font-light text-gray-700 dark:text-gray-400 md:text-lg">
-                    Daftar sekarang dan mulai menjual produk lokal Anda kepada lebih banyak orang. Bergabunglah dengan
-                    komunitas penjual kami dan dukung ekonomi desa.
-                </p>
-                <a href="#"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-200 dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-600">
-                    Daftar Sebagai Penjual
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </section> --}}
     {{-- MARKETPLACE SECTION END --}}
 
     {{-- GALLERY SECTION --}}
