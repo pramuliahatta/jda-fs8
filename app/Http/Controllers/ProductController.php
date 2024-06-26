@@ -18,11 +18,43 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $fetchData = Http::get('http://127.0.0.1:8001/api/products');
+        $page = $request->input('page', 1);
+        $pageSize = $request->input('pageSize', 12);
+        $categories = $request->input('categories', []);
+        // if(Route::current()->getName() == 'products.dashboard') {
+        //     $pageSize = 10;
+        // }
+        $fetchData = Http::get('http://127.0.0.1:8001/api/products', [
+            'page' => $page,
+            'pageSize' => $pageSize,
+            'categories' => $categories,
+        ]);
         $response = $fetchData->json();
+        // dd($response);
         $data = $response['data'];
+        // $data = [
+        //     'data' => $response['data'],
+        //     'currentPage' => $response['data']['current_page'],
+        //     'lastPage' => $response['data']['last_page']
+        // ];
+        
+        // $link = $data['links'];
+        // $page = [
+        //     'from' => $response['data']['from'],
+        //     'to' => $response['data']['to'],
+        //     'total' => $response['data']['total'],
+        // ];
+        //     For change the link
+        // foreach ($link as $key => $value) {
+            // $link[$key]['url'] = str_replace(env('BASE_URL_API') . "products", url()->current(), $value['url']);
+        // }
+        // $data['links'] = $link;
+        $data['categories'] = $categories;
+        // dd($data);
+
+
         if(Route::current()->getName() == 'products.dashboard') {
             return view('products.dashboard', compact('data'));
         }

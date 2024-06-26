@@ -19,7 +19,7 @@ Route::get('/about', function () {
 
 Route::get('/services', [FileController::class, 'index'])->name('services');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products', [ProductController::class, 'index'])->name('products');
 
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.detail');
 
