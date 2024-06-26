@@ -108,8 +108,27 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(file $file)
+    public function show(string $id, Client $client)
     {
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "files/$id";
+
+        try {
+            // Get the data from the API
+            $response = $client->get($apiUrl);
+            $content = json_decode($response->getBody(), true);
+            $data = $content['data'];
+            // If success, return view and data
+            return view('dashboard.forms.detail', ['data' => $data]);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route('dashboard.forms.index')->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to get forms data:' . $e->getMessage());
+            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
+        }
     }
 
     /**
