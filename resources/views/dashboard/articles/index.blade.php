@@ -43,6 +43,7 @@
                         <th scope="col" class="px-4 py-3">No</th>
                         <th scope="col" class="px-4 py-3">Judul</th>
                         <th scope="col" class="px-4 py-4">Foto</th>
+                        <th scope="col" class="px-4 py-4">Berita</th>
                         <th scope="col" class="px-4 py-3">Artikel</th>
                         <th scope="col" class="px-4 py-3">
                             <span class="sr-only">Actions</span>
@@ -61,6 +62,9 @@
                         <td class="px-4 py-3 max-w-[12rem] truncate">
                             <img src="https://images.pexels.com/photos/94693/pexels-photo-94693.jpeg?auto=compress&cs=tinysrgb&w=600"
                                 class="w-8 h-8 rounded-lg object-cover" alt="">
+                        </td>
+                        <td class="px-4 py-3 max-w-[12rem] truncate">
+                            Kategori
                         </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">What is a product description? A product
                             description describes a product.</td>
