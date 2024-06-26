@@ -27,12 +27,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12345'),
             'role' => 'admin',
         ]);
-        User::factory(9)->create();
-        Article::factory(10)->create();
-        Product::factory(10)->create();
-        ProductPhoto::factory(10)->create();
-        Gallery::factory(10)->create();
-        File::factory(10)->create();
+        User::factory(19)->create();
+        Article::factory(30)->create();
+        Product::factory(30)->create();
+        ProductPhoto::factory(50)->create();
+        Gallery::factory(30)->create();
+        File::factory(30)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',
