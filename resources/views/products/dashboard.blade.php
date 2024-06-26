@@ -39,7 +39,7 @@
                                 <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     @foreach($product['product_photo'] as $productPhoto)
                                     @if ($loop->first)
-                                    <img src="/upload/product/{{ $productPhoto['photo'] }}" alt="productPhoto" class="w-auto h-8 mr-3">
+                                    <img src="/{{ $productPhoto['photo'] }}" alt="productPhoto" class="w-auto h-8 mr-3">
                                     @endif
                                     @endforeach
                                     {{ $product['name'] }}

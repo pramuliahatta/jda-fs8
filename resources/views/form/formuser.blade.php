@@ -59,7 +59,7 @@
                                     </td>
                                     <td class="px-4 py-3 max-w-[12rem] truncate">{{ $item['file'] }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
-                                        <a type="button" href="/upload/file/{{ $item['file'] }}" target="_blank"
+                                        <a type="button" href="/{{ $item['file'] }}" target="_blank"
                                             class="w-48 text-white mt-4 sm:mt-0 bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-green-200-800 flex items-center justify-center">
                                             <svg class="w-5 h-5 -ms-1 me-1 text-white-800 dark:text-white"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"

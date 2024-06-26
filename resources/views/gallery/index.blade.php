@@ -16,7 +16,7 @@
                     {{-- <div class="grid gap-4"> --}}
                     @foreach ($data as $item)
                         <div>
-                            <img class="h-72 w-full rounded-lg gallery-item object-cover" src="/upload/gallery/{{ $item['photo'] }}"
+                            <img class="h-72 w-full rounded-lg gallery-item object-cover" src="/{{ $item['photo'] }}"
                                 data-title="{{ $item['title'] }}" alt="{{ $item['title'] }}">
                         </div>
                     @endforeach
