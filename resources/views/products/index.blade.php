@@ -124,7 +124,7 @@
                                     @foreach ($product['product_photo'] as $productPhoto)
                                         @if ($loop->first)
                                             <img class="mx-auto h-64 w-full rounded-lg object-cover dark:hidden"
-                                                src="/upload/product/{{ $productPhoto['photo'] }}" alt="imac image" />
+                                                src="/{{ $productPhoto['photo'] }}" alt="imac image" />
                                         @endif
                                     @endforeach
                                 @else

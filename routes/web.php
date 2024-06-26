@@ -97,6 +97,13 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users', function () {
         return view('dashboard.users.index');
     })->name('dashboard.users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('dashboard.users.store');
+
+    Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
+
+    Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
+    Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
 
     Route::get('/users/create', function () {
         return view('dashboard.users.create');
