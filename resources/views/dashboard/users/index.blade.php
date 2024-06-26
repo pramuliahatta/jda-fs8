@@ -18,7 +18,7 @@
                             </svg>
                         </div>
                         <input type="text" id="simple-search"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Cari" required="">
                     </div>
                 </form>
@@ -40,10 +40,10 @@
             <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
+                        <th scope="col" class="px-4 py-3">No</th>
                         <th scope="col" class="px-4 py-3">Nama</th>
                         <th scope="col" class="px-4 py-4">Email</th>
                         <th scope="col" class="px-4 py-3">Nomor WA</th>
-                        <th scope="col" class="px-4 py-3">Password</th>
                         <th scope="col" class="px-4 py-3">
                             <span class="sr-only">Actions</span>
                         </th>
@@ -53,16 +53,16 @@
                     <tr class="border-b dark:border-gray-700">
                         <th scope="row"
                             class="px-4 py-3 font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">
-                            Ignasius Yuda Adhitia
+                            1
                         </th>
+                        <td class="px-4 py-3 max-w-[12rem] truncate">
+                            Ignasius Yuda Adhitia
+                        </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
                             ignasius.yuda.adhitia@gmail.com
                         </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
                             +628882204001
-                        </td>
-                        <td class="px-4 py-3 max-w-[12rem] truncate">
-                            p******d
                         </td>
                         <td class="px-4 py-3 flex items-center justify-end">
                             <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown"
