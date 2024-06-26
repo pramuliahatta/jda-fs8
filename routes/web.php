@@ -21,6 +21,12 @@ Route::get('/services', [FileController::class, 'index'])->name('services');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 
+
+
+Route::get('/products/{product}', function () {
+    return view('products.detail');
+})->name('productsDetail');
+
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.detail');
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
@@ -78,17 +84,18 @@ Route::prefix('dashboard')->group(function () {
     Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('dashboard.gallery.update');
     Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('dashboard.gallery.destroy');
 
-    Route::get('/forms', function () {
-        return view('dashboard.forms.index');
-    })->name('dashboard.forms.index');
+    Route::get('/forms', [FileController::class, 'index'])->name('dashboard.forms.index');
+    Route::get('/forms/create', [FileController::class, 'create'])->name('dashboard.forms.create');
+    Route::post('/forms/create', [FileController::class, 'store'])->name('dashboard.forms.store');
+    Route::get('/forms/{id}', [FileController::class, 'show'])->name('dashboard.forms.show');
+    Route::get('/forms/edit/{id}', [FileController::class, 'edit'])->name('dashboard.forms.edit');
+    Route::post('/forms/edit/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
+    Route::delete('/forms/{id}', [GalleryController::class, 'destroy'])->name('dashboard.forms.destroy');
 
     Route::get('/users', [UserController::class, 'index'])->name('dashboard.users.index');
-
     Route::get('/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
     Route::post('/users', [UserController::class, 'store'])->name('dashboard.users.store');
-
     Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
-    
     Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
     Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
 
@@ -104,4 +111,8 @@ Route::prefix('dashboard')->group(function () {
     })->name('about');
 
 })->middleware('auth');
+
+
+
+
 
