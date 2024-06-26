@@ -9,6 +9,7 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Http\Requests\UpdateFileRequest;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
@@ -21,6 +22,7 @@ class ArticleController extends Controller
         // Define endpoint
         $apiUrl = env('BASE_URL_API') . "articles";
         // Determine the view and perpage based on route
+        $currentPage = request()->get('page', 1);
         $viewName =  'articles.index';
         $perPage = 12;
         if ($request->route()->getName() == 'dashboard.articles.index') {
@@ -40,17 +42,24 @@ class ArticleController extends Controller
             ]);
             $content = json_decode($response->getBody(), true);
             $data = $content['data'];
-            dd($content);
+            $paginator = new LengthAwarePaginator(
+                $data,
+                count($data),
+                $perPage,
+                $currentPage,
+                [
+                    'path' => request()->url(),
+                    'query' => request()->query(),
+                ]
+            );
         } catch (\Exception $e) {
             // If fail data is empty and log error
             Log::error('Failed to get article data:' . $e->getMessage());
             $data = [];
-            $link = [];
-            $page = ['from' => 0, 'to' => 0, 'total' => 0,];
         }
         // Return view and data ($data for data | $pageLinks for link url, label, & isActive | 
         // $pageInfo for showing information)
-        return view($viewName, ['data' => $data, 'pageLinks' => $link, 'pageInfo' => $page]);
+        return view($viewName, ['data' => $data, 'paginator' => $paginator]);
     }
 
     /**
