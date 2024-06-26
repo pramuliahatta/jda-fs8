@@ -37,7 +37,7 @@
                     </div>
 
                     <div>
-                        <x-input-field label="Konfirmasi Kata Sandi" name="password_confirmation" id="password_confirmation" placeholder="Masukkan kata sandi sekali lagi"
+                        <x-input-field label="Konfirmasi Kata Sandi" type="password" name="password_confirmation" id="password_confirmation" placeholder="Masukkan kata sandi sekali lagi"
                             value="" />
                         <x-error-message field="password_confirmation" />
                     </div>

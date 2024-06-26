@@ -8,7 +8,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserController extends Controller
 {
@@ -18,18 +17,20 @@ class UserController extends Controller
     public function index(Request $request)
     {
         // $page = $request->input('page', 1);
-        // $pageSize = $request->input('pageSize', 10);
-
-        $fetchData = Http::get('http://127.0.0.1:8001/api/users');
-        $response = $fetchData->json();
-        // dd($data);
-        $users = collect($response['data']);
-
-        // Determine the current page
-        $currentPage = request()->get('page', 1);
 
         // Define the number of items per page
         $perPage = 10;
+
+        // Determine the current page
+        $currentPage = request()->get('page', 1);
+        $search = $request->input('search', null);
+
+        $fetchData = Http::get('http://127.0.0.1:8001/api/users', [
+                'search' => $search,
+            ]);
+        $response = $fetchData->json();
+        // dd($data);
+        $users = collect($response['data']);
 
         // Slice the users collection to get the items to display in the current page
         $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
@@ -84,6 +85,7 @@ class UserController extends Controller
             ],
             'phone_number' => [
                 'required',
+                'unique:users',
                 'min:7',
                 'max:20',
             ],
@@ -96,10 +98,12 @@ class UserController extends Controller
                 'required',
                 'min:4',
                 'confirmed',
-            ]
+            ],
+            'password_confirmation' => [
+                'required',
+                'min:4',
+            ],
         ]);
-
-        // dd($validatedData);
 
         if ($validatedData) {
             $fetchData = Http::post('http://127.0.0.1:8001/api/users', $validatedData);
@@ -130,7 +134,7 @@ class UserController extends Controller
             $response = $fetchData->json();
             $data = $response['data'];
         }
-        return view('dashboard.users.detail', compact('data'));
+        return view('dashboard.users.show', compact('data'));
     }
 
     /**
@@ -163,7 +167,6 @@ class UserController extends Controller
             ],
             'email' => [
                 'required',
-                'unique:users',
                 'email:dns'
             ],
             'password' => [
@@ -171,15 +174,19 @@ class UserController extends Controller
                 'min:4',
                 'max:20',
                 'confirmed',
-            ]
+            ],
+            'password_confirmation' => [
+                'nullable',
+                'min:4',
+            ],
         ]);
 
         if ($validatedData) {
-            $fetchData = Http::put('http://127.0.0.1:8001/api/users/' + $user->id, $request);
+            $fetchData = Http::put('http://127.0.0.1:8001/api/users/' . $user->id, $validatedData);
             $response = $fetchData->json();
-            $data = $response['data'];
-            if ($data['status'] == true) {
-                return back()->with('success', $data['message']);
+            // dd($response);
+            if ($response['status'] == true) {
+                return redirect()->intended(route('dashboard.users.index'))->with('success', $response['message']);
             }
         }
 
@@ -191,7 +198,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $fetchData = Http::delete('http://127.0.0.1:8001/api/users/' + $user->id);
+        $fetchData = Http::delete('http://127.0.0.1:8001/api/users/' . $user->id);
         $response = $fetchData->json();
         $data = $response['data'];
         if ($data['status'] == true) {
