@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot name="title">Produk</x-slot>
 
-    <x-dashboard-section route='dashboard.products.index'>
+    <x-dashboard-section route='dashboard.products.index'> 
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-8">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
                 <div class="shrink-0 max-w-md lg:max-w-lg ">
@@ -57,11 +57,6 @@
 
                 {{-- name of product --}}
                 <div class="mt-6 sm:mt-8 lg:mt-0">
-                    {{-- <div class="bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
-                        <x-icon-link route="{{route('products.dashboard')}}" text="Kembali" />
-                    </div> --}}
-
-
                     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
                         {{ $data['name'] }}
 
@@ -101,7 +96,7 @@
                     <div class="flex justify-between items-center">
 
                         <button type="button" data-modal-target="deleteModal" data-modal-toggle="deleteModal"
-                            data-id="{{ $product['id'] }}"
+                            data-id="{{ $data['id'] }}"
                             class="delete-button text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                             <svg aria-hidden="true" class="w-5 h-5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -144,7 +139,9 @@
                     <button data-modal-toggle="deleteModal" type="button"
                         class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan</button>
-                    <form action="{{ route('dashboard.gallery.destroy', $data['id']) }}" method="POST">
+                    <form 
+                    {{-- action="{{ route('dashboard.product.destroy', $data['id']) }}"  --}}
+                    method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit"

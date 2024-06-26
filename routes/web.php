@@ -101,6 +101,9 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.users.edit');
     })->name('dashboard.users.edit');
 
+    Route::get('/product', [ProductController::class, 'index'])->name('dashboard.products.index');
+    Route::get('/product/{product}', [ProductController::class, 'show'])->name('dashboard.products.show');
+
     Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'store'])->name('products.stores');
@@ -108,8 +111,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
     Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
 
-    Route::get('/product', [ProductController::class, 'index'])->name('dashboard.products.index');
-    Route::get('/product/{product}', [ProductController::class, 'show'])->name('dashboard.products.show');
+    
    
 
 })->middleware('auth');
