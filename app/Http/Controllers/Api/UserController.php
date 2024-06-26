@@ -13,8 +13,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // $pageSize = $request->input('pageSize', 10); // Default page size
+
+        // $users = User::paginate($pageSize);
+
         $users = User::all();
 
         return success($users, 'Data fetched successfully');

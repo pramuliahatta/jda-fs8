@@ -59,7 +59,7 @@
                                     </td>
                                     <td class="px-4 py-3 max-w-[12rem] truncate">{{ $item['file'] }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
-                                        <a type="button" href="/upload/file/{{ $item['file'] }}" target="_blank"
+                                        <a type="button" href="/{{ $item['file'] }}" target="_blank"
                                             class="w-48 text-white mt-4 sm:mt-0 bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-green-200-800 flex items-center justify-center">
                                             <svg class="w-5 h-5 -ms-1 me-1 text-white-800 dark:text-white"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -80,61 +80,132 @@
                         </tbody>
                     </table>
                 </div>
-                <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
-                    aria-label="Table navigation">
-                    <span class="text-sm font-normal text-gray-700 dark:text-gray-400">
-                        Showing
-                        <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
-                        of
-                        <span class="font-semibold text-gray-900 dark:text-white">100</span>
-                    </span>
-                    <ul class="inline-flex items-stretch -space-x-px">
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-700 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <span class="sr-only">Previous</span>
-                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                        </li>
-                        <li>
-                            <a href="#" aria-current="page"
-                                class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-700 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <span class="sr-only">Next</span>
-                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <div class="space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
+                    @php
+                        // TODO: DELETE LATER
+                        $users = collect([
+                            ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                            ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                            ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                            ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                            ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                            ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                            ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                            ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                            ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                            ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                            ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                            ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                            ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                            ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                            ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                            ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                            ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                            ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                            ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                            ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                            ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                            ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                            ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                            ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                            ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                            ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                            ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                            ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                            ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                            ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                            ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                            ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                            ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                            ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                            ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                            ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                            ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                            ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                            ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                            ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                            ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                            ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                            ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                            ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                            ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                            ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                            ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                            ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                            ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                            ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                            ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                            ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                            ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                            ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                            ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                            ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                            ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                            ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                            ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                            ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                            ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                            ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                            ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                            ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                            ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                            ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                            ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                            ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                            ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                            ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                            ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                            ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                            ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                            ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                            ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                            ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                            ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                            ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                            ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                            ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                            ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                            ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                            ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                            ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                            ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                            ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                            ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                            ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                            ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                            ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                            ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                            ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                            ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                            ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                            ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                            ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ]);
+
+                        // Determine the current page
+                        $currentPage = request()->get('page', 1);
+
+                        // Define the number of items per page
+                        $perPage = 4;
+
+                        // Slice the users collection to get the items to display in the current page
+                        $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+                        // Create the paginator
+                        $paginatedUsers = new Illuminate\Pagination\LengthAwarePaginator(
+                            $currentPageItems,
+                            $users->count(),
+                            $perPage,
+                            $currentPage,
+                            [
+                                'path' => request()->url(),
+                                'query' => request()->query(),
+                            ],
+                        );
+                    @endphp
+
+                    {{ $paginatedUsers->links('vendor.pagination.custom') }}
+                </div>
             </div>
         </div>
     </section>
