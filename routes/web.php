@@ -87,8 +87,10 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/forms', [FileController::class, 'index'])->name('dashboard.forms.index');
     Route::get('/forms/create', [FileController::class, 'create'])->name('dashboard.forms.create');
     Route::post('/forms/create', [FileController::class, 'store'])->name('dashboard.forms.store');
+    Route::get('/forms/{id}', [FileController::class, 'show'])->name('dashboard.forms.show');
     Route::get('/forms/edit/{id}', [FileController::class, 'edit'])->name('dashboard.forms.edit');
     Route::post('/forms/edit/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
+    Route::delete('/forms/{id}', [GalleryController::class, 'destroy'])->name('dashboard.forms.destroy');
 
 
     Route::get('/users', function () {

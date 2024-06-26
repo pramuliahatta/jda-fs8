@@ -71,7 +71,22 @@ class FileController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            // find data in database
+            $file = File::find($id);
+
+            if ($file) {
+                // response if success
+                return success($file, 'file berhasil ditemukan');
+            } else {
+                // response if fails
+                return fails('File tidak ditemukan', 404);
+            }
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to get file data:' . $e->getMessage());
+            return fails('Gagal mendapatkan data file', 500);
+        }
     }
 
     /**

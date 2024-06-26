@@ -12,7 +12,7 @@
             </div>
             <!-- Modal body -->
             <form 
-            {{-- action="{{ route('dashboard.forms.edit', 1) }}"  --}}
+            action="{{ route('dashboard.forms.edit', $item['id']) }}" 
             method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
