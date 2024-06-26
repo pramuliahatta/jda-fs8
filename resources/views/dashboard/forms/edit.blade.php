@@ -1,3 +1,5 @@
+<x-layout>
+    <x-slot name="name">Artikel</x-slot>
 
 <x-layout>
     <x-slot name="title">Formulir</x-slot>
@@ -18,7 +20,7 @@
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
                         <x-input-field label="Jenis Formulir" name="file" id="file" placeholder="Masukkan jenis formulir"
-                            value="{{ old('file', $data ?? '') }}" />
+                            value="{{ old('file', $item ?? '') }}" />
                         <x-error-message field="file" />
                     </div>
 

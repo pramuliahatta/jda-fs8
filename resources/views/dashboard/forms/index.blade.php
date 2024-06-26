@@ -38,6 +38,18 @@
                         </a>
                        
                     </div>
+                    @if (@session('success'))
+                    <p>{{ session('success') }}</p>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
@@ -89,7 +101,7 @@
                                                         Ubah
                                                     </a>
                                                 </li>
-                                                <li>
+                                                {{-- <li>
                                                     <a href="{{ route('dashboard.forms.show', $item['id']) }}"
                                                         class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                         <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +112,7 @@
                                                         </svg>
                                                         Pratinjau
                                                     </a>
-                                                </li>
+                                                </li> --}}
                                                 <li>
                                                     <button type="button" data-modal-target="deleteModal"
                                                         data-modal-toggle="deleteModal" data-id="{{ $item['id'] }}"
@@ -237,12 +249,26 @@
                     <button data-modal-toggle="deleteModal" type="button"
                         class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan</button>
-                    <button type="submit"
-                        class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-                        Hapus
-                    </button>
+                    <form action="{{ route('dashboard.gallery.destroy', $data['id']) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                            Hapus
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </x-layout>
+<script>
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const itemId = button.getAttribute('data-id');
+
+            document.getElementById('delete-form').setAttribute('action',
+                `/dashboard/forms/${itemId}`);
+        })
+    })
+</script>
