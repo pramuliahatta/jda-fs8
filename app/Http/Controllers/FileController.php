@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\File;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -10,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFileRequest;
 use App\Http\Requests\UpdateFileRequest;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class FileController extends Controller
 {
@@ -19,12 +19,9 @@ class FileController extends Controller
     public function index(Request $request, Client $client)
     {
         // Define endpoint
-        
         $apiUrl = env('BASE_URL_API') . "files";
-        if ($request->input('page') != '') {
-            $apiUrl .= '?page=' . $request->input('page');
-        }
         // Determine the view and perpage based on route
+        $currentPage = request()->get('page', 1);
         $viewName =  'form.formuser';
         $perPage = 12;
         if ($request->route()->getName() == 'dashboard.forms.index') {
@@ -36,33 +33,32 @@ class FileController extends Controller
             // Get data from the API
             $response = $client->get($apiUrl, [
                 'query' => [
-                    'page' => $request->input('page'),
-                    'per_page' => $perPage,
+                    'search' => $request->input('search'),
                 ]
             ]);
-            $content = json_decode($response->getBody(), true)['data'];
-            $data = $content['data'];
-            $link = $content['links'];
-            $page = [
-                'from' => $content['from'],
-                'to' => $content['to'],
-                'total' => $content['total'],
-            ];
-            // For change the link
-            foreach ($link as $key => $value) {
-                $link[$key]['url'] = str_replace(env('BASE_URL_API') . "files", url()->current(), $value['url']);
-            }
-            // dd($link);
+            $content = json_decode($response->getBody(), true);
+            $data = collect($content['data']);
+            $currentPageItems = $data->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            // dd($currentPageItems);
+            $paginator = new LengthAwarePaginator(
+                $currentPageItems,
+                count($data),
+                $perPage,
+                $currentPage,
+                [
+                    'path' => request()->url(),
+                    'query' => request()->query(),
+                ]
+            );
         } catch (\Exception $e) {
             // If fail data is empty and log error
-            Log::error('Failed to get file data:' . $e->getMessage());
-            $data = [];
-            $link = [];
-            $page = ['from' => 0, 'to' => 0, 'total' => 0,];
+            Log::error('Failed to get gallery data:' . $e->getMessage());
+            $currentPageItems = [];
+            $paginator = [];
         }
         // Return view and data ($data for data | $pageLinks for link url, label, & isActive | 
         // $pageInfo for showing information)
-        return view($viewName, ['data' => $data, 'pageLinks' => $link, 'pageInfo' => $page]);
+        return view($viewName, ['data' => $currentPageItems, 'paginator' => $paginator]);
     }
 
     /**
@@ -120,7 +116,7 @@ class FileController extends Controller
             $content = json_decode($response->getBody(), true);
             $data = $content['data'];
             // If success, return view and data
-            return view('dashboard.forms.detail', ['data' => $data]);
+            return view('dashboard.forms.show', ['data' => $data]);
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
@@ -128,7 +124,7 @@ class FileController extends Controller
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to get forms data:' . $e->getMessage());
-            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.forms.index')->withErrors($e->getMessage());
         }
     }
 
@@ -138,7 +134,7 @@ class FileController extends Controller
     public function edit(string $id, Client $client)
     {
         // Define endpoint
-        
+
         $apiUrl = env('BASE_URL_API') . "files/$id";
 
         try {
@@ -149,12 +145,12 @@ class FileController extends Controller
             $content = json_decode($response->getBody(), true);
             $data = $content['data'];
             // If success, return view and data
-            
+
             return view('dashboard.forms.edit', ['data' => $data]);
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-           
+
             return redirect()->route('dashboard.forms.index')->withErrors($errorMessage);
         } catch (\Exception $e) {
             // Another fails
@@ -162,16 +158,15 @@ class FileController extends Controller
             Log::error('Failed to get file data:' . $e->getMessage());
             return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
         }
-
     }
 
 
 
 
-     
 
 
-    
+
+
 
     /**
      * Update the specified resource in storage.

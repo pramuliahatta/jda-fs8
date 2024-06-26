@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGalleryRequest;
-use App\Http\Requests\UpdateGalleryRequest;
 use GuzzleHttp\Exception\RequestException;
-use Illuminate\Support\Facades\Log;
+use App\Http\Requests\UpdateGalleryRequest;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class GalleryController extends Controller
 {
@@ -19,10 +20,8 @@ class GalleryController extends Controller
     {
         // Define endpoint
         $apiUrl = env('BASE_URL_API') . "galleries";
-        if ($request->input('page') != '') {
-            $apiUrl .= '?page=' . $request->input('page');
-        }
         // Determine the view and perpage based on route
+        $currentPage = request()->get('page', 1);
         $viewName =  'gallery.index';
         $perPage = 12;
         if ($request->route()->getName() == 'dashboard.gallery.index') {
@@ -34,32 +33,32 @@ class GalleryController extends Controller
             // Get data from the API
             $response = $client->get($apiUrl, [
                 'query' => [
-                    'page' => $request->input('page'),
-                    'per_page' => $perPage,
+                    'search' => $request->input('search'),
                 ]
             ]);
-            $content = json_decode($response->getBody(), true)['data'];
-            $data = $content['data'];
-            $link = $content['links'];
-            $page = [
-                'from' => $content['from'],
-                'to' => $content['to'],
-                'total' => $content['total'],
-            ];
-            // For change the link
-            foreach ($link as $key => $value) {
-                $link[$key]['url'] = str_replace(env('BASE_URL_API') . "galleries", url()->current(), $value['url']);
-            }
+            $content = json_decode($response->getBody(), true);
+            $data = collect($content['data']);
+            $currentPageItems = $data->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            // dd($currentPageItems);
+            $paginator = new LengthAwarePaginator(
+                $currentPageItems,
+                count($data),
+                $perPage,
+                $currentPage,
+                [
+                    'path' => request()->url(),
+                    'query' => request()->query(),
+                ]
+            );
         } catch (\Exception $e) {
             // If fail data is empty and log error
             Log::error('Failed to get gallery data:' . $e->getMessage());
-            $data = [];
-            $link = [];
-            $page = ['from' => 0, 'to' => 0, 'total' => 0,];
+            $currentPageItems = [];
+            $paginator = [];
         }
         // Return view and data ($data for data | $pageLinks for link url, label, & isActive | 
         // $pageInfo for showing information)
-        return view($viewName, ['data' => $data, 'pageLinks' => $link, 'pageInfo' => $page]);
+        return view($viewName, ['data' => $currentPageItems, 'paginator' => $paginator]);
     }
 
 

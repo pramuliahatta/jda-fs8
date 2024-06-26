@@ -6,11 +6,8 @@ use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\StoreFileRequest;
 use App\Http\Requests\UpdateFileRequest;
-use Illuminate\Support\Facades\Validator;
-use function PHPUnit\Framework\fileExists;
 use Illuminate\Validation\ValidationException;
 
 class FileController extends Controller
@@ -24,7 +21,15 @@ class FileController extends Controller
 
         try {
             // get all data in database
-            $file = File::paginate($perPage);
+            $query =  File::query();
+            if ($request->has('search')) {
+                $search = $request->query('search');
+
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                });
+            }
+            $file = $query->get();
             // response if success
             return success($file, 'File berhasil ditemukan');
         } catch (\Exception $e) {
