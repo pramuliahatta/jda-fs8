@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\File;
-use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\UserController;
@@ -74,7 +72,10 @@ Route::prefix('dashboard')->group(function () {
     Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('dashboard.gallery.update');
     Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('dashboard.gallery.destroy');
 
-    Route::get('/forms', [FileController::class, 'index'])->name('dashboard.forms.index');
+    // Route::get('/forms', [FileController::class, 'index'])->name('dashboard.forms.index');
+    Route::get('/forms', function () {
+        return view('dashboard.forms.index');
+    })->name('dashboard.forms.index');
     Route::get('/forms/create', [FileController::class, 'create'])->name('dashboard.forms.create');
     Route::post('/forms/create', [FileController::class, 'store'])->name('dashboard.forms.store');
     Route::get('/forms/{id}', [FileController::class, 'show'])->name('dashboard.forms.show');
