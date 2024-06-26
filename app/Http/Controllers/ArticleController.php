@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Http\Requests\UpdateFileRequest;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Log;
 
@@ -19,9 +20,6 @@ class ArticleController extends Controller
     {
         // Define endpoint
         $apiUrl = env('BASE_URL_API') . "articles";
-        if ($request->input('page') != '') {
-            $apiUrl .= '?page=' . $request->input('page');
-        }
         // Determine the view and perpage based on route
         $viewName =  'articles.index';
         $perPage = 12;
@@ -36,6 +34,8 @@ class ArticleController extends Controller
                 'query' => [
                     'page' => $request->input('page'),
                     'per_page' => $perPage,
+                    'category' => $request->input('category'),
+                    'search' => $request->input('search'),
                 ]
             ]);
             $content = json_decode($response->getBody(), true)['data'];
@@ -159,8 +159,34 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateArticleRequest $request, string $id, Client $client)
+    public function update(UpdateFileRequest $request, string $id, Client $client)
     {
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "articles";
+
+        try {
+            // Store data using API
+            $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+                'multipart' => $multipart,
+            ]);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.articles.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to store articles:' . $e->getMessage());
+            return redirect()->route('dashboard.articles.index')->withErrors('Terjadi kesalahan pada server');
+        }
+
         // Get multipart data from request
         $multipart = $request->getMultipart();
         // Define endpoint

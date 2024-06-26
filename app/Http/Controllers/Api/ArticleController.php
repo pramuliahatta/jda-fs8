@@ -21,7 +21,20 @@ class ArticleController extends Controller
 
         try {
             // get all data in database
-            $article = Article::paginate($perPage);
+            $query = Article::query();
+            if ($request->has('category')) {
+                $categories = $request->query('category');
+                $query->whereIn('category', $categories);
+            }
+            if ($request->has('search')) {
+                $search = $request->query('search');
+
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', '%' . $search . '%')
+                        ->orWhere('body', 'like', '%' . $search . '%');
+                });
+            }
+            $article = $query->paginate($perPage)->appends($request->query());;
             // response if success
             return success($article, 'Artikel berhasil ditemukan');
         } catch (\Exception $e) {
@@ -90,7 +103,7 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateArticleRequest $request, string $id)
+    public function update(StoreArticleRequest $request, string $id)
     {
         try {
             // find data from database

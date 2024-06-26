@@ -12,24 +12,16 @@
                             <!-- Carousel wrapper -->
                             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                                 <!-- Item 1 -->
+                                @foreach($data['product_photo'] as $productPhoto)
                                 <div class="hidden ease-in-out" data-carousel-item>
-                                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
+                                    <img src="/upload/product/{{ $productPhoto['photo'] }}"
                                         class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                                         alt="">
                                 </div>
-                                <!-- Item 2 -->
-                                <div class="hidden ease-in-out" data-carousel-item="active">
-                                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
-                                        class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                                        alt="">
-                                </div>
-                                <!-- Item 3 -->
-                                <div class="hidden ease-in-out" data-carousel-item>
-                                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
-                                        class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                                        alt="">
-                                </div>
+                                @endforeach
+
                             </div>
+                            @if(sizeOf($data['product_photo']) > 1)
                             <div class="flex justify-center items-center pt-4">
                                 <button type="button"
                                     class="flex justify-center items-center me-4 h-full cursor-pointer group focus:outline-none"
@@ -58,6 +50,7 @@
                                     </span>
                                 </button>
                             </div>
+                            @endif
                         </div>
 
 

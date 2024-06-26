@@ -39,64 +39,11 @@
                 </p>
 
                 <figure>
-                    <img class="w-full h-96 rounded-lg object-cover"
-                        src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
+                    <img class="w-full h-96 rounded-lg object-cover" src="/{{ $data['photo'] }}"
                         alt="road-construction">
                     <figcaption>Pembangunan Jalan Baru</figcaption>
                 </figure>
-                <h2>Tujuan dan Manfaat Pembangunan Jalan Desa Baru</h2>
-                <p>
-                    Tujuan utama dari pembangunan jalan ini adalah untuk meningkatkan aksesibilitas dan kenyamanan bagi
-                    warga Desa Cidadap. Selama ini, kondisi jalan yang kurang memadai sering kali menjadi hambatan dalam
-                    kegiatan sehari-hari warga, terutama dalam hal mobilitas dan transportasi. Dengan adanya jalan baru
-                    ini, diharapkan warga dapat menikmati perjalanan yang lebih lancar dan aman.
-                </p>
-                <p>
-                    Selain itu, pembangunan jalan baru ini juga bertujuan untuk mempermudah transportasi hasil pertanian
-                    dan produk lokal. Desa Cidadap dikenal dengan hasil pertanian yang melimpah serta produk-produk
-                    lokal yang berkualitas. Dengan akses jalan yang lebih baik, distribusi hasil pertanian dan produk
-                    lokal akan menjadi lebih efisien, sehingga dapat meningkatkan perekonomian desa secara keseluruhan.
-                </p>
-                <h2>Tujuan dan Manfaat Pembangunan Jalan Desa Baru</h2>
-                <p>
-                    Proyek pembangunan jalan desa ini melibatkan berbagai pihak, termasuk pemerintah desa, kontraktor
-                    lokal, dan warga setempat. Pemerintah desa telah melakukan koordinasi dengan berbagai pihak terkait
-                    untuk memastikan proses pembangunan berjalan lancar dan tepat waktu. Selain itu, warga desa juga
-                    turut berpartisipasi dalam proyek ini, baik melalui gotong royong maupun memberikan masukan yang
-                    konstruktif.
-                </p>
-                <p>
-                    Kepala Desa Cidadap, Bapak Ahmad Syahroni, menyampaikan apresiasinya atas partisipasi aktif warga
-                    dalam proyek ini. "Kami sangat menghargai dukungan dan partisipasi warga Desa Cidadap dalam
-                    pembangunan jalan desa baru ini. Ini adalah bukti nyata semangat gotong royong dan kebersamaan kita
-                    dalam membangun desa yang lebih baik," ujarnya.
-                </p>
-                <h2>Harapan untuk Masa Depan</h2>
-                <p>
-                    Dengan dimulainya proyek pembangunan jalan desa baru ini, pemerintah desa berharap bahwa berbagai
-                    hambatan yang selama ini dirasakan oleh warga dapat teratasi. Jalan baru ini tidak hanya akan
-                    meningkatkan mobilitas dan transportasi, tetapi juga diharapkan dapat mendorong pertumbuhan ekonomi
-                    desa.
-                </p>
-                <p>
-                    Pembangunan jalan desa baru ini juga merupakan bagian dari rencana jangka panjang pemerintah Desa
-                    Cidadap untuk meningkatkan kualitas hidup warganya. Ke depan, pemerintah desa berencana untuk terus
-                    mengembangkan infrastruktur dan fasilitas publik lainnya guna menciptakan desa yang lebih maju dan
-                    sejahtera.
-                </p>
-
-                <h2>Kesimpulan</h2>
-                <p>Proyek pembangunan jalan desa baru di Desa Cidadap adalah langkah penting dalam meningkatkan
-                    aksesibilitas dan kenyamanan bagi warga, serta mempermudah transportasi hasil pertanian dan produk
-                    lokal. Dengan partisipasi aktif dari warga dan dukungan penuh dari pemerintah desa, diharapkan
-                    proyek ini dapat selesai tepat waktu dan memberikan manfaat yang besar bagi seluruh masyarakat Desa
-                    Cidadap.
-                </p>
-                <p>
-                    Untuk informasi lebih lanjut mengenai perkembangan proyek ini, warga desa dapat mengunjungi kantor
-                    desa atau mengakses situs web resmi Desa Cidadap. Mari kita bersama-sama mendukung pembangunan ini
-                    demi kemajuan dan kesejahteraan Desa Cidadap.
-                </p>
+                {!! $data['body'] !!}
             </article>
         </div>
     </main>
