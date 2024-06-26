@@ -17,8 +17,8 @@ class ProductPhotoFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => rand(1,10),
-            'photo' => 'test.jpg',
+            'product_id' => rand(1,30),
+            'photo' => fake()->randomElement(['1.jpg', '2.jpg', '3.jpg']),
         ];
     }
 }

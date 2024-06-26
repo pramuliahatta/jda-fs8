@@ -5,7 +5,7 @@
                 <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
                     {{-- add product button --}}
                     <div class="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-end lg:justify-end md:space-y-0 md:space-x-3">
-                        <a href="{{route('productsCreate')}}"
+                        <a href="{{route('products.create')}}"
                             class="flex items-center justify-end px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
@@ -30,29 +30,30 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data['data'] as $index => $product)
                             <tr class=" border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="px-4 py-2">
-                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 ">1</span>
+                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 ">{{ $index+1 }}</span>
                                 </td>
 
                                 <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png" alt="iMac Front Image" class="w-auto h-8 mr-3">
-                                    JANGKRIK (Jamu Organik)
+                                    @foreach($product['product_photo'] as $productPhoto)
+                                    @if ($loop->first)
+                                    <img src="/upload/product/{{ $productPhoto['photo'] }}" alt="productPhoto" class="w-auto h-8 mr-3">
+                                    @endif
+                                    @endforeach
+                                    {{ $product['name'] }}
                                 </th>
                                 <td class="px-4 py-2">
-                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">Minuman</span>
+                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{ $product['category'] }}</span>
                                 </td>
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="flex items-center">
-                                        Rp 10.000
+                                        Rp. {{ number_format($product['price'], 0, ',', '.') }}
                                     </div>
                                 </td>
                                 <td class="px-4 py-2 font-small text-gray-700 break-words dark:text-white ">
-                                   
-                                    Studio quality three mic array for crystal clear calls and voice
-                                    recordings. Six-speaker sound system for a remarkably robust and
-                                    high-quality audio experience. Up to 256GB of ultrafast SSD storage.
-
+                                    {{ $product['description'] }}
                                 </td>
                                 <td class="px-4 py-3 flex items-center justify-center">
                                     <button id="apple-imac-27-dropdown-button"
@@ -69,7 +70,7 @@
                                         class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                         <ul class="py-1 text-sm" aria-labelledby="apple-imac-27-dropdown-button">
                                             <li>
-                                                <a href="{{route('productsEdit')}}"
+                                                <a href="{{route('products.edit', $product['id'])}}"
                                                     class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                     <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                         viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -107,51 +108,64 @@
                                                 </button>
                                             </li>
                                         </ul>
-                                    </div>      
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
-                <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0" aria-label="Table navigation">
-                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                        Showing
-                        <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
-                        of
-                        <span class="font-semibold text-gray-900 dark:text-white">1000</span>
-                    </span>
-                    <ul class="inline-flex items-stretch -space-x-px">
-                        <li>
-                            <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <span class="sr-only">Previous</span>
-                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                        </li>
-                        <li>
-                            <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 py-2 text-sm leading-tight border text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <span class="sr-only">Next</span>
-                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"
+                aria-label="Table navigation">
+                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span
+                        class="font-semibold text-gray-900 dark:text-white">{{ $data['to'] }}</span> of <span
+                        class="font-semibold text-gray-900 dark:text-white">{{ $data['total'] }}</span></span>
+                <ul class="inline-flex items-stretch -space-x-px">
+                    <li>
+                        <a href="{{ $data['prev_page_url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $data['prev_page_url']) }}"
+                        class="flex items-center justify-center h-full py-1.5 px-3 leading-tight rounded-r-lg border text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <span class="sr-only">Previous</span>
+                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                    @foreach (array_slice($data['links'], 1, count($data['links']) - 2) as $index=>$link)
+                    <li>
+                        <a href="{{ $link['url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $link['url']) }}" aria-current="page"
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight border {{ $link['active']? 'text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700' }} dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $index + 1 }}</a>
+                    </li>
+                    @endforeach
+                    {{-- <li>
+                        <a href="#" 
+                            class="z-10 flex items-center justify-center px-3 py-2 text-sm leading-tight border text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
+                    </li> --}}
+                    <li>
+                        <a href="{{ $data['next_page_url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $data['next_page_url']) }}"
+                            class="flex items-center justify-center h-full py-1.5 px-3 leading-tight rounded-r-lg border text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <span class="sr-only">Next</span>
+                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
             </div>
         </div>
       </section>

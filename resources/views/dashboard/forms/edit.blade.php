@@ -17,8 +17,8 @@
 
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
-                        <x-input-field label="Judul File" name="file" id="file" placeholder="Masukkan file"
-                            value="{{ old('file', $file ?? '') }}" />
+                        <x-input-field label="Jenis Formulir" name="file" id="file" placeholder="Masukkan jenis formulir"
+                            value="{{ old('file', $data ?? '') }}" />
                         <x-error-message field="file" />
                     </div>
 

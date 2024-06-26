@@ -7,7 +7,7 @@
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                 Pasar Desa
             </h2>
-            <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
+            <p class="font-light text-gray-700 lg:mb-16 sm:text-xl dark:text-gray-400">
                 Pasar Desa hadir sebagai wadah yang menghubungkan pembeli dengan produk-produk unggulan dari pengusaha
                 kecil dan menengah (UKM) warga Desa Cidadap.
             </p>
@@ -22,7 +22,7 @@
                             <label for="simple-search" class="sr-only">Search</label>
                             <div class="relative w-full">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-700 dark:text-gray-400"
                                         fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
                                             d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
@@ -59,6 +59,8 @@
                                 </svg>
                             </button>
                             <!-- Dropdown menu -->
+                            <form method="GET" action="{{ route('products') }}">
+
                             <div id="filterDropdown"
                                 class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
                                 <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
@@ -66,39 +68,41 @@
                                 </h6>
                                 <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
                                     <li class="flex items-center">
-                                        <input id="apple" type="checkbox" value=""
+                                        <input id="makanan" name="categories[]" type="checkbox" value="Makanan" {{ isset($data['categories'])? (in_array('Makanan', $data['categories']) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="apple"
+                                        <label for="makanan"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Apple (56)
+                                            Makanan
                                         </label>
                                     </li>
                                     <li class="flex items-center">
-                                        <input id="fitbit" type="checkbox" value=""
+                                        <input id="pakaian" name="categories[]" type="checkbox" value="Pakaian" {{ isset($data['categories'])? (in_array('Pakaian', $data['categories']) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="fitbit"
+                                        <label for="pakaian"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Fitbit (56)
+                                            Pakaian
                                         </label>
                                     </li>
                                     <li class="flex items-center">
-                                        <input id="dell" type="checkbox" value=""
+                                        <input id="minuman" name="categories[]" type="checkbox" value="Minuman" {{ isset($data['categories'])? (in_array('Minuman', $data['categories']) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="dell"
+                                        <label for="minuman"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Dell (56)
+                                            Minuman
                                         </label>
                                     </li>
                                     <li class="flex items-center">
-                                        <input id="asus" type="checkbox" value="" checked
+                                        <input id="elektronik" name="categories[]" type="checkbox" value="Elektronik" {{ isset($data['categories'])? (in_array('Elektronik', $data['categories']) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="asus"
+                                        <label for="elektronik"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Asus (97)
+                                            Elektronik
                                         </label>
                                     </li>
                                 </ul>
+                                <button type="submit">Filter</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -106,69 +110,55 @@
 
             {{-- list products --}}
             <div class="mt-2 sm:mt-2 md:gap-6 lg:flex lg:items-start xl:gap-8">
-                <div class="xl:block">
-                    <div class="mt-6 grid grid-cols-3 gap-4 sm:mt-8">
-                        @foreach ($data as $product)
-                            <div
-                                class="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                                <a href="#" class="overflow-hidden rounded">
-                                    @if (!empty($product['product_photo']))
-                                        @foreach ($product['product_photo'] as $productPhoto)
-                                            @if ($loop->first)
-                                                <img class="mx-auto h-44 w-44 dark:hidden"
-                                                    src="/upload/product/{{ $productPhoto['photo'] }}"
-                                                    alt="imac image" />
-                                                {{-- <img class="mx-auto hidden h-44 w-44 dark:block"
-                                    src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
-                                    alt="imac image" /> --}}
-                                            @endif
-                                        @endforeach
-                                    @else
-                                        <img class="mx-auto h-44 w-44 dark:hidden" src="/upload/product/noimage.jpg"
-                                            alt="imac image" />
-                                        <img class="mx-auto hidden h-44 w-44 dark:block"
-                                            src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
-                                            alt="imac image" />
-                                    @endif
-                                </a>
-                                <div>
-
-                                    {{-- product name --}}
-                                    <a href="#"
-                                        class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">{{ $product['name'] }}</a>
-
-                                    {{-- description products --}}
-                                    <p class="mt-2 text-base font-normal text-gray-700 dark:text-gray-400">
-                                        {{ strlen($product['description']) > 100 ? substr($product['description'], 0, 100) . '...' : $product['description'] }}
-                                    </p>
-                                </div>
-                                <div>
-
-                                    {{-- real price --}}
-                                    <p class="text-lg font-bold leading-tight text-red-600 dark:text-red-500">
-                                        {{ 'Rp. ' . number_format($product['price'], 0, ',', '.') }}</p>
-                                </div>
-
-                                <div class="mt-6 flex items-center gap-2.5">
-                                    <a type="button" href="{{ route('products.detail', $product['id']) }}"
-                                        class="inline-flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium  text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                        Detail Produk
-                                    </a>
-                                </div>
+                <div class="w-full mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:mt-8">
+                    @foreach ($data['data'] as $product)
+                        <div
+                            class="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                            <a href="#" class="overflow-hidden rounded">
+                                @if (!empty($product['product_photo']))
+                                    @foreach ($product['product_photo'] as $productPhoto)
+                                        @if ($loop->first)
+                                            <img class="mx-auto h-64 w-full rounded-lg object-cover dark:hidden"
+                                                src="/upload/product/{{ $productPhoto['photo'] }}" alt="imac image" />
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <img class="mx-auto h-64 w-full rounded-lg object-cover dark:hidden"
+                                        src="/upload/product/noimage.jpg" alt="imac image" />
+                                    <img class="mx-auto hidden h-44 w-44 dark:block"
+                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
+                                        alt="imac image" />
+                                @endif
+                            </a>
+                            <div class="flex flex-col gap-3">
+                                {{-- product name --}}
+                                <a href="#"
+                                    class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white capitalize truncate">{{ $product['name'] }}</a>
+                                <p class="text-md text-gray-600">{{ substr($product['description'], 0, 75) }}</p>
+                                {{-- real price --}}
+                                <p class="text-2xl font-semibold leading-tight text-gray-800 dark:text-white">
+                                    {{ 'Rp. ' . number_format($product['price'], 0, ',', '.') }},-</p>
                             </div>
-                        @endforeach
-                    </div>
+
+                            <div class="mt-6 flex items-center gap-2.5">
+                                <a type="button" href="{{ route('products.detail', $product['id']) }}"
+                                    class="inline-flex w-full items-center justify-center rounded-lg bg-green-500 px-5 py-2.5 text-sm font-medium  text-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-200 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                    Lihat Produk
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"
                 aria-label="Table navigation">
                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span
-                        class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span
-                        class="font-semibold text-gray-900 dark:text-white">1000</span></span>
+                        class="font-semibold text-gray-900 dark:text-white">{{ $data['from'] . ' - ' . $data['to'] }}</span> of <span
+                        class="font-semibold text-gray-900 dark:text-white">{{ $data['total'] }}</span></span>
                 <ul class="inline-flex items-stretch -space-x-px">
                     <li>
-                        <a href="#"
-                            class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <a href="{{ $data['prev_page_url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $data['prev_page_url']) }}"
+                            class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-700 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <span class="sr-only">Previous</span>
                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -179,28 +169,27 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                    </li>
+                    @foreach (array_slice($data['links'], 1, count($data['links']) - 2) as $index=>$link)
                     <li>
-                        <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                        <a href="{{ $link['url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $link['url']) }}&{{ http_build_query(['categories' => $data['categories']]) }}" aria-current="{{ $link['active']? 'page' : '' }}"
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight border {{ $link['active']? 'z-10 text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700'}} dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $index + 1 }}</a>
                     </li>
-                    <li>
-                        <a href="#" aria-current="page"
+                    @endforeach
+                    {{-- <li>
+                        <a href="#" 
                             class="z-10 flex items-center justify-center px-3 py-2 text-sm leading-tight border text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
                     </li>
                     <li>
                         <a href="#"
                             class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-                    </li>
+                    </li> --}}
                     <li>
-                        <a href="#"
-                            class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <a href="{{ $data['next_page_url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $data['next_page_url']) }}"
+                            class="flex items-center justify-center h-full py-1.5 px-3 leading-tight rounded-r-lg border text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <span class="sr-only">Next</span>
                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">

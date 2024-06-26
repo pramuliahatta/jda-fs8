@@ -34,7 +34,7 @@ class FileController extends Controller
     public function create()
     {
         // view create page 
-        return view('dashboard.file-create');
+        return view('dashboard.forms.create');
     }
 
     /**

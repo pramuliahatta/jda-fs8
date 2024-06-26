@@ -13,9 +13,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/about', function () {
+    return view('about.index');
+})->name('about');
 
 Route::get('/services', [FileController::class, 'index'])->name('services');
 
@@ -33,11 +33,19 @@ Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/articles', function () {
     return view('articles.index');
-})->name('articles');
+})->name('articles.index');
 
 Route::get('/articles/{article}', function () {
     return view('articles.detail');
 })->name('articles.detail');
+
+Route::get('/contact', function () {
+    return view('contact.index');
+})->name('contact');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', function () {
@@ -76,21 +84,14 @@ Route::prefix('dashboard')->group(function () {
     Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('dashboard.gallery.update');
     Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('dashboard.gallery.destroy');
 
-    Route::get('/forms', function () {
-        return view('dashboard.forms.index');
-    })->name('dashboard.forms.index');
+    Route::get('/forms', [FileController::class, 'index'])->name('dashboard.forms.index');
+    Route::get('/forms/create', [FileController::class, 'create'])->name('dashboard.forms.create');
+    Route::post('/forms/create', [FileController::class, 'store'])->name('dashboard.forms.store');
+    Route::get('/forms/edit/{id}', [FileController::class, 'edit'])->name('dashboard.forms.edit');
+    Route::post('/forms/edit/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
+    Route::get('/forms/{id}' ,[FileController::class, 'show'])->name('dashboard.forms.show');
 
-    Route::get('/forms/create', function () {
-        return view('dashboard.forms.create');
-    })->name('dashboard.forms.create');
 
-    Route::get('/forms/{id}/edit', function () {
-        return view('dashboard.forms.edit');
-    })->name('dashboard.forms.edit');
-
-    Route::get('/forms/{id}', function () {
-        return view('dashboard.forms.show');
-    })->name('dashboard.forms.show');
 
 
     Route::get('/users', function () {
@@ -109,31 +110,24 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users/{id}/edit/', function () {
         return view('dashboard.users.edit');
     })->name('dashboard.users.edit');
-})->middleware('auth');
 
 
+    Route::get('/users', [UserController::class, 'index'])->name('dashboard.users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
+    Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
+    Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
 
-    Route::get('/createproducts', function () {
-        return view('products.create');
-    })->name('productsCreate');
-
-    Route::get('/dashboardproducts', function () {
-        return view('products.dashboard');
-    })->name('productsDashboard');
-
-    Route::get('/editproducts', function () {
-        return view('products.edit');
-    })->name('productsEdit');
-
-    Route::get('/previewproducts', function () {
-        return view('products.preview');
-    })->name('productsPreview');
-
-
+    Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.stores');
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
+    Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
 
     Route::get('/about', function () {
         return view('about.index');
     })->name('about');
 
-   
+})->middleware('auth');
+
 

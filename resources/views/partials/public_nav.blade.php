@@ -14,7 +14,7 @@
         <div class="flex items-center lg:order-2">
             @if (!Auth::check())
                 <a href="{{ route('login') }}"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                    class="hidden text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                     Log in
                 </a>
             @else
@@ -28,7 +28,7 @@
             @endif
 
             <button data-collapse-toggle="mobile-menu-2" type="button"
-                class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                class="inline-flex items-center p-2 ml-1 text-sm text-gray-700 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 aria-controls="mobile-menu-2" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -46,12 +46,12 @@
         <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
             <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                 <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">Beranda</x-nav-link>
-                <x-nav-link href="#">Tentang Kami</x-nav-link>
+                <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">Tentang Kami</x-nav-link>
                 <x-nav-link href="{{ route('services') }}" :active="request()->routeIs('services')">Layanan</x-nav-link>
-                <x-nav-link href="{{ route('products') }}" :active="request()->routeIs('products')">Pasar Desa</x-nav-link>
+                <x-nav-link href="{{ route('products') }}" :active="request()->routeIs('products.*')">Pasar Desa</x-nav-link>
                 <x-nav-link href="{{ route('gallery') }}" :active="request()->routeIs('gallery')">Galeri</x-nav-link>
-                <x-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles')">Artikel</x-nav-link>
-                <x-nav-link href="#">Kontak Kami</x-nav-link>
+                <x-nav-link href="{{ route('articles.index') }}" :active="request()->routeIs('articles.*')">Artikel</x-nav-link>
+                <x-nav-link href="{{ route('contact') }}" :active="request()->routeIs('contact')">Kontak Kami</x-nav-link>
             </ul>
         </div>
     </div>

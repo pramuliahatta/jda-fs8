@@ -26,13 +26,20 @@
                     <div>
                         <x-input-field label="Nomor WA" name="phone" id="phone" placeholder="Masukkan nomor WA"
                             value="{{ old('phone', $user->phone ?? '') }}" />
+                        <span class="text-xs text-gray-600">Format: 628881234567</span>
                         <x-error-message field="phone" />
                     </div>
 
                     <div>
-                        <x-input-field label="Password" name="password" id="password" placeholder="Masukkan password"
-                            value="{{ old('password', $user->password ?? '') }}" />
+                        <x-input-field type="password" label="Kata Sandi" name="password" id="password"
+                            placeholder="Masukkan kata sandi" value="{{ old('password', $user->password ?? '') }}" />
                         <x-error-message field="password" />
+                    </div>
+
+                    <div>
+                        <x-input-field type="password" label="Konfirmasi Kata Sandi" name="password_confirmation"
+                            id="password_confirmation" placeholder="Masukkan kata sandi sekali lagi" value="" />
+                        <x-error-message field="password_confirmation" />
                     </div>
 
                 </div>

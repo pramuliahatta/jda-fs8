@@ -13,9 +13,10 @@
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
-                        <x-input-field label="Nama Formulir" name="name" id="name" placeholder="Masukkan formulir"
-                            value="{{ old('name', $data->name ?? '') }}" />
+                        <x-input-field label="Jenis Formulir" name="name" id="name" placeholder="Masukkan Jenis formulir"
+                            value="{{ old('name', $item->name ?? '') }}" />
                         <x-error-message field="name" />
+                        
                     </div>
 
                     <div>
