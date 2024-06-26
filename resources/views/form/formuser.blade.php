@@ -38,7 +38,7 @@
                             <tr>
                                 <th scope="col" class="px-4 py-3">No</th>
                                 <th scope="col" class="px-4 py-4">Jenis Formulir</th>
-                                <th scope="col" class="px-4 py-3">Keterangan</th>
+                                {{-- <th scope="col" class="px-4 py-3">Keterangan</th> --}}
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
@@ -54,7 +54,7 @@
                                     <td class="px-4 py-3 max-w-[12rem] truncate">
                                         {{ $item['name'] }}
                                     </td>
-                                    <td class="px-4 py-3 max-w-[12rem] truncate">{{ $item['file'] }}</td>
+                                    {{-- <td class="px-4 py-3 max-w-[12rem] truncate">{{ $item['file'] }}</td> --}}
                                     <td class="px-4 py-3 flex items-center justify-end">
                                         <a type="button" href="/{{ $item['file'] }}" target="_blank"
                                             class="w-48 text-white mt-4 sm:mt-0 bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-green-200-800 flex items-center justify-center">

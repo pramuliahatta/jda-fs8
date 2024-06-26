@@ -95,28 +95,9 @@ Route::prefix('dashboard')->group(function () {
     Route::post('/forms/edit/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
     Route::delete('/forms/{id}', [GalleryController::class, 'destroy'])->name('dashboard.forms.destroy');
 
-
-    Route::get('/users', function () {
-        return view('dashboard.users.index');
-    })->name('dashboard.users.index');
-
-
-    Route::get('/users/create', function () {
-        return view('dashboard.users.create');
-    })->name('dashboard.users.create');
-
-    Route::get('/users/{id}', function () {
-        return view('dashboard.users.show');
-    })->name('dashboard.users.show');
-
-    Route::get('/users/{id}/edit/', function () {
-        return view('dashboard.users.edit');
-    })->name('dashboard.users.edit');
-
-
     Route::get('/users', [UserController::class, 'index'])->name('dashboard.users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
-
+    Route::post('/users', [UserController::class, 'store'])->name('dashboard.users.store');
     Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
 
     Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
