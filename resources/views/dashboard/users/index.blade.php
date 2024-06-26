@@ -50,19 +50,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($data as $user)
                     <tr class="border-b dark:border-gray-700">
                         <th scope="row"
                             class="px-4 py-3 font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">
-                            1
+                            Ignasius Yuda Adhitia
                         </th>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
                             Ignasius Yuda Adhitia
                         </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
-                            ignasius.yuda.adhitia@gmail.com
+                            {{ $user['email'] }}
                         </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
                             +628882204001
+                        </td>
+                        <td class="px-4 py-3 max-w-[12rem] truncate">
+                            p******d
                         </td>
                         <td class="px-4 py-3 flex items-center justify-end">
                             <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown"
@@ -118,12 +122,13 @@
                             </div>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
         {{-- <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
             aria-label="Table navigation">
-            <span class="text-sm font-normal text-gray-700 dark:text-gray-400">
+            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                 Showing
                 <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
                 of
@@ -132,7 +137,7 @@
             <ul class="inline-flex items-stretch -space-x-px">
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-700 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                         <span class="sr-only">Previous</span>
                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -144,11 +149,11 @@
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
                 </li>
                 <li>
                     <a href="#" aria-current="page"
@@ -156,15 +161,15 @@
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
+                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
+                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-700 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                         <span class="sr-only">Next</span>
                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">

@@ -13,13 +13,18 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $fetchData = Http::get('http://127.0.0.1:8001/api/users');
-        if ($fetchData->successful()) {
-            $response = $fetchData->json();
-            $data = $response['data'];
-        }
+        $page = $request->input('page', 1);
+        $pageSize = $request->input('pageSize', 10);
+
+        $fetchData = Http::get('http://127.0.0.1:8001/api/users', [
+            'page' => $page,
+            'pageSize' => $pageSize,
+        ]);
+        $response = $fetchData->json();
+        $data = $response['data'];
+        dd($data);
 
         //cek nama route, jika 'dashboard.users.index' ke dashboard admin menu user, jika bukan ke login
         if (Route::current()->getName() == 'dashboard.users.index') {

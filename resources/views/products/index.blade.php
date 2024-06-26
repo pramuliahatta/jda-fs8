@@ -158,7 +158,7 @@
             {{-- <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"
                 aria-label="Table navigation">
                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span
-                        class="font-semibold text-gray-900 dark:text-white">{{ count($data['data']) }}</span> of <span
+                        class="font-semibold text-gray-900 dark:text-white">{{ $data['from'] . ' - ' . $data['to'] }}</span> of <span
                         class="font-semibold text-gray-900 dark:text-white">{{ $data['total'] }}</span></span>
                 <ul class="inline-flex items-stretch -space-x-px">
                     <li>
@@ -176,7 +176,7 @@
                     <li>
                     @foreach (array_slice($data['links'], 1, count($data['links']) - 2) as $index => $link)
                     <li>
-                        <a href="{{ $link['url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $link['url']) }}&{{ http_build_query(['categories' => $data['categories']]) }}" aria-current="page"
+                        <a href="{{ $link['url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $link['url']) }}&{{ http_build_query(['categories' => $data['categories']]) }}" aria-current="{{ $link['active']? 'page' : '' }}"
                             class="flex items-center justify-center px-3 py-2 text-sm leading-tight border {{ $link['active']? 'z-10 text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700'}} dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $index + 1 }}</a>
                     </li>
                     @endforeach

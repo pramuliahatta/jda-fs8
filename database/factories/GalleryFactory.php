@@ -18,7 +18,7 @@ class GalleryFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
-            'photo' => 'test.jpg',
+            'photo' => fake()->randomElement(['1.jpg', '2.jpg', '3.jpg']),
         ];
     }
 }
