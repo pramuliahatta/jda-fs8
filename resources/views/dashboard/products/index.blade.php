@@ -214,7 +214,7 @@
             const itemId = button.getAttribute('data-id');
 
             document.getElementById('delete-form').setAttribute('action',
-                `/dashboard/gallery/${itemId}`);
+                `/dashboard/product/${itemId}`);
         })
     })
 </script>

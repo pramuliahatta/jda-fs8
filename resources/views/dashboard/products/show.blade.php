@@ -155,3 +155,13 @@
         </div>
     </div>
 </x-layout>
+<script>
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const itemId = button.getAttribute('data-id');
+
+            document.getElementById('delete-form').setAttribute('action',
+                `/dashboard/product/${itemId}`);
+        })
+    })
+</script>
