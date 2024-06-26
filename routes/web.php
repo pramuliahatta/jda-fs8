@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\UserController;
-use App\Models\File;
-use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::get('/', function () {
@@ -24,13 +24,10 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
-Route::get('/articles', function () {
-    return view('articles.index');
-})->name('articles.index');
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
 
-Route::get('/articles/{article}', function () {
-    return view('articles.detail');
-})->name('articles.detail');
+Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.detail');
+
 
 Route::get('/contact', function () {
     return view('contact.index');
@@ -40,23 +37,20 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
 Route::prefix('dashboard')->group(function () {
+
     Route::get('/', function () {
         return view('dashboard.index');
     })->name('dashboard.index');
 
-    Route::get('/articles', function () {
-        return view('dashboard.articles.index');
-    })->name('dashboard.articles.index');
-    Route::get('/articles/create', function () {
-        return view('dashboard.articles.create');
-    })->name('dashboard.articles.create');
-    Route::get('/articles/{id}', function () {
-        return view('dashboard.articles.show');
-    })->name('dashboard.articles.show');
-    Route::get('/articles/{id}/edit/', function () {
-        return view('dashboard.articles.edit');
-    })->name('dashboard.articles.edit');
+    Route::get('/articles', [ArticleController::class, 'index'])->name('dashboard.articles.index');
+    Route::get('/articles/create', [ArticleController::class, 'create'])->name('dashboard.articles.create');
+    Route::post('/articles/create', [ArticleController::class, 'store'])->name('dashboard.articles.store');
+    Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('dashboard.articles.show');
+    Route::get('/articles/{id}/edit/', [ArticleController::class, 'edit'])->name('dashboard.articles.edit');
+    Route::post('/articles/{id}/edit/', [ArticleController::class, 'update'])->name('dashboard.articles.update');
+    Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('dashboard.articles.destroy');
 
     Route::get('/gallery', [GalleryController::class, 'index'])->name('dashboard.gallery.index');
     Route::get('/gallery/create', [GalleryController::class, 'create'])->name('dashboard.gallery.create');
@@ -69,6 +63,10 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/forms', [FileController::class, 'index'])->name('dashboard.forms.index');
     Route::get('/forms/create', [FileController::class, 'create'])->name('dashboard.forms.create');
     Route::get('/forms/{id}/edit', [FileController::class, 'edit'])->name('dashboard.forms.edit');
+    Route::post('/forms/create', [FileController::class, 'store'])->name('dashboard.forms.store');
+    Route::get('/forms/{id}', [FileController::class, 'show'])->name('dashboard.forms.show');
+    Route::post('/forms/edit/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
+    Route::delete('/forms/{id}', [FileController::class, 'destroy'])->name('dashboard.forms.destroy');
 
     Route::get('/users', [UserController::class, 'index'])->name('dashboard.users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
@@ -77,16 +75,14 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
     Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
 
+    Route::get('/product', [ProductController::class, 'index'])->name('dashboard.products.index');
+    Route::get('/product/{product}', [ProductController::class, 'show'])->name('dashboard.products.show');
+
     Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'store'])->name('products.stores');
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
     Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
-
-    Route::get('/about', function () {
-        return view('about.index');
-    })->name('about');
-
+    
 })->middleware('auth');
-

@@ -50,7 +50,7 @@
                 <x-nav-link href="{{ route('services') }}" :active="request()->routeIs('services')">Layanan</x-nav-link>
                 <x-nav-link href="{{ route('products') }}" :active="request()->routeIs('products') || request()->routeIs('products.*')">Pasar Desa</x-nav-link>
                 <x-nav-link href="{{ route('gallery') }}" :active="request()->routeIs('gallery')">Galeri</x-nav-link>
-                <x-nav-link href="{{ route('articles.index') }}" :active="request()->routeIs('articles.*')">Artikel</x-nav-link>
+                <x-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles')">Artikel</x-nav-link>
                 <x-nav-link href="{{ route('contact') }}" :active="request()->routeIs('contact')">Kontak Kami</x-nav-link>
             </ul>
         </div>
