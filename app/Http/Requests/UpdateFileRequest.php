@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateGalleryRequest extends FormRequest
+class UpdateFileRequest extends FormRequest
 {
     protected $multipart = [];
     /**
@@ -25,16 +25,16 @@ class UpdateGalleryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'name' => 'required|string|max:255',
+            'file' => 'nullable|mimes:pdf|max:2048',
         ];
     }
 
     protected function prepareForValidation()
     {
-        if ($this->has('title')) {
+        if ($this->has('name')) {
             $this->merge([
-                'title' => ucwords(strtolower($this->input('title')))
+                'name' => ucwords(strtolower($this->input('name')))
             ]);
         }
     }
@@ -43,8 +43,8 @@ class UpdateGalleryRequest extends FormRequest
     {
         $this->multipart = [
             [
-                'name'      => 'title',
-                'contents'   => $this->validated()['title'],
+                'name'      => 'name',
+                'contents'   => $this->validated()['name'],
             ],
             [
                 "name" => "_method",
@@ -52,11 +52,11 @@ class UpdateGalleryRequest extends FormRequest
             ],
         ];
 
-        if ($this->hasFile('photo')) {
+        if ($this->hasFile('file')) {
             $this->multipart[] = [
-                'name' => 'photo',
-                'contents' => fopen($this->file('photo')->getPathname(), 'r'),
-                'filename' => $this->file('photo')->getClientOriginalName(),
+                'name' => 'file',
+                'contents' => fopen($this->file('file')->getPathname(), 'r'),
+                'filename' => $this->file('file')->getClientOriginalName(),
             ];
         }
     }
@@ -69,12 +69,11 @@ class UpdateGalleryRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Harap masukan judul',
-            'title.string' => 'Format judul tidak valid',
-            'title.max' => 'Judul tidak boleh lebih dari 255 karakter',
-            'photo.image' => 'Format photo tidak valid',
-            'photo.mimes' => 'Format photo tidak valid',
-            'photo.max' => 'Photo maksimal 2 MB',
+            'name.required' => 'Harap masukan nama file',
+            'name.string' => 'Format nama tidak valid',
+            'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
+            'file.mimes' => 'Pastikan mengunggah file berbentuk PDF',
+            'file.max' => 'File maksimal 2 MB',
         ];
     }
 

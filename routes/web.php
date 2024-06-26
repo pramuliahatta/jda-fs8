@@ -82,24 +82,7 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.forms.index');
     })->name('dashboard.forms.index');
 
-    Route::get('/users', [UserController::class, 'index'])->name('dashboard.users.index');
-
-    Route::get('/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
-
-    Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
-
-    Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
-
-    Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.stores');
-    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
-    Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
-
-    Route::get('/about', function () {
-        return view('about.index');
-    })->name('about');
-
+    Route::get('/users', function () {
+        return view('dashboard.users.index');
+    })->name('dashboard.users.index');
 })->middleware('auth');
-
