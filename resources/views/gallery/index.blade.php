@@ -23,7 +23,9 @@
 
                 </div>
 
-                {{-- {{ $paginatedUsers->links('vendor.pagination.custom') }} --}}
+                <div class="space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
+                    {{ $paginator->links('vendor.pagination.custom') }}
+                </div>
     </section>
     {{-- GALLERY SECTION END --}}
 

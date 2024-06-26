@@ -1,4 +1,3 @@
-
 <x-layout>
     <x-slot name="title">Formulir</x-slot>
     <!-- Create modal -->
@@ -13,13 +12,13 @@
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
-                        <x-input-field label="Nama Formulir" name="name" id="name" placeholder="Masukkan formulir"
-                            value="{{ old('name', $data->name ?? '') }}" />
+                        <x-input-field label="Nama Formulir" name="name" id="name"
+                            placeholder="Masukkan formulir" value="{{ old('name', $data['name'] ?? '') }}" />
                         <x-error-message field="name" />
                     </div>
 
                     <div>
-                        <x-pdf-uploader /> 
+                        <x-pdf-file-input />
                         <x-error-message field="file" />
                     </div>
                 </div>
