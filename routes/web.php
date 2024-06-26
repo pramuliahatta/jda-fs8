@@ -88,7 +88,7 @@ Route::prefix('dashboard')->group(function () {
     Route::post('/users', [UserController::class, 'store'])->name('dashboard.users.store');
 
     Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
-    
+
     Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
     Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
 

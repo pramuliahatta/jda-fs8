@@ -8,14 +8,15 @@ use Illuminate\View\Component;
 
 class DeleteModal extends Component
 {
-    public $action;
+    public $itemId;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($action)
+
+    public function __construct($itemId = null)
     {
-        $this->action = $action;
+        $this->itemId = $itemId;
     }
 
     /**

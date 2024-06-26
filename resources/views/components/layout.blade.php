@@ -43,6 +43,8 @@
             @include('partials.footer')
         </footer>
     @endunless
+
+    @stack('scripts')
 </body>
 
 </html>
