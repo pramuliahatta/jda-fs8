@@ -35,6 +35,7 @@ Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
 
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.detail');
 
+
 Route::get('/contact', function () {
     return view('contact.index');
 })->name('contact');
@@ -43,7 +44,9 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
 Route::prefix('dashboard')->group(function () {
+
     Route::get('/', function () {
         return view('dashboard.index');
     })->name('dashboard.index');
@@ -84,8 +87,12 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
     Route::post('/users', [UserController::class, 'store'])->name('dashboard.users.store');
     Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
+
     Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
     Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
+
+    Route::get('/product', [ProductController::class, 'index'])->name('dashboard.products.index');
+    Route::get('/product/{product}', [ProductController::class, 'show'])->name('dashboard.products.show');
 
     Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
@@ -93,8 +100,5 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
     Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
-
-    Route::get('/about', function () {
-        return view('about.index');
-    })->name('about');
+    
 })->middleware('auth');
