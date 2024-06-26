@@ -162,7 +162,6 @@ class ArticleController extends Controller
     {
         // Get multipart data from request
         $multipart = $request->getMultipart();
-        dd($multipart);
 
         // Define endpoint
         $apiUrl = env('BASE_URL_API') . "articles/$id";
