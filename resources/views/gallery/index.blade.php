@@ -16,8 +16,9 @@
                     {{-- <div class="grid gap-4"> --}}
                     @foreach ($data as $item)
                         <div>
-                            <img class="h-72 w-full rounded-lg gallery-item object-cover" src="/upload/gallery/{{ $item['photo'] }}"
-                                data-title="{{ $item['title'] }}" alt="{{ $item['title'] }}">
+                            <img class="h-72 w-full rounded-lg gallery-item object-cover"
+                                src="/upload/gallery/{{ $item['photo'] }}" data-title="{{ $item['title'] }}"
+                                alt="{{ $item['title'] }}">
                         </div>
                     @endforeach
 
@@ -145,8 +146,8 @@
                         ],
                     );
                 @endphp
-
-                {{ $paginatedUsers->links('vendor.pagination.custom') }}
+                {{ dd($pageLinks) }}
+                {{ $pageLinks->links('vendor.pagination.custom') }}
     </section>
     {{-- GALLERY SECTION END --}}
 

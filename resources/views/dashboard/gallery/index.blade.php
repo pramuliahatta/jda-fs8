@@ -179,6 +179,7 @@
             </ul>
         </nav> --}}
 
+
         <div class="space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
             @php
                 // TODO: DELETE LATER
@@ -302,8 +303,8 @@
                     ],
                 );
             @endphp
-
-            {{ $paginatedUsers->links('vendor.pagination.custom') }}
+            {{ dd($pageLinks) }}
+            {{-- {{ $data->links('vendor.pagination.custom') }} --}}
         </div>
     </x-dashboard-section>
     <!-- End block -->
