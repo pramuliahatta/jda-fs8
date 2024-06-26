@@ -157,8 +157,6 @@
             </table>
         </div>
         <div class="space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
-
-
             {{ $paginator->links() }}
         </div>
         {{-- <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"

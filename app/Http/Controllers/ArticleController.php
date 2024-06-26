@@ -34,22 +34,22 @@ class ArticleController extends Controller
             // Get data from the API
             $response = $client->get($apiUrl, [
                 'query' => [
-                    'page' => $request->input('page'),
-                    'per_page' => $perPage,
                     'category' => $request->input('category'),
                     'search' => $request->input('search'),
                 ]
             ]);
             $content = json_decode($response->getBody(), true);
-            $data = $content['data'];
+            $data = collect($content['data']);
+            $currentPageItems = $data->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            dd($currentPageItems);
             $paginator = new LengthAwarePaginator(
-                $data,
+                $currentPageItems,
                 count($data),
                 $perPage,
                 $currentPage,
                 [
                     'path' => request()->url(),
-                    'query' => request()->query(),
+                    // 'query' => request()->query(),
                 ]
             );
         } catch (\Exception $e) {
