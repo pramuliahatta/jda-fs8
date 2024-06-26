@@ -23,6 +23,7 @@
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
+                                <th scope="col" class="px-4 py-3 text-center">No</th>
                                 <th scope="col" class="px-4 py-3 text-center">Nama Produk</th>
                                 <th scope="col" class="px-4 py-3 text-center">Kategori</th>
                                 <th scope="col" class="px-4 py-3 text-center">Harga</th>
@@ -31,29 +32,33 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data as $index => $product)
                             <tr class=" border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="px-4 py-2">
-                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 ">1</span>
+                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 ">{{ $index+1 }}</span>
                                 </td>
 
                                 <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png" alt="iMac Front Image" class="w-auto h-8 mr-3">
-                                    Renginang
+
+
+                                    @foreach($product['product_photo'] as $productPhoto)
+                                    @if ($loop->first)
+                                    <img src="/upload/product/{{ $productPhoto['photo'] }}" alt="productPhoto" class="w-auto h-8 mr-3">
+                                    @endif
+                                    @endforeach
+                                    {{ $product['name'] }}
+
                                 </th>
                                 <td class="px-4 py-2">
-                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">Minuman</span>
+                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{ $product['category'] }}</span>
                                 </td>
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="flex items-center">
-                                        Rp 10.000
+                                        Rp. {{ number_format($product['price'], 0, ',', '.') }}
                                     </div>
                                 </td>
                                 <td class="px-4 py-2 font-small text-gray-700 break-words dark:text-white ">
-                                   
-                                    Studio quality three mic array for crystal clear calls and voice
-                                    recordings. Six-speaker sound system for a remarkably robust and
-                                    high-quality audio experience. Up to 256GB of ultrafast SSD storage.
-
+                                    {{ $product['description'] }}
                                 </td>
                                 <td class="px-4 py-3 flex items-center justify-center">
                                     <button id="apple-imac-27-dropdown-button"
@@ -70,7 +75,9 @@
                                         class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                         <ul class="py-1 text-sm" aria-labelledby="apple-imac-27-dropdown-button">
                                             <li>
-                                                <a href="#"
+
+                                                <a href="{{route('products.edit', $product['id'])}}"
+
                                                     class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                     <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                         viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -108,7 +115,10 @@
                                                 </button>
                                             </li>
                                         </ul>
-                                    </div>      
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

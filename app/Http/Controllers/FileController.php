@@ -17,7 +17,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        $response = Http::get('http://127.0.0.1:8081/api/files');
+        $response = Http::get('http://127.0.0.1:8001/api/files');
         if ($response->successful()) {
             $data = $response->json()['data'];
             if (request()->route()->getName() == 'services') {

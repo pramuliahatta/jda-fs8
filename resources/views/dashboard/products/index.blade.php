@@ -23,15 +23,13 @@
                     </div>
                 </form>
             </div>
-            <div
-                class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-
-            </div>
+            
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
+                        <th scope="col" class="px-4 py-3">No</th>
                         <th scope="col" class="px-4 py-3">Nama Produk</th>
                         <th scope="col" class="px-4 py-4">Kategori</th>
                         <th scope="col" class="px-4 py-3">Harga</th>
@@ -42,22 +40,32 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($data as $index => $product)
                     <tr class="border-b dark:border-gray-700">
                         <th scope="row"
                             class="px-4 py-3 font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">
-                            tes
+                            {{ $index+1 }}
                         </th>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
-                            tes
+                            @foreach($product['product_photo'] as $productPhoto)
+                                    @if ($loop->first)
+                                    <img src="/upload/product/{{ $productPhoto['photo'] }}" alt="productPhoto" class="w-auto h-8 mr-3">
+                                    @endif
+                                    @endforeach
+                                    {{ $product['name'] }}
                         </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
-                            Rp 10000
+                            {{ $product['category'] }}
                         </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
-                            ini adalah suatu tes produk
+                            Rp. {{ number_format($product['price'], 0, ',', '.') }}
+                        </td>
+                        <td class="px-4 py-3 max-w-[12rem] truncate">
+                           {{$product['description']}}
                         </td>
                         <td class="px-4 py-3 flex items-center justify-end">
-                            <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown"
+                            <button id="{{$product['id']}}-dropdown-botton" 
+                            data-dropdown-toggle="{{$product['id']}}-dropdown"
                                 class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                 type="button">
                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
@@ -66,24 +74,11 @@
                                         d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                                 </svg>
                             </button>
-                            <div id="apple-imac-27-dropdown"
+                            <div id="{{$product['id']}}-dropdown"
                                 class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                 <ul class="py-1 text-sm" aria-labelledby="apple-imac-27-dropdown-button">
                                     <li>
-                                        <a href="{{ route('dashboard.products.edit', 1) }}"
-                                            class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
-                                            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                                viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                <path
-                                                    d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                                            </svg>
-                                            Ubah
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('dashboard.products.show', 1) }}"
+                                        <a href="{{ route('dashboard.products.show', $product['id']) }}"
                                             class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                             <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                 viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -110,6 +105,7 @@
                             </div>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
