@@ -82,8 +82,8 @@ class StoreArticleRequest extends FormRequest
             'body.string' => 'Format body tidak valid',
             'category.required' => 'Harap pilih kategori',
             'category.string' => 'Format category tidak valid',
-            // 'photo.image' => 'Format photo tidak valid',
-            // 'photo.mimes' => 'Format photo tidak valid',
+            'photo.image' => 'Format photo tidak valid',
+            'photo.mimes' => 'Format photo tidak valid',
             'photo.max' => 'Photo maksimal 2 MB',
         ];
     }

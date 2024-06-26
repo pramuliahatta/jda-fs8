@@ -29,25 +29,20 @@
                         <x-error-message field="title" />
                     </div>
 
-                    {{-- <div>
+                    <div>
                         <x-image-uploader-viewer name="photo" id="photo"
                             imagePath="{{ $photo->image_path ?? '' }}" altText="Foto" />
                         <x-error-message field="photo" />
-                    </div> --}}
-
-
-
-                    <div>
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori
-                            artikel</label>
-                        <select id="category" name="category"
-                            class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Pilih kategori artikel</option>
-                            <option value="event">Event</option>
-                            <option value="berita">Berita</option>
-                        </select>
                     </div>
+
+                    <label for="category"
+                        class="block text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
+                    <select id="category" name="category" required
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected value="" disabled>Pilih kategori</option>
+                        <option value="Berita">Berita</option>
+                        <option value="Acara">Acara</option>
+                    </select>
 
                     <div>
                         @php

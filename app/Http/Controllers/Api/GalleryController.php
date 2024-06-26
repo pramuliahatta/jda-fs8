@@ -17,11 +17,17 @@ class GalleryController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->query('per_page', 10);
-
         try {
             // get all data in database
-            $gallery = Gallery::paginate($perPage);
+            $query =  Gallery::query();
+            if ($request->has('search')) {
+                $search = $request->query('search');
+
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', '%' . $search . '%');
+                });
+            }
+            $gallery = $query->get();
             // response if success
             return success($gallery, 'Gallery berhasil ditemukan');
         } catch (\Exception $e) {

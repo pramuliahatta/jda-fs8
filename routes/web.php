@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/about', function () {
+    return view('about.index');
+})->name('about');
 
 Route::get('/services', [FileController::class, 'index'])->name('services');
 
@@ -30,6 +30,14 @@ Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
 
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.detail');
+
+Route::get('/contact', function () {
+    return view('contact.index');
+})->name('contact');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', function () {
@@ -67,32 +75,21 @@ Route::prefix('dashboard')->group(function () {
     Route::post('/forms/edit/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
     Route::delete('/forms/{id}', [FileController::class, 'destroy'])->name('dashboard.forms.destroy');
 
-    Route::get('/users', function () {
-        return view('dashboard.users.index');
-    })->name('dashboard.users.index');
+    Route::get('/users', [UserController::class, 'index'])->name('dashboard.users.index');
 
-    Route::get('/users/create', function () {
-        return view('dashboard.users.create');
-    })->name('dashboard.users.create');
+    Route::get('/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('dashboard.users.store');
 
-    Route::get('/users/{id}', function () {
-        return view('dashboard.users.show');
-    })->name('dashboard.users.show');
+    Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
 
-    Route::get('/users/{id}/edit/', function () {
-        return view('dashboard.users.edit');
-    })->name('dashboard.users.edit');
+    Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
+    Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
 
     Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
-
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-
     Route::post('/products', [ProductController::class, 'store'])->name('products.stores');
-
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
-
     Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
 
     Route::get('/about', function () {

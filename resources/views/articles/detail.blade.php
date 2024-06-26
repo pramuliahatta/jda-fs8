@@ -15,10 +15,10 @@
                                     class="text-xl font-bold text-gray-900 dark:text-white">
                                     Hendra, S.Pd
                                 </a>
-                                <p class="text-base text-gray-500 dark:text-gray-400">
+                                <p class="text-base text-gray-700 dark:text-gray-400">
                                     Kepala Desa Cidadap
                                 </p>
-                                <p class="text-base text-gray-500 dark:text-gray-400">
+                                <p class="text-base text-gray-700 dark:text-gray-400">
                                     <time pubdate datetime="2024-06-12" title="June 12th, 2024">
                                         Feb. 6, 2024
                                     </time>
@@ -31,7 +31,7 @@
                         Pembangunan Jalan Desa Baru
                     </h1>
                 </header>
-                <p class="lead">
+                <p class="lead text-gray-700">
                     Proyek pembangunan jalan desa baru telah resmi dimulai minggu ini. Pembangunan ini merupakan salah
                     satu program unggulan pemerintah Desa Cidadap untuk meningkatkan kualitas infrastruktur dan
                     kesejahteraan masyarakat. Jalan baru ini diharapkan akan membawa berbagai manfaat signifikan bagi
@@ -48,7 +48,7 @@
         </div>
     </main>
 
-    <aside aria-label="Related articles" class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
+    <aside aria-label="Related articles" class="py-8 lg:py-24 bg-green-50 dark:bg-gray-800">
         <div class="px-4 mx-auto max-w-screen-xl">
             <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Artikel Terkait</h2>
             <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
@@ -60,13 +60,17 @@
                     <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Pembangunan Jalan Desa Baru</a>
                     </h2>
-                    <p class="mb-4 text-gray-500 dark:text-gray-400">
-                        Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
-                        meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
-                        pertanian dan produk lokal.
+                    <p class="mb-4 text-gray-700 dark:text-gray-400">
+                        {{ substr(
+                            'Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
+                                                                                                                                                                                                                                                                                                                                                                                                                                                meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
+                                                                                                                                                                                                                                                                                                                                                                                                                                                pertanian dan produk lokal.',
+                            0,
+                            50,
+                        ) }}...
                     </p>
                     <a href="{{ route('articles.detail', 5) }}"
-                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-green-500 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
                 </article>
@@ -79,13 +83,15 @@
                     <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Festival Budaya Tahunan</a>
                     </h2>
-                    <p class="mb-4  text-gray-500 dark:text-gray-400">
-                        Festival budaya tahunan Desa Cidadap akan diselenggarakan bulan depan. Acara ini akan
-                        menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan
-                        khas daerah.
+                    <p class="mb-4  text-gray-700 dark:text-gray-400">
+                        {{ substr(
+                            'Festival budaya tahunan Desa Cidadap akan diselenggarakan bulan depan. Acara ini akan menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan khas daerah.',
+                            0,
+                            50,
+                        ) }}...
                     </p>
                     <a href="{{ route('articles.detail', 6) }}"
-                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-green-500 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
                 </article>
@@ -98,13 +104,15 @@
                     <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#"> Gotong Royong Desa</a>
                     </h2>
-                    <p class="mb-4  text-gray-500 dark:text-gray-400">
-                        Ayo bersama-sama membersihkan
-                        lingkungan desa dalam kegiatan gotong royong. Ini adalah kesempatan untuk mempererat silaturahmi
-                        dan menjaga kebersihan desa kita.
+                    <p class="mb-4  text-gray-700 dark:text-gray-400">
+                        {{ substr(
+                            'Ayo bersama-sama membersihkan lingkungan desa dalam kegiatan gotong royong. Ini adalah kesempatan untuk mempererat silaturahmi dan menjaga kebersihan desa kita.',
+                            0,
+                            50,
+                        ) }}...
                     </p>
                     <a href="{{ route('articles.detail', 7) }}"
-                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-green-500 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
                 </article>
@@ -117,12 +125,17 @@
                     <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Lomba Memasak Tradisional</a>
                     </h2>
-                    <p class="mb-4  text-gray-500 dark:text-gray-400">Ikuti lomba memasak dengan resep-resep
-                        tradisional
-                        Desa Cidadap. Acara ini terbuka untuk semua
-                        warga desa dan pemenang akan mendapatkan hadiah menarik.</p>
+                    <p class="mb-4  text-gray-700 dark:text-gray-400">
+                        {{ substr(
+                            'Ikuti lomba memasak dengan resep-resep tradisional
+                                                                                                                                                                                                                        Desa Cidadap. Acara ini terbuka untuk semua warga desa dan pemenang akan mendapatkan hadiah
+                                                                                                                                                                                                                        menarik.',
+                            0,
+                            50,
+                        ) }}...
+                    </p>
                     <a href="{{ route('articles.detail', 8) }}"
-                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-green-500 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
                 </article>

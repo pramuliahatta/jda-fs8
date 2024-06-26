@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
-use App\Http\Requests\UpdateFileRequest;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
@@ -41,7 +40,7 @@ class ArticleController extends Controller
             $content = json_decode($response->getBody(), true);
             $data = collect($content['data']);
             $currentPageItems = $data->slice(($currentPage - 1) * $perPage, $perPage)->all();
-            dd($currentPageItems);
+            // dd($currentPageItems);
             $paginator = new LengthAwarePaginator(
                 $currentPageItems,
                 count($data),
@@ -49,7 +48,7 @@ class ArticleController extends Controller
                 $currentPage,
                 [
                     'path' => request()->url(),
-                    // 'query' => request()->query(),
+                    'query' => request()->query(),
                 ]
             );
         } catch (\Exception $e) {
@@ -59,7 +58,7 @@ class ArticleController extends Controller
         }
         // Return view and data ($data for data | $pageLinks for link url, label, & isActive | 
         // $pageInfo for showing information)
-        return view($viewName, ['data' => $data, 'paginator' => $paginator]);
+        return view($viewName, ['data' => $currentPageItems, 'paginator' => $paginator]);
     }
 
     /**
@@ -159,12 +158,14 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFileRequest $request, string $id, Client $client)
+    public function update(UpdateArticleRequest $request, string $id, Client $client)
     {
         // Get multipart data from request
         $multipart = $request->getMultipart();
+        dd($multipart);
+
         // Define endpoint
-        $apiUrl = env('BASE_URL_API') . "articles";
+        $apiUrl = env('BASE_URL_API') . "articles/$id";
 
         try {
             // Store data using API

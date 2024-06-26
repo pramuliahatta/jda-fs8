@@ -17,8 +17,6 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->query('per_page', 10);
-
         try {
             // get all data in database
             $query = Article::query();
@@ -51,6 +49,8 @@ class ArticleController extends Controller
         try {
             // Get validated data from request
             $validatedData = $request->validated();
+            $photoName = "noimage.jpg";
+            $article = new Article;
 
             // store photo in public directory
             if ($request->hasFile('photo')) {
@@ -60,12 +60,11 @@ class ArticleController extends Controller
             }
 
             // store article data in database
-            Article::create([
-                'title' => $validatedData['title'],
-                'body' => $validatedData['body'],
-                'category' => $validatedData['category'],
-                'photo' => 'upload/article/' . $photoName,
-            ]);
+            $article->photo = 'upload/article/' . $photoName;
+            $article->title = $validatedData['title'];
+            $article->body = $validatedData['body'];
+            $article->category = $validatedData['category'];
+            $article->save();
 
             // response if success
             return success(null, 'Artikel berhasil ditambahkan');
@@ -103,7 +102,7 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreArticleRequest $request, string $id)
+    public function update(UpdateArticleRequest $request, string $id)
     {
         try {
             // find data from database

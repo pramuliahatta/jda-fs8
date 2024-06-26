@@ -7,7 +7,7 @@
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Jelajahi Desa Kami
                 </h2>
-                <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
+                <p class="font-light text-gray-700 lg:mb-16 sm:text-xl dark:text-gray-400">
                     Lihatlah keindahan dan kehidupan sehari-hari di Desa Cidadap melalui galeri foto kami.
                 </p>
             </div>
@@ -22,6 +22,8 @@
                     @endforeach
 
                 </div>
+
+                {{-- {{ $paginatedUsers->links('vendor.pagination.custom') }} --}}
     </section>
     {{-- GALLERY SECTION END --}}
 
@@ -29,7 +31,8 @@
     <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center"
         style="display: none;">
         <div class="relative bg-white p-4 rounded-lg shadow-lg">
-            <button id="close-lightbox" class="absolute top-2 right-2 text-black bg-white w-10 h-10 rounded-full p-2">
+            <button id="close-lightbox"
+                class="absolute top-2 right-2 text-black bg-white hover:bg-green-100 w-10 h-10 rounded-full p-2">
                 &times;
             </button>
             <img id="lightbox-img" src="" alt=""
@@ -37,7 +40,7 @@
             <h2 id="lightbox-title" class="text-center text-xl mt-4 w-96"></h2>
             <div class="flex justify-center mt-4">
                 <button id="prev"
-                    class="px-4 py-2 bg-white text-black mr-2 flex items-center gap-2 hover:bg-gray-100 w-10 h-10 rounded-full">
+                    class="px-4 py-2 bg-white text-black mr-2 flex items-center gap-2 hover:bg-green-100 w-10 h-10 rounded-full">
                     <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -45,7 +48,7 @@
                     </svg>
                 </button>
                 <button id="next"
-                    class="px-4 py-2 bg-white text-black flex items-center gap-2 hover:bg-gray-100 w-10 h-10 rounded-full">
+                    class="px-4 py-2 bg-white text-black flex items-center gap-2 hover:bg-green-100 w-10 h-10 rounded-full">
                     <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
