@@ -18,7 +18,7 @@ class FileFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'file' => 'test.pdf',
+            'file' => 'upload/file/test.pdf',
         ];
     }
 }

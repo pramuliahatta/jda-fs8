@@ -15,9 +15,11 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $pageSize = $request->input('pageSize', 10); // Default page size
+        // $pageSize = $request->input('pageSize', 10); // Default page size
 
-        $users = User::paginate($pageSize);
+        // $users = User::paginate($pageSize);
+
+        $users = User::all();
 
         return success($users, 'Data fetched successfully');
     }

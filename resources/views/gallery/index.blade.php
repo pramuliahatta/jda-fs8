@@ -7,7 +7,7 @@
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Jelajahi Desa Kami
                 </h2>
-                <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
+                <p class="font-light text-gray-700 lg:mb-16 sm:text-xl dark:text-gray-400">
                     Lihatlah keindahan dan kehidupan sehari-hari di Desa Cidadap melalui galeri foto kami.
                 </p>
             </div>
@@ -16,12 +16,137 @@
                     {{-- <div class="grid gap-4"> --}}
                     @foreach ($data as $item)
                         <div>
-                            <img class="h-72 w-full rounded-lg gallery-item object-cover" src="/upload/gallery/{{ $item['photo'] }}"
+                            <img class="h-72 w-full rounded-lg gallery-item object-cover" src="/{{ $item['photo'] }}"
                                 data-title="{{ $item['title'] }}" alt="{{ $item['title'] }}">
                         </div>
                     @endforeach
 
                 </div>
+
+                @php
+                    // TODO: DELETE LATER
+                    $users = collect([
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                    ]);
+
+                    // Determine the current page
+                    $currentPage = request()->get('page', 1);
+
+                    // Define the number of items per page
+                    $perPage = 4;
+
+                    // Slice the users collection to get the items to display in the current page
+                    $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+                    // Create the paginator
+                    $paginatedUsers = new Illuminate\Pagination\LengthAwarePaginator(
+                        $currentPageItems,
+                        $users->count(),
+                        $perPage,
+                        $currentPage,
+                        [
+                            'path' => request()->url(),
+                            'query' => request()->query(),
+                        ],
+                    );
+                @endphp
+
+                {{ $paginatedUsers->links('vendor.pagination.custom') }}
     </section>
     {{-- GALLERY SECTION END --}}
 
