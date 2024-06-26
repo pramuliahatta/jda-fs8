@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\File;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -19,7 +18,7 @@ class FileController extends Controller
     public function index(Request $request, Client $client)
     {
         // Define endpoint
-        
+
         $apiUrl = env('BASE_URL_API') . "files";
         if ($request->input('page') != '') {
             $apiUrl .= '?page=' . $request->input('page');
@@ -120,7 +119,7 @@ class FileController extends Controller
             $content = json_decode($response->getBody(), true);
             $data = $content['data'];
             // If success, return view and data
-            return view('dashboard.forms.detail', ['data' => $data]);
+            return view('dashboard.forms.show', ['data' => $data]);
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
@@ -128,7 +127,7 @@ class FileController extends Controller
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to get forms data:' . $e->getMessage());
-            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.forms.index')->withErrors($e->getMessage());
         }
     }
 
@@ -138,7 +137,7 @@ class FileController extends Controller
     public function edit(string $id, Client $client)
     {
         // Define endpoint
-        
+
         $apiUrl = env('BASE_URL_API') . "files/$id";
 
         try {
@@ -149,12 +148,12 @@ class FileController extends Controller
             $content = json_decode($response->getBody(), true);
             $data = $content['data'];
             // If success, return view and data
-            
+
             return view('dashboard.forms.edit', ['data' => $data]);
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-           
+
             return redirect()->route('dashboard.forms.index')->withErrors($errorMessage);
         } catch (\Exception $e) {
             // Another fails

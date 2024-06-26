@@ -90,7 +90,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/forms/{id}', [FileController::class, 'show'])->name('dashboard.forms.show');
     Route::get('/forms/edit/{id}', [FileController::class, 'edit'])->name('dashboard.forms.edit');
     Route::post('/forms/edit/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
-    Route::delete('/forms/{id}', [GalleryController::class, 'destroy'])->name('dashboard.forms.destroy');
+    Route::delete('/forms/{id}', [FileController::class, 'destroy'])->name('dashboard.forms.destroy');
 
 
     Route::get('/users', function () {
@@ -126,10 +126,4 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/about', function () {
         return view('about.index');
     })->name('about');
-
 })->middleware('auth');
-
-
-
-
-
