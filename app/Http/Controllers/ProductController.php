@@ -60,6 +60,9 @@ class ProductController extends Controller
         if(Route::current()->getName() == 'products.dashboard') {
             return view('products.dashboard', compact('data'));
         }
+        if(Route::current()->getName() == 'dashboard.products.index') {
+            return view('dashboard.products.index', compact('data'));
+        }
         return view('products.index', compact('data'));
     }
 
@@ -166,10 +169,14 @@ class ProductController extends Controller
         $fetchData = Http::get('http://127.0.0.1:8001/api/products/' . $product->id);
         $response = $fetchData->json();
         $data = $response['data'];
-        // dd($data);
+        // dd(Route::current()->getName());
         if(Route::current()->getName() == 'products.preview') {
             return view('products.preview', compact('data'));
         }
+        if(Route::current()->getName() == 'dashboard.products.show') {
+            return view('dashboard.products.show', compact('data'));
+        }
+    
         return view('products.detail', compact('data'));
     }
 
@@ -182,6 +189,8 @@ class ProductController extends Controller
         $response = $fetchData->json();
         $data = $response['data'];
         return view('products.edit', compact('data'));
+
+       
     }
 
     /**

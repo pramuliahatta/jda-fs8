@@ -1,7 +1,6 @@
 <x-layout>
     <x-slot name="title">Galeri</x-slot>
 
-<<<<<<< HEAD
     <!-- Start block -->
     <x-dashboard-section route='dashboard.gallery.index'>
         <!-- Start coding here -->
@@ -37,7 +36,6 @@
                     </svg>
                     Tambah foto
                 </a>
-=======
                         </tbody>
                     </table>
                 </div>
@@ -62,7 +60,6 @@
                         @endforeach
                     </ul>
                 </nav>
->>>>>>> 92f15881454151ccbd80ea1806f99ac6d36e31aa
             </div>
         </div>
         <div class="overflow-x-auto">
