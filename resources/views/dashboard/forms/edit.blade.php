@@ -8,15 +8,27 @@
             <div class="flex justify-between items-center rounded-t sm:mb-5 dark:border-gray-600">
                 <h2 class="text-xl font-bold text-gray-900 dark:text-white">Ubah File</h2>
             </div>
+            @if (@session('success'))
+                <p>{{ session('success') }}</p>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <!-- Modal body -->
             <form action="{{ route('dashboard.forms.update', $data['id']) }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
-                        <x-input-field label="Jenis Formulir" name="file" id="file"
-                            placeholder="Masukkan jenis formulir" value="{{ old('file', $data['name'] ?? '') }}" />
-                        <x-error-message field="file" />
+                        <x-input-field label="Jenis Formulir" name="name" id="name"
+                            placeholder="Masukkan jenis formulir" value="{{ old('name', $data['name'] ?? '') }}" />
+                        <x-error-message field="name" />
                     </div>
 
                     <div>

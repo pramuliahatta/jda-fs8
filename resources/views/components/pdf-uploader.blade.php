@@ -1,8 +1,5 @@
 <div class="space-y-2">
     <label for="pdf-upload" class="block text-sm font-medium text-gray-700">Upload PDF</label>
-    {{-- <input type="file" name="{{ $name }}" id="{{ $id }}" accept="image/*"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-        onchange="previewImage(event, '{{ $id }}-preview')"> --}}
     <input type="file" id="pdf-upload" name="file" accept="application/pdf">
     <div id="pdf-preview" class="mt-4" style="display: none;">
         <iframe id="pdf-frame" class="w-full h-screen" frameborder="0"></iframe>
