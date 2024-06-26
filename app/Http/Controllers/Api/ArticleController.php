@@ -4,59 +4,77 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-
-use function PHPUnit\Framework\fileExists;
+use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
+use Illuminate\Validation\ValidationException;
 
 class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // get data from database
-        $article = Article::all();
-        // response
-        return success($article, 'File berhasil ditemukan');
+        try {
+            // get all data in database
+            $query = Article::query();
+            if ($request->has('category')) {
+                $categories = $request->query('category');
+                $query->whereIn('category', $categories);
+            }
+            if ($request->has('search')) {
+                $search = $request->query('search');
+
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', '%' . $search . '%')
+                        ->orWhere('body', 'like', '%' . $search . '%');
+                });
+            }
+            $article = $query->get();
+            // response if success
+            return success($article, 'Artikel berhasil ditemukan');
+        } catch (\Exception $e) {
+            Log::error("Failed to get article data:" . $e->getMessage());
+            return fails('Gagal mendapatkan data artikel', 500);
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
-        // validation
-        $validator = Validator::make($request->all(), [
-            'title'     => 'required|max:255',
-            'body'      => 'required',
-            'category'  => 'required',
-            'photo'     => 'nullable|image|mimes:jpeg,jpg,png|max:2048'
-        ]);
+        try {
+            // Get validated data from request
+            $validatedData = $request->validated();
+            $photoName = "noimage.jpg";
+            $article = new Article;
 
-        if ($validator->fails()) {
-            // response if fail
-            return fails($validator->errors(), 422);
+            // store photo in public directory
+            if ($request->hasFile('photo')) {
+                $photo = $request->file('photo');
+                $photoName = time() . '.' . $photo->getClientOriginalExtension();
+                $photo->move(public_path('upload/article'), $photoName);
+            }
+
+            // store article data in database
+            $article->photo = 'upload/article/' . $photoName;
+            $article->title = $validatedData['title'];
+            $article->body = $validatedData['body'];
+            $article->category = $validatedData['category'];
+            $article->save();
+
+            // response if success
+            return success(null, 'Artikel berhasil ditambahkan');
+        } catch (ValidationException $e) {
+            return fails($e->errors(), 422);
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to store article:' . $e->getMessage());
+            return fails('Gagal menambahkan artikel', 500);
         }
-
-        // store file in public directory
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $photoName = time() . '.' . $photo->getClientOriginalExtension();
-            $photo->move(public_path('upload/article'), $photoName);
-        }
-
-        // store file data in database
-        $article = new Article;
-        $article->title = $request->title;
-        $article->body = $request->body;
-        $article->category = $request->category;
-        $article->photo = 'upload/article/' . $photoName;
-        $article->save();
-
-        // response if success
-        return success(null, 'Article berhasil ditambahkan');
     }
 
     /**
@@ -64,64 +82,68 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-        // get data from database
-        $article = Article::find($id);
+        try {
+            // find data in database
+            $article = Article::find($id);
 
-        if ($article) {
-            // response if success
-            return success($article, 'Artikel berhasil ditemukan');
+            if ($article) {
+                // response if success
+                return success($article, 'Artikel berhasil ditemukan');
+            }
+            // response if fails
+            return fails('Artikel tidak ditemukan', 404);
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to get article data:' . $e->getMessage());
+            return fails('Gagal mendapatkan data artikel', 500);
         }
-        // response if fail
-        return fails("Artikel tidak ditemukan", 404);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateArticleRequest $request, string $id)
     {
-        // get data from database
-        $article = Article::find($id);
-        if (!$article) {
-            // response if fails
-            return success(null, 'Artikel tidak ditemukan');
-        }
-
-        // validation
-        $validator = Validator::make($request->all(), [
-            'title'     => 'required|max:255',
-            'body'      => 'required',
-            'category'  => 'required',
-            'photo'     => 'nullable|image|mimes:jpeg,jpg,png|max:2048'
-        ]);
-
-        if ($validator->fails()) {
-            // response if fail
-            return fails($validator->errors(), 422);
-        }
-
-        // store file in public directory
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $photoName = time() . '.' . $photo->getClientOriginalExtension();
-            $photo->move(public_path('upload/article'), $photoName);
-
-            // remove old photo in public directory
-            $photoPath = public_path($article->photo);
-            if (fileExists($photoPath)) {
-                @unlink($photoPath);
+        try {
+            // find data from database
+            $article = Article::find($id);
+            if (!$article) {
+                // response if fails
+                return fails('Artikel tidak ditemukan', 404);
             }
+            // Get data from request
+            $validatedData = $request->validated();
+
+            if ($request->hasFile('photo')) {
+                // store photo in public directory
+                $photo = $request->file('photo');
+                $photoName = time() . '.' . $photo->getClientOriginalExtension();
+                $photo->move(public_path('upload/article'), $photoName);
+
+                // remove old photo in public directory
+                $oldPhotoPath = public_path($article->photo);
+                if (file_exists($oldPhotoPath)) {
+                    @unlink($oldPhotoPath);
+                }
+                // store article data in database
+                $article->photo = 'upload/article/' . $photoName;
+            }
+
+            // store article data in database
+            $article->title = $validatedData['title'];
+            $article->body = $validatedData['body'];
+            $article->category = $validatedData['category'];
+            $article->save();
+
+            // response if success
+            return success(null, 'Artikel berhasil diubah');
+        } catch (ValidationException $e) {
+            return fails($e->errors(), 422);
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to update article:' . $e->getMessage());
+            return fails('Gagal mengubah artikel', 500);
         }
-
-        // store file data in database
-        $article->title = $request->title;
-        $article->body = $request->body;
-        $article->category = $request->category;
-        $article->photo = 'upload/article/' . $photoName;
-        $article->save();
-
-        // response if success
-        return success(null, 'Article berhasil diubah');
     }
 
     /**
@@ -129,21 +151,28 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        // get data from database
-        $article = Article::find($id);
+        try {
+            // find data in database
+            $article = Article::find($id);
 
-        if ($article) {
-            // remove photo in public directory
-            $photoPath = public_path($article->photo);
-            if (fileExists($photoPath)) {
-                @unlink($photoPath);
+            if ($article) {
+                // remove photo in public directory
+                $photoPath = public_path($article->photo);
+                if (file_exists($photoPath)) {
+                    @unlink($photoPath);
+                }
+                // remove gallery data in database
+                $article->delete();
+                // response if success
+                return success(null, 'Artikel berhasil dihapus');
             }
-            // remove gallery data in database
-            $article->delete();
-            // response if success
-            return success(null, 'Artikel berhasil dihapus');
+
+            // response if fails find
+            return fails('Artikel tidak ditemukan', 404);
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to delete article:' . $e->getMessage());
+            return fails('Gagal menghapus artikel', 500);
         }
-        // response if fail
-        return fails("Artikel tidak ditemukan", 404);
     }
 }

@@ -7,7 +7,7 @@
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Jelajahi Desa Kami
                 </h2>
-                <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
+                <p class="font-light text-gray-700 lg:mb-16 sm:text-xl dark:text-gray-400">
                     Lihatlah keindahan dan kehidupan sehari-hari di Desa Cidadap melalui galeri foto kami.
                 </p>
             </div>
@@ -16,12 +16,14 @@
                     {{-- <div class="grid gap-4"> --}}
                     @foreach ($data as $item)
                         <div>
-                            <img class="h-72 w-full rounded-lg gallery-item object-cover" src="/upload/gallery/{{ $item['photo'] }}"
+                            <img class="h-72 w-full rounded-lg gallery-item object-cover" src="/{{ $item['photo'] }}"
                                 data-title="{{ $item['title'] }}" alt="{{ $item['title'] }}">
                         </div>
                     @endforeach
 
                 </div>
+
+                {{-- {{ $paginatedUsers->links('vendor.pagination.custom') }} --}}
     </section>
     {{-- GALLERY SECTION END --}}
 

@@ -8,7 +8,7 @@
                 <h2 class="text-xl font-bold text-gray-900 dark:text-white">Tambah Pengguna</h2>
             </div>
             <!-- Modal body -->
-            <form {{-- action="{{ route('dashboard.users.store') }}"  --}} method="POST" enctype="multipart/form-data">
+            <form action="{{ route('dashboard.users.store') }}"  method="POST" {{-- enctype="multipart/form-data" --}}>
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
@@ -24,10 +24,10 @@
                     </div>
 
                     <div>
-                        <x-input-field label="Nomor WA" name="phone" id="phone" placeholder="Masukkan nomor WA"
-                            value="{{ old('phone', $user->phone ?? '') }}" />
+                        <x-input-field label="Nomor WA" name="phone_number" id="phone_number" placeholder="Masukkan nomor WA"
+                            value="{{ old('phone_number', $user->phone_number ?? '') }}" />
                         <span class="text-xs text-gray-600">Format: 628881234567</span>
-                        <x-error-message field="phone" />
+                        <x-error-message field="phone_number" />
                     </div>
 
                     <div>

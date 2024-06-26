@@ -2,23 +2,63 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
+use GuzzleHttp\Exception\RequestException;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, Client $client)
     {
-        // get data from database
-        $article = Article::all();
-        // return view and data
-        if (request()->route()->getName() == 'dashboard.articles.index') {
-            return view('dashboard.articles.index', $article);
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "articles";
+        // Determine the view and perpage based on route
+        $currentPage = request()->get('page', 1);
+        $viewName =  'articles.index';
+        $perPage = 12;
+        if ($request->route()->getName() == 'dashboard.articles.index') {
+            $viewName = 'dashboard.articles.index';
+            $perPage = 10;
         }
-        return view('articles.index', $article);
+
+        try {
+            // Get data from the API
+            $response = $client->get($apiUrl, [
+                'query' => [
+                    'category' => $request->input('category'),
+                    'search' => $request->input('search'),
+                ]
+            ]);
+            $content = json_decode($response->getBody(), true);
+            $data = collect($content['data']);
+            $currentPageItems = $data->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            // dd($currentPageItems);
+            $paginator = new LengthAwarePaginator(
+                $currentPageItems,
+                count($data),
+                $perPage,
+                $currentPage,
+                [
+                    'path' => request()->url(),
+                    'query' => request()->query(),
+                ]
+            );
+        } catch (\Exception $e) {
+            // If fail data is empty and log error
+            Log::error('Failed to get article data:' . $e->getMessage());
+            $data = [];
+        }
+        // Return view and data ($data for data | $pageLinks for link url, label, & isActive | 
+        // $pageInfo for showing information)
+        return view($viewName, ['data' => $currentPageItems, 'paginator' => $paginator]);
     }
 
     /**
@@ -32,120 +72,169 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request, Client $client)
     {
-        // validation
-        $validatedData = $request->validate([
-            'title'     => 'required|max:255',
-            'body'      => 'required',
-            'category'  => 'required',
-            'photo'     => 'nullable|image|mimes:jpeg,jpg,png|max:2048'
-        ]);
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "articles";
 
-        // store file in public directory
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $photoName = time() . '.' . $photo->getClientOriginalExtension();
-            $photo->move(public_path('upload/article'), $photoName);
+        try {
+            // Store data using API
+            $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+                'multipart' => $multipart,
+            ]);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.articles.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to store articles:' . $e->getMessage());
+            return redirect()->route('dashboard.articles.index')->withErrors('Terjadi kesalahan pada server');
         }
-
-        // make new data in database
-        $article = new Article;
-
-        // store article data in database
-        $article = new Article;
-        $article->title = $validatedData['title'];
-        $article->body = $validatedData['body'];
-        $article->category = $validatedData['category'];
-        $article->photo = 'upload/article/' . $photoName;
-        $article->save();
-
-        return back()->with('success', "Artikel berhasil ditambahkan!");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, Client $client, Request $request)
     {
-        return view('articles.detail', Article::find($id));
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "articles/$id";
+        // Determine the view and perpage based on route
+        $viewName = $request->route()->getName() == 'articles.detail' ? 'articles.detail' : 'dashboard.articles.show';
+
+        try {
+            // Get the data from the API
+            $response = $client->get($apiUrl);
+            $content = json_decode($response->getBody(), true);
+            $data = $content['data'];
+            // If success, return view and data
+            return view($viewName, ['data' => $data]);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route('dashboard.articles.index')->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to get articles data:' . $e->getMessage());
+            return redirect()->route('dashboard.articles.index')->withErrors('Terjadi kesalahan pada server');
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, Client $client)
     {
-        return view('dashboard.articles.update', Article::find($id));
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "articles/$id";
+
+        try {
+            // Get the data from the API
+            $response = $client->get($apiUrl);
+            $content = json_decode($response->getBody(), true);
+            $data = $content['data'];
+            // If success, return view and data
+            return view('dashboard.articles.edit', ['data' => $data]);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route('dashboard.articles.index')->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to get article data:' . $e->getMessage());
+            return redirect()->route('dashboard.articles.index')->withErrors('Terjadi kesalahan pada server');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateArticleRequest $request, string $id, Client $client)
     {
-        // get gallery data in database
-        $article = Article::find($id);
-        if (!$article) {
-            return back()->with('error', "Article tidak ditemukan!");
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        dd($multipart);
+
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "articles/$id";
+
+        try {
+            // Store data using API
+            $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+                'multipart' => $multipart,
+            ]);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.articles.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to store articles:' . $e->getMessage());
+            return redirect()->route('dashboard.articles.index')->withErrors('Terjadi kesalahan pada server');
         }
 
-        // validation input data
-        $validatedData = $request->validate([
-            'title' => [
-                'required',
-                'max:255'
-            ],
-            'photo' => [
-                'required',
-                'image',
-                'mimes:jpeg,png,jpg',
-                'max:2048'
-            ],
-        ]);
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "articles/$id";
 
-        if ($request->hasFile('photo')) {
-            // store photo in public directory
-            $photo = $request->file('photo');
-            $photoName = time() . '.' . $photo->getClientOriginalExtension();
-            $photo->move(public_path('upload/article'), $photoName);
-
-            // remove old photo in public directory
-            $oldPhotoPath = public_path($article->photo);
-            if (file_exists($oldPhotoPath)) {
-                @unlink($oldPhotoPath);
-            }
+        try {
+            $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+                'multipart' => $multipart,
+            ]);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.articles.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to update article:' . $e->getMessage());
+            return redirect()->route('dashboard.articles.index')->withErrors('Terjadi kesalahan pada server');
         }
-
-        // store gallery data (photo) in database
-        $article->title = $validatedData['title'];
-        $article->body = $validatedData['body'];
-        $article->category = $validatedData['category'];
-        $article->photo = 'upload/article/' . $photoName;
-        $article->save();
-
-        return back()->with('success', "Artikel berhasil diubah!");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Client $client)
     {
-        // get gallery data in database
-        $article = Article::find($id);
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "articles/$id";
 
-        if ($article) {
-            // remove photo in public directory
-            $imagePath = public_path($article->photo);
-            if (file_exists($imagePath)) {
-                @unlink($imagePath);
-            }
-
-            // remove arti$article data in database
-            $article->delete();
-            return back()->with('success', "Artikel berhasil dihapus!");
+        try {
+            $response = $client->delete($apiUrl);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.articles.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route('dashboard.articles.index')->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to delete article:' . $e->getMessage());
+            return redirect()->route('dashboard.articles.index')->withErrors('Terjadi kesalahan pada server');
         }
-        return back()->with('error', "Artikel tidak ditemukan!");
     }
 }
