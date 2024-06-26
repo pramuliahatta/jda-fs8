@@ -82,8 +82,8 @@
                                 {{ $item['id'] }}
                             </th>
                             <td class="px-4 py-3 max-w-[12rem] truncate">
-                                <img src="/{{ $item['photo'] }}" class="w-8 h-8 rounded-lg object-cover"
-                                    alt="{{ $item['title'] }}">
+                                <img src="{{ asset('img/static/hero.jpg') }}" {{-- src="{{ $item['photo'] }}"  --}}
+                                    class="w-8 h-8 rounded-lg object-cover" alt="{{ $item['title'] }}">
                             </td>
                             <td class="px-4 py-3 max-w-[12rem] truncate">
                                 {{ $item['title'] }}

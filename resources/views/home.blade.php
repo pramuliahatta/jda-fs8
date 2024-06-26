@@ -223,7 +223,7 @@
 
     {{-- NEXT EVENT SECTION --}}
     <section class="bg-white dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="py-8 px-4 bg-green-50 rounded-lg mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
                 <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Acara Mendatang
@@ -440,122 +440,28 @@
 
     {{-- TESTIMONIALS SECTION --}}
     <section class="bg-white dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
+        <div class="py-8 bg-green-50 rounded-lg px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-sm">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-                    Apa Kata Warga Kami
+                    Ada Pertanyaan? Hubungi Kami!
                 </h2>
                 <p class="mb-8 font-light text-gray-700 lg:mb-16 sm:text-xl dark:text-gray-400">
-                    Dengar langsung dari warga Desa Cidadap tentang pengalaman dan kesan mereka mengenai desa kita.
-                    Testimoni ini menunjukkan bagaimana desa kami selalu berusaha memberikan yang terbaik untuk semua
-                    warganya.
+                    Butuh informasi lebih lanjut, punya saran, atau ingin bertanya sesuatu? Kami siap membantu Anda!
+                    Hubungi kami melalui telepon, email, atau kunjungi kantor kami langsung. Mari bersama-sama membangun
+                    Desa Cidadap yang lebih baik!
                 </p>
             </div>
-            <div class="grid mb-8 lg:mb-12 lg:grid-cols-2">
-                <figure
-                    class="flex flex-col justify-center items-center p-8 text-center bg-green-50 border-b border-gray-200 md:p-12 lg:border-r dark:bg-gray-800 dark:border-gray-700">
-                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-700 dark:text-gray-400">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                            Pelayanan Terbaik untuk Warga
-                        </h3>
-                        <p class="my-4">
-                            "Desa Cidadap selalu memberikan pelayanan terbaik untuk warganya. Saya sangat bangga menjadi
-                            bagian dari desa ini. Semua kebutuhan administratif saya selalu ditangani dengan cepat dan
-                            profesional."
-                        </p>
-                    </blockquote>
-                    <figcaption class="flex justify-center items-center space-x-3">
-                        <img class="w-9 h-9 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/karen-nelson.png"
-                            alt="profile picture">
-                        <div class="space-y-0.5 font-medium dark:text-white text-left">
-                            <div>
-                                Nurul Cahyani
-                            </div>
-                            <div class="text-sm font-light text-gray-700 dark:text-gray-400">
-                                Warga Desa Cidadap
-                            </div>
-                        </div>
-                    </figcaption>
-                </figure>
-                <figure
-                    class="flex flex-col justify-center items-center p-8 text-center bg-green-50 border-b border-gray-200 md:p-12 dark:bg-gray-800 dark:border-gray-700">
-                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-700 dark:text-gray-400">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                            Festival Budaya yang Mengesankan
-                        </h3>
-                        <p class="my-4">
-                            "Festival budaya tahunan di desa kami sangat mengesankan dan mempererat tali
-                            persaudaraan antarwarga. Setiap tahun, saya selalu menantikan acara ini karena membawa
-                            kebahagiaan dan kebanggaan tersendiri."
-                        </p>
-                    </blockquote>
-                    <figcaption class="flex justify-center items-center space-x-3">
-                        <img class="w-9 h-9 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png"
-                            alt="profile picture">
-                        <div class="space-y-0.5 font-medium dark:text-white text-left">
-                            <div>
-                                Siti Aminah
-                            </div>
-                            <div class="text-sm font-light text-gray-700 dark:text-gray-400">
-                                Warga Desa Cidadap
-                            </div>
-                        </div>
-                    </figcaption>
-                </figure>
-                <figure
-                    class="flex flex-col justify-center items-center p-8 text-center bg-green-50 border-b border-gray-200 lg:border-b-0 md:p-12 lg:border-r dark:bg-gray-800 dark:border-gray-700">
-                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-700 dark:text-gray-400">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                            Produk Lokal Berkualitas
-                        </h3>
-                        <p class="my-4">
-                            "Produk-produk lokal dari desa kami sangat berkualitas dan unik. Saya senang
-                            bisa berbelanja di pasar desa dan mendukung ekonomi lokal. Setiap produk yang saya beli
-                            selalu memuaskan."
-                        </p>
-
-                        undoubtedly level up your next application."</p>
-                    </blockquote>
-                    <figcaption class="flex justify-center items-center space-x-3">
-                        <img class="w-9 h-9 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                            alt="profile picture">
-                        <div class="space-y-0.5 font-medium dark:text-white text-left">
-                            <div>Andi Pratama</div>
-                            <div class="text-sm font-light text-gray-700 dark:text-gray-400">
-                                Warga Desa Cidadap
-                            </div>
-                        </div>
-                    </figcaption>
-                </figure>
-                <figure
-                    class="flex flex-col justify-center items-center p-8 text-center bg-green-50 border-gray-200 md:p-12 dark:bg-gray-800 dark:border-gray-700">
-                    <blockquote class="mx-auto mb-8 max-w-2xl text-gray-700 dark:text-gray-400">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                            Pelatihan Pertanian yang Bermanfaat
-                        </h3>
-                        <p class="my-4">
-                            "Program pelatihan pertanian modern yang diadakan oleh pemerintah desa sangat membantu saya
-                            sebagai petani. Saya belajar banyak teknik baru yang meningkatkan hasil panen saya. Terima
-                            kasih Desa Cidadap!""
-                        </p>
-                    </blockquote>
-                    <figcaption class="flex justify-center items-center space-x-3">
-                        <img class="w-9 h-9 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
-                            alt="profile picture">
-                        <div class="space-y-0.5 font-medium dark:text-white text-left">
-                            <div>
-                                Rina Wulandari
-                            </div>
-                            <div class="text-sm font-light text-gray-700 dark:text-gray-400">
-                                Warga Desa Cidadap
-                            </div>
-                        </div>
-                    </figcaption>
-                </figure>
+            <div class="justify-center">
+                <a href="{{ route('contact') }}"
+                    class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 dark:focus:ring-primary-900">
+                    Kontak Kami
+                    <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
             </div>
     </section>
     {{-- TESTIMONIALS SECTION END --}}
