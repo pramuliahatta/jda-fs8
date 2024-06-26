@@ -59,46 +59,55 @@
                                 </svg>
                             </button>
                             <!-- Dropdown menu -->
-                            <div id="filterDropdown"
-                                class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
-                                <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-                                    Category
-                                </h6>
-                                <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
-                                    <li class="flex items-center">
-                                        <input id="apple" type="checkbox" value=""
-                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="apple"
-                                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Apple (56)
-                                        </label>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <input id="fitbit" type="checkbox" value=""
-                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="fitbit"
-                                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Fitbit (56)
-                                        </label>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <input id="dell" type="checkbox" value=""
-                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="dell"
-                                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Dell (56)
-                                        </label>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <input id="asus" type="checkbox" value="" checked
-                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="asus"
-                                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Asus (97)
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
+                            <form method="GET" action="{{ route('products') }}">
+
+                                <div id="filterDropdown"
+                                    class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                                        Category
+                                    </h6>
+                                    <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                                        <li class="flex items-center">
+                                            <input id="makanan" name="categories[]" type="checkbox" value="Makanan"
+                                                {{ isset($data['categories']) ? (in_array('Makanan', $data['categories']) ? 'checked' : '') : '' }}
+                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <label for="makanan"
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                Makanan
+                                            </label>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <input id="pakaian" name="categories[]" type="checkbox" value="Pakaian"
+                                                {{ isset($data['categories']) ? (in_array('Pakaian', $data['categories']) ? 'checked' : '') : '' }}
+                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <label for="pakaian"
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                Pakaian
+                                            </label>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <input id="minuman" name="categories[]" type="checkbox" value="Minuman"
+                                                {{ isset($data['categories']) ? (in_array('Minuman', $data['categories']) ? 'checked' : '') : '' }}
+                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <label for="minuman"
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                Minuman
+                                            </label>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <input id="elektronik" name="categories[]" type="checkbox"
+                                                value="Elektronik"
+                                                {{ isset($data['categories']) ? (in_array('Elektronik', $data['categories']) ? 'checked' : '') : '' }}
+                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <label for="elektronik"
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                Elektronik
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <button type="submit">Filter</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -107,7 +116,7 @@
             {{-- list products --}}
             <div class="mt-2 sm:mt-2 md:gap-6 lg:flex lg:items-start xl:gap-8">
                 <div class="w-full mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:mt-8">
-                    @foreach ($data as $product)
+                    @foreach ($data['data'] as $product)
                         <div
                             class="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                             <a href="#" class="overflow-hidden rounded">
@@ -115,7 +124,7 @@
                                     @foreach ($product['product_photo'] as $productPhoto)
                                         @if ($loop->first)
                                             <img class="mx-auto h-64 w-full rounded-lg object-cover dark:hidden"
-                                                src="/upload/product/{{ $productPhoto['photo'] }}" alt="imac image" />
+                                                src="/{{ $productPhoto['photo'] }}" alt="imac image" />
                                         @endif
                                     @endforeach
                                 @else
@@ -127,13 +136,12 @@
                                 @endif
                             </a>
                             <div class="flex flex-col gap-3">
-
                                 {{-- product name --}}
                                 <a href="#"
                                     class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white capitalize truncate">{{ $product['name'] }}</a>
-                                <p class="text-md text-gray-600">{{ substr($product['description'], 0, 75) }}...</p>
+                                <p class="text-md text-gray-600">{{ substr($product['description'], 0, 75) }}</p>
                                 {{-- real price --}}
-                                <p class="text-2xl font-semibold leading-tight text-gray-600 dark:text-white">
+                                <p class="text-2xl font-semibold leading-tight text-gray-800 dark:text-white">
                                     {{ 'Rp. ' . number_format($product['price'], 0, ',', '.') }},-</p>
                             </div>
 
@@ -147,14 +155,14 @@
                     @endforeach
                 </div>
             </div>
-            <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"
+            {{-- <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"
                 aria-label="Table navigation">
-                <span class="text-sm font-normal text-gray-700 dark:text-gray-400">Showing <span
-                        class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span
-                        class="font-semibold text-gray-900 dark:text-white">1000</span></span>
+                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span
+                        class="font-semibold text-gray-900 dark:text-white">{{ $data['from'] . ' - ' . $data['to'] }}</span> of <span
+                        class="font-semibold text-gray-900 dark:text-white">{{ $data['total'] }}</span></span>
                 <ul class="inline-flex items-stretch -space-x-px">
                     <li>
-                        <a href="#"
+                        <a href="{{ $data['prev_page_url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $data['prev_page_url']) }}"
                             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-700 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <span class="sr-only">Previous</span>
                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -166,15 +174,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                    </li>
+                    @foreach (array_slice($data['links'], 1, count($data['links']) - 2) as $index => $link)
                     <li>
-                        <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                        <a href="{{ $link['url'] == null? '#' : str_replace(env('BASE_URL_API') . "products", url()->current(), $link['url']) }}&{{ http_build_query(['categories' => $data['categories']]) }}" aria-current="{{ $link['active']? 'page' : '' }}"
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight border {{ $link['active']? 'z-10 text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700'}} dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $index + 1 }}</a>
                     </li>
-                    <li>
-                        <a href="#" aria-current="page"
+                    @endforeach
+                     <li>
+                        <a href="#" 
                             class="z-10 flex items-center justify-center px-3 py-2 text-sm leading-tight border text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
                     </li>
                     <li>
@@ -183,23 +190,149 @@
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
+                            class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
                     </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-700 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                            <span class="sr-only">Next</span>
-                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            {{-- </div> --}}
+            <li>
+                <a href="{{ $data['next_page_url'] == null ? '#' : str_replace(env('BASE_URL_API') . 'products', url()->current(), $data['next_page_url']) }}"
+                    class="flex items-center justify-center h-full py-1.5 px-3 leading-tight rounded-r-lg border text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <span class="sr-only">Next</span>
+                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </li>
+            </ul>
+            </nav> --}}
+
+            <div class="space-y-3 md:space-y-0 py-4" aria-label="Table navigation">
+                @php
+                    // TODO: DELETE LATER
+                    $users = collect([
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                    ]);
+
+                    // Determine the current page
+                    $currentPage = request()->get('page', 1);
+
+                    // Define the number of items per page
+                    $perPage = 4;
+
+                    // Slice the users collection to get the items to display in the current page
+                    $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+                    // Create the paginator
+                    $paginatedUsers = new Illuminate\Pagination\LengthAwarePaginator(
+                        $currentPageItems,
+                        $users->count(),
+                        $perPage,
+                        $currentPage,
+                        [
+                            'path' => request()->url(),
+                            'query' => request()->query(),
+                        ],
+                    );
+                @endphp
+
+                {{ $paginatedUsers->links('vendor.pagination.custom') }}
+            </div>
         </div>
 
         </div>

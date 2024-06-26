@@ -8,7 +8,7 @@
                 <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Berita & Update Desa
                 </h2>
-                <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">
+                <p class="font-light text-gray-700 sm:text-xl dark:text-gray-400">
                     Temukan berita dan informasi terbaru tentang berbagai kegiatan dan perkembangan di Desa Cidadap.
                     Kami selalu berupaya untuk memberikan informasi yang akurat dan terkini untuk warga desa dan
                     pengunjung.
@@ -22,9 +22,9 @@
                             src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
                             alt="road-construction">
                     </a>
-                    <div class="flex justify-between items-center mb-2 text-gray-500">
+                    <div class="flex justify-between items-center mb-2 text-gray-700">
                         <span
-                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-blue-100 text-green-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -40,7 +40,7 @@
                             Pembangunan Jalan Desa Baru
                         </a>
                     </h2>
-                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+                    <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
                         Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
                         meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
                         pertanian dan produk lokal.
@@ -55,7 +55,7 @@
                             </span>
                         </div>
                         <a href="{{ route('articles.detail', 1) }}"
-                            class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
+                            class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
                             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -73,9 +73,9 @@
                             src="https://images.pexels.com/photos/713644/pexels-photo-713644.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt="festivals">
                     </a>
-                    <div class="flex justify-between items-center mb-2 text-gray-500">
+                    <div class="flex justify-between items-center mb-2 text-gray-700">
                         <span
-                            class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            class="bg-blue-100 text-green-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                             <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -91,7 +91,7 @@
                             Festival Budaya Tahunan
                         </a>
                     </h2>
-                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+                    <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
                         Festival budaya tahunan Desa Cidadap akan diselenggarakan bulan depan. Acara ini akan
                         menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan
                         khas daerah.
@@ -106,7 +106,7 @@
                             </span>
                         </div>
                         <a href="{{ route('articles.detail', 1) }}"
-                            class="inline-flex items-center font-medium text-blue-700 dark:text-primary-500 hover:underline">
+                            class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
                             Baca Selengkapnya
                             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -118,11 +118,11 @@
                     </div>
                 </article>
             </div>
-            <nav aria-label="Page navigation example">
+            {{-- <nav aria-label="Page navigation example">
                 <ul class="mt-8 flex justify-end items-center -space-x-px h-8 text-sm">
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-700 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <span class="sr-only">Previous</span>
                             <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -133,27 +133,27 @@
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
                     </li>
                     <li>
                         <a href="#" aria-current="page"
-                            class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+                            class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-green-500 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
+                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-700 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <span class="sr-only">Next</span>
                             <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -163,7 +163,134 @@
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav> --}}
+
+            <div class="space-y-3 md:space-y-0 py-8" aria-label="Table navigation">
+                @php
+                    // TODO: DELETE LATER
+                    $users = collect([
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                        ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                    ]);
+
+                    // Determine the current page
+                    $currentPage = request()->get('page', 1);
+
+                    // Define the number of items per page
+                    $perPage = 4;
+
+                    // Slice the users collection to get the items to display in the current page
+                    $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+                    // Create the paginator
+                    $paginatedUsers = new Illuminate\Pagination\LengthAwarePaginator(
+                        $currentPageItems,
+                        $users->count(),
+                        $perPage,
+                        $currentPage,
+                        [
+                            'path' => request()->url(),
+                            'query' => request()->query(),
+                        ],
+                    );
+                @endphp
+
+                {{ $paginatedUsers->links('vendor.pagination.custom') }}
+            </div>
         </div>
     </section>
     {{-- NEWS SECTION END --}}

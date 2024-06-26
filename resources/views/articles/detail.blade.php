@@ -15,10 +15,10 @@
                                     class="text-xl font-bold text-gray-900 dark:text-white">
                                     Hendra, S.Pd
                                 </a>
-                                <p class="text-base text-gray-500 dark:text-gray-400">
+                                <p class="text-base text-gray-700 dark:text-gray-400">
                                     Kepala Desa Cidadap
                                 </p>
-                                <p class="text-base text-gray-500 dark:text-gray-400">
+                                <p class="text-base text-gray-700 dark:text-gray-400">
                                     <time pubdate datetime="2024-06-12" title="June 12th, 2024">
                                         Feb. 6, 2024
                                     </time>
@@ -31,7 +31,7 @@
                         Pembangunan Jalan Desa Baru
                     </h1>
                 </header>
-                <p class="lead">
+                <p class="lead text-gray-700">
                     Proyek pembangunan jalan desa baru telah resmi dimulai minggu ini. Pembangunan ini merupakan salah
                     satu program unggulan pemerintah Desa Cidadap untuk meningkatkan kualitas infrastruktur dan
                     kesejahteraan masyarakat. Jalan baru ini diharapkan akan membawa berbagai manfaat signifikan bagi
@@ -45,40 +45,40 @@
                     <figcaption>Pembangunan Jalan Baru</figcaption>
                 </figure>
                 <h2>Tujuan dan Manfaat Pembangunan Jalan Desa Baru</h2>
-                <p>
+                <p class="text-gray-700">
                     Tujuan utama dari pembangunan jalan ini adalah untuk meningkatkan aksesibilitas dan kenyamanan bagi
                     warga Desa Cidadap. Selama ini, kondisi jalan yang kurang memadai sering kali menjadi hambatan dalam
                     kegiatan sehari-hari warga, terutama dalam hal mobilitas dan transportasi. Dengan adanya jalan baru
                     ini, diharapkan warga dapat menikmati perjalanan yang lebih lancar dan aman.
                 </p>
-                <p>
+                <p class="text-gray-700">
                     Selain itu, pembangunan jalan baru ini juga bertujuan untuk mempermudah transportasi hasil pertanian
                     dan produk lokal. Desa Cidadap dikenal dengan hasil pertanian yang melimpah serta produk-produk
                     lokal yang berkualitas. Dengan akses jalan yang lebih baik, distribusi hasil pertanian dan produk
                     lokal akan menjadi lebih efisien, sehingga dapat meningkatkan perekonomian desa secara keseluruhan.
                 </p>
                 <h2>Tujuan dan Manfaat Pembangunan Jalan Desa Baru</h2>
-                <p>
+                <p class="text-gray-700">
                     Proyek pembangunan jalan desa ini melibatkan berbagai pihak, termasuk pemerintah desa, kontraktor
                     lokal, dan warga setempat. Pemerintah desa telah melakukan koordinasi dengan berbagai pihak terkait
                     untuk memastikan proses pembangunan berjalan lancar dan tepat waktu. Selain itu, warga desa juga
                     turut berpartisipasi dalam proyek ini, baik melalui gotong royong maupun memberikan masukan yang
                     konstruktif.
                 </p>
-                <p>
+                <p class="text-gray-700">
                     Kepala Desa Cidadap, Bapak Ahmad Syahroni, menyampaikan apresiasinya atas partisipasi aktif warga
                     dalam proyek ini. "Kami sangat menghargai dukungan dan partisipasi warga Desa Cidadap dalam
                     pembangunan jalan desa baru ini. Ini adalah bukti nyata semangat gotong royong dan kebersamaan kita
                     dalam membangun desa yang lebih baik," ujarnya.
                 </p>
                 <h2>Harapan untuk Masa Depan</h2>
-                <p>
+                <p class="text-gray-700">
                     Dengan dimulainya proyek pembangunan jalan desa baru ini, pemerintah desa berharap bahwa berbagai
                     hambatan yang selama ini dirasakan oleh warga dapat teratasi. Jalan baru ini tidak hanya akan
                     meningkatkan mobilitas dan transportasi, tetapi juga diharapkan dapat mendorong pertumbuhan ekonomi
                     desa.
                 </p>
-                <p>
+                <p class="text-gray-700">
                     Pembangunan jalan desa baru ini juga merupakan bagian dari rencana jangka panjang pemerintah Desa
                     Cidadap untuk meningkatkan kualitas hidup warganya. Ke depan, pemerintah desa berencana untuk terus
                     mengembangkan infrastruktur dan fasilitas publik lainnya guna menciptakan desa yang lebih maju dan
@@ -86,13 +86,14 @@
                 </p>
 
                 <h2>Kesimpulan</h2>
-                <p>Proyek pembangunan jalan desa baru di Desa Cidadap adalah langkah penting dalam meningkatkan
+                <p class="text-gray-700">Proyek pembangunan jalan desa baru di Desa Cidadap adalah langkah penting dalam
+                    meningkatkan
                     aksesibilitas dan kenyamanan bagi warga, serta mempermudah transportasi hasil pertanian dan produk
                     lokal. Dengan partisipasi aktif dari warga dan dukungan penuh dari pemerintah desa, diharapkan
                     proyek ini dapat selesai tepat waktu dan memberikan manfaat yang besar bagi seluruh masyarakat Desa
                     Cidadap.
                 </p>
-                <p>
+                <p class="text-gray-700">
                     Untuk informasi lebih lanjut mengenai perkembangan proyek ini, warga desa dapat mengunjungi kantor
                     desa atau mengakses situs web resmi Desa Cidadap. Mari kita bersama-sama mendukung pembangunan ini
                     demi kemajuan dan kesejahteraan Desa Cidadap.
@@ -101,7 +102,7 @@
         </div>
     </main>
 
-    <aside aria-label="Related articles" class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
+    <aside aria-label="Related articles" class="py-8 lg:py-24 bg-green-50 dark:bg-gray-800">
         <div class="px-4 mx-auto max-w-screen-xl">
             <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Artikel Terkait</h2>
             <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
@@ -113,13 +114,17 @@
                     <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Pembangunan Jalan Desa Baru</a>
                     </h2>
-                    <p class="mb-4 text-gray-500 dark:text-gray-400">
-                        Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
-                        meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
-                        pertanian dan produk lokal.
+                    <p class="mb-4 text-gray-700 dark:text-gray-400">
+                        {{ substr(
+                            'Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
+                                                                                                                                                                                                                                                                                                                                                                                                                        meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
+                                                                                                                                                                                                                                                                                                                                                                                                                        pertanian dan produk lokal.',
+                            0,
+                            50,
+                        ) }}...
                     </p>
                     <a href="{{ route('articles.detail', 5) }}"
-                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-green-500 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
                 </article>
@@ -132,13 +137,15 @@
                     <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Festival Budaya Tahunan</a>
                     </h2>
-                    <p class="mb-4  text-gray-500 dark:text-gray-400">
-                        Festival budaya tahunan Desa Cidadap akan diselenggarakan bulan depan. Acara ini akan
-                        menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan
-                        khas daerah.
+                    <p class="mb-4  text-gray-700 dark:text-gray-400">
+                        {{ substr(
+                            'Festival budaya tahunan Desa Cidadap akan diselenggarakan bulan depan. Acara ini akan menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan khas daerah.',
+                            0,
+                            50,
+                        ) }}...
                     </p>
                     <a href="{{ route('articles.detail', 6) }}"
-                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-green-500 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
                 </article>
@@ -151,13 +158,15 @@
                     <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#"> Gotong Royong Desa</a>
                     </h2>
-                    <p class="mb-4  text-gray-500 dark:text-gray-400">
-                        Ayo bersama-sama membersihkan
-                        lingkungan desa dalam kegiatan gotong royong. Ini adalah kesempatan untuk mempererat silaturahmi
-                        dan menjaga kebersihan desa kita.
+                    <p class="mb-4  text-gray-700 dark:text-gray-400">
+                        {{ substr(
+                            'Ayo bersama-sama membersihkan lingkungan desa dalam kegiatan gotong royong. Ini adalah kesempatan untuk mempererat silaturahmi dan menjaga kebersihan desa kita.',
+                            0,
+                            50,
+                        ) }}...
                     </p>
                     <a href="{{ route('articles.detail', 7) }}"
-                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-green-500 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
                 </article>
@@ -170,12 +179,17 @@
                     <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white truncate">
                         <a href="#">Lomba Memasak Tradisional</a>
                     </h2>
-                    <p class="mb-4  text-gray-500 dark:text-gray-400">Ikuti lomba memasak dengan resep-resep
-                        tradisional
-                        Desa Cidadap. Acara ini terbuka untuk semua
-                        warga desa dan pemenang akan mendapatkan hadiah menarik.</p>
+                    <p class="mb-4  text-gray-700 dark:text-gray-400">
+                        {{ substr(
+                            'Ikuti lomba memasak dengan resep-resep tradisional
+                                                                                                                                                                                                Desa Cidadap. Acara ini terbuka untuk semua warga desa dan pemenang akan mendapatkan hadiah
+                                                                                                                                                                                                menarik.',
+                            0,
+                            50,
+                        ) }}...
+                    </p>
                     <a href="{{ route('articles.detail', 8) }}"
-                        class="inline-flex items-center font-medium underline underline-offset-4 text-blue-700 dark:text-primary-500 hover:no-underline">
+                        class="inline-flex items-center font-medium underline underline-offset-4 text-green-500 dark:text-primary-500 hover:no-underline">
                         Baca Selengkapnya
                     </a>
                 </article>

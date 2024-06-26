@@ -8,10 +8,10 @@
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
             <div class="w-full md:w-1/2">
                 <form class="flex items-center">
-                    <label for="simple-search" class="sr-only">Search</label>
+                    <label for="simple-search" class="sr-only">Cari</label>
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-700 dark:text-gray-400" fill="currentColor"
                                 viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
@@ -19,8 +19,8 @@
                             </svg>
                         </div>
                         <input type="text" id="simple-search"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Search" required="">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Cari" required="">
                     </div>
                 </form>
             </div>
@@ -28,7 +28,7 @@
             <div
                 class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                 <a href="{{ route('dashboard.gallery.create') }}"
-                    class="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-primary-800">
+                    class="flex items-center justify-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-primary-800">
                     <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path clip-rule="evenodd" fill-rule="evenodd"
@@ -39,9 +39,10 @@
             </div>
         </div>
         <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
+                        <th scope="col" class="px-4 py-4">No</th>
                         <th scope="col" class="px-4 py-4">Foto</th>
                         <th scope="col" class="px-4 py-3">Judul</th>
                         <th scope="col" class="px-4 py-3">
@@ -54,16 +55,19 @@
                         <tr class="border-b dark:border-gray-700">
                             <th scope="row"
                                 class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                1
+                            </th>
+                            <td class="px-4 py-3 max-w-[12rem] truncate">
                                 <img src="/{{ $item['photo'] }}" class="w-8 h-8 rounded-lg object-cover"
                                     alt="{{ $item['title'] }}">
-                            </th>
+                            </td>
                             <td class="px-4 py-3 max-w-[12rem] truncate">
                                 {{ $item['title'] }}
                             </td>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <button id="{{ $item['id'] }}-dropdown-button"
                                     data-dropdown-toggle="{{ $item['id'] }}-dropdown"
-                                    class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                                    class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-700 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                     type="button">
                                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -119,9 +123,9 @@
                 </tbody>
             </table>
         </div>
-        <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+        {{-- <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
             aria-label="Table navigation">
-            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+            <span class="text-sm font-normal text-gray-700 dark:text-gray-400">
                 Showing
                 <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
                 of
@@ -130,7 +134,7 @@
             <ul class="inline-flex items-stretch -space-x-px">
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-700 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                         <span class="sr-only">Previous</span>
                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -142,11 +146,11 @@
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
                 </li>
                 <li>
                     <a href="#" aria-current="page"
@@ -154,15 +158,15 @@
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
+                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
+                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-700 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                         <span class="sr-only">Next</span>
                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -173,8 +177,134 @@
                     </a>
                 </li>
             </ul>
-        </nav>
+        </nav> --}}
 
+        <div class="space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
+            @php
+                // TODO: DELETE LATER
+                $users = collect([
+                    ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                    ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                    ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                    ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                    ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                    ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                    ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                    ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                    ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                    ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                    ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                    ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                    ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                    ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                    ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                    ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                    ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                    ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                    ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                    ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                    ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                    ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                    ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                    ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                    ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                    ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                    ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                    ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                    ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                    ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                    ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                    ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                    ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                    ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                    ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                    ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                    ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                    ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                    ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                    ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                    ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                    ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                    ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                    ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                    ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                    ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                    ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                    ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                    ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                    ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                    ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                    ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                    ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                    ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                    ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                    ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                    ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                    ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                    ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                    ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                    ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                    ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                    ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                    ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                    ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                    ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                    ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                    ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                    ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                    ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                    ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                    ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                    ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                    ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                    ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                    ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                    ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                    ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                    ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                    ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                    ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                    ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                    ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                    ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                    ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                    ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                    ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                    ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                    ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                    ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                    ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                    ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                    ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                    ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                    ['id' => 11, 'name' => 'Ivy Green', 'email' => 'ivy@example.com'],
+                    ['id' => 12, 'name' => 'Jack Black', 'email' => 'jack@example.com'],
+                ]);
+
+                // Determine the current page
+                $currentPage = request()->get('page', 1);
+
+                // Define the number of items per page
+                $perPage = 4;
+
+                // Slice the users collection to get the items to display in the current page
+                $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+                // Create the paginator
+                $paginatedUsers = new Illuminate\Pagination\LengthAwarePaginator(
+                    $currentPageItems,
+                    $users->count(),
+                    $perPage,
+                    $currentPage,
+                    [
+                        'path' => request()->url(),
+                        'query' => request()->query(),
+                    ],
+                );
+            @endphp
+
+            {{ $paginatedUsers->links('vendor.pagination.custom') }}
+        </div>
     </x-dashboard-section>
     <!-- End block -->
 
@@ -195,16 +325,16 @@
                     </svg>
                     <span class="sr-only">Close modal</span>
                 </button>
-                <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true"
+                <svg class="text-gray-400 dark:text-gray-700 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true"
                     fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                         d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                         clip-rule="evenodd" />
                 </svg>
-                <p class="mb-4 text-gray-500 dark:text-gray-300">Apakah Anda yakin ingin menghapus item ini?</p>
+                <p class="mb-4 text-gray-700 dark:text-gray-300">Apakah Anda yakin ingin menghapus item ini?</p>
                 <div class="flex justify-center items-center space-x-4">
                     <button data-modal-toggle="deleteModal" type="button"
-                        class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        class="py-2 px-3 text-sm font-medium text-gray-700 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan
                     </button>
                     <form action="{{ route('dashboard.gallery.destroy', $item['id'] ?? '') }}" method="POST">

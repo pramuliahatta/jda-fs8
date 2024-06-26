@@ -7,19 +7,46 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // $page = $request->input('page', 1);
+        // $pageSize = $request->input('pageSize', 10);
+
         $fetchData = Http::get('http://127.0.0.1:8001/api/users');
-        if ($fetchData->successful()) {
-            $response = $fetchData->json();
-            $data = $response['data'];
-        }
+        $response = $fetchData->json();
+        // dd($data);
+        $users = collect($response['data']);
+
+        // Determine the current page
+        $currentPage = request()->get('page', 1);
+
+        // Define the number of items per page
+        $perPage = 10;
+
+        // Slice the users collection to get the items to display in the current page
+        $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+        // Create the paginator
+        $data = new LengthAwarePaginator(
+            $currentPageItems,
+            $users->count(),
+            $perPage,
+            $currentPage,
+            [
+                'path' => request()->url(),
+                'query' => request()->query(),
+            ],
+        );
+
+
+        dd($data);
 
         //cek nama route, jika 'dashboard.users.index' ke dashboard admin menu user, jika bukan ke login
         if (Route::current()->getName() == 'dashboard.users.index') {
@@ -43,6 +70,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
+
         //memvalidasi data yang diisi pada tampilan create
         $validatedData = $request->validate([
             'name' => [
@@ -60,14 +89,20 @@ class UserController extends Controller
                 'unique:users',
                 'email:dns'
             ],
+            'password' => [
+                'required',
+                'min:4',
+                'confirmed',
+            ]
         ]);
 
+        // dd($validatedData);
+
         if ($validatedData) {
-            $fetchData = Http::post('http://127.0.0.1:8001/api/users', $request);
+            $fetchData = Http::post('http://127.0.0.1:8001/api/users', $validatedData);
             $response = $fetchData->json();
-            $data = $response['data'];
-            if ($data['status'] == true) {
-                return back()->with('success', $data['message']);
+            if ($response['status'] == true) {
+                return redirect()->intended(route('dashboard.users.index'))->with('success', $response['message']);
             }
         }
 
