@@ -114,7 +114,9 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('dashboard.users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
     Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
+    Route::post('/users', [UserController::class, 'store'])->name('dashboard.users.store');
     Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
+    Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
 
     Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');

@@ -50,23 +50,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($data as $user)
+                    @foreach($data['current_item'] as $index => $user)
                     <tr class="border-b dark:border-gray-700">
                         <th scope="row"
                             class="px-4 py-3 font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">
-                            Ignasius Yuda Adhitia
+                            {{ $index + 1 }}
                         </th>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
-                            Ignasius Yuda Adhitia
+                            {{ $user['name'] }}
                         </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
                             {{ $user['email'] }}
                         </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
-                            +628882204001
-                        </td>
-                        <td class="px-4 py-3 max-w-[12rem] truncate">
-                            p******d
+                            {{ $user['phone_number'] }}
                         </td>
                         <td class="px-4 py-3 flex items-center justify-end">
                             <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown"
@@ -126,7 +123,7 @@
                 </tbody>
             </table>
         </div>
-        <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+        {{-- <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
             aria-label="Table navigation">
             <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                 Showing
@@ -180,7 +177,13 @@
                     </a>
                 </li>
             </ul>
-        </nav>
+        </nav> --}}
+
+        <div class="space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
+            
+
+            {{ $data['paginated_users']->links('vendor.pagination.custom') }}
+        </div>
 
     </x-dashboard-section>
     <!-- End block -->

@@ -18,7 +18,7 @@ class ProductPhotoFactory extends Factory
     {
         return [
             'product_id' => rand(1,30),
-            'photo' => fake()->randomElement(['1.jpg', '2.jpg', '3.jpg']),
+            'photo' => fake()->randomElement(['upload/product/1.jpg', 'upload/product/2.jpg', 'upload/product/3.jpg']),
         ];
     }
 }
