@@ -20,12 +20,14 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+
         $page = $request->input('page', 1);
         $pageSize = $request->input('pageSize', 12);
         $categories = $request->input('categories', []);
-        // if(Route::current()->getName() == 'products.dashboard') {
-        //     $pageSize = 10;
-        // }
+        if(Route::current()->getName() == 'products.dashboard') {
+            $pageSize = 10;
+
+        }
         $fetchData = Http::get('http://127.0.0.1:8001/api/products', [
             'page' => $page,
             'pageSize' => $pageSize,

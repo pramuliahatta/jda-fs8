@@ -5,27 +5,64 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Route;
-use function PHPUnit\Framework\fileExists;
+use App\Http\Requests\StoreFileRequest;
+use App\Http\Requests\UpdateFileRequest;
+use GuzzleHttp\Exception\RequestException;
 
 class FileController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, Client $client)
     {
-        $response = Http::get('http://127.0.0.1:8001/api/files');
-        if ($response->successful()) {
-            $data = $response->json()['data'];
-            if (request()->route()->getName() == 'services') {
-                return view('form.formuser', compact('data'));
-            }
-            return view('dashboard.forms.index', compact('data'));
+        // Define endpoint
+        
+        $apiUrl = env('BASE_URL_API') . "files";
+        if ($request->input('page') != '') {
+            $apiUrl .= '?page=' . $request->input('page');
         }
-        return abort(404, 'Data tidak ada!');
+        // Determine the view and perpage based on route
+        $viewName =  'form.formuser';
+        $perPage = 12;
+        if ($request->route()->getName() == 'dashboard.forms.index') {
+            $viewName = 'dashboard.forms.index';
+            $perPage = 10;
+        }
+
+        try {
+            // Get data from the API
+            $response = $client->get($apiUrl, [
+                'query' => [
+                    'page' => $request->input('page'),
+                    'per_page' => $perPage,
+                ]
+            ]);
+            $content = json_decode($response->getBody(), true)['data'];
+            $data = $content['data'];
+            $link = $content['links'];
+            $page = [
+                'from' => $content['from'],
+                'to' => $content['to'],
+                'total' => $content['total'],
+            ];
+            // For change the link
+            foreach ($link as $key => $value) {
+                $link[$key]['url'] = str_replace(env('BASE_URL_API') . "files", url()->current(), $value['url']);
+            }
+            // dd($link);
+        } catch (\Exception $e) {
+            // If fail data is empty and log error
+            Log::error('Failed to get file data:' . $e->getMessage());
+            $data = [];
+            $link = [];
+            $page = ['from' => 0, 'to' => 0, 'total' => 0,];
+        }
+        // Return view and data ($data for data | $pageLinks for link url, label, & isActive | 
+        // $pageInfo for showing information)
+        return view($viewName, ['data' => $data, 'pageLinks' => $link, 'pageInfo' => $page]);
     }
 
     /**
@@ -34,123 +71,151 @@ class FileController extends Controller
     public function create()
     {
         // view create page 
-        return view('dashboard.file-create');
+        return view('dashboard.forms.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreFileRequest $request, Client $client)
     {
-        // validation data
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'file' => 'required|mimes:pdf|max:2048'
-        ]);
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "files";
 
-        // store file in public directory
-        $uploadedFile = $request->file('file');
-        $uploadedFileName = time() . '.' . $uploadedFile->getClientOriginalExtension();
-        $uploadedFile->move(public_path('/file/upload'), $uploadedFile);
-
-        // make new data in database
-        $file = new File;
-
-        // store file data in database
-        $file->name = $validatedData['name'];
-        $file->file = '/file/upload/' . $uploadedFileName;
-        $file->save();
-
-        // stay in the page and return success message
-        return back()->with('success', 'File berhasil disimpan!');
+        try {
+            // Store data using API
+            $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+                'multipart' => $multipart,
+            ]);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.forms.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to store file:' . $e->getMessage());
+            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(file $file)
+    public function show(string $id, Client $client)
     {
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "files/$id";
+
+        try {
+            // Get the data from the API
+            $response = $client->get($apiUrl);
+            $content = json_decode($response->getBody(), true);
+            $data = $content['data'];
+            // If success, return view and data
+            return view('dashboard.forms.detail', ['data' => $data]);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route('dashboard.forms.index')->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to get forms data:' . $e->getMessage());
+            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, Client $client)
     {
-        $client = new Client();
-        $apiUrl = "http://127.0.0.1:8001/api/files/$id";
+        // Define endpoint
+        
+        $apiUrl = env('BASE_URL_API') . "files/$id";
 
         try {
+            // Get the data from the API
             $response = $client->get($apiUrl);
+            // dd($response->getBody());
+            // dd($apiUrl);
             $content = json_decode($response->getBody(), true);
             $data = $content['data'];
-
+            // If success, return view and data
+            
             return view('dashboard.forms.edit', ['data' => $data]);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+           
+            return redirect()->route('dashboard.forms.index')->withErrors($errorMessage);
         } catch (\Exception $e) {
-            return view('api_error', ['error' => $e->getMessage()]);
+            // Another fails
+            // dd($e);
+            Log::error('Failed to get file data:' . $e->getMessage());
+            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
         }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(UpdateFileRequest $request, string $id, Client $client)
     {
-        // get file data in database
-        $file = File::find($id);
-        if (!$file) {
-            return back()->with('error', 'File tidak ditemukan!');
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "files/$id";
+
+        try {
+            $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+                'multipart' => $multipart,
+            ]);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.forms.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to update file:' . $e->getMessage());
+            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
         }
-
-        // validation input data
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'file' => 'required|mimes:pdf|max:2048'
-        ]);
-
-        if ($request->hasFile('file')) {
-            // store file in public directory
-            $uploadedFile = $request->file('file');
-            $uploadedFileName = time() . '.' . $uploadedFile->getClientOriginalExtension();
-            $uploadedFile->move(public_path('/file/upload'), $uploadedFile);
-
-            // remove old file in public directory
-            $oldFilePath = public_path($file->file);
-            if (file_exists($oldFilePath)) {
-                @unlink($oldFilePath);
-            }
-
-            // store file data (file) in database
-            $file->file = 'file/upload/' . $uploadedFileName;
-        }
-
-        // store file data (name) in database
-        $file->name = $validatedData['name'];
-        $file->save();
-
-        // stay in the page and return success message
-        return back()->with('success', 'File berhasil disimpan!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Client $client)
     {
-        // get file data in database
-        $file = File::find($id);
+        // Define endpoint
+        $apiUrl = env('BASE_URL_API') . "files/$id";
 
-        if ($file) {
-            // remove file in public directory
-            $filePath = public_path($file->file);
-            if (fileExists($filePath)) {
-                @unlink($filePath);
-            }
-
-            // remove file data in database
-            $file->delete();
-            return back()->with('success', 'File berhasil dihapus!');
+        try {
+            $response = $client->delete($apiUrl);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.forms.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route('dashboard.forms.index')->withErrors($errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to delete file:' . $e->getMessage());
+            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
         }
-        return back()->with('error', 'File tidak ditemukan!');
     }
 }
