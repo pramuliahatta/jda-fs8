@@ -1,10 +1,10 @@
 <div class="pdf-file-input">
     <input type="file" accept="application/pdf" id="pdfInput" onchange="previewPdf(event)">
     <div id="pdfPreview" class="mt-2">
-        @if($documentUrl)
-            <embed src="{{ $documentUrl }}" type="application/pdf" width="100%" height="400px">
+        @if($pdfUrl)
+            <embed src="{{ $pdfUrl }}" type="application/pdf" width="100%" height="400px">
         @else
-            <p>No File uploaded yet.</p>
+            <p>No document uploaded yet.</p>
         @endif
     </div>
 </div>

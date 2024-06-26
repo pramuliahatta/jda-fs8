@@ -6,17 +6,17 @@ use Illuminate\View\Component;
 
 class PdfFileInput extends Component
 {
-    public $documentUrl;
+    public $pdfUrl;
 
     /**
      * Create a new component instance.
      *
-     * @param string|null $documentUrl
+     * @param string|null $pdfUrl
      * @return void
      */
-    public function __construct($documentUrl = null)
+    public function __construct($pdfUrl = null)
     {
-        $this->documentUrl = $documentUrl;
+        $this->pdfUrl = $pdfUrl;
     }
 
     /**

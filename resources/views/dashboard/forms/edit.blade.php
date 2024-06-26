@@ -25,7 +25,7 @@
                     </div>
 
                     <div>
-                        <x-pdf-file-input :document-url="$documentUrl" />
+                        <x-pdf-file-input pdf-url="{{ $item['file'] }}" />
                         <x-error-message field="file" />
                     </div>
                 </div>
