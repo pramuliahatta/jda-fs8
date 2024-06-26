@@ -188,21 +188,81 @@
                         <a href="#"
                             class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
                     </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                            <span class="sr-only">Next</span>
-                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            {{-- </div> --}}
+            <li>
+                <a href="{{ $data['next_page_url'] == null ? '#' : str_replace(env('BASE_URL_API') . 'products', url()->current(), $data['next_page_url']) }}"
+                    class="flex items-center justify-center h-full py-1.5 px-3 leading-tight rounded-r-lg border text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <span class="sr-only">Next</span>
+                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </li>
+            </ul>
+            </nav> --}}
+
+            <div class="space-y-3 md:space-y-0 py-4" aria-label="Table navigation">
+                @php
+                    // TODO: DELETE LATER
+                    $users = collect([
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                        ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+                        ['id' => 2, 'name' => 'Jane Doe', 'email' => 'jane@example.com'],
+                        ['id' => 3, 'name' => 'Alice Johnson', 'email' => 'alice@example.com'],
+                        ['id' => 4, 'name' => 'Bob Smith', 'email' => 'bob@example.com'],
+                        ['id' => 5, 'name' => 'Charlie Brown', 'email' => 'charlie@example.com'],
+                        ['id' => 6, 'name' => 'Dave Williams', 'email' => 'dave@example.com'],
+                        ['id' => 7, 'name' => 'Eve Davis', 'email' => 'eve@example.com'],
+                        ['id' => 8, 'name' => 'Frank Moore', 'email' => 'frank@example.com'],
+                        ['id' => 9, 'name' => 'Grace Lee', 'email' => 'grace@example.com'],
+                        ['id' => 10, 'name' => 'Hank White', 'email' => 'hank@example.com'],
+                    ]);
+
+                    // Determine the current page
+                    $currentPage = request()->get('page', 1);
+
+                    // Define the number of items per page
+                    $perPage = 12;
+
+                    // Slice the users collection to get the items to display in the current page
+                    $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+                    // Create the paginator
+                    $paginatedUsers = new Illuminate\Pagination\LengthAwarePaginator(
+                        $currentPageItems,
+                        $users->count(),
+                        $perPage,
+                        $currentPage,
+                        [
+                            'path' => request()->url(),
+                            'query' => request()->query(),
+                        ],
+                    );
+                @endphp
+
+                {{ $paginatedUsers->links('vendor.pagination.custom') }}
+            </div>
         </div>
 
         </div>

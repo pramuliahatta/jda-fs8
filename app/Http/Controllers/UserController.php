@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -15,11 +16,41 @@ class UserController extends Controller
      */
     public function index()
     {
-        $fetchData = Http::get('http://127.0.0.1:8081/api/users');
-        if($fetchData->successful()) {
-            $response = $fetchData->json();
-            $data = $response['data'];
-        }
+        // $page = $request->input('page', 1);
+        // $pageSize = $request->input('pageSize', 10);
+
+        $fetchData = Http::get('http://127.0.0.1:8001/api/users');
+        $response = $fetchData->json();
+        // dd($data);
+        $users = collect($response['data']);
+
+        // Determine the current page
+        $currentPage = request()->get('page', 1);
+
+        // Define the number of items per page
+        $perPage = 10;
+
+        // Slice the users collection to get the items to display in the current page
+        $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+        // Create the paginator
+        $paginatedUsers = new LengthAwarePaginator(
+            $currentPageItems,
+            $users->count(),
+            $perPage,
+            $currentPage,
+            [
+                'path' => request()->url(),
+                'query' => request()->query(),
+            ],
+        );
+
+        $data = [
+            'current_item' => $currentPageItems,
+            'paginated_users' => $paginatedUsers,
+        ];
+
+        // dd($paginatedUsers);
 
         //cek nama route, jika 'dashboard.users.index' ke dashboard admin menu user, jika bukan ke login
         if(Route::current()->getName() == 'dashboard.users.index') {
@@ -87,8 +118,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $fetchData = Http::get('http://127.0.0.1:8081/api/users/' + $user->id);
-        if($fetchData->successful()) {
+        $fetchData = Http::get('http://127.0.0.1:8001/api/users/' . $user->id);
+        if ($fetchData->successful()) {
             $response = $fetchData->json();
             $data = $response['data'];
         }
@@ -100,11 +131,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $fetchData = Http::get('http://127.0.0.1:8081/api/users/' + $user->id);
-        if($fetchData->successful()) {
-            $response = $fetchData->json();
-            $data = $response['data'];
-        }
+        $fetchData = Http::get('http://127.0.0.1:8001/api/users/' . $user->id);
+        $response = $fetchData->json();
+        $data = $response['data'];
         return view('dashboard.users.edit', compact('data'));
     }
 
@@ -115,10 +144,20 @@ class UserController extends Controller
     {
         //pengecekan data dari form yang diisi oleh user
         $validatedData = $request->validate([
+            'name' => [
+                'required',
+                'min:4',
+                'max:255',
+            ],
             'phone_number' => [
                 'required',
                 'min:7',
                 'max:20',
+            ],
+            'email' => [
+                'required',
+                'unique:users',
+                'email:dns'
             ],
             'password' => [
                 'nullable',

@@ -48,9 +48,9 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.gallery.index');
     })->name('dashboard.gallery.index');
 
-    Route::get('/forms', function () {
-        return view('dashboard.forms.index');
-    })->name('dashboard.forms.index');
+    Route::get('/forms', [FileController::class, 'index'])->name('dashboard.forms.index');
+    Route::get('/forms/create', [FileController::class, 'create'])->name('dashboard.forms.create');
+    Route::get('/forms/{id}/edit', [FileController::class, 'edit'])->name('dashboard.forms.edit');
 
     Route::get('/users', function () {
         return view('dashboard.users.index');
