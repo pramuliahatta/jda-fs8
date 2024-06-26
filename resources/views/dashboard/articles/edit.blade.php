@@ -20,7 +20,8 @@
                 </div>
             @endif
             <!-- Modal body -->
-            <form action="{{ route('dashboard.articles.update', $data['id']) }}" method="POST">
+            <form action="{{ route('dashboard.articles.update', $data['id']) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
 
                 <div class="grid gap-4 mb-4 grid-cols-1">
