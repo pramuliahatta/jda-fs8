@@ -50,7 +50,7 @@
                             <td class="px-4 py-3 max-w-[12rem] truncate">
                                 @foreach ($product['product_photo'] as $productPhoto)
                                     @if ($loop->first)
-                                        <img src="/upload/product/{{ $productPhoto['photo'] }}" alt="productPhoto"
+                                        <img src="/{{ $productPhoto['photo'] }}" alt="productPhoto"
                                             class="w-auto h-8 mr-3">
                                     @endif
                                 @endforeach
@@ -93,8 +93,8 @@
                                         </li>
                                         <li>
                                             <button type="button" data-modal-target="deleteModal"
-                                                data-modal-toggle="deleteModal"
-                                                class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400">
+                                                data-modal-toggle="deleteModal" data-id="{{ $product['id'] }}"
+                                                class="delete-button flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400">
                                                 <svg class="w-4 h-4 mr-2" viewbox="0 0 14 15" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                                     <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"
@@ -111,61 +111,9 @@
                 </tbody>
             </table>
         </div>
-        <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
-            aria-label="Table navigation">
-            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                Showing
-                <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
-                of
-                <span class="font-semibold text-gray-900 dark:text-white">1000</span>
-            </span>
-            <ul class="inline-flex items-stretch -space-x-px">
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                        <span class="sr-only">Previous</span>
-                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                </li>
-                <li>
-                    <a href="#" aria-current="page"
-                        class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-blue-50 border border-primary-300 hover:bg-blue-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                        <span class="sr-only">Next</span>
-                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <div class="space-y-3 md:space-y-0 py-4" aria-label="Table navigation">
+            {{ $data['paginator']->links('vendor.pagination.custom') }}
+        </div>
 
     </x-dashboard-section>
     <!-- End block -->
@@ -200,10 +148,14 @@
                         class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan
                     </button>
+                    <form method="POST" id="delete-form">
+                        @csrf
+                        @method('DELETE')
                     <button type="submit"
                         class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
                         Hapus
                     </button>
+                    </form>
                 </div>
             </div>
         </div>

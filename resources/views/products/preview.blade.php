@@ -66,7 +66,7 @@
                         <x-icon-link route="{{route('products.dashboard')}}" text="Kembali" />
                     </div> --}}
 
-
+                <div>
                     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
                         {{ $data['name'] }}
 

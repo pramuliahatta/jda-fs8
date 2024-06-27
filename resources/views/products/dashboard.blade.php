@@ -88,7 +88,7 @@
                                                     </a>
                                                 </li>
                                             <li>
-                                                <a href="{{ route('products.show', $product['id']) }}"
+                                                <a href="{{ route('products.preview', $product['id']) }}"
                                                     class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                     <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                         viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -101,8 +101,8 @@
                                             </li>
                                             <li>
                                                 <button type="button" data-modal-target="deleteModal"
-                                                    data-modal-toggle="deleteModal"
-                                                    class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400">
+                                                    data-modal-toggle="deleteModal" data-id="{{ $product['id'] }}"
+                                                    class="delete-button flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400">
                                                     <svg class="w-4 h-4 mr-2" viewbox="0 0 14 15" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"
@@ -155,12 +155,28 @@
                     class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                     Batalkan
                 </button>
+                <form method="POST" id="delete-form">
+                    @csrf
+                    @method('DELETE')
                 <button type="submit"
                     class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-                    Hapus</button>
+                    Hapus
+                </button>
+                </form>
             </div>
         </div>
     </div>
 </div>
     
 </x-layout>
+
+<script>
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const itemId = button.getAttribute('data-id');
+
+            document.getElementById('delete-form').setAttribute('action',
+                `/dashboard/products/${itemId}`);
+        })
+    })
+</script>

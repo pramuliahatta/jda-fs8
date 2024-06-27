@@ -176,7 +176,7 @@ class ProductController extends Controller
         }
 
         foreach ($product->productPhoto as $productPhoto) {
-            if (File::exists(public_path('upload/product'), basename($productPhoto->photo))){
+            if (File::exists(public_path('upload/product/'), basename($productPhoto->photo))){
                 unlink(public_path('upload/product/') . basename($productPhoto->photo));
             }
             $productPhoto->delete();

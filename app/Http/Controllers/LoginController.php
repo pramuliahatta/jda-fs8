@@ -28,12 +28,12 @@ class LoginController extends Controller
 
             //jika user admin maka arahkan user ke menu dashboard, jika user adalah pengguna biasa maka arahkan user ke halaman awal
             if (Auth::user()->role == 'admin') {
-                return redirect()->intended(route('dashboard.index'));
+                return redirect()->intended(route('dashboard.articles.index'));
             }
             return redirect()->intended(route('home'));
         }
 
-        return back()->with('error', 'Login Failed');
+        return back()->with('error', 'Gagal Masuk');
     }
 
     public function logout()
