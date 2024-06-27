@@ -18,8 +18,15 @@ class UserController extends Controller
         // $pageSize = $request->input('pageSize', 10); // Default page size
 
         // $users = User::paginate($pageSize);
+        $search = $request->input('search', null);
 
-        $users = User::all();
+        $query = User::query();
+
+        if (!empty($search)) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        $users = $query->get();
 
         return success($users, 'Data fetched successfully');
     }
@@ -31,8 +38,9 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:4|max:255',
-            'phone_number' => 'required|min:7|max:20',
+            'phone_number' => 'required|unique:users|min:7|max:20',
             'email' => 'required|unique:users|email:dns',
+            'password' => 'required|min:4|confirmed',
         ]);
 
         if ($validator->fails()) {
@@ -51,13 +59,13 @@ class UserController extends Controller
             'phone_number' => $request->phone_number,
             'email' => $request->email,
             'role' => 'member',
-            'password' => Hash::make('12345'),
+            'password' => Hash::make($request->password),
         ]);
         if ($storeData) {
-            return success(null, 'User created successfully');
+            return success(null, 'Pengguna berhasil ditambah');
         }
 
-        return fails('Failed to create data', 400);
+        return fails('Pengguna gagal ditambah', 400);
     }
 
     /**
@@ -79,8 +87,10 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'password' => 'nullable|min:4|max:255',
+            'name' => 'required|min:4|max:255',
             'phone_number' => 'required|min:7|max:20',
+            'email' => 'required|email:dns',
+            'password' => 'nullable|min:4|confirmed',
         ]);
 
         if ($validator->fails()) {
@@ -96,16 +106,28 @@ class UserController extends Controller
         // $user->role = 'member';
         // $user->password = Hash::make('12345');
 
-        $updatedData = false;
+        // return $request;
+
+        $updatedData = User::where('id', $id)
+            ->update([
+                'name' => $request->name,
+            ]);
         
-        // if($user->phone_number != $request->phone_number) {
-        //     $updatedData = User::where('id', $id)
-        //     ->update([
-        //         'phone_number' => $request->phone_number,
-        //     ]);
-        // }
+        if($user->phone_number != $request->phone_number) {
+            $updatedData = User::where('id', $id)
+            ->update([
+                'phone_number' => $request->phone_number,
+            ]);
+        }
+
+        if($user->email != $request->email) {
+            $updatedData = User::where('id', $id)
+            ->update([
+                'email' => $request->email,
+            ]);
+        }
         
-        if($request->password) {
+        if(!is_null($request->password)) {
             $updatedData = User::where('id', $id)
             ->update([
                 'password' => Hash::make($request->password),
@@ -113,10 +135,10 @@ class UserController extends Controller
         }
         
         if ($updatedData) {
-            return success(null, 'User updated successfully');
+            return success(null, 'Pengguna berhasil diubah');
         }
 
-        return fails('User update failed', 400);
+        return fails('Pengguna gagal diubah', 400);
     }
 
     /**
@@ -126,10 +148,10 @@ class UserController extends Controller
     {
         $user = User::destroy($id);
         if($user) {
-            return success(null, 'User deleted successfully');
+            return success(null, 'Pengguna berhasil dihapus');
         }
 
-        return fails('Failed', 400);
+        return fails('Pengguna gagal dihapus', 400);
     }
 
     public function authenticate(Request $request) {
@@ -151,14 +173,14 @@ class UserController extends Controller
 
         $user = User::where("email", $email)->first();
         if ($user == null || !Hash::check($password, $user->password)) {
-            return fails('Login Failed', 422);
+            return fails('Gagal Masuk', 422);
         }
         // $request->session()->regenerate();
         // $user = Auth::user();
 
         $token = $user->createToken(uniqid())->plainTextToken;
 
-        return success($token, 'Login Success');
+        return success($token, 'Berhasil Masuk');
 
     }
 }

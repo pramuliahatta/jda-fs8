@@ -33,7 +33,7 @@
         </div>
         <div class="flex items-center lg:order-2">
             <!-- Dropdown menu -->
-            <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+            <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
                 id="apps-dropdown">
                 <div
                     class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300">
@@ -167,7 +167,7 @@
                     alt="user photo" />
             </button>
             <!-- Dropdown menu -->
-            <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+            <div class="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
                 id="dropdown">
                 <div class="py-3 px-4">
                     <span class="block text-sm font-semibold text-gray-900 dark:text-white">Josiah Williamson</span>
@@ -216,7 +216,7 @@
             </div>
         </form>
         <ul class="space-y-2">
-            <x-sidebar-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
+            {{-- <x-sidebar-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
                 <svg class="w-6 h-6 dark:text-white {{ request()->routeIs('dashboard.index') ? 'text-green-500' : 'text-gray-800 dark:text-white' }}"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     fill="none" viewBox="0 0 24 24">
@@ -226,7 +226,7 @@
                         d="M13.5 3c-.169 0-.334.014-.5.025V11h7.975c.011-.166.025-.331.025-.5A7.5 7.5 0 0 0 13.5 3Z" />
                 </svg>
                 <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
-            </x-sidebar-link>
+            </x-sidebar-link> --}}
 
             <x-sidebar-link href="{{ route('dashboard.articles.index') }}" :active="request()->routeIs('dashboard.articles.*')">
                 <svg class="w-6 h-6 dark:text-white {{ request()->routeIs('dashboard.articles.*') ? 'text-green-500' : 'text-gray-800 dark:text-white' }}"
@@ -256,6 +256,15 @@
                         d="M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
                 </svg>
                 <span class="flex-1 ml-3 whitespace-nowrap">Formulir</span>
+            </x-sidebar-link>
+
+            <x-sidebar-link href="{{ route('dashboard.products.index') }}" :active="request()->routeIs('dashboard.products.*')">
+                <svg class="w-6 h-6 dark:text-white  {{ request()->routeIs('dashboard.products.*') ? 'text-green-500' : 'text-gray-800 dark:text-white'}}" 
+                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+                  </svg>                         
+                <span class="flex-1 ml-3 whitespace-nowrap">Produk</span>
             </x-sidebar-link>
 
             <x-sidebar-link href="{{ route('dashboard.users.index') }}" :active="request()->routeIs('dashboard.users.*')">

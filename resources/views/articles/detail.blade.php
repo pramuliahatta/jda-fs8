@@ -13,10 +13,10 @@
                             <div>
                                 <a href="#" rel="author"
                                     class="text-xl font-bold text-gray-900 dark:text-white">
-                                    Hendra, S.Pd
+                                    Admin
                                 </a>
                                 <p class="text-base text-gray-700 dark:text-gray-400">
-                                    Kepala Desa Cidadap
+                                    Pemerintah Desa Cidadap
                                 </p>
                                 <p class="text-base text-gray-700 dark:text-gray-400">
                                     <time pubdate datetime="2024-06-12" title="June 12th, 2024">

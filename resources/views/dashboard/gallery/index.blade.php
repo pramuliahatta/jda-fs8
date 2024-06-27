@@ -38,7 +38,7 @@
                 </a>
             </div>
         </div>
-        {{-- </div> --}}
+        </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -125,8 +125,6 @@
                 </tbody>
             </table>
         </div>
-
-
         <div class="space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
             {{ $paginator->links('vendor.pagination.custom') }}
         </div>
