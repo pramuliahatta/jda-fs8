@@ -200,9 +200,8 @@ class UserController extends Controller
     {
         $fetchData = Http::delete('http://127.0.0.1:8001/api/users/' . $user->id);
         $response = $fetchData->json();
-        $data = $response['data'];
-        if ($data['status'] == true) {
-            return back()->with('success', $data['message']);
+        if ($response['status'] == true) {
+            return back()->with('success', $response['message']);
         }
         return back()->with('error', 'Error.');
     }

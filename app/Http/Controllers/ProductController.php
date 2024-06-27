@@ -25,7 +25,7 @@ class ProductController extends Controller
         $perPage = 12;
         $search = $request->input('search', null);
         $categories = $request->input('categories', []);
-        if(Route::current()->getName() == 'products.dashboard') {
+        if(Route::current()->getName() == 'products.dashboard' || Route::current()->getName() == 'dashboard.products.index') {
             $perPage = 10;
         }
 
@@ -310,10 +310,44 @@ class ProductController extends Controller
      */
     public function destroy(product $product)
     {
+        $client = new Client();
+
+        // dd($product->id);
+        try {
+            // Send POST request using Guzzle client
+            $response = $client->delete('http://127.0.0.1:8001/api/products/' . $product->id);
+            
+            // Handle successful response
+            $statusCode = $response->getStatusCode();
+            $responseData = json_decode($response->getBody()->getContents(), true);
+            // dd($responseData);
+
+            if ($statusCode === 200) {
+                $data = $responseData['data']; // Assuming API returns 'data' key in response
+                if(Route::current()->getName() == 'dashboard.products.destroy') {
+                    return redirect()->intended(route('dashboard.products.index', compact('data')));    
+                }
+                return redirect()->intended(route('products.dashboard', compact('data')));
+            } else {
+                // Handle unsuccessful response
+                return back()->with('error', 'Failed to create product: ' . $statusCode);
+            }
+        } catch (RequestException $e) {
+            // Guzzle request exception handling
+            Log::error('Failed to send POST request to API: ' . $e->getMessage());
+            return back()->with('error', 'Failed to communicate with API: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            // Other exceptions handling
+            Log::error('Failed to communicate with API: ' . $e->getMessage());
+            return back()->with('error', 'Failed to communicate with API: ' . $e->getMessage());
+        }
+
         // Delete associated photos
-        $fetchData = Http::delete('http://127.0.0.1:8001/api/products/' . $product->id);
-        $response = $fetchData->json();
-        $data = $response['data'];
-        return redirect()->intended(route('products.index', compact('data')));
+        // $fetchData = Http::delete('http://127.0.0.1:8001/api/products/' . $product->id, [
+        //     'method' => 'DELETE',
+        // ]);
+        // $response = $fetchData->json();
+        // $data = $response['data'];
+        // return redirect()->intended(route('products.index', compact('data')));
     }
 }
