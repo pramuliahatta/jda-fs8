@@ -109,7 +109,12 @@ class ArticleController extends Controller
         // Define endpoint
         $apiUrl = env('BASE_URL_API') . "articles/$id";
         // Determine the view and perpage based on route
-        $viewName = $request->route()->getName() == 'articles.detail' ? 'articles.detail' : 'dashboard.articles.show';
+        $viewName = "articles.detail";
+        $routeName = "articles";
+        if ($request->route()->getName() == 'dashboard.articles.show') {
+            $viewName = "dashboard.articles.show";
+            $routeName = "dashboard.articles.index";
+        }
 
         try {
             // Get the data from the API
@@ -121,11 +126,11 @@ class ArticleController extends Controller
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return redirect()->route('dashboard.articles.index')->withErrors($errorMessage);
+            return redirect()->route($routeName)->withErrors($errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to get articles data:' . $e->getMessage());
-            return redirect()->route('dashboard.articles.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route($routeName)->withErrors('Terjadi kesalahan pada server');
         }
     }
 
