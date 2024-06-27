@@ -34,6 +34,7 @@ class ArticleController extends Controller
             $response = $client->get($apiUrl, [
                 'query' => [
                     'category' => $request->input('category'),
+                    'sort' => $request->input('sort'),
                     'search' => $request->input('search'),
                 ]
             ]);
