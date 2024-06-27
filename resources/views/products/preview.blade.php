@@ -7,7 +7,7 @@
                 <div class="shrink-0 max-w-md lg:max-w-lg ">
                     <div class="container mx-auto ">
 
-
+                        <x-icon-link route="{{ route('products.dashboard') }}" text="Kembali" />
                         <!-- main Product galery -->
                         <div id="custom-controls-gallery" class="relative w-full" data-carousel="static">
                             <!-- Carousel wrapper -->
