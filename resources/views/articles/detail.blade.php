@@ -15,10 +15,7 @@
 
     $restOfContent = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
 
-    $createdDate = $detail['created_at'];
-    $updatedDate = $detail['updated_at'];
-
-    $displayDate = $updatedDate ?: $createdDate;
+    $displayDate = $updatedDate = $detail['updated_at'];
 
     // Set Carbon locale to Indonesian
     Carbon::setLocale('id');
@@ -50,10 +47,10 @@
                                     class="text-xl font-bold text-gray-900 dark:text-white">
                                     Admin
                                 </a>
-                                <p class="text-base text-gray-700 dark:text-gray-400">
+                                <p class="text-base text-gray-500 dark:text-gray-400">
                                     Pemerintah Desa Cidadap
                                 </p>
-                                <p class="text-base text-gray-700 dark:text-gray-400">
+                                <p class="text-base text-gray-500 dark:text-gray-400">
                                     <time pubdate datetime="{{ $formattedDate }}" title="J{{ $formattedDate }}">
                                         {{ $formattedDate }}
                                     </time>
@@ -110,7 +107,7 @@
 
                                     {{ substr($textContent, 0, 50) }}...
                                 </p>
-                                <a href="{{ route('articles.detail', 5) }}"
+                                <a href="{{ route('articles.detail', $article['id']) }}"
                                     class="inline-flex items-center font-medium underline underline-offset-4 text-green-500 dark:text-primary-500 hover:no-underline">
                                     Baca Selengkapnya
                                 </a>
