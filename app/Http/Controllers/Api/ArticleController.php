@@ -32,7 +32,7 @@ class ArticleController extends Controller
                         ->orWhere('body', 'like', '%' . $search . '%');
                 });
             }
-            $article = $query->get();
+            $article = $query->get()->sortByDesc('created_at')->values();
             // response if success
             return success($article, 'Artikel berhasil ditemukan');
         } catch (\Exception $e) {

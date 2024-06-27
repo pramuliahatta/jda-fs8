@@ -29,7 +29,7 @@ class FileController extends Controller
                     $q->where('name', 'like', '%' . $search . '%');
                 });
             }
-            $file = $query->get();
+            $file = $query->get()->sortByDesc('created_at')->values();
             // response if success
             return success($file, 'File berhasil ditemukan');
         } catch (\Exception $e) {
