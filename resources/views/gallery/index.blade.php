@@ -23,6 +23,7 @@
 
                 </div>
 
+<<<<<<< HEAD
                 @php
                     // TODO: DELETE LATER
                     $users = collect([
@@ -146,6 +147,11 @@
                     );
                 @endphp
                 {{ $paginatedUsers->links('vendor.pagination.custom') }}
+=======
+                <div class="space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
+                    {{ $paginator->links('vendor.pagination.custom') }}
+                </div>
+>>>>>>> 62e383ef23f49a9876170f05016a2036f8e13639
     </section>
     {{-- GALLERY SECTION END --}}
 
