@@ -1,6 +1,3 @@
-@php
-    use Carbon\Carbon;
-@endphp
 <x-layout>
     <x-slot name="title">Artikel</x-slot>
 
@@ -100,7 +97,9 @@
             </div>
             <div class="grid gap-8 lg:grid-cols-2">
                 @foreach ($data as $article)
-                    @php
+                    <x-article-card :article="$article" />
+
+                    {{-- @php
                         $dom = new \DOMDocument();
                         @$dom->loadHTML($article['body']);
 
@@ -172,7 +171,7 @@
                                 </svg>
                             </a>
                         </div>
-                    </article>
+                    </article> --}}
                 @endforeach
 
             </div>
