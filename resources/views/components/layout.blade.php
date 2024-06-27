@@ -43,6 +43,19 @@
             @include('partials.footer')
         </footer>
     @endunless
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const alertMessage = document.getElementById('alert-message');
+
+            if (alertMessage) {
+                const messageType = alertMessage.getAttribute('data-type');
+                setTimeout(() => {
+                    alertMessage.style.display = 'none';
+                }, 5000);
+            }
+        });
+    </script>
 </body>
 
 </html>

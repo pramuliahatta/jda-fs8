@@ -94,11 +94,11 @@ class FileController extends Controller
         } catch (RequestException $e) {
             // If fails from the request, then back and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return back()->withErrors($errorMessage);
+            return back()->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to store file:' . $e->getMessage());
-            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.forms.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 
@@ -120,11 +120,11 @@ class FileController extends Controller
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return redirect()->route('dashboard.forms.index')->withErrors($errorMessage);
+            return redirect()->route('dashboard.forms.index')->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to get forms data:' . $e->getMessage());
-            return redirect()->route('dashboard.forms.index')->withErrors($e->getMessage());
+            return redirect()->route('dashboard.forms.index')->with('error', $e->getMessage());
         }
     }
 
@@ -151,12 +151,12 @@ class FileController extends Controller
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
 
-            return redirect()->route('dashboard.forms.index')->withErrors($errorMessage);
+            return redirect()->route('dashboard.forms.index')->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             // dd($e);
             Log::error('Failed to get file data:' . $e->getMessage());
-            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.forms.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 
@@ -191,11 +191,11 @@ class FileController extends Controller
         } catch (RequestException $e) {
             // If fails from the request, then back and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return back()->withErrors($errorMessage);
+            return back()->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to update file:' . $e->getMessage());
-            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.forms.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 
@@ -215,11 +215,11 @@ class FileController extends Controller
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return redirect()->route('dashboard.forms.index')->withErrors($errorMessage);
+            return redirect()->route('dashboard.forms.index')->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to delete file:' . $e->getMessage());
-            return redirect()->route('dashboard.forms.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.forms.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 }
