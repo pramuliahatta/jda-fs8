@@ -1,3 +1,22 @@
+{{-- @php
+    use Carbon\Carbon;
+
+    $createdDate = $article['created_at'];
+    $updatedDate = $article['updated_at'];
+
+    $displayDate = $updatedDate ?: $createdDate;
+
+    // Set Carbon locale to Indonesian
+    Carbon::setLocale('id');
+
+    // Ensure $displayDate is a Carbon instance
+    if (!($displayDate instanceof Carbon)) {
+        $displayDate = Carbon::parse($displayDate);
+    }
+
+    // Format date to "27 Juni 2024"
+    $formattedDate = $displayDate->translatedFormat('d F Y');
+@endphp --}}
 <x-layout>
     <x-slot name="title">Artikel</x-slot>
 
@@ -114,7 +133,10 @@
                                 </svg>
                                 {{ $article['category'] }}
                             </span>
-                            <span class="text-sm">14 days ago</span>
+                            <span class="text-sm">
+                                14 hari yang lalu
+                                {{-- {{ $article['created_at']->diffForHumans() }} --}}
+                            </span>
                         </div>
                         <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="{{ route('articles.detail', $article['id']) }}">
