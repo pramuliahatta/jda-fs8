@@ -44,31 +44,6 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.index');
     })->name('dashboard.index');
 
-<<<<<<< HEAD
-    Route::get('/gallery', [GalleryController::class, 'index'])->name('dashboard.gallery.index');
-    Route::get('/gallery/create', [GalleryController::class, 'create'])->name('dashboard.gallery.create');
-    Route::post('/gallery', [GalleryController::class, 'store'])->name('dashboard.gallery.store');
-    Route::get('/gallery/detail/{id}', [GalleryController::class, 'show'])->name('dashboard.gallery.detail');
-    Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit'])->name('dashboard.gallery.edit');
-    Route::post('/gallery/edit/{id}', [GalleryController::class, 'update'])->name('dashboard.gallery.update');
-    Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('dashboard.gallery.delete');
-
-    Route::get('/articles', function () {
-        return view('dashboard.articles.index');
-    })->name('dashboard.articles.index');
-
-    Route::get('/articles/create', function () {
-        return view('dashboard.articles.create');
-    })->name('dashboard.articles.create');
-
-    Route::get('/articles/{id}', function () {
-        return view('dashboard.articles.show');
-    })->name('dashboard.articles.show');
-
-    Route::get('/articles/{id}/edit/', function () {
-        return view('dashboard.articles.edit');
-    })->name('dashboard.articles.edit');
-=======
     Route::get('/articles', [ArticleController::class, 'index'])->name('dashboard.articles.index');
     Route::get('/articles/create', [ArticleController::class, 'create'])->name('dashboard.articles.create');
     Route::post('/articles/create', [ArticleController::class, 'store'])->name('dashboard.articles.store');
@@ -76,7 +51,6 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/articles/{id}/edit/', [ArticleController::class, 'edit'])->name('dashboard.articles.edit');
     Route::post('/articles/{id}/edit/', [ArticleController::class, 'update'])->name('dashboard.articles.update');
     Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('dashboard.articles.destroy');
->>>>>>> 62e383ef23f49a9876170f05016a2036f8e13639
 
     Route::get('/gallery', [GalleryController::class, 'index'])->name('dashboard.gallery.index');
     Route::get('/gallery/create', [GalleryController::class, 'create'])->name('dashboard.gallery.create');
@@ -86,27 +60,6 @@ Route::prefix('dashboard')->group(function () {
     Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('dashboard.gallery.update');
     Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('dashboard.gallery.destroy');
 
-<<<<<<< HEAD
-    Route::get('/forms', function () {
-        return view('dashboard.forms.index');
-    })->name('dashboard.forms.index');
-
-    Route::get('/forms/create', function () {
-        return view('dashboard.forms.create');
-    })->name('dashboard.forms.create');
-
-    Route::get('/forms/{id}', function () {
-        return view('dashboard.forms.show');
-    })->name('dashboard.forms.show');
-
-    Route::get('/forms/{id}/edit/', function () {
-        return view('dashboard.forms.edit');
-    })->name('dashboard.forms.edit');
-
-    Route::get('/users', function () {
-        return view('dashboard.users.index');
-    })->name('dashboard.users.index');
-=======
     Route::get('/forms', [FileController::class, 'index'])->name('dashboard.forms.index');
     Route::get('/forms/create', [FileController::class, 'create'])->name('dashboard.forms.create');
     Route::get('/forms/{id}/edit', [FileController::class, 'edit'])->name('dashboard.forms.edit');
@@ -116,28 +69,9 @@ Route::prefix('dashboard')->group(function () {
     Route::delete('/forms/{id}', [FileController::class, 'destroy'])->name('dashboard.forms.destroy');
 
     Route::get('/users', [UserController::class, 'index'])->name('dashboard.users.index');
->>>>>>> 62e383ef23f49a9876170f05016a2036f8e13639
     Route::get('/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
     Route::post('/users', [UserController::class, 'store'])->name('dashboard.users.store');
     Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
-<<<<<<< HEAD
-
-    Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
-    Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
-
-    Route::get('/users/create', function () {
-        return view('dashboard.users.create');
-    })->name('dashboard.users.create');
-
-    Route::get('/users/{id}', function () {
-        return view('dashboard.users.show');
-    })->name('dashboard.users.show');
-
-    Route::get('/users/{id}/edit/', function () {
-        return view('dashboard.users.edit');
-    })->name('dashboard.users.edit');
-
-=======
     Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
     Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
 
@@ -150,6 +84,5 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
     Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
-    
->>>>>>> 62e383ef23f49a9876170f05016a2036f8e13639
+
 })->middleware('auth');
