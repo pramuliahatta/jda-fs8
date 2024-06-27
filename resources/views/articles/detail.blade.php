@@ -1,7 +1,44 @@
+@php
+    use Carbon\Carbon;
+
+    $dom = new \DOMDocument();
+    @$dom->loadHTML($data['body']);
+
+    $paragraphs = $dom->getElementsByTagName('p');
+
+    if ($paragraphs->length > 0) {
+        $leadParagraph = $paragraphs->item(0);
+        $leadParagraph->setAttribute('class', 'lead text-gray-700"');
+        $leadParagraphHtml = $dom->saveHTML($leadParagraph);
+        $leadParagraph->parentNode->removeChild($leadParagraph);
+    }
+
+    $restOfContent = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
+
+    $createdDate = $data['created_at'];
+    $updatedDate = $data['updated_at'];
+
+    $displayDate = $updatedDate ?: $createdDate;
+
+    // Set Carbon locale to Indonesian
+    Carbon::setLocale('id');
+
+    // Ensure $displayDate is a Carbon instance
+    if (!($displayDate instanceof Carbon)) {
+        $displayDate = Carbon::parse($displayDate);
+    }
+
+    // Format date to "27 Juni 2024"
+    $formattedDate = $displayDate->translatedFormat('d F Y');
+@endphp
+
 <x-layout>
     <x-slot name="title">Artikel</x-slot>
 
+
     <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
+
+
         <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
             <article
                 class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
@@ -19,8 +56,8 @@
                                     Pemerintah Desa Cidadap
                                 </p>
                                 <p class="text-base text-gray-700 dark:text-gray-400">
-                                    <time pubdate datetime="2024-06-12" title="June 12th, 2024">
-                                        Feb. 6, 2024
+                                    <time pubdate datetime="{{ $formattedDate }}" title="J{{ $formattedDate }}">
+                                        {{ $formattedDate }}
                                     </time>
                                 </p>
                             </div>
@@ -28,22 +65,18 @@
                     </address>
                     <h1
                         class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
-                        Pembangunan Jalan Desa Baru
+                        {{ $data['title'] }}
                     </h1>
                 </header>
-                <p class="lead text-gray-700">
-                    Proyek pembangunan jalan desa baru telah resmi dimulai minggu ini. Pembangunan ini merupakan salah
-                    satu program unggulan pemerintah Desa Cidadap untuk meningkatkan kualitas infrastruktur dan
-                    kesejahteraan masyarakat. Jalan baru ini diharapkan akan membawa berbagai manfaat signifikan bagi
-                    warga desa.
-                </p>
+
+                {!! $leadParagraphHtml !!}
 
                 <figure>
                     <img class="w-full h-96 rounded-lg object-cover" src="/{{ $data['photo'] }}"
                         alt="road-construction">
-                    <figcaption>Pembangunan Jalan Baru</figcaption>
+                    <figcaption>{{ $data['title'] }}</figcaption>
                 </figure>
-                {!! $data['body'] !!}
+                {!! $restOfContent !!}
             </article>
         </div>
     </main>
@@ -63,8 +96,8 @@
                     <p class="mb-4 text-gray-700 dark:text-gray-400">
                         {{ substr(
                             'Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
-                                                                                                                                                                                                                                                                                                                                                                                                                                                meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
-                                                                                                                                                                                                                                                                                                                                                                                                                                                pertanian dan produk lokal.',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                pertanian dan produk lokal.',
                             0,
                             50,
                         ) }}...
@@ -128,8 +161,8 @@
                     <p class="mb-4  text-gray-700 dark:text-gray-400">
                         {{ substr(
                             'Ikuti lomba memasak dengan resep-resep tradisional
-                                                                                                                                                                                                                        Desa Cidadap. Acara ini terbuka untuk semua warga desa dan pemenang akan mendapatkan hadiah
-                                                                                                                                                                                                                        menarik.',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Desa Cidadap. Acara ini terbuka untuk semua warga desa dan pemenang akan mendapatkan hadiah
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        menarik.',
                             0,
                             50,
                         ) }}...
