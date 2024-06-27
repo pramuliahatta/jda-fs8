@@ -1,32 +1,6 @@
 <x-layout>
     <x-slot name="title">Galeri</x-slot>
 
-    @php
-                // TODO: DELETE LATER
-                $users = collect($data);
-
-                // Determine the current page
-                $currentPage = request()->get('page', 1);
-
-                // Define the number of items per page
-                $perPage = 10;
-
-                // Slice the users collection to get the items to display in the current page
-                $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
-
-                // Create the paginator
-                $paginatedUsers = new Illuminate\Pagination\LengthAwarePaginator(
-                    $currentPageItems,
-                    $users->count(),
-                    $perPage,
-                    $currentPage,
-                    [
-                        'path' => request()->url(),
-                        'query' => request()->query(),
-                    ],
-                );
-            @endphp
-
     <!-- Start block -->
     <x-dashboard-section route='dashboard.gallery.index'>
         <!-- Start coding here -->
@@ -64,7 +38,7 @@
                 </a>
             </div>
         </div>
-        {{-- </div> --}}
+        </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

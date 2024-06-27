@@ -216,7 +216,7 @@
             </div>
         </form>
         <ul class="space-y-2">
-            <x-sidebar-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
+            {{-- <x-sidebar-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
                 <svg class="w-6 h-6 dark:text-white {{ request()->routeIs('dashboard.index') ? 'text-green-500' : 'text-gray-800 dark:text-white' }}"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     fill="none" viewBox="0 0 24 24">
@@ -226,7 +226,7 @@
                         d="M13.5 3c-.169 0-.334.014-.5.025V11h7.975c.011-.166.025-.331.025-.5A7.5 7.5 0 0 0 13.5 3Z" />
                 </svg>
                 <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
-            </x-sidebar-link>
+            </x-sidebar-link> --}}
 
             <x-sidebar-link href="{{ route('dashboard.articles.index') }}" :active="request()->routeIs('dashboard.articles.*')">
                 <svg class="w-6 h-6 dark:text-white {{ request()->routeIs('dashboard.articles.*') ? 'text-green-500' : 'text-gray-800 dark:text-white' }}"

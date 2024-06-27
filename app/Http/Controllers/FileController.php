@@ -22,7 +22,7 @@ class FileController extends Controller
         $apiUrl = env('BASE_URL_API') . "files";
         // Determine the view and perpage based on route
         $currentPage = request()->get('page', 1);
-        $viewName =  'form.formuser';
+        $viewName = 'form.formuser';
         $perPage = 12;
         if ($request->route()->getName() == 'dashboard.forms.index') {
             $viewName = 'dashboard.forms.index';

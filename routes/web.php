@@ -84,5 +84,5 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
     Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
-    
+
 })->middleware('auth');
