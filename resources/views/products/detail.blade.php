@@ -14,7 +14,7 @@
                                 <!-- Item 1 -->
                                 @foreach($data['product_photo'] as $productPhoto)
                                 <div class="hidden ease-in-out" data-carousel-item>
-                                    <img src="/upload/product/{{ $productPhoto['photo'] }}"
+                                    <img src="/{{ $productPhoto['photo'] }}"
                                         class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                                         alt="">
                                 </div>
@@ -72,10 +72,12 @@
                     </div>
 
                     {{-- seller contact --}}
+
                     <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8 capitalize">
-                        <a href="https://wa.me/628882204001?text=Halo,%20saya%20tertarik%20untuk%20membeli%20produk%20ini"
+                        <a href="https://wa.me/{{ $data['user']['phone_number'] }}?text={{ $data['text'] }}"
                             target="_blank" title=""
                             class="text-white mt-4 sm:mt-0 bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+
                             role="button">
                             <svg class="w-6 h-6 text-white-800 dark:text-white -ms-2 me-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -94,16 +96,14 @@
 
                     {{-- description --}}
                     <p class="mb-6 text-gray-700 dark:text-gray-700">
-                        Studio quality three mic array for crystal clear calls and voice
-                        recordings. Six-speaker sound system for a remarkably robust and
-                        high-quality audio experience. Up to 256GB of ultrafast SSD storage.
+                        {{ $data['description'] }}
                     </p>
 
-                    <p class="text-gray-700 dark:text-gray-700">
+                    {{-- <p class="text-gray-700 dark:text-gray-700">
                         Two Thunderbolt USB 4 ports and up to two USB 3 ports. Ultrafast
                         Wi-Fi 6 and Bluetooth 5.0 wireless. Color matched Magic Mouse with
                         Magic Keyboard or Magic Keyboard with Touch ID.
-                    </p>
+                    </p> --}}
                 </div>
             </div>
         </div>

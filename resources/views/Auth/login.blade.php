@@ -1,5 +1,6 @@
 <x-layout>
 <x-slot name="title">Login</x-slot>
+
     <section class="bg-gray-50 dark:bg-gray-900">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg" class="h-12, w-12"

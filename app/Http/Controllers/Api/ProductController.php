@@ -17,16 +17,21 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $pageSize = $request->input('pageSize', 10); // Default page size
+        // $pageSize = $request->input('pageSize', 10); // Default page size
         $categories = $request->input('categories', []); // Get categories from request
+        $search = $request->input('search', null);
         
-        $query = Product::with('productPhoto');
+        $query = Product::with('productPhoto')->with('user');
 
         if (!empty($categories)) {
             $query->whereIn('category', $categories); // Adjust field name if needed
         }
 
-        $products = $query->paginate($pageSize);
+        if (!empty($search)) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        $products = $query->get();
 
         if($products) {
             return success($products, 'Data fetched succesfully');
@@ -69,7 +74,7 @@ class ProductController extends Controller
 
                 ProductPhoto::create([
                     'product_id' => $product->id,
-                    'photo' => $uploadedFileName,
+                    'photo' => 'upload/product/' . $uploadedFileName,
                 ]);
             }
 
@@ -87,7 +92,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         if($product) {
-            $product->load('productPhoto');
+            $product->load('productPhoto')->load('user');
             return success($product, 'Data fetched succesfully');
         }
         return fails('Failed to fetch data', 422);
@@ -127,8 +132,8 @@ class ProductController extends Controller
             if(sizeOf($request->file('photos')) > 0) {
 
                 foreach ($product->productPhoto as $productPhoto) {
-                    if (File::exists(public_path('upload/product'), $productPhoto->photo)){
-                        unlink(public_path('upload/product/') . $productPhoto->photo);
+                    if (File::exists(public_path('upload/product'), basename($productPhoto->photo))){
+                        unlink(public_path('upload/product/') . basename($productPhoto->photo));
                     }
                     $productPhoto->delete();
                 }
@@ -142,21 +147,21 @@ class ProductController extends Controller
                     // Save the file photo in the database
                     $productPhoto = ProductPhoto::create([
                         'product_id' => $product->id,
-                        'photo' => $uploadedFileName,
+                        'photo' => 'upload/product/' . $uploadedFileName,
                     ]);
                 }
     
                 if($productPhoto) {
-                    return success(null, 'Product updated successfully');
+                    return success(null, 'Produk berhasil diubah');
                 }
             } 
         }
 
         if($updatedData) {
-            return success(null, 'Product updated successfully');
+            return success(null, 'Produk berhasil diubah');
         }
 
-        return fails('Failed to update data', 400);
+        return fails('Produk gagal diubah', 400);
     }
 
     /**
@@ -167,12 +172,12 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         if(!$product) {
-            return fails('Product not found', 400);
+            return fails('Produk tidak ditemukan', 400);
         }
 
         foreach ($product->productPhoto as $productPhoto) {
-            if (File::exists(public_path('upload/product'), $productPhoto->photo)){
-                unlink(public_path('upload/product/') . $productPhoto->photo);
+            if (File::exists(public_path('upload/product'), basename($productPhoto->photo))){
+                unlink(public_path('upload/product/') . basename($productPhoto->photo));
             }
             $productPhoto->delete();
         }
@@ -180,8 +185,8 @@ class ProductController extends Controller
         $deleteData = $product->delete();
 
         if($deleteData) {
-            return success(null, 'Product deleted successfully');
+            return success(null, 'Produk berhasil dihapus');
         }
-        return fails('Failed to delete data', 400);
+        return fails('Produk gagal dihapus', 400);
     }
 }

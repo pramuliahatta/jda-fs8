@@ -72,7 +72,6 @@ class UpdateGalleryRequest extends FormRequest
             'title.required' => 'Harap masukan judul',
             'title.string' => 'Format judul tidak valid',
             'title.max' => 'Judul tidak boleh lebih dari 255 karakter',
-            'photo.required' => 'Harap unggah photo',
             'photo.image' => 'Format photo tidak valid',
             'photo.mimes' => 'Format photo tidak valid',
             'photo.max' => 'Photo maksimal 2 MB',

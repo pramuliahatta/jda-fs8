@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Gallery;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGalleryRequest;
@@ -14,11 +15,19 @@ class GalleryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
             // get all data in database
-            $gallery = Gallery::all();
+            $query =  Gallery::query();
+            if ($request->has('search')) {
+                $search = $request->query('search');
+
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', '%' . $search . '%');
+                });
+            }
+            $gallery = $query->get();
             // response if success
             return success($gallery, 'Gallery berhasil ditemukan');
         } catch (\Exception $e) {
@@ -72,10 +81,9 @@ class GalleryController extends Controller
             if ($gallery) {
                 // response if success
                 return success($gallery, 'Gallery berhasil ditemukan');
-            } else {
-                // response if fails
-                return fails('Galleri tidak ditemukan', 404);
             }
+            // response if fails
+            return fails('Galleri tidak ditemukan', 404);
         } catch (\Exception $e) {
             // response if fails
             Log::error('Failed to get gallery data:' . $e->getMessage());
