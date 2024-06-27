@@ -15,7 +15,7 @@
                     Desa tertua di Kecamatan Cingambul yang kaya akan sejarah dan budaya. Jelajahi pesona alam dan
                     kehidupan masyarakat kami yang harmonis. Temukan lebih lanjut tentang keunikan desa kami.
                 </p>
-                <a href="#"
+                <a href="{{ route('about') }}"
                     class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 dark:focus:ring-primary-900">
                     Pelajari Lebih Lanjut
                     <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
@@ -206,7 +206,7 @@
                 </article>
             </div>
             <div class="flex justify-end my-8">
-                <a href="{{ route('articles.index') }}"
+                <a href="{{ route('articles') }}"
                     class="inline-flex items-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Berita
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -340,7 +340,7 @@
                 </article>
             </div>
             <div class="flex justify-end my-8">
-                <a href="{{ route('articles.index') }}"
+                <a href="{{ route('articles') }}"
                     class="inline-flex items-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                     Lihat Semua Acara
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"

@@ -74,6 +74,7 @@
                         alt="road-construction">
                     <figcaption>{{ $detail['title'] }}</figcaption>
                 </figure>
+
                 {!! $restOfContent !!}
             </article>
         </div>
@@ -88,6 +89,13 @@
                 @endphp
 
                 @foreach ($data as $article)
+                    @php
+                        $dom = new \DOMDocument();
+                        @$dom->loadHTML($article['body']);
+
+                        // Extract text content without tags
+                        $textContent = strip_tags($dom->saveHTML($dom->documentElement));
+                    @endphp
                     @if ($article['id'] != $detail['id'])
                         @if ($count < 4)
                             <article class="max-w-xs">
@@ -100,7 +108,7 @@
                                 </h2>
                                 <p class="mb-4 text-gray-700 dark:text-gray-400">
 
-                                    {!! substr($article['body'], 0, 50) !!}...
+                                    {{ substr($textContent, 0, 50) }}...
                                 </p>
                                 <a href="{{ route('articles.detail', 5) }}"
                                     class="inline-flex items-center font-medium underline underline-offset-4 text-green-500 dark:text-primary-500 hover:no-underline">

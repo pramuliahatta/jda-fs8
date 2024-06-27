@@ -1,22 +1,6 @@
-{{-- @php
+@php
     use Carbon\Carbon;
-
-    $createdDate = $article['created_at'];
-    $updatedDate = $article['updated_at'];
-
-    $displayDate = $updatedDate ?: $createdDate;
-
-    // Set Carbon locale to Indonesian
-    Carbon::setLocale('id');
-
-    // Ensure $displayDate is a Carbon instance
-    if (!($displayDate instanceof Carbon)) {
-        $displayDate = Carbon::parse($displayDate);
-    }
-
-    // Format date to "27 Juni 2024"
-    $formattedDate = $displayDate->translatedFormat('d F Y');
-@endphp --}}
+@endphp
 <x-layout>
     <x-slot name="title">Artikel</x-slot>
 
@@ -116,6 +100,29 @@
             </div>
             <div class="grid gap-8 lg:grid-cols-2">
                 @foreach ($data as $article)
+                    @php
+                        $dom = new \DOMDocument();
+                        @$dom->loadHTML($article['body']);
+
+                        // Extract text content without tags
+                        $textContent = strip_tags($dom->saveHTML($dom->documentElement));
+
+                        $createdDate = $article['created_at'];
+                        $updatedDate = $article['updated_at'];
+
+                        $displayDate = $updatedDate ?: $createdDate;
+
+                        // Set Carbon locale to Indonesian
+                        Carbon::setLocale('id');
+
+                        // Ensure $displayDate is a Carbon instance
+                        if (!($displayDate instanceof Carbon)) {
+                            $displayDate = Carbon::parse($displayDate);
+                        }
+
+                        // Format date to "27 Juni 2024"
+                        $formattedDate = $displayDate->translatedFormat('d F Y');
+                    @endphp
                     <article
                         class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                         <a href="#">
@@ -124,7 +131,7 @@
                         </a>
                         <div class="flex justify-between items-center mb-2 text-gray-700">
                             <span
-                                class="bg-blue-100 text-green-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                                class="{{ $article['category'] == 'Acara' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600' }} text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                                 <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -134,17 +141,16 @@
                                 {{ $article['category'] }}
                             </span>
                             <span class="text-sm">
-                                14 hari yang lalu
-                                {{-- {{ $article['created_at']->diffForHumans() }} --}}
+                                {{ \Carbon\Carbon::parse($article['created_at'])->diffForHumans() }}
                             </span>
                         </div>
-                        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
                             <a href="{{ route('articles.detail', $article['id']) }}">
                                 {{ $article['title'] }}
                             </a>
                         </h2>
                         <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
-                            {!! substr($article['body'], 0, 75) !!}...
+                            {{ substr($textContent, 0, 75) }}...
                         </p>
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-4">
@@ -172,7 +178,6 @@
             </div>
 
             <div class="space-y-3 md:space-y-0 py-8" aria-label="Table navigation">
-
                 {{ $paginator->links('vendor.pagination.custom') }}
             </div>
         </div>
