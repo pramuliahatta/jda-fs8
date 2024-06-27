@@ -60,7 +60,9 @@
 
 
                 {{-- name of product --}}
+                
                 <div class="mt-6 sm:mt-8 lg:mt-0">
+                    <x-icon-link route="{{'products'}}" text="Kembali" />
                     <h1 class="text-4xl font-bold text-gray-900 dark:text-white capitalize">
                         {{ $data['name'] }}
                     </h1>

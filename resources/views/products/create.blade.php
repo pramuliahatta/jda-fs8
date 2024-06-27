@@ -2,16 +2,35 @@
     <x-slot name="title">Pasar Desa</x-slot>
     <section class="bg-white dark:bg-gray-900">
         <div class="py-16 px-16 mx-auto max-w-screen-md sm:py-16 lg:px-16 ">
+                <x-icon-link route="{{'products.dashboard'}}" text="Kembali" />
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Tambah Produk
                 </h2>
 
-            <form action="{{ route('products.stores') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('products.stores') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="user_id" value="5">
+
+                
+                {{-- @php
+                    // Extract image paths from the data
+                    $imagePaths = 
+                    array_map(function($photo) {
+                        return $photo['photo'];
+                    }, $data['product_photo']);
+                @endphp --}}
+                
+               {{-- {{dd($imagePaths)}} --}}
+                    <x-multi-image 
+                    id="photos"
+                    name="photo[]"
+                    altText="Gambar Produk"
+                    {{-- :imagePaths="$imagePaths" --}}
+                    />
+
+                {{-- <input type="hidden" name="user_id" value="5">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar Produk</label>
                 <input id="photos" name="photos[]" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" multiple required>
-                
+                 --}}
                     
                     
 
@@ -22,7 +41,7 @@
                     </div>
                     <div class="w-full mt-2 mb-2">
 
-                        <x-input-field label="Harga" name="price" id="price" placeholder="Masukkan harga produk (contoh: Rp 10.000)"
+                        <x-input-field label="Harga" name="price" id="price" placeholder="Masukkan harga produk"
                         value="{{ old('price', $photo->title ?? '') }}" />
                     <x-error-message field="price" />
                     </div>

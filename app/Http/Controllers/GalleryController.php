@@ -94,11 +94,11 @@ class GalleryController extends Controller
         } catch (RequestException $e) {
             // If fails from the request, then back and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return back()->withErrors($errorMessage);
+            return back()->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to store gallery:' . $e->getMessage());
-            return redirect()->route('dashboard.gallery.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.gallery.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 
@@ -120,11 +120,11 @@ class GalleryController extends Controller
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return redirect()->route('dashboard.gallery.index')->withErrors($errorMessage);
+            return redirect()->route('dashboard.gallery.index')->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to get gallery data:' . $e->getMessage());
-            return redirect()->route('dashboard.gallery.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.gallery.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 
@@ -146,11 +146,11 @@ class GalleryController extends Controller
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return redirect()->route('dashboard.gallery.index')->withErrors($errorMessage);
+            return redirect()->route('dashboard.gallery.index')->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to get gallery data:' . $e->getMessage());
-            return redirect()->route('dashboard.gallery.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.gallery.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 
@@ -177,11 +177,11 @@ class GalleryController extends Controller
         } catch (RequestException $e) {
             // If fails from the request, then back and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return back()->withErrors($errorMessage);
+            return back()->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to update gallery:' . $e->getMessage());
-            return redirect()->route('dashboard.gallery.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.gallery.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 
@@ -201,11 +201,11 @@ class GalleryController extends Controller
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return redirect()->route('dashboard.gallery.index')->withErrors($errorMessage);
+            return redirect()->route('dashboard.gallery.index')->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to delete gallery:' . $e->getMessage());
-            return redirect()->route('dashboard.gallery.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.gallery.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 }

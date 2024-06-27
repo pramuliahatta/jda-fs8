@@ -7,7 +7,7 @@
                 <div class="shrink-0 max-w-md lg:max-w-lg ">
                     <div class="container mx-auto ">
 
-                        <x-icon-link route="{{ route('products.dashboard') }}" text="Kembali" />
+                        
                         <!-- main Product galery -->
                         <div id="custom-controls-gallery" class="relative w-full" data-carousel="static">
                             <!-- Carousel wrapper -->
@@ -67,6 +67,19 @@
                     </div> --}}
 
                 <div>
+                    <x-icon-link route="{{'products.dashboard'}}" text="Kembali" />
+                    {{-- <div class="flex justify-start">
+                        <a href="{{ route('products.dashboard') }}" type="button"
+                            class="flex gap-1 items-center text-sm text-gray-500 hover:text-green-500 mb-8 uppercase">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                    d="m15 19-7-7 7-7" />
+                            </svg>
+                            <span class="all-caps">Kembali</span>
+                        </a>
+                    </div> --}}
+                    
                     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
                         {{ $data['name'] }}
 
