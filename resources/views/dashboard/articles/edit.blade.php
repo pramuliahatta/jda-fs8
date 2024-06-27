@@ -7,18 +7,6 @@
             <div class="flex justify-between items-center rounded-t sm:mb-5 dark:border-gray-600">
                 <h2 class="text-xl font-bold text-gray-900 dark:text-white">Ubah Artikel</h2>
             </div>
-            @if (@session('success'))
-                <p>{{ session('success') }}</p>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <!-- Modal body -->
             <form action="{{ route('dashboard.articles.update', $data['id']) }}" method="POST"
                 enctype="multipart/form-data">

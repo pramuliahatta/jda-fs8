@@ -27,7 +27,12 @@ class GalleryController extends Controller
                     $q->where('title', 'like', '%' . $search . '%');
                 });
             }
-            $gallery = $query->get()->sortByDesc('created_at')->values();
+            $sortOrder = $request->query('sort', 'desc');
+            if ($sortOrder === 'asc') {
+                $gallery = $query->orderBy('created_at', 'asc')->get();
+            } else {
+                $gallery = $query->orderBy('created_at', 'desc')->get();
+            }
             // response if success
             return success($gallery, 'Gallery berhasil ditemukan');
         } catch (\Exception $e) {

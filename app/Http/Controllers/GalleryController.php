@@ -34,6 +34,7 @@ class GalleryController extends Controller
             $response = $client->get($apiUrl, [
                 'query' => [
                     'search' => $request->input('search'),
+                    'sort' => $request->input('sort'),
                 ]
             ]);
             $content = json_decode($response->getBody(), true);
