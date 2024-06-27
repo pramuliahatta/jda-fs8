@@ -40,7 +40,6 @@ class ArticleController extends Controller
             $content = json_decode($response->getBody(), true);
             $data = collect($content['data']);
             $currentPageItems = $data->slice(($currentPage - 1) * $perPage, $perPage)->all();
-            // dd($currentPageItems);
             $paginator = new LengthAwarePaginator(
                 $currentPageItems,
                 count($data),
@@ -107,7 +106,7 @@ class ArticleController extends Controller
     public function show(string $id, Client $client, Request $request)
     {
         // Define endpoint
-        $apiUrl = env('BASE_URL_API') . "articles/$id";
+        $apiUrl = env('BASE_URL_API') . "articles";
         // Determine the view and perpage based on route
         $viewName = "articles.detail";
         $routeName = "articles";
@@ -120,9 +119,13 @@ class ArticleController extends Controller
             // Get the data from the API
             $response = $client->get($apiUrl);
             $content = json_decode($response->getBody(), true);
-            $data = $content['data'];
+            $data = collect($content['data']);
+            $foundArticle = $data->firstWhere('id', $id);
+            if (!$foundArticle) {
+                return redirect()->route($routeName)->withErrors('Artikel tidak ditemukan');
+            }
             // If success, return view and data
-            return view($viewName, ['data' => $data]);
+            return view($viewName, ['data' => $data, 'detail' => $foundArticle]);
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
