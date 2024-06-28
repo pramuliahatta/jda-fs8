@@ -67,10 +67,11 @@
                     <!-- Foto Kepala Desa -->
                     <div
                         class="md:w-1/3 mt-4 md:mt-0 md:ml-6 mx-auto h-full w-full dark:hidden rounded-lg object-cover">
-                        <img src="https://png.pngtree.com/png-clipart/20221020/original/pngtree-kepala-daerah-png-image_8708543.png"
-                            alt="Foto Kepala Desa" class="rounded-lg shadow-lg w-full h-auto object-cover">
+                        <img src="{{ asset('upload\aset\Kades.jpg') }}" alt="Foto Kepala Desa"
+                            class="rounded-lg shadow-lg w-full h-auto object-cover">
                     </div>
                 </div>
+            </div>
             </div>
         </section>
 
@@ -129,10 +130,10 @@
             <div class="container mx-auto">
                 <div class="bg-white-200 text-grey  rounded-lg  flex flex-col md:flex-row items-center md:items-start">
                     <div class="md:w-1/2 mt-4 md:mt-0 md:ml-6 mx-auto dark:hidden rounded-lg object-cover">
-                        <img class="mx-auto h-70 w-50 dark:hidden rounded-lg object-cover"
-                            src="https://imgur.com/MB1tTu7" alt="Foto peta desa">
+                        <img class="mx-auto h-fit w-fit dark:hidden rounded-lg object-cover"
+                            src="{{ asset('upload\aset\Peta-Desa.png') }}" alt="Foto peta desa">
                     </div>
-                    <div class="md:w-1/2 p-6">
+                    <div class="md:w-1/2 p-6 flex justify-center items-center">
                         <div class="container mx-auto">
                             <h2 class="text-3xl font-bold mb-4">Wilayah Desa Cidadap</h2>
                             <p class="text-lg">Desa Cidadap memiliki luas wilayah sebesar 274.548,5 hektar yang terdiri
@@ -165,16 +166,22 @@
 
         <!-- Statistik Desa Section -->
         <section class="bg-white dark:bg-gray-900">
-            <div class="bg-gray-100 rounded-lg max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
+            <div class="bg-white-100 rounded-lg max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
                 <h2 class="text-3xl font-bold mb-4">Penduduk Desa Cidadap</h2>
                 <p class="text-lg mb-4">Jumlah penduduk Desa Cidadap berdasarkan data terakhir tercatat sebanyak 2.785
                     jiwa dengan jumlah
                     826 kartu keluarga. Dengan sebaran penduduk sebagai berikut.
                 </p>
 
-                <div class="md:w-1/2 p-6">
-                    <table class="w-full text-sm text-left rtl:text-right text-black-500 dark:text-gray-400">
-                        <thead class="text-m text-black-700 uppercase dark:text-black-400">
+
+                <div class="bg-white-200 text-grey  rounded-lg  flex flex-col md:flex-row items-center md:items-start">
+                    <div class="md:w-1/2 mt-4 md:mt-0 md:ml-6 mx-auto dark:hidden rounded-lg object-cover">
+                        <img class="mx-auto h-fit w-fit dark:hidden rounded-lg object-cover"
+                            src="{{ asset('upload\aset\jenis-kelamin.png') }}" alt="Foto peta desa">
+                    </div>
+                    {{-- <div class="md:w-1/2 p-6">
+                        <table class="w-full text-sm text-left rtl:text-right text-black-500 dark:text-gray-400">
+                            <thead class="text-m text-black-700 uppercase dark:text-black-400">
                             <tr>
                                 <th>Jenis Kelamin</th>
                                 <th>Jumlah</th>
@@ -193,130 +200,131 @@
                                 <td><strong>48.5%</strong></td>
                             </tr>
                         </tbody>
-                    </table>
+                        </table>
+                    </div>  --}}
+
+                    <div class="md:w-1/2 mt-4 md:mt-0 md:ml-6 mx-auto dark:hidden rounded-lg object-cover">
+                        <img class="mx-auto h-fit w-fit dark:hidden rounded-lg object-cover"
+                            src="{{ asset('upload\aset\usia.png') }}" alt="pie chart usia">
+                    </div>
+
                 </div>
             </div>
 
         </section>
 
-        <section class="bg-white dark:bg-gray-900">
-            <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
-                <div class="mx-auto mb-6 max-w-screen-sm lg:mb-16">
-                    <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Struktur
-                        Organisasi</h2>
-                    <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Pemerintah Desa Cidadap Kecamatan
-                        Cingambul Kabupaten Majalengka</p>
-                </div>
-
-                <div class="text-center text-gray-500 dark:text-gray-400 mb-8">
-                    <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                        alt="Jese Avatar">
-                    <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        <a href="#">Suntono</a>
-                    </h3>
-                    <p>Kepala Desa</p>
-                </div>
-
-                <div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                            alt="Bonnie Avatar">
-                        <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">Hendra, S.Pd</a>
-                        </h3>
-                        <p>Sekretaris Desa</p>
+        <section class="bg-gray dark:bg-gray-900">
+            <div class="bg-gray-100 rounded-lg max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-2 lg:px-6">
+                <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
+                    <div class="mx-auto mb-6 max-w-screen-sm lg:mb-16">
+                        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Aparat
+                            Desa</h2>
+                        <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Pemerintah Desa Cidadap
+                            Kecamatan Cingambul Kabupaten Majalengka</p>
                     </div>
 
-                    <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
-                            alt="Helene Avatar">
+                    <div class="text-center text-gray-500 dark:text-gray-400 mb-8">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{ asset('upload\aset\Kades.jpg') }}"
+                            alt="Kepala Desa">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">Aang Syahrowardi</a>
+                            <a href="#">Suntono</a>
                         </h3>
-                        <p>Kaur Keuangan</p>
+                        <p>Kepala Desa</p>
                     </div>
 
-                    <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                            alt="Jese Avatar">
-                        <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">Hendriyana</a>
-                        </h3>
-                        <p>Kaur Umum</p>
-                    </div>
+                    <div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{ asset('upload\aset\Sekdes.jpg') }}"
+                                alt="Sekretaris Desa">
+                            <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <a href="#">Hendra, S.Pd</a>
+                            </h3>
+                            <p>Sekretaris Desa</p>
+                        </div>
 
-                    <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
-                            alt="Joseph Avatar">
-                        <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">Rudi Rusmayadi</a>
-                        </h3>
-                        <p>Kaur Perencanaan</p>
-                    </div>
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                                src="{{ asset('upload\aset\keuangan.jpg') }}" alt="Helene Avatar">
+                            <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <a href="#">Aang Syahrowardi</a>
+                            </h3>
+                            <p>Kaur Keuangan</p>
+                        </div>
 
-                    <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/sofia-mcguire.png"
-                            alt="Sofia Avatar">
-                        <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">Mamat Rahmat</a>
-                        </h3>
-                        <p>Kasi Pelayanan</p>
-                    </div>
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{ asset('upload\aset\TU.jpg') }}"
+                                alt="Jese Avatar">
+                            <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <a href="#">Hendriyana</a>
+                            </h3>
+                            <p>Kaur Umum</p>
+                        </div>
 
-                    <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png"
-                            alt="Leslie Avatar">
-                        <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">Nurjamal</a>
-                        </h3>
-                        <p>Kasi Pemerintahan</p>
-                    </div>
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                                src="{{ asset('upload\aset\perencanaan.jpg') }}" alt="Joseph Avatar">
+                            <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <a href="#">Rudi Rusmayadi</a>
+                            </h3>
+                            <p>Kaur Perencanaan</p>
+                        </div>
 
-                    <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
-                            alt="Michael Avatar">
-                        <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">Rona Judrat</a>
-                        </h3>
-                        <p>Kasi Kesra</p>
-                    </div>
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                                src="{{ asset('upload\aset\pelayanan.jpg') }}" alt="Sofia Avatar">
+                            <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <a href="#">Mamat Rahmat</a>
+                            </h3>
+                            <p>Kasi Pelayanan</p>
+                        </div>
 
-                    <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/neil-sims.png"
-                            alt="Neil Avatar">
-                        <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">Ujang Yana Taryana</a>
-                        </h3>
-                        <p>Kadus I</p>
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                                src="{{ asset('upload\aset\pemerintahan.jpg') }}" alt="Leslie Avatar">
+                            <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <a href="#">Nurjamal</a>
+                            </h3>
+                            <p>Kasi Pemerintahan</p>
+                        </div>
 
-                    </div>
-                    <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/neil-sims.png"
-                            alt="Neil Avatar">
-                        <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">Jajang Gunawan</a>
-                        </h3>
-                        <p>Kadus II</p>
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                                src="{{ asset('upload\aset\kesra.jpg') }}" alt="Michael Avatar">
+                            <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <a href="#">Rona Judrat</a>
+                            </h3>
+                            <p>Kasi Kesra</p>
+                        </div>
 
-                    </div>
-                    <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/neil-sims.png"
-                            alt="Neil Avatar">
-                        <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">Dian Maulana</a>
-                        </h3>
-                        <p>Kadus III</p>
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                                src="{{ asset('upload\aset\Kadusi.jpg') }}" alt="Neil Avatar">
+                            <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <a href="#">Ujang Yana Taryana</a>
+                            </h3>
+                            <p>Kadus I</p>
+
+                        </div>
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <p> </p>
+                        </div>
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                                src="{{ asset('upload\aset\KadusII.jpg') }}" alt="Neil Avatar">
+                            <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <a href="#">Jajang Gunawan</a>
+                            </h3>
+                            <p>Kadus II</p>
+
+                        </div>
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                                src="{{ asset('upload\aset\kadusIII.jpg') }}" alt="Neil Avatar">
+                            <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <a href="#">Dian Maulana</a>
+                            </h3>
+                            <p>Kadus III</p>
+                        </div>
                     </div>
                 </div>
             </div>

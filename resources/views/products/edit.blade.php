@@ -6,10 +6,9 @@
                     Edit Produk
                 </h2>
                 
-                <form action="{{ route('products.edit', 1) }}" method="POST"
+                <form action="{{ route('products.updates', 1) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
 
                 <input type="hidden" name="user_id" value="5">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar Produk</label>

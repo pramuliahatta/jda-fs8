@@ -8,6 +8,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Middleware\CheckUserIsAdmin;
 
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -37,7 +38,7 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('authentic
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-Route::prefix('dashboard')->group(function () {
+Route::middleware(['auth', CheckUserIsAdmin::class])->prefix('dashboard')->group(function () {
 
     Route::get('/', function () {
         return view('dashboard.index');
@@ -73,9 +74,11 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
     Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
     Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroys');
 
     Route::get('/product', [ProductController::class, 'index'])->name('dashboard.products.index');
     Route::get('/product/{product}', [ProductController::class, 'show'])->name('dashboard.products.show');
+    Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('dashboard.products.destroy');
 
     Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
@@ -83,4 +86,5 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
     Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
-})->middleware('auth');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroys');
+});

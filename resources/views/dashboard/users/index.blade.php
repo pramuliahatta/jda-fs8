@@ -66,7 +66,7 @@
                                 {{ $user['phone_number'] }}
                             </td>
                             <td class="px-4 py-3 flex items-center justify-end">
-                                <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown"
+                                <button id="{{ $user['id'] }}-button" data-dropdown-toggle="{{ $user['id'] }}-dropdown"
                                     class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-700 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                     type="button">
                                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
@@ -75,11 +75,11 @@
                                             d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                                     </svg>
                                 </button>
-                                <div id="apple-imac-27-dropdown"
+                                <div id="{{ $user['id'] }}-dropdown"
                                     class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                     <ul class="py-1 text-sm" aria-labelledby="apple-imac-27-dropdown-button">
                                         <li>
-                                            <a href="{{ route('dashboard.users.edit', 1) }}"
+                                            <a href="{{ route('dashboard.users.edit', $user['id']) }}"
                                                 class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                 <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                     viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -92,7 +92,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('dashboard.users.show', 1) }}"
+                                            <a href="{{ route('dashboard.users.show', $user['id']) }}"
                                                 class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                 <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                     viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -105,8 +105,8 @@
                                         </li>
                                         <li>
                                             <button type="button" data-modal-target="deleteModal"
-                                                data-modal-toggle="deleteModal"
-                                                class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400">
+                                                data-modal-toggle="deleteModal" data-id="{{ $user['id'] }}"
+                                                class="delete-button flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400">
                                                 <svg class="w-4 h-4 mr-2" viewbox="0 0 14 15" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                                     <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"
@@ -161,10 +161,14 @@
                         class="py-2 px-3 text-sm font-medium text-gray-700 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-green-200 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan
                     </button>
+                    <form method="POST" id="delete-form">
+                        @csrf
+                        @method('DELETE')
                     <button type="submit"
                         class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
                         Hapus
                     </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -177,7 +181,7 @@
             const itemId = button.getAttribute('data-id');
 
             document.getElementById('delete-form').setAttribute('action',
-                `/dashboard/gallery/${itemId}`);
+                `/dashboard/users/${itemId}`);
         })
     })
 </script>
