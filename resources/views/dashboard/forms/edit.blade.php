@@ -22,7 +22,6 @@
             <!-- Modal body -->
             <form action="{{ route('dashboard.forms.edit', $data['id']) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
                         <x-input-field label="Jenis Formulir" name="name" id="file"

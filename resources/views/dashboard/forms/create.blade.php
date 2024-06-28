@@ -16,7 +16,6 @@
                             placeholder="Masukkan formulir" value="{{ old('name', $data['name'] ?? '') }}" />
                         <x-error-message field="name" />
                     </div>
-
                     <div>
                         <x-pdf-file-input />
                         <x-error-message field="file" />

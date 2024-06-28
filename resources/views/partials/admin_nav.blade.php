@@ -33,7 +33,7 @@
         </div>
         <div class="flex items-center lg:order-2">
             <!-- Dropdown menu -->
-            <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+            <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
                 id="apps-dropdown">
                 <div
                     class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300">
@@ -167,7 +167,7 @@
                     alt="user photo" />
             </button>
             <!-- Dropdown menu -->
-            <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+            <div class="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
                 id="dropdown">
                 <div class="py-3 px-4">
                     <span class="block text-sm font-semibold text-gray-900 dark:text-white">Josiah Williamson</span>
@@ -216,7 +216,7 @@
             </div>
         </form>
         <ul class="space-y-2">
-            <x-sidebar-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
+            {{-- <x-sidebar-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
                 <svg class="w-6 h-6 dark:text-white {{ request()->routeIs('dashboard.index') ? 'text-green-500' : 'text-gray-800 dark:text-white' }}"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     fill="none" viewBox="0 0 24 24">
@@ -226,7 +226,7 @@
                         d="M13.5 3c-.169 0-.334.014-.5.025V11h7.975c.011-.166.025-.331.025-.5A7.5 7.5 0 0 0 13.5 3Z" />
                 </svg>
                 <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
-            </x-sidebar-link>
+            </x-sidebar-link> --}}
 
             <x-sidebar-link href="{{ route('dashboard.articles.index') }}" :active="request()->routeIs('dashboard.articles.*')">
                 <svg class="w-6 h-6 dark:text-white {{ request()->routeIs('dashboard.articles.*') ? 'text-green-500' : 'text-gray-800 dark:text-white' }}"
