@@ -162,9 +162,11 @@ class ArticleController extends Controller
 
             if ($article) {
                 // remove photo in public directory
-                $photoPath = public_path($article->photo);
-                if (file_exists($photoPath)) {
-                    @unlink($photoPath);
+                if ($article->photo != 'upload/article/noimage.jpg') {
+                    $photoPath = public_path($article->photo);
+                    if (file_exists($photoPath)) {
+                        @unlink($photoPath);
+                    }
                 }
                 // remove gallery data in database
                 $article->delete();

@@ -39,11 +39,11 @@
                 </p>
 
                 <figure>
-                    <img class="w-full h-96 rounded-lg object-cover" src="/{{ $data['photo'] }}"
+                    <img class="w-full h-96 rounded-lg object-cover" src="/{{ $detail['photo'] }}"
                         alt="road-construction">
                     <figcaption>Pembangunan Jalan Baru</figcaption>
                 </figure>
-                {!! $data['body'] !!}
+                {!! $detail['body'] !!}
             </article>
         </div>
     </main>
@@ -63,8 +63,8 @@
                     <p class="mb-4 text-gray-700 dark:text-gray-400">
                         {{ substr(
                             'Proyek pembangunan jalan desa baru telah dimulai minggu ini. Jalan baru ini diharapkan akan
-                                                                                                                                                                                                                                                                                                                                                                                                                                                meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
-                                                                                                                                                                                                                                                                                                                                                                                                                                                pertanian dan produk lokal.',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                meningkatkan aksesibilitas dan kenyamanan bagi warga desa, serta mempermudah transportasi hasil
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                pertanian dan produk lokal.',
                             0,
                             50,
                         ) }}...
@@ -128,8 +128,8 @@
                     <p class="mb-4  text-gray-700 dark:text-gray-400">
                         {{ substr(
                             'Ikuti lomba memasak dengan resep-resep tradisional
-                                                                                                                                                                                                                        Desa Cidadap. Acara ini terbuka untuk semua warga desa dan pemenang akan mendapatkan hadiah
-                                                                                                                                                                                                                        menarik.',
+                                                                                                                                                                                                                                                                                                                        Desa Cidadap. Acara ini terbuka untuk semua warga desa dan pemenang akan mendapatkan hadiah
+                                                                                                                                                                                                                                                                                                                        menarik.',
                             0,
                             50,
                         ) }}...
