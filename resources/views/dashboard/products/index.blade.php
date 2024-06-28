@@ -45,12 +45,13 @@
                 <tbody>
                     @foreach ($data['current_items'] as $index => $product)
                     <tr class=" border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <td class="px-4 py-2">
-                            <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 ">{{ $index+1 }}</span>
-                        </td>
+                        <th scope="row"
+                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $index + 1 }}
+                         </th>
 
-                        <th scope="row" 
-                        class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <td scope="row" 
+                        class="px-4 py-3 max-w-[12rem] truncate">
 
 
                             @foreach($product['product_photo'] as $productPhoto)
@@ -60,17 +61,17 @@
                             @endforeach
                             {{ $product['name'] }}
 
-                        </th>
+                        </td>
                         <td class="px-4 py-2">
                             <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">
                                 {{ $product['category'] }}</span>
                         </td>
-                        <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <td class="px-4 py-3 max-w-[12rem] truncate">
                             <div class="flex items-center">
                                 Rp. {{ number_format($product['price'], 0, ',', '.') }}
                             </div>
                         </td>
-                        <td class="px-4 py-2 font-small text-gray-700 break-words dark:text-white ">
+                        <td class="px-4 py-3 max-w-[12rem] truncate ">
                             {{ $product['description'] }}
                         </td>
                         <td class="px-4 py-3 flex items-center justify-end">

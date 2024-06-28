@@ -22,7 +22,7 @@
         </div>
         <section class="bg-white-100 p-8 ">
             <div class="container mx-auto">
-                <div class="bg-white-200 text-grey  rounded-lg  flex flex-col md:flex-row items-center md:items-start">
+                <div class="bg-white-200 text-grey rounded-lg flex flex-col md:flex-row items-center md:items-start">
                       <!-- Sambutan Kepala Desa -->
                     <div class="md:w-2/3">
                         <div class="container mx-auto">
@@ -52,10 +52,10 @@
                         </div>
                     </div>
                       <!-- Foto Kepala Desa -->
-                      <div class="md:w-1/3 mt-4 md:mt-0 md:ml-6 mx-auto h-full w-full dark:hidden rounded-lg object-cover">
-                        <img src="{{asset('upload\aset\Kades.jpg')}}" alt="Foto Kepala Desa" class="rounded-lg shadow-lg w-full h-auto object-cover">
+                      <div class="md:w-1/3 mt-4 md:mt-0 md:ml-6 mx-auto h-full w-full dark:hidden rounded-lg">
+                        <img src="{{asset('upload\aset\kades-full.jpg')}}" alt="Foto Kepala Desa" class="rounded-lg shadow-lg w-full h-auto object-cover ">
                       </div>
-                    </div>
+                    
             </div>
         </section>
 
@@ -201,17 +201,17 @@
                     <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Pemerintah Desa Cidadap Kecamatan Cingambul Kabupaten Majalengka</p>
                 </div> 
 
-                <div class="text-center text-gray-500 dark:text-gray-400 mb-8">
-                    <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('upload\aset\Kades.jpg')}}" alt="Kepala Desa">
+                <div class="text-center text-gray-500 dark:text-gray-400 mb-6">
+                    <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover" src="{{asset('upload\aset\Kades.jpg')}}" alt="Kepala Desa">
                     <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         <a href="#">Suntono</a>
                     </h3>
                     <p>Kepala Desa</p>
                 </div>
 
-                <div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                <div class="grid gap-2 lg:gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('upload\aset\Sekdes.jpg')}}" alt="Sekretaris Desa">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover" src="{{asset('upload\aset\Sekdes.jpg')}}" alt="Sekretaris Desa">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="#">Hendra, S.Pd</a>
                         </h3>
@@ -219,7 +219,7 @@
                     </div>
 
                     <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('upload\aset\keuangan.jpg')}}" alt="Helene Avatar">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover" src="{{asset('upload\aset\keuangan.jpg')}}" alt="Helene Avatar">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="#">Aang Syahrowardi</a>
                         </h3>
@@ -227,7 +227,7 @@
                     </div>
 
                     <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('upload\aset\TU.jpg')}}" alt="Jese Avatar">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover" src="{{asset('upload\aset\TU.jpg')}}" alt="Jese Avatar">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="#">Hendriyana</a>
                         </h3>
@@ -235,7 +235,7 @@
                     </div>
 
                     <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('upload\aset\perencanaan.jpg')}}" alt="Joseph Avatar">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover" src="{{asset('upload\aset\perencanaan.jpg')}}" alt="Joseph Avatar">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="#">Rudi Rusmayadi</a>
                         </h3>
@@ -243,7 +243,7 @@
                     </div>
 
                     <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('upload\aset\pelayanan.jpg')}}" alt="Sofia Avatar">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover" src="{{asset('upload\aset\pelayanan.jpg')}}" alt="Sofia Avatar">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="#">Mamat Rahmat</a>
                         </h3>
@@ -251,7 +251,7 @@
                     </div>
 
                     <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('upload\aset\pemerintahan.jpg')}}" alt="Leslie Avatar">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover" src="{{asset('upload\aset\pemerintahan.jpg')}}" alt="Leslie Avatar">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="#">Nurjamal</a>
                         </h3>
@@ -259,7 +259,7 @@
                     </div>
 
                     <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('upload\aset\kesra.jpg')}}" alt="Michael Avatar">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover" src="{{asset('upload\aset\kesejahteraan.jpg')}}" alt="Michael Avatar">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="#">Rona Judrat</a>
                         </h3>
@@ -267,30 +267,30 @@
                     </div>
 
                     <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('upload\aset\Kadusi.jpg')}}" alt="Neil Avatar">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover" src="{{asset('upload\aset\kadus-cidadap.jpg')}}" alt="Neil Avatar">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="#">Ujang Yana Taryana</a>
                         </h3>
-                        <p>Kadus I</p>
+                        <p>Kadus Cidadap</p>
                        
                     </div>
                     <div class="text-center text-gray-500 dark:text-gray-400">
                         <p> </p>
                      </div>
                     <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('upload\aset\KadusII.jpg')}}" alt="Neil Avatar">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover" src="{{asset('upload\aset\kadus-citeureup.jpg')}}" alt="Neil Avatar">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="#">Jajang Gunawan</a>
                         </h3>
-                        <p>Kadus II</p>
+                        <p>Kadus Citeureup</p>
 
                     </div>
                     <div class="text-center text-gray-500 dark:text-gray-400">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('upload\aset\kadusIII.jpg')}}" alt="Neil Avatar">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover" src="{{asset('upload\aset\kadus-ciroke.jpg')}}" alt="Neil Avatar">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="#">Dian Maulana</a>
                         </h3>
-                        <p>Kadus III</p>
+                        <p>Kadus Ciroke</p>
                     </div>
                 </div>    
                 </div>  

@@ -43,26 +43,27 @@
                 <div class="overflow-x-auto">
 
                     {{-- table products --}}
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-4 py-3 text-center">No</th>
-                                <th scope="col" class="px-4 py-3 text-center">Nama Produk</th>
-                                <th scope="col" class="px-4 py-3 text-center">Kategori</th>
-                                <th scope="col" class="px-4 py-3 text-center">Harga</th>
-                                <th scope="col" class="px-4 py-3 text-center">Deskripsi</th>
-                                <th scope="col" class="px-4 py-3 text-center"><span class="sr-only">Actions</span></th>
+                                <th scope="col" class="px-4 py-3 ">No</th>
+                                <th scope="col" class="px-4 py-3 ">Nama Produk</th>
+                                <th scope="col" class="px-4 py-3 ">Kategori</th>
+                                <th scope="col" class="px-4 py-3 ">Harga</th>
+                                <th scope="col" class="px-4 py-3 ">Deskripsi</th>
+                                <th scope="col" class="px-4 py-3 "><span class="sr-only">Actions</span></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($data['current_items'] as $index => $product)
                             <tr class=" border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="px-4 py-2">
-                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 ">{{ $index+1 }}</span>
+                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 ">
+                                        {{ $index+1 }}</span>
                                 </td>
 
-                                <th scope="row" 
-                                class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
 
 
                                     @foreach($product['product_photo'] as $productPhoto)
@@ -82,7 +83,7 @@
                                         Rp. {{ number_format($product['price'], 0, ',', '.') }}
                                     </div>
                                 </td>
-                                <td class="px-4 py-2 font-small text-gray-700 break-words dark:text-white ">
+                                <td class="px-4 py-2 font-small text-gray-700 break-words dark:text-white px-4 py-3 max-w-[12rem] truncate">
                                     {{ $product['description'] }}
                                 </td>
                                 <td class="px-4 py-3 flex items-center justify-end">
@@ -143,6 +144,7 @@
                         @endforeach
                     </tbody>
                     </table>
+                </div>
                 </div>
                 <div class="space-y-3 md:space-y-0 py-4 px-4" aria-label="Table navigation">
                     {{ $data['paginator']->links('vendor.pagination.custom') }}
