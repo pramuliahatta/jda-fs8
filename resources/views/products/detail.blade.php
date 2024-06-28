@@ -101,11 +101,7 @@
                         {{ $data['description'] }}
                     </p>
 
-                    {{-- <p class="text-gray-700 dark:text-gray-700">
-                        Two Thunderbolt USB 4 ports and up to two USB 3 ports. Ultrafast
-                        Wi-Fi 6 and Bluetooth 5.0 wireless. Color matched Magic Mouse with
-                        Magic Keyboard or Magic Keyboard with Touch ID.
-                    </p> --}}
+                   
                 </div>
             </div>
         </div>

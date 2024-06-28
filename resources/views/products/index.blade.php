@@ -142,9 +142,21 @@
                             <div class="flex flex-col gap-3">
                                 {{-- product name --}}
                                 <a href="#"
-                                    class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white capitalize truncate">{{ $product['name'] }}</a>
+                                    class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white capitalize truncate flex items-center">
+                                    <button
+                                        class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-gray-500 bg-gray-100 rounded-lg">
+                                        {{ $product['category'] }}
+                                    </button>
+                                </a>
+                                {{-- {{-- <button
+                                    class="inline-flex px-2 py-1 mr-2 text-xs font-bold leading-none text-gray-900 bg-gray-100 rounded-lg">
+                                {{ $product['category'] }}
+                                </button> --}}
+                                <a href="#"
+                                    class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white capitalize truncate">{{ $product['name'] }}</a> --}}
                                 <p class="text-md text-gray-600">{{ substr($product['description'], 0, 75) }}</p>
                                 {{-- real price --}}
+                                
                                 <p class="text-2xl font-semibold leading-tight text-gray-800 dark:text-white">
                                     {{ 'Rp. ' . number_format($product['price'], 0, ',', '.') }},-</p>
                             </div>
