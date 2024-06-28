@@ -87,5 +87,9 @@ Route::middleware(['auth', CheckUserIsAdmin::class])->prefix('dashboard')->group
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
     Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroys');
+<<<<<<< HEAD
 
 })->middleware('auth');
+=======
+});
+>>>>>>> abbe477302085cdc29bdce392027f6f604e93c0d

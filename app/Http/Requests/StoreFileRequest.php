@@ -34,7 +34,7 @@ class StoreFileRequest extends FormRequest
     {
         if ($this->has('name')) {
             $this->merge([
-                'name' => ucwords(strtolower($this->input('name')))
+                'name' => ucwords($this->input('name'))
             ]);
         }
     }

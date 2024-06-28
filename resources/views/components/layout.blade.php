@@ -17,9 +17,9 @@
     @endunless
 
     <main>
-        <div class="w-full flex justify-center">
+        <div id="alert-message" class="w-full flex justify-center shadow-md">
             @if (session('success'))
-                <div class="p-4 mt-8 w-4/4 top-0 z-50 fixed text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                <div class="p-4 mt-8 w-4/4 top-0 z-50 fixed text-sm text-green-800 rounded-lg shadow-md bg-green-50 dark:bg-gray-800 dark:text-green-400"
                     role="alert">
                     <span class="font-medium">Berhasil!</span>
                     {{ session('success') }}
@@ -27,7 +27,8 @@
             @endif
 
             @if (session('error'))
-                <div class="p-4 mt-8 w-4/4 top-0 z-50 fixed text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                <div id="alert-message"
+                    class="p-4 mt-8 w-4/4 top-0 z-50 fixed text-sm text-red-800 rounded-lg shadow-md bg-red-50 dark:bg-gray-800 dark:text-red-400"
                     role="alert">
                     <span class="font-medium">Upps!</span>
                     {{ session('error') }}
