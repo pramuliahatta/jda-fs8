@@ -1,81 +1,12 @@
-@php
-    use Carbon\Carbon;
-
-    $dom = new \DOMDocument();
-    @$dom->loadHTML($detail['body']);
-
-    $paragraphs = $dom->getElementsByTagName('p');
-
-    if ($paragraphs->length > 0) {
-        $leadParagraph = $paragraphs->item(0);
-        $leadParagraph->setAttribute('class', 'lead text-gray-700"');
-        $leadParagraphHtml = $dom->saveHTML($leadParagraph);
-        $leadParagraph->parentNode->removeChild($leadParagraph);
-    }
-
-    $restOfContent = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
-
-    $displayDate = $updatedDate = $detail['updated_at'];
-
-    // Set Carbon locale to Indonesian
-    Carbon::setLocale('id');
-
-    // Ensure $displayDate is a Carbon instance
-    if (!($displayDate instanceof Carbon)) {
-        $displayDate = Carbon::parse($displayDate);
-    }
-
-    // Format date to "27 Juni 2024"
-    $formattedDate = $displayDate->translatedFormat('d F Y');
-@endphp
-
 <x-layout>
     <x-slot name="title">Artikel</x-slot>
 
-    <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
+    <div class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
 
         <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
-            <article
-                class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-                <header class="mb-4 lg:mb-6 not-format">
-                    <address class="flex items-center mb-6 not-italic">
-                        <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                            <img class="mr-4 w-16 h-16 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
-                            <div>
-                                <a href="#" rel="author"
-                                    class="text-xl font-bold text-gray-900 dark:text-white">
-                                    Admin
-                                </a>
-                                <p class="text-base text-gray-500 dark:text-gray-400">
-                                    Pemerintah Desa Cidadap
-                                </p>
-                                <p class="text-base text-gray-500 dark:text-gray-400">
-                                    <time pubdate datetime="{{ $formattedDate }}" title="J{{ $formattedDate }}">
-                                        {{ $formattedDate }}
-                                    </time>
-                                </p>
-                            </div>
-                        </div>
-                    </address>
-                    <h1
-                        class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
-                        {{ $detail['title'] }}
-                    </h1>
-                </header>
-
-                {!! $leadParagraphHtml !!}
-
-                <figure>
-                    <img class="w-full h-96 rounded-lg object-cover" src="/{{ $detail['photo'] }}"
-                        alt="road-construction">
-                    <figcaption>{{ $detail['title'] }}</figcaption>
-                </figure>
-
-                {!! $restOfContent !!}
-            </article>
+            <x-article :detail="$detail" />
         </div>
-    </main>
+    </div>
 
     <aside aria-label="Related articles" class="py-8 lg:py-24 bg-green-50 dark:bg-gray-800">
         <div class="px-4 mx-auto max-w-screen-xl">
