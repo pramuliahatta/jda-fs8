@@ -22,7 +22,7 @@ class ArticleController extends Controller
         $apiUrl = env('BASE_URL_API') . "articles";
         // Determine the view and perpage based on route
         $currentPage = request()->get('page', 1);
-        $viewName =  'articles.index';
+        $viewName = 'articles.index';
         $perPage = 12;
         if ($request->route()->getName() == 'dashboard.articles.index') {
             $viewName = 'dashboard.articles.index';
@@ -125,7 +125,7 @@ class ArticleController extends Controller
             if (!$foundArticle) {
                 return redirect()->route($routeName)->with('error', 'Artikel tidak ditemukan');
             }
-            $data = $data->filter(fn ($el) => $el["category"] == $foundArticle["category"])->take(4);
+            $data = $data->filter(fn($el) => $el["category"] == $foundArticle["category"])->take(5);
             // If success, return view and data
             return view($viewName, ['data' => $data, 'detail' => $foundArticle]);
         } catch (RequestException $e) {
