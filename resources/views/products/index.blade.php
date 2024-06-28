@@ -32,8 +32,8 @@
                                 <input type="text" id="simple-search" name="search"
                                     class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Search" required="">
-                                @foreach ($data['categories'] as $categories)
-                                    <input name="categories[]" type="hidden" value="{{ $categories }}">
+                                @foreach ($categories as $category)
+                                    <input name="categories[]" type="hidden" value="{{ $category }}">
                                 @endforeach
                             </div>
                         </form>
@@ -72,7 +72,7 @@
                                     <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
                                         <li class="flex items-center">
                                             <input id="makanan" name="categories[]" type="checkbox" value="Makanan"
-                                                {{ isset($data['categories']) ? (in_array('Makanan', $data['categories']) ? 'checked' : '') : '' }}
+                                                {{ isset($categories) ? (in_array('Makanan', $categories) ? 'checked' : '') : '' }}
                                                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                             <label for="makanan"
                                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -81,7 +81,7 @@
                                         </li>
                                         <li class="flex items-center">
                                             <input id="pakaian" name="categories[]" type="checkbox" value="Pakaian"
-                                                {{ isset($data['categories']) ? (in_array('Pakaian', $data['categories']) ? 'checked' : '') : '' }}
+                                                {{ isset($categories) ? (in_array('Pakaian', $categories) ? 'checked' : '') : '' }}
                                                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                             <label for="pakaian"
                                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -90,7 +90,7 @@
                                         </li>
                                         <li class="flex items-center">
                                             <input id="minuman" name="categories[]" type="checkbox" value="Minuman"
-                                                {{ isset($data['categories']) ? (in_array('Minuman', $data['categories']) ? 'checked' : '') : '' }}
+                                                {{ isset($categories) ? (in_array('Minuman', $categories) ? 'checked' : '') : '' }}
                                                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                             <label for="minuman"
                                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -100,7 +100,7 @@
                                         <li class="flex items-center">
                                             <input id="elektronik" name="categories[]" type="checkbox"
                                                 value="Elektronik"
-                                                {{ isset($data['categories']) ? (in_array('Elektronik', $data['categories']) ? 'checked' : '') : '' }}
+                                                {{ isset($categories) ? (in_array('Elektronik', $categories) ? 'checked' : '') : '' }}
                                                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                             <label for="elektronik"
                                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -119,7 +119,7 @@
             {{-- list products --}}
             <div class="mt-2 sm:mt-2 md:gap-6 lg:flex lg:items-start xl:gap-8">
                 <div class="w-full mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:mt-8">
-                    @foreach ($data['current_items'] as $product)
+                    @foreach ($data as $product)
                         <div
                             class="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                             <a href="#" class="overflow-hidden rounded">
@@ -142,7 +142,8 @@
                                 {{-- product name --}}
                                 <a href="#"
                                     class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white capitalize truncate">{{ $product['name'] }}</a>
-                                <p class="text-md text-gray-600">{{ substr($product['description'], 0, 75) }}</p>
+                                <span>{{ $product['category'] }} | {{ $product['user']['name'] }}</span>
+                                <p class="text-md text-gray-600">{!! substr($product['description'], 0, 75) !!}</p>
                                 {{-- real price --}}
                                 <p class="text-2xl font-semibold leading-tight text-gray-800 dark:text-white">
                                     {{ 'Rp. ' . number_format($product['price'], 0, ',', '.') }},-</p>
@@ -160,7 +161,7 @@
             </div>
 
             <div class="space-y-3 md:space-y-0 py-4" aria-label="Table navigation">
-                {{ $data['paginator']->links('vendor.pagination.custom') }}
+                {{ $paginator->links('vendor.pagination.custom') }}
             </div>
         </div>
 

@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data['current_items'] as $index => $product)
+                    @foreach ($data as $index => $product)
                         <tr class="border-b dark:border-gray-700">
                             <th scope="row"
                                 class="px-4 py-3 font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">
@@ -112,7 +112,7 @@
             </table>
         </div>
         <div class="space-y-3 md:space-y-0 py-4" aria-label="Table navigation">
-            {{ $data['paginator']->links('vendor.pagination.custom') }}
+            {{ $paginator->links('vendor.pagination.custom') }}
         </div>
 
     </x-dashboard-section>

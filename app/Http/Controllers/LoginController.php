@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,13 +25,23 @@ class LoginController extends Controller
         //cek jika email dan password sesuai dengan apa yang ada di database
         if (Auth::attempt($credentials)) {
             //buat session baru
-            $request->session()->regenerate();
+            $user = User::where('email', $request->email)->first();
+            $token = $user->createToken('authToken')->plainTextToken;
 
+            // Example of storing the token in a database table
+            $user->tokens()->create([
+                'token' => $token,
+                'name' => 'authToken',
+                'last_used_at' => now(),
+            ]);
+
+            $request->session()->regenerate();
+            
             //jika user admin maka arahkan user ke menu dashboard, jika user adalah pengguna biasa maka arahkan user ke halaman awal
             if (Auth::user()->role == 'admin') {
                 return redirect()->intended(route('dashboard.articles.index'));
             }
-            return redirect()->intended(route('home'));
+            return redirect()->intended(route('products.index'));
         }
 
         return back()->with('error', 'Gagal Masuk');
