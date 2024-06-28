@@ -32,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data['current_items'] as $index => $product)
+                            @foreach ($data as $index => $product)
                             <tr class=" border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="px-4 py-2">
                                     <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 ">{{ $index+1 }}</span>
@@ -58,7 +58,7 @@
                                     </div>
                                 </td>
                                 <td class="px-4 py-2 font-small text-gray-700 break-words dark:text-white ">
-                                    {{ $product['description'] }}
+                                    {!! $product['description'] !!}
                                 </td>
                                 <td class="px-4 py-3 flex items-center justify-end">
                                     <button id="{{$product['id']}}-dropdown-botton" 
@@ -88,7 +88,7 @@
                                                     </a>
                                                 </li>
                                             <li>
-                                                <a href="{{ route('products.preview', $product['id']) }}"
+                                                <a href="{{ route('products.show', $product['id']) }}"
                                                     class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                     <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                         viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -120,7 +120,7 @@
                     </table>
                 </div>
                 <div class="space-y-3 md:space-y-0 py-4" aria-label="Table navigation">
-                    {{ $data['paginator']->links('vendor.pagination.custom') }}
+                    {{ $paginator->links('vendor.pagination.custom') }}
                 </div>
             </div>
         </div>
@@ -176,7 +176,7 @@
             const itemId = button.getAttribute('data-id');
 
             document.getElementById('delete-form').setAttribute('action',
-                `/dashboard/products/${itemId}`);
+                `/seller/products/${itemId}`);
         })
     })
 </script>

@@ -63,7 +63,7 @@
                 {{-- name of product --}}
                 {{-- <div class="mt-6 sm:mt-8 lg:mt-0">
                     <div class="bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
-                        <x-icon-link route="{{route('products.dashboard')}}" text="Kembali" />
+                        <x-icon-link route="{{route('products.index')}}" text="Kembali" />
                     </div> --}}
 
                 <div>
@@ -80,7 +80,7 @@
 
                     {{-- seller contact --}}
                     <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-                        <a href="#" title=""
+                        <a href="https://wa.me/{{ $data['user']['phone_number'] }}?text={{ $automatedText }}" title=""
                             class="text-white mt-4 sm:mt-0 bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
                             role="button">
                             <svg class="w-6 h-6 text-white-800 dark:text-white -ms-2 me-2" aria-hidden="true"
@@ -100,7 +100,7 @@
 
                     {{-- description --}}
                     <p class="mb-6 text-gray-500 dark:text-gray-400">
-                        {{ $data['description'] }}
+                        {!! $data['description'] !!}
                     </p>
 
                     <div class="flex justify-between items-center">
@@ -161,7 +161,7 @@
                     <button data-modal-toggle="deleteModal" type="button"
                         class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan</button>
-                    <form action="{{ route('dashboard.gallery.destroy', $data['id']) }}" method="POST">
+                    <form action="{{ route('products.destroy', $data['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
@@ -176,14 +176,14 @@
     </div>
 </x-layout>
 
-{{-- <script>
+<script>
     document.querySelectorAll('.delete-button').forEach(button => {
         button.addEventListener('click', () => {
             const itemId = button.getAttribute('data-id');
 
             document.getElementById('delete-form').setAttribute('action',
-                `/dashboard/gallery/${itemId}`);
+                `/seller/products/${itemId}`);
         })
     })
-</script> --}}
+</script>
 

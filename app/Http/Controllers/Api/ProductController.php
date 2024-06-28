@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Models\ProductPhoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
@@ -17,71 +20,68 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        // $pageSize = $request->input('pageSize', 10); // Default page size
-        $categories = $request->input('categories', []); // Get categories from request
-        $search = $request->input('search', null);
-        
-        $query = Product::with('productPhoto')->with('user');
+        try {
+            // get all data in database
+            $query =  Product::with('productPhoto')->with('user');
+            if ($request->has('search')) {
+                $search = $request->query('search');
 
-        if (!empty($categories)) {
-            $query->whereIn('category', $categories); // Adjust field name if needed
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                });
+            }
+
+            if ($request->has('categories')) {
+                $categories = $request->query('categories');
+
+                $query->whereIn('category', $categories);
+            }
+
+            $product = $query->get()->sortByDesc('updated_at')->values();
+            // response if success
+            return success($product, 'Produk berhasil ditemukan');
+        } catch (\Exception $e) {
+            Log::error("Failed to get product data:" . $e->getMessage());
+            return fails('Gagal mendapatkan data produk', 500);
         }
-
-        if (!empty($search)) {
-            $query->where('name', 'like', '%' . $search . '%');
-        }
-
-        $products = $query->get();
-
-        if($products) {
-            return success($products, 'Data fetched succesfully');
-        }
-        return fails('Failed to fetch data', 422);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category' => 'required|string',
-            'price' => 'required',
-            // 'photos' => 'array|max:3',
-            // 'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
+        $validatedData = $request->validated();
         try {
-            // Create product
+            // Get validated data from request
+            $validatedData = $request->validated();
+
+            // store product data in database
             $product = Product::create([
-                'name' => $request->name,
-                'description' => $request->description,
-                'category' => $request->category,
-                'price' => $request->price,
-                'user_id' => $request->user_id, // Assuming user_id is passed in request
+                'name' => $validatedData['name'],
+                'description' => $validatedData['description'],
+                'category' => $validatedData['category'],
+                'price' => $validatedData['price'],
+                'user_id' => (Auth::user()->id?? $validatedData['user_id']) ?? 1, 
             ]);
 
-            // Handle product photos
-            foreach ($request->file('photos') as $file) {
-                $uploadedFileName = generateUniqueString('product_photos', 'photo', $file->getClientOriginalExtension());
-                $file->move(public_path('upload/product'), $uploadedFileName);
+            // store photo in public directory
+            foreach ($validatedData['photos'] as $photo) {
+                $uploadedFileName = generateUniqueString('product_photos', 'photo', $photo->getClientOriginalExtension());
+                $photo->move(public_path('upload/product'), $uploadedFileName);
 
                 ProductPhoto::create([
                     'product_id' => $product->id,
                     'photo' => 'upload/product/' . $uploadedFileName,
                 ]);
             }
-
-            return success(null, 'Produk berhasil dibuat');
+            return success(null, 'Product berhasil ditambahkan');
+        } catch (ValidationException $e) {
+            return fails($e->errors(), 422);
         } catch (\Exception $e) {
-            // Handle exceptions
-            return fails('Produk gagal dibuat', 500);
+            // response if fails
+            Log::error('Failed to store product:' . $e->getMessage());
+            return fails('Gagal menambahkan product', 500);
         }
     }
 
@@ -90,12 +90,22 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $product = Product::find($id);
-        if($product) {
-            $product->load('productPhoto')->load('user');
-            return success($product, 'Data fetched succesfully');
+        try {
+            // find data in database
+            $product = Product::find($id);
+
+            if ($product) {
+                // response if success
+                $product->load('productPhoto')->load('user');
+                return success($product, 'Produk berhasil ditemukan');
+            }
+            // response if fails
+            return fails('Produk tidak ditemukan', 404);
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to get product data:' . $e->getMessage());
+            return fails('Gagal mendapatkan data produk', 500);
         }
-        return fails('Failed to fetch data', 422);
     }
 
     /**

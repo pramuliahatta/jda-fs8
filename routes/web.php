@@ -9,6 +9,12 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\CheckUserIsAdmin;
+use App\Models\Product;
+
+// Public Routes
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -21,23 +27,20 @@ Route::get('/services', [FileController::class, 'index'])->name('services');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.detail');
+//Dashboard User(Seller)
+Route::resource('/seller/products', ProductController::class)->middleware(['auth'])->except('update');
+Route::post('/seller/products/{product}', [ProductController::class, 'update'])->name('products.update');
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
-
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.detail');
-
 
 Route::get('/contact', function () {
     return view('contact.index');
 })->name('contact');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-
+//Dashboard Routes
 Route::middleware(['auth', CheckUserIsAdmin::class])->prefix('dashboard')->group(function () {
 
     Route::get('/', function () {
@@ -76,15 +79,7 @@ Route::middleware(['auth', CheckUserIsAdmin::class])->prefix('dashboard')->group
     Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroys');
 
-    Route::get('/product', [ProductController::class, 'index'])->name('dashboard.products.index');
-    Route::get('/product/{product}', [ProductController::class, 'show'])->name('dashboard.products.show');
-    Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('dashboard.products.destroy');
-
-    Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.stores');
-    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
-    Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
-    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroys');
+    Route::get('/products', [ProductController::class, 'index'])->name('dashboard.products.index');
+    Route::get('/products/{product}', [ProductController::class, 'show'])->name('dashboard.products.show');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('dashboard.products.destroy');
 });

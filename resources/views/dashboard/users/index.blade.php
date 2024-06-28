@@ -50,7 +50,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data['current_item'] as $index => $user)
+                    @foreach ($data as $index => $user)
                         <tr class="border-b dark:border-gray-700">
                             <th scope="row"
                                 class="px-4 py-3 font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">

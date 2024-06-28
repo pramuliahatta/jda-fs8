@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Models\ProductPhoto;
 use GuzzleHttp\Client;
@@ -21,63 +22,64 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        // $page = $request->input('page', 1);
-        $perPage = 12;
+        $client = new Client();
+        $apiUrl = env('BASE_URL_API') . "products";
+
+        $currentPage = request()->get('page', 1);
         $search = $request->input('search', null);
         $categories = $request->input('categories', []);
-        if(Route::current()->getName() == 'products.dashboard' || Route::current()->getName() == 'dashboard.products.index') {
+
+        $perPage = 12;
+        $viewName = 'products.index';
+        
+        if(Route::current()->getName() == 'products.index' || Route::current()->getName() == 'dashboard.products.index') {
             $perPage = 10;
+            if(Route::current()->getName() == 'products.index') {
+                $viewName = 'products.dashboard';
+            }
+            if(Route::current()->getName() == 'dashboard.products.index') {
+                $viewName = 'dashboard.products.index';
+            }
         }
 
-        // $fetchData = Http::get('http://127.0.0.1:8001/api/products', [
-        //     'page' => $page,
-        //     'perPage' => $perPage,
-        //     'categories' => $categories,
-        // ]);
-        $fetchData = Http::get('http://127.0.0.1:8001/api/products', [
-                'search' => $search,
-                'categories' => $categories,
+        try {
+            // Get data from the API
+            $fetchData = $client->get($apiUrl, [
+                'query' => [
+                    'search' => $search,
+                    'categories' => $categories,
+                ]
             ]);
-        $response = $fetchData->json();
-        
-        // $data = $response['data'];
-        // $data['categories'] = $categories;
+            $response = json_decode($fetchData->getBody(), true);
 
-        $users = collect($response['data']);
-        $currentPage = request()->get('page', 1);
+            $data = collect($response['data']);
+            $currentPageItems = $data->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            
+            $paginator = new LengthAwarePaginator(
+                $currentPageItems,
+                count($data),
+                $perPage,
+                $currentPage,
+                [
+                    'path' => request()->url(),
+                    'query' => request()->query(),
+                ]
+            );
+        } catch (\Exception $e) {
+            // If fail data is empty and log error
+            Log::error('Failed to get product data:' . $e->getMessage());
+            $currentPageItems = [];
+            $paginator = [];
+            $categories = [];
+        }
 
-        // Slice the users collection to get the items to display in the current page
-        $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
-
-        // Create the paginator
-        $paginator = new LengthAwarePaginator(
-            $currentPageItems,
-            $users->count(),
-            $perPage,
-            $currentPage,
-            [
-                'path' => request()->url(),
-                'query' => request()->query(),
-            ],
-        );
-
-        // dd($paginator);
-
-        $data = [
-            'current_items' => $currentPageItems,
+        // Return view and data ($data for data | $pageLinks for link url, label, & isActive | 
+        // $pageInfo for showing information)
+        return view($viewName, [
+            'data' => $currentPageItems, 
             'paginator' => $paginator,
             'categories' => $categories,
-        ];
-
-        // dd($data);
-
-        if(Route::current()->getName() == 'products.dashboard') {
-            return view('products.dashboard', compact('data'));
-        }
-        if(Route::current()->getName() == 'dashboard.products.index') {
-            return view('dashboard.products.index', compact('data'));
-        }
-        return view('products.index', compact('data'));
+        ]);
     }
 
     /**
@@ -85,93 +87,36 @@ class ProductController extends Controller
      */
     public function create()
     {
-        if(Route::current()->getName() == 'dashboard.users.index') {
-            return view('products.index');
-        }
         return view('products.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category' => 'required|string',
-            'price' => 'required',
-            'user_id' => 'required',
-            'photos' => 'required|array|max:3',
-            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-
-        // Initialize Guzzle client
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        // Define endpoint
         $client = new Client();
-
-        // Prepare files for multipart upload
-        $files = [];
-        foreach ($request->file('photos') as $file) {
-            $files[] = [
-                'name' => 'photos[]',
-                'contents' => fopen($file->getPathname(), 'r'),
-                'filename' => $file->getClientOriginalName(),
-                'headers'  => [
-                    'Content-Type' => 'multipart/form-data'
-                ],
-            ];
-        }
-
-        $multipart = array_merge($files, 
-            [
-                [
-                    'name' => 'name',
-                    'contents' => $validatedData['name'],
-                ],
-                [
-                    'name' => 'description',
-                    'contents' => $validatedData['description'],
-                ],
-                [
-                    'name' => 'category',
-                    'contents' => $validatedData['category'],
-                ],
-                [
-                    'name' => 'price',
-                    'contents' => $validatedData['price'],
-                ],
-                [
-                    'name' => 'user_id',
-                    'contents' => $validatedData['user_id'],
-                ],
-            ]
-        );
+        $apiUrl = env('BASE_URL_API') . "products";
 
         try {
-            // Send POST request using Guzzle client
-            $response = $client->post('http://127.0.0.1:8001/api/products', [
+            // Store data using API
+            $response = $client->post($apiUrl, [
                 'multipart' => $multipart,
             ]);
-            
-            // Handle successful response
-            $statusCode = $response->getStatusCode();
-            $responseData = json_decode($response->getBody()->getContents(), true);
-
-            if ($statusCode === 200) {
-                $data = $responseData['data']; // Assuming API returns 'data' key in response
-                return redirect()->intended(route('products.dashboard', compact('data')));
-            } else {
-                // Handle unsuccessful response
-                return back()->with('error', 'Failed to create product: ' . $statusCode);
-            }
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('products.index')->with('success', $responseMessage);
         } catch (RequestException $e) {
-            // Guzzle request exception handling
-            Log::error('Failed to send POST request to API: ' . $e->getMessage());
-            return back()->with('error', 'Failed to communicate with API: ' . $e->getMessage());
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->with('error', $errorMessage);
         } catch (\Exception $e) {
-            // Other exceptions handling
-            Log::error('Failed to communicate with API: ' . $e->getMessage());
-            return back()->with('error', 'Failed to communicate with API: ' . $e->getMessage());
+            // Another fails
+            Log::error('Failed to store products:' . $e->getMessage());
+            return redirect()->route('products.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 
@@ -180,23 +125,47 @@ class ProductController extends Controller
      */
     public function show(product $product)
     {
-        $fetchData = Http::get('http://127.0.0.1:8001/api/products/' . $product->id);
-        $response = $fetchData->json();
-        $data = $response['data'];
-        $seller = $data['user']['name'];
-        $productName = $data['name'];
-        $text = "Halo $seller, \n Saya tertarik untuk membeli produk $productName. Bisakah Anda memberikan informasi lebih lanjut tentang ketersediaan produk ini ? Juga, bagaimana cara untuk melakukan pembelian? \n Terima kasih banyak atas bantuannya. Saya menunggu informasi lebih lanjut dari Anda.";
-        $text = urlencode($text);
-        $data['text'] = $text;
-        $data['user']['phone_number'] = preg_replace('/[^0-9]/', '', $data['user']['phone_number']);
-        if(Route::current()->getName() == 'products.preview') {
-            return view('products.preview', compact('data'));
+        // Define endpoint
+        $client = new Client();
+        $apiUrl = env('BASE_URL_API') . "products/" . $product->id;
+
+        $routeName = 'products';
+        $viewName = 'products.detail';
+        if(Route::current()->getName() == 'products.show') {
+            $viewName = 'products.show';
+            $routeName = 'products.index';
         }
         if(Route::current()->getName() == 'dashboard.products.show') {
-            return view('dashboard.products.show', compact('data'));
+            $viewName = 'dashboard.products.show';
+            $routeName = 'dashboard.products.index';
         }
-    
-        return view('products.detail', compact('data'));
+
+        try {
+            // Get the data from the API
+            $fetchData = $client->get($apiUrl);
+            $response = json_decode($fetchData->getBody(), true);
+            $data = $response['data'];
+            $data['user']['phone_number'] = preg_replace('/[^0-9]/', '', $data['user']['phone_number']);
+
+            // $seller = $data['user']['name'];
+            $productName = $data['name'];
+            $automatedText = "Halo kak, \n Saya tertarik membeli produk $productName. Apakah produk ini tersedia ? Juga, bagaimana cara untuk pemesanannya? \n Ditunggu ya kak.";
+            $automatedText = urlencode($automatedText);
+
+            // If success, return view and data
+            return view($viewName, [
+                'data' => $data,
+                'automatedText' => $automatedText,
+            ]);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route($routeName)->with('error', $errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to get products data:' . $e->getMessage());
+            return redirect()->route($routeName)->with('error', 'Terjadi kesalahan pada server');
+        }
     }
 
     /**
@@ -204,12 +173,26 @@ class ProductController extends Controller
      */
     public function edit(product $product)
     {
-        $fetchData = Http::get('http://127.0.0.1:8001/api/products/' . $product->id);
-        $response = $fetchData->json();
-        $data = $response['data'];
-        return view('products.edit', compact('data'));
+        // Define endpoint
+        $client = new Client();
+        $apiUrl = env('BASE_URL_API') . "products/" . $product->id;
 
-       
+        try {
+            // Get the data from the API
+            $fetchData = $client->get($apiUrl);
+            $response = json_decode($fetchData->getBody(), true);
+            $data = $response['data'];
+            // If success, return view and data
+            return view('products.edit', ['data' => $data]);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route('products.index')->with('error', $errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to get products data:' . $e->getMessage());
+            return redirect()->route('products.index')->with('error', 'Terjadi kesalahan pada server');
+        }
     }
 
     /**
@@ -289,7 +272,7 @@ class ProductController extends Controller
 
             if ($statusCode === 200) {
                 $data = $responseData['data']; // Assuming API returns 'data' key in response
-                return redirect()->intended(route('products.dashboard', compact('data')));
+                return redirect()->intended(route('products.index', compact('data')));
             } else {
                 // Handle unsuccessful response
                 return back()->with('error', 'Failed to create product: ' . $statusCode);
@@ -327,7 +310,7 @@ class ProductController extends Controller
                 if(Route::current()->getName() == 'dashboard.products.destroy') {
                     return redirect()->intended(route('dashboard.products.index', compact('data')));    
                 }
-                return redirect()->intended(route('products.dashboard', compact('data')));
+                return redirect()->intended(route('products.index', compact('data')));
             } else {
                 // Handle unsuccessful response
                 return back()->with('error', 'Failed to create product: ' . $statusCode);
