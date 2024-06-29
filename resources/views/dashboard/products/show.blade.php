@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot name="title">Produk</x-slot>
 
-    <x-dashboard-section route='dashboard.products.index'> 
+    <x-dashboard-section route='dashboard.products.index'>
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-8">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
                 <div class="shrink-0 max-w-md lg:max-w-lg ">
@@ -11,47 +11,49 @@
                             <!-- Carousel wrapper -->
                             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                                 <!-- Item 1 -->
-                                @foreach($data['product_photo'] as $productPhoto)
-                                <div class="hidden ease-in-out" data-carousel-item>
-                                    <img src="/upload/product/{{ $productPhoto['photo'] }}"
-                                        class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                                        alt="">
-                                </div>
+                                @foreach ($data['product_photo'] as $productPhoto)
+                                    <div class="hidden ease-in-out" data-carousel-item>
+                                        <img src="/upload/product/{{ $productPhoto['photo'] }}"
+                                            class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                            alt="">
+                                    </div>
                                 @endforeach
 
                             </div>
-                            @if(sizeOf($data['product_photo']) > 1)
-                            <div class="flex justify-center items-center pt-4">
-                                <button type="button"
-                                    class="flex justify-center items-center me-4 h-full cursor-pointer group focus:outline-none"
-                                    data-carousel-prev>
-                                    <span
-                                        class="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
-                                        <svg class="rtl:rotate-180 w-5 h-5" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
-                                        </svg>
-                                        <span class="sr-only">Previous</span>
-                                    </span>
-                                </button>
-                                <button type="button"
-                                    class="flex justify-center items-center h-full cursor-pointer group focus:outline-none"
-                                    data-carousel-next>
-                                    <span
-                                        class="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
-                                        <svg class="rtl:rotate-180 w-5 h-5" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                        </svg>
-                                        <span class="sr-only">Next</span>
-                                    </span>
-                                </button>
-                            </div>
+                            @if (sizeOf($data['product_photo']) > 1)
+                                <div class="flex justify-center items-center pt-4">
+                                    <button type="button"
+                                        class="flex justify-center items-center me-4 h-full cursor-pointer group focus:outline-none"
+                                        data-carousel-prev>
+                                        <span
+                                            class="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+                                            <svg class="rtl:rotate-180 w-5 h-5" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 5H1m0 0 4 4M1 5l4-4" />
+                                            </svg>
+                                            <span class="sr-only">Previous</span>
+                                        </span>
+                                    </button>
+                                    <button type="button"
+                                        class="flex justify-center items-center h-full cursor-pointer group focus:outline-none"
+                                        data-carousel-next>
+                                        <span
+                                            class="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+                                            <svg class="rtl:rotate-180 w-5 h-5" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                            </svg>
+                                            <span class="sr-only">Next</span>
+                                        </span>
+                                    </button>
+                                </div>
                             @endif
                         </div>
-                    </div>        
+                    </div>
                 </div>
 
 
@@ -139,9 +141,7 @@
                     <button data-modal-toggle="deleteModal" type="button"
                         class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Batalkan</button>
-                    <form 
-                    {{-- action="{{ route('dashboard.product.destroy', $data['id']) }}"  --}}
-                    method="POST">
+                    <form {{-- action="{{ route('dashboard.product.destroy', $data['id']) }}"  --}} method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
