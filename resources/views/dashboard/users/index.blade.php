@@ -50,7 +50,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $index => $user)
+                    @foreach ($data['current_item'] as $index => $user)
                         <tr class="border-b dark:border-gray-700">
                             <th scope="row"
                                 class="px-4 py-3 font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">
@@ -66,7 +66,8 @@
                                 {{ $user['phone_number'] }}
                             </td>
                             <td class="px-4 py-3 flex items-center justify-end">
-                                <button id="{{ $user['id'] }}-button" data-dropdown-toggle="{{ $user['id'] }}-dropdown"
+                                <button id="{{ $user['id'] }}-button"
+                                    data-dropdown-toggle="{{ $user['id'] }}-dropdown"
                                     class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-700 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                     type="button">
                                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
@@ -164,10 +165,10 @@
                     <form method="POST" id="delete-form">
                         @csrf
                         @method('DELETE')
-                    <button type="submit"
-                        class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-                        Hapus
-                    </button>
+                        <button type="submit"
+                            class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                            Hapus
+                        </button>
                     </form>
                 </div>
             </div>

@@ -9,7 +9,6 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\CheckUserIsAdmin;
-use App\Models\Product;
 
 // Public Routes
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');

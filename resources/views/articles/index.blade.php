@@ -19,7 +19,7 @@
                 <div
                     class="flex flex-col items-center justify-between p-3 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                     <div class="w-full md:w-1/2">
-                        <form class="flex items-center">
+                        <form class="flex items-center" action="{{ route('articles') }}" method="get">
                             <label for="simple-search" class="sr-only">Cari</label>
                             <div class="relative w-full">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -30,9 +30,10 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <input type="text" id="simple-search"
-                                    class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Search" required="">
+                                <input type="text" id="simple-search" name="search"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    placeholder="Cari"
+                                    value="{{ request()->query('search') ? request()->query('search') : '' }}">
                             </div>
                         </form>
                     </div>
@@ -70,7 +71,7 @@
                                     <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
                                         <li class="flex items-center">
                                             <input id="makanan" name="category[]" type="checkbox" value="Berita"
-                                                {{ isset($data['category']) ? (in_array('Berita', $data['category']) ? 'checked' : '') : '' }}
+                                                {{ in_array('Berita', request()->query('category', [])) ? 'checked' : '' }}
                                                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                             <label for="makanan"
                                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -79,7 +80,7 @@
                                         </li>
                                         <li class="flex items-center">
                                             <input id="pakaian" name="category[]" type="checkbox" value="Acara"
-                                                {{ isset($data['category']) ? (in_array('Acara', $data['category']) ? 'checked' : '') : '' }}
+                                                {{ in_array('Acara', request()->query('category', [])) ? 'checked' : '' }}
                                                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                             <label for="pakaian"
                                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -96,58 +97,58 @@
                 </div>
             </div>
             <div class="grid gap-8 lg:grid-cols-2">
-                @foreach($data as $item)
-                <article
-                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                        <img class="mb-4 rounded-lg h-56 w-full object-cover"
-                            src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
-                            alt="road-construction">
-                    </a>
-                    <div class="flex justify-between items-center mb-2 text-gray-700">
-                        <span
-                            class="{{ $item['category'] == 'Berita' ? 'bg-blue-100 text-green-600' : 'bg-red-100 text-red-600' }}  text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-                            <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z">
-                                </path>
-                            </svg>
-                            {{ $item['category'] }}
-                        </span>
-                        <span class="text-sm">14 days ago</span>
-                    </div>
-                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                @foreach ($data as $item)
+                    <article
+                        class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                         <a href="#">
-                            {{ $item['title'] }}
+                            <img class="mb-4 rounded-lg h-56 w-full object-cover"
+                                src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
+                                alt="road-construction">
                         </a>
-                    </h2>
-                    <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
-                        {{ substr($item['body'], 0, 100) }}
-                    </p>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-4">
-                            <img class="w-7 h-7 rounded-full"
-                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                                alt="Jese Leos avatar" />
-                            <span class="font-medium dark:text-white">
-                                Jese Leos
+                        <div class="flex justify-between items-center mb-2 text-gray-700">
+                            <span
+                                class="{{ $item['category'] == 'Berita' ? 'bg-blue-100 text-green-600' : 'bg-red-100 text-red-600' }}  text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                                <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z">
+                                    </path>
+                                </svg>
+                                {{ $item['category'] }}
                             </span>
+                            <span class="text-sm">14 days ago</span>
                         </div>
-                        <a href="{{ route('articles.detail', 1) }}"
-                            class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
-                            Baca Selengkapnya
-                            <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </article>
+                        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            <a href="#">
+                                {{ $item['title'] }}
+                            </a>
+                        </h2>
+                        <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
+                            {{ substr($item['body'], 0, 100) }}
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-4">
+                                <img class="w-7 h-7 rounded-full"
+                                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
+                                    alt="Jese Leos avatar" />
+                                <span class="font-medium dark:text-white">
+                                    Jese Leos
+                                </span>
+                            </div>
+                            <a href="{{ route('articles.detail', 1) }}"
+                                class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
+                                Baca Selengkapnya
+                                <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
                 @endforeach
-                
+
             </div>
             <div class="space-y-3 md:space-y-0 py-8" aria-label="Table navigation">
                 {{ $paginator->links('vendor.pagination.custom') }}

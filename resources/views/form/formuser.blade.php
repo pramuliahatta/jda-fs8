@@ -31,8 +31,9 @@
                                         </svg>
                                     </div>
                                     <input type="text" id="simple-search" name="search"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="Search" required="">
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        placeholder="Cari"
+                                        value="{{ request()->query('search') ? request()->query('search') : '' }}">
                                 </div>
                             </form>
                         </div>
@@ -74,7 +75,7 @@
                                                     <path fill-rule="evenodd"
                                                         d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z"
                                                         clip-rule="evenodd" />
-                                                </svg></a>
+                                                </svg>Unduh di Sini</a>
                                         </td>
                                     </tr>
                                 @endforeach

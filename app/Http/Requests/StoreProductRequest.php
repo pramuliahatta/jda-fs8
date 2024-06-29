@@ -28,7 +28,7 @@ class StoreProductRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'category' => 'required|string',
-            'price' => 'required',
+            'price' => 'required|numeric|min:0',
             'user_id' => 'nullable',
             'photos' => 'required|array|max:3',
             'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -65,7 +65,7 @@ class StoreProductRequest extends FormRequest
             ],
             [
                 'name'      => 'user_id',
-                'contents'   => $this->validated()['user_id']?? null,
+                'contents'   => $this->validated()['user_id'] ?? null,
             ],
         ];
 
@@ -98,6 +98,9 @@ class StoreProductRequest extends FormRequest
             'photos.image' => 'Format foto tidak valid',
             'photos.mimes' => 'Format foto tidak valid',
             'photos.max' => 'Photo maksimal 2 MB',
+            'price.required' => 'Harap masukkan harga produk',
+            'price.numeric' => 'Format harga tidak valid',
+            'price.min' => 'Format harga tidak valid',
         ];
     }
 
