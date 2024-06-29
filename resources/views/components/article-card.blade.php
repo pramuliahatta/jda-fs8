@@ -2,7 +2,7 @@
     $categoryClass = $article['category'] == 'Acara' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600';
 @endphp
 
-<article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+<article class="p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
         <img class="mb-4 rounded-lg h-56 w-full object-cover" src="{{ $article['photo'] }}" alt="road-construction">
     </a>
@@ -27,7 +27,7 @@
         {{ substr($textContent, 0, 75) }}...
     </p>
     <div class="flex justify-between items-center">
-        <div class="flex items-center space-x-4">
+        <div class="hidden md:flex items-center space-x-4">
             <img class="w-7 h-7 rounded-full"
                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
                 alt="Jese Leos avatar" />
