@@ -15,141 +15,116 @@
                 </p>
             </div>
 
-            <div class=" relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg mb-12">
-                <div
-                    class="flex flex-col items-center justify-between p-3 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
-                    <div class="w-full md:w-1/2">
-                        <form class="flex items-center" action="{{ route('articles') }}" method="get">
-                            <label for="simple-search" class="sr-only">Cari</label>
-                            <div class="relative w-full">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-700 dark:text-gray-400"
-                                        fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <div class=" relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg mb-8">
+                <div class="bg-white rounded-lg shadow dark:bg-gray-800">
+                    <!-- Start coding here -->
+
+                    <form id="articlesForm" action="{{ route('articles') }}" method="get">
+                        <div
+                            class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                            <div class="w-full md:w-1/2">
+                                <label for="simple-search" class="sr-only">Cari</label>
+                                <div class="relative w-full">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-700 dark:text-gray-400"
+                                            fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <input type="text" id="simple-search" name="search"
+                                        value="{{ request('search') }}"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        placeholder="Cari">
+                                </div>
+                                <!-- Add reset button conditionally -->
+                                @if (request('search') || request('category') || request('sort'))
+                                    <button type="button" id="resetButton"
+                                        class="mt-4 text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                        Hapus Filter
+                                    </button>
+                                @endif
+                            </div>
+
+                            <div
+                                class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                                <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
+                                    class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-500 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                    type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        class="h-4 w-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd"
-                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                            d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
                                             clip-rule="evenodd" />
                                     </svg>
-                                </div>
-                                <input type="text" id="simple-search" name="search"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Cari"
-                                    value="{{ request()->query('search') ? request()->query('search') : '' }}">
-                            </div>
-                        </form>
-                    </div>
-                    <div
-                        class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
-
-
-
-                        {{-- filter --}}
-                        <div class="flex items-center w-full space-x-3 md:w-auto">
-                            <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
-                                class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                                type="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                    class="w-4 h-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Filter
-                                <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path clip-rule="evenodd" fill-rule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                </svg>
-                            </button>
-                            <!-- Dropdown menu -->
-                            <form method="GET" action="{{ route('articles') }}">
-
+                                    Filter
+                                    <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path clip-rule="evenodd" fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                                    </svg>
+                                </button>
                                 <div id="filterDropdown"
-                                    class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
-                                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-                                        Category
-                                    </h6>
-                                    <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                                    class="hidden z-10 w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Kategori</h6>
+                                    <ul class="space-y-2 text-sm">
                                         <li class="flex items-center">
-                                            <input id="makanan" name="category[]" type="checkbox" value="Berita"
-                                                {{ in_array('Berita', request()->query('category', [])) ? 'checked' : '' }}
-                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                            <label for="makanan"
-                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                Berita
-                                            </label>
+                                            <input id="acara" type="checkbox" value="acara" name="category[]"
+                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                {{ in_array('acara', request('category', [])) ? 'checked' : '' }}>
+                                            <label for="acara"
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Acara</label>
                                         </li>
                                         <li class="flex items-center">
-                                            <input id="pakaian" name="category[]" type="checkbox" value="Acara"
-                                                {{ in_array('Acara', request()->query('category', [])) ? 'checked' : '' }}
-                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                            <label for="pakaian"
-                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                Acara
-                                            </label>
+                                            <input id="berita" type="checkbox" value="berita" name="category[]"
+                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                {{ in_array('berita', request('category', [])) ? 'checked' : '' }}>
+                                            <label for="berita"
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Berita</label>
                                         </li>
-
                                     </ul>
-                                    <button type="submit">Filter</button>
+
+                                    <h6 class="mt-3 mb-3 text-sm font-medium text-gray-900 dark:text-white">Urutkan</h6>
+                                    <ul class="space-y-2 text-sm">
+                                        <li class="flex items-center">
+                                            <input id="asc" type="radio" value="asc" name="sort"
+                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                {{ request('sort') == 'asc' ? 'checked' : '' }}>
+                                            <label for="asc"
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Terlama</label>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <input id="desc" type="radio" value="desc" name="sort"
+                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                {{ request('sort') == 'desc' ? 'checked' : '' }}>
+                                            <label for="desc"
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Terbaru</label>
+                                        </li>
+                                    </ul>
+
+                                    <button type="submit"
+                                        class="mt-3 w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-600">Terapkan</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+
+
                 </div>
             </div>
             <div class="grid gap-8 lg:grid-cols-2">
-                @foreach ($data as $item)
-                    <article
-                        class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        <a href="#">
-                            <img class="mb-4 rounded-lg h-56 w-full object-cover"
-                                src="https://images.pexels.com/photos/2489/street-building-construction-industry.jpg?auto=compress&cs=tinysrgb&w=600"
-                                alt="road-construction">
-                        </a>
-                        <div class="flex justify-between items-center mb-2 text-gray-700">
-                            <span
-                                class="{{ $item['category'] == 'Berita' ? 'bg-blue-100 text-green-600' : 'bg-red-100 text-red-600' }}  text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-                                <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z">
-                                    </path>
-                                </svg>
-                                {{ $item['category'] }}
-                            </span>
-                            <span class="text-sm">14 days ago</span>
-                        </div>
-                        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">
-                                {{ $item['title'] }}
-                            </a>
-                        </h2>
-                        <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
-                            {{ substr($item['body'], 0, 100) }}
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center space-x-4">
-                                <img class="w-7 h-7 rounded-full"
-                                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                                    alt="Jese Leos avatar" />
-                                <span class="font-medium dark:text-white">
-                                    Jese Leos
-                                </span>
-                            </div>
-                            <a href="{{ route('articles.detail', 1) }}"
-                                class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
-                                Baca Selengkapnya
-                                <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </article>
-                @endforeach
+                @if (count($data) > 0)
+                    @foreach ($data as $article)
+                        <x-article-card :article="$article" />
+                    @endforeach
+                @endif
 
             </div>
+            @if (count($data) < 1)
+                <x-alert name="Artikel" />
+            @endif
+
             <div class="space-y-3 md:space-y-0 py-8" aria-label="Table navigation">
                 {{ $paginator->links('vendor.pagination.custom') }}
             </div>
@@ -157,3 +132,18 @@
     </section>
     {{-- NEWS SECTION END --}}
 </x-layout>
+
+
+<script>
+    document.getElementById('resetButton')?.addEventListener('click', function() {
+        const form = document.getElementById('articlesForm');
+
+        // Clear all input fields
+        form.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+        form.querySelectorAll('input[type="checkbox"]').forEach(checkbox => checkbox.checked = false);
+        form.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+
+        // Submit the form
+        form.submit();
+    });
+</script>

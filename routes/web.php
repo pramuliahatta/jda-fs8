@@ -78,7 +78,15 @@ Route::middleware(['auth', CheckUserIsAdmin::class])->prefix('dashboard')->group
     Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroys');
 
-    Route::get('/products', [ProductController::class, 'index'])->name('dashboard.products.index');
-    Route::get('/products/{product}', [ProductController::class, 'show'])->name('dashboard.products.show');
-    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('dashboard.products.destroy');
-});
+    Route::get('/product', [ProductController::class, 'index'])->name('dashboard.products.index');
+    Route::get('/product/{product}', [ProductController::class, 'show'])->name('dashboard.products.show');
+    Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('dashboard.products.destroy');
+
+    Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.stores');
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
+    Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroys');
+})->middleware('auth');
