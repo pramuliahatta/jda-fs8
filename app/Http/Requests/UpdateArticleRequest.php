@@ -36,7 +36,7 @@ class UpdateArticleRequest extends FormRequest
     {
         if ($this->has('title')) {
             $this->merge([
-                'title' => ucwords(strtolower($this->input('title')))
+                'title' => ucwords($this->input('title'))
             ]);
         }
     }

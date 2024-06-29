@@ -22,10 +22,10 @@
             <a href="{{ route('gallery') }}" class="mr-4 hover:underline md:mr-6">Galeri</a>
         </li>
         <li>
-            <a href="{{ route('articles.index') }}" class="mr-4 hover:underline md:mr-6">Artikel</a>
+            <a href="{{ route('articles') }}" class="mr-4 hover:underline md:mr-6">Artikel</a>
         </li>
         <li>
-            <a href="{{ route('products.index') }}" class="mr-4 hover:underline md:mr-6">Pasar Desa</a>
+            <a href="{{ route('products') }}" class="mr-4 hover:underline md:mr-6">Pasar Desa</a>
         </li>
         <li>
             <a href="{{ route('contact') }}" class="mr-4 hover:underline md:mr-6">Kontak Kami</a>
