@@ -58,22 +58,25 @@
 
 
                 {{-- name of product --}}
+
                 <div class="mt-6 sm:mt-8 lg:mt-0">
-                    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
+                    <x-icon-link route="{{ 'products.dashboard' }}" text="Kembali" />
+                    <h1 class="text-4xl font-bold text-gray-900  dark:text-white capitalize">
                         {{ $data['name'] }}
 
                     </h1>
                     {{-- price --}}
                     <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
-                        <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-                            Rp. {{ number_format($data['price'], 0, ',', '.') }}/pack
+                        <p class="text-2xl font-semibold text-gray-900 dark:text-white">
+                            Rp. {{ number_format($data['price'], 0, ',', '.') }},-
                         </p>
                     </div>
 
                     {{-- seller contact --}}
-                    <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-                        <a href="#" title=""
-                            class="text-white mt-4 sm:mt-0 bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+                    <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8 capitalize">
+                        <a href="https://wa.me/{{ $data['user']['phone_number'] }}?text={{ $data['text'] }}"
+                            target="_blank" title=""
+                            class="text-white mt-4 sm:mt-0 bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
                             role="button">
                             <svg class="w-6 h-6 text-white-800 dark:text-white -ms-2 me-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -96,7 +99,20 @@
                     </p>
 
                     <div class="flex justify-between items-center">
-
+                        <div class="flex items-center space-x-3 sm:space-x-4 mt-4">
+                            <a href="{{ route('products.edit', $data['id']) }}" type="button"
+                                class="text-white inline-flex items-center bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                <svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor"
+                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                    <path fill-rule="evenodd"
+                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Ubah
+                            </a>
+                        </div>
                         <button type="button" data-modal-target="deleteModal" data-modal-toggle="deleteModal"
                             data-id="{{ $data['id'] }}"
                             class="delete-button text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">

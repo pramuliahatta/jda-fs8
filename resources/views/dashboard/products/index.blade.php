@@ -6,20 +6,23 @@
         <!-- Start coding here -->
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
             <div class="w-full md:w-1/2">
-                <form class="flex items-center">
-                    <label for="simple-search" class="sr-only">Search</label>
+                <form method="GET" action="{{ route('dashboard.products.index') }}" class="flex items-center">
+                    <label for="simple-search" class="sr-only">Cari</label>
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-700 dark:text-gray-400" fill="currentColor"
                                 viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                                     clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <input type="text" id="simple-search"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Search" required="">
+                        <input type="text" id="simple-search" name="search"
+                            class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Cari" required="">
+                        @foreach ($data['categories'] as $categories)
+                            <input name="categories[]" type="hidden" value="{{ $categories }}">
+                        @endforeach
                     </div>
                 </form>
             </div>
@@ -40,14 +43,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $index => $product)
-                        <tr class="border-b dark:border-gray-700">
+                    @foreach ($data['current_items'] as $index => $product)
+                        <tr class=" border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                             <th scope="row"
-                                class="px-4 py-3 font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">
-
+                                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $index + 1 }}
                             </th>
-                            <td class="px-4 py-3 max-w-[12rem] truncate">
+
+                            <td scope="row" class="px-4 py-3 max-w-[12rem] truncate">
+
+
                                 @foreach ($product['product_photo'] as $productPhoto)
                                     @if ($loop->first)
                                         <img src="/{{ $productPhoto['photo'] }}" alt="productPhoto"
@@ -55,14 +60,19 @@
                                     @endif
                                 @endforeach
                                 {{ $product['name'] }}
+
+                            </td>
+                            <td class="px-4 py-2">
+                                <span
+                                    class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">
+                                    {{ $product['category'] }}</span>
                             </td>
                             <td class="px-4 py-3 max-w-[12rem] truncate">
-                                {{ $product['category'] }}
+                                <div class="flex items-center">
+                                    Rp. {{ number_format($product['price'], 0, ',', '.') }}
+                                </div>
                             </td>
-                            <td class="px-4 py-3 max-w-[12rem] truncate">
-                                Rp. {{ number_format($product['price'], 0, ',', '.') }}
-                            </td>
-                            <td class="px-4 py-3 max-w-[12rem] truncate">
+                            <td class="px-4 py-3 max-w-[12rem] truncate ">
                                 {{ $product['description'] }}
                             </td>
                             <td class="px-4 py-3 flex items-center justify-end">
@@ -78,9 +88,22 @@
                                 </button>
                                 <div id="{{ $product['id'] }}-dropdown"
                                     class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-1 text-sm" aria-labelledby="apple-imac-27-dropdown-button">
+                                    <ul class="py-1 text-sm" aria-labelledby="{{ $product['id'] }}-dropdown-button">
                                         <li>
-                                            <a href="{{ route('dashboard.products.show', $product['id']) }}"
+                                            <a href="{{ route('products.edit', $product['id']) }}"
+                                                class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
+                                                <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
+                                                    viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path
+                                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+                                                </svg>
+                                                Ubah
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('products.preview', $product['id']) }}"
                                                 class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                 <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                     viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -151,10 +174,10 @@
                     <form method="POST" id="delete-form">
                         @csrf
                         @method('DELETE')
-                    <button type="submit"
-                        class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-                        Hapus
-                    </button>
+                        <button type="submit"
+                            class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                            Hapus
+                        </button>
                     </form>
                 </div>
             </div>

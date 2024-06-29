@@ -1,3 +1,4 @@
+@props(['id', 'name', 'altText', 'imagePaths' => []])
 <div class="sm:col-span-2">
     <label for="{{ $id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
         {{ $altText }}
@@ -8,7 +9,7 @@
 
     <div id="{{ $id }}-preview-container" class="mt-4 flex space-x-2">
         @foreach ($imagePaths as $imagePath)
-            <img src="{{ asset($imagePath) }}" alt="{{ $altText }}" class="rounded-lg w-32 h-32 object-cover">
+            <img src="/{{ asset($imagePath) }}" alt="{{ $altText }}" class="rounded-lg w-32 h-32 object-cover">
         @endforeach
     </div>
 </div>
@@ -20,7 +21,7 @@
         const files = event.target.files;
 
         if (files.length > 3) {
-            alert('You can upload a maximum of 3 images.');
+            alert('Hanya bisa mengirim maksimal 3 foto');
             event.target.value = ''; // Clear the file input
             return;
         }

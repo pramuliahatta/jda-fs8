@@ -24,54 +24,75 @@
         </div>
         <section class="bg-white-100 p-16 ">
             <div class="container mx-auto">
-                <div class="bg-white-200 text-grey  rounded-lg  flex flex-col md:flex-row items-center md:items-start">
+                <<<<<<< HEAD <div
+                    class="bg-white-200 text-grey  rounded-lg  flex flex-col md:flex-row items-center md:items-start">
                     <!-- Sambutan Kepala Desa -->
-                    <div class="md:w-2/3">
-                        <div class="container mx-auto">
-                            <h2 class="text-3xl font-bold mb-4">Sambutan Kepala Desa</h2>
-                            <p class="text-lg text-justify">
-                                Assalamu'alaikum Warahmatullahi Wabarakatuh,
-                            </p>
-                            <p class="text-lg text-justify mb-4">
-                                Selamat datang di website resmi Desa Cidadap. Sebagai kepala desa, saya merasa terhormat
-                                dan bersemangat
-                                untuk memperkenalkan desa kita yang indah ini kepada dunia. Desa Cidadap bukan hanya
-                                sekadar tempat tinggal,
-                                tetapi juga komunitas yang kaya akan budaya, tradisi, dan semangat gotong royong.
-                                Melalui website ini, kami
-                                berharap dapat memberikan informasi yang berguna dan terkini tentang berbagai kegiatan,
-                                program, dan
-                                perkembangan yang ada di desa kita. Kami juga berharap bahwa website ini dapat menjadi
-                                sarana komunikasi
-                                yang efektif antara pemerintah desa dan seluruh warga, baik yang berada di dalam desa
-                                maupun di perantauan.
-                            </p>
-                            <p class="text-lg text-justify">
-                                Saya mengajak seluruh warga Desa Cidadap untuk aktif berpartisipasi dalam pembangunan
-                                desa kita tercinta.
-                                Mari kita bersama-sama menjaga dan melestarikan nilai-nilai luhur yang telah diwariskan
-                                oleh leluhur kita,
-                                sambil terus berinovasi dan beradaptasi dengan perkembangan zaman. Semoga dengan adanya
-                                website ini,
-                                transparansi dan akuntabilitas dalam pemerintahan desa dapat semakin meningkat, dan kita
-                                semua dapat
-                                bekerja sama untuk mewujudkan Desa Cidadap yang maju, mandiri, dan sejahtera. Terima
-                                kasih atas perhatian
-                                dan partisipasi Anda.
-                            </p>
-                            <p class="text-lg text-justify">
-                                Wassalamu'alaikum Warahmatullahi Wabarakatuh.
-                            </p>
+                    =======
+                    <div class="bg-white-200 text-grey rounded-lg flex flex-col md:flex-row items-center md:items-start">
+                        <!-- Sambutan Kepala Desa -->
+                        >>>>>>> d9875d251ccfab7dda9584e746e79cca41da65e1
+                        <div class="md:w-2/3">
+                            <div class="container mx-auto">
+                                <h2 class="text-3xl font-bold mb-4">Sambutan Kepala Desa</h2>
+                                <p class="text-lg text-justify">
+                                    Assalamu'alaikum Warahmatullahi Wabarakatuh,
+                                </p>
+                                <p class="text-lg text-justify mb-4">
+                                    Selamat datang di website resmi Desa Cidadap. Sebagai kepala desa, saya merasa
+                                    terhormat
+                                    dan bersemangat
+                                    untuk memperkenalkan desa kita yang indah ini kepada dunia. Desa Cidadap bukan hanya
+                                    sekadar tempat tinggal,
+                                    tetapi juga komunitas yang kaya akan budaya, tradisi, dan semangat gotong royong.
+                                    Melalui website ini, kami
+                                    berharap dapat memberikan informasi yang berguna dan terkini tentang berbagai
+                                    kegiatan,
+                                    program, dan
+                                    perkembangan yang ada di desa kita. Kami juga berharap bahwa website ini dapat
+                                    menjadi
+                                    sarana komunikasi
+                                    yang efektif antara pemerintah desa dan seluruh warga, baik yang berada di dalam
+                                    desa
+                                    maupun di perantauan.
+                                </p>
+                                <p class="text-lg text-justify">
+                                    Saya mengajak seluruh warga Desa Cidadap untuk aktif berpartisipasi dalam
+                                    pembangunan
+                                    desa kita tercinta.
+                                    Mari kita bersama-sama menjaga dan melestarikan nilai-nilai luhur yang telah
+                                    diwariskan
+                                    oleh leluhur kita,
+                                    sambil terus berinovasi dan beradaptasi dengan perkembangan zaman. Semoga dengan
+                                    adanya
+                                    website ini,
+                                    transparansi dan akuntabilitas dalam pemerintahan desa dapat semakin meningkat, dan
+                                    kita
+                                    semua dapat
+                                    bekerja sama untuk mewujudkan Desa Cidadap yang maju, mandiri, dan sejahtera. Terima
+                                    kasih atas perhatian
+                                    dan partisipasi Anda.
+                                </p>
+                                <p class="text-lg text-justify">
+                                    Wassalamu'alaikum Warahmatullahi Wabarakatuh.
+                                </p>
+                            </div>
                         </div>
+                        <<<<<<< HEAD <!-- Foto Kepala Desa -->
+                            <div
+                                class="md:w-1/3 mt-4 md:mt-0 md:ml-6 mx-auto h-full w-full dark:hidden rounded-lg object-cover">
+                                <img src="{{ asset('upload\aset\Kades.jpg') }}" alt="Foto Kepala Desa"
+                                    class="rounded-lg shadow-lg w-full h-auto object-cover">
+                            </div>
                     </div>
-                    <!-- Foto Kepala Desa -->
-                    <div
-                        class="md:w-1/3 mt-4 md:mt-0 md:ml-6 mx-auto h-full w-full dark:hidden rounded-lg object-cover">
-                        <img src="{{ asset('upload\aset\Kades.jpg') }}" alt="Foto Kepala Desa"
-                            class="rounded-lg shadow-lg w-full h-auto object-cover">
-                    </div>
-                </div>
             </div>
+            =======
+            <!-- Foto Kepala Desa -->
+            <div class="md:w-1/3 mt-4 md:mt-0 md:ml-6 mx-auto h-full w-full dark:hidden rounded-lg">
+                <img src="{{ asset('upload\aset\kades-full.jpg') }}" alt="Foto Kepala Desa"
+                    class="rounded-lg shadow-lg w-full h-auto object-cover ">
+            </div>
+
+            >>>>>>> d9875d251ccfab7dda9584e746e79cca41da65e1
             </div>
         </section>
 
@@ -223,19 +244,19 @@
                             Kecamatan Cingambul Kabupaten Majalengka</p>
                     </div>
 
-                    <div class="text-center text-gray-500 dark:text-gray-400 mb-8">
-                        <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{ asset('upload\aset\Kades.jpg') }}"
-                            alt="Kepala Desa">
+                    <div class="text-center text-gray-500 dark:text-gray-400 mb-6">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover"
+                            src="{{ asset('upload\aset\Kades.jpg') }}" alt="Kepala Desa">
                         <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="#">Suntono</a>
                         </h3>
                         <p>Kepala Desa</p>
                     </div>
 
-                    <div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    <div class="grid gap-2 lg:gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         <div class="text-center text-gray-500 dark:text-gray-400">
-                            <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{ asset('upload\aset\Sekdes.jpg') }}"
-                                alt="Sekretaris Desa">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover"
+                                src="{{ asset('upload\aset\Sekdes.jpg') }}" alt="Sekretaris Desa">
                             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 <a href="#">Hendra, S.Pd</a>
                             </h3>
@@ -243,7 +264,7 @@
                         </div>
 
                         <div class="text-center text-gray-500 dark:text-gray-400">
-                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover"
                                 src="{{ asset('upload\aset\keuangan.jpg') }}" alt="Helene Avatar">
                             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 <a href="#">Aang Syahrowardi</a>
@@ -252,8 +273,8 @@
                         </div>
 
                         <div class="text-center text-gray-500 dark:text-gray-400">
-                            <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{ asset('upload\aset\TU.jpg') }}"
-                                alt="Jese Avatar">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover"
+                                src="{{ asset('upload\aset\TU.jpg') }}" alt="Jese Avatar">
                             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 <a href="#">Hendriyana</a>
                             </h3>
@@ -261,7 +282,7 @@
                         </div>
 
                         <div class="text-center text-gray-500 dark:text-gray-400">
-                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover"
                                 src="{{ asset('upload\aset\perencanaan.jpg') }}" alt="Joseph Avatar">
                             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 <a href="#">Rudi Rusmayadi</a>
@@ -270,7 +291,7 @@
                         </div>
 
                         <div class="text-center text-gray-500 dark:text-gray-400">
-                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover"
                                 src="{{ asset('upload\aset\pelayanan.jpg') }}" alt="Sofia Avatar">
                             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 <a href="#">Mamat Rahmat</a>
@@ -279,7 +300,7 @@
                         </div>
 
                         <div class="text-center text-gray-500 dark:text-gray-400">
-                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover"
                                 src="{{ asset('upload\aset\pemerintahan.jpg') }}" alt="Leslie Avatar">
                             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 <a href="#">Nurjamal</a>
@@ -288,8 +309,8 @@
                         </div>
 
                         <div class="text-center text-gray-500 dark:text-gray-400">
-                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                                src="{{ asset('upload\aset\kesra.jpg') }}" alt="Michael Avatar">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover"
+                                src="{{ asset('upload\aset\kesejahteraan.jpg') }}" alt="Michael Avatar">
                             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 <a href="#">Rona Judrat</a>
                             </h3>
@@ -297,33 +318,33 @@
                         </div>
 
                         <div class="text-center text-gray-500 dark:text-gray-400">
-                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                                src="{{ asset('upload\aset\Kadusi.jpg') }}" alt="Neil Avatar">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover"
+                                src="{{ asset('upload\aset\kadus-cidadap.jpg') }}" alt="Neil Avatar">
                             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 <a href="#">Ujang Yana Taryana</a>
                             </h3>
-                            <p>Kadus I</p>
+                            <p>Kadus Cidadap</p>
 
                         </div>
                         <div class="text-center text-gray-500 dark:text-gray-400">
                             <p> </p>
                         </div>
                         <div class="text-center text-gray-500 dark:text-gray-400">
-                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                                src="{{ asset('upload\aset\KadusII.jpg') }}" alt="Neil Avatar">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover"
+                                src="{{ asset('upload\aset\kadus-citeureup.jpg') }}" alt="Neil Avatar">
                             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 <a href="#">Jajang Gunawan</a>
                             </h3>
-                            <p>Kadus II</p>
+                            <p>Kadus Citeureup</p>
 
                         </div>
                         <div class="text-center text-gray-500 dark:text-gray-400">
-                            <img class="mx-auto mb-4 w-36 h-36 rounded-full"
-                                src="{{ asset('upload\aset\kadusIII.jpg') }}" alt="Neil Avatar">
+                            <img class="mx-auto mb-4 w-36 h-36 rounded-full object-cover"
+                                src="{{ asset('upload\aset\kadus-ciroke.jpg') }}" alt="Neil Avatar">
                             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 <a href="#">Dian Maulana</a>
                             </h3>
-                            <p>Kadus III</p>
+                            <p>Kadus Ciroke</p>
                         </div>
                     </div>
                 </div>
