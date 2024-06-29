@@ -125,7 +125,7 @@ class ArticleController extends Controller
             if (!$foundArticle) {
                 return redirect()->route($routeName)->with('error', 'Artikel tidak ditemukan');
             }
-            $data = $data->filter(fn($el) => $el["category"] == $foundArticle["category"])->take(5);
+            $data = $data->filter(fn($el) => $el["category"] == $foundArticle["category"])->take(4);
             // If success, return view and data
             return view($viewName, ['data' => $data, 'detail' => $foundArticle]);
         } catch (RequestException $e) {
