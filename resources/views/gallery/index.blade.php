@@ -12,10 +12,10 @@
                 </p>
             </div>
             <div class="grid gap-8 mb-6 lg:mb-16">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {{-- <div class="grid gap-4"> --}}
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
                     @foreach ($data as $item)
-                        <div>
+                        <div class="cursor-pointer">
                             <img class="h-72 w-full rounded-lg gallery-item object-cover" src="/{{ $item['photo'] }}"
                                 data-title="{{ $item['title'] }}" alt="{{ $item['title'] }}">
                         </div>
@@ -30,16 +30,19 @@
     {{-- GALLERY SECTION END --}}
 
     {{-- LIGHTBOX SECTION --}}
-    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center"
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-2"
         style="display: none;">
-        <div class="relative bg-white p-4 rounded-lg shadow-lg">
+        <div class="relative bg-white p-4 rounded-lg shadow-lg w-full max-w-sm max-h-full">
             <button id="close-lightbox"
                 class="absolute top-2 right-2 text-black bg-white hover:bg-green-100 w-10 h-10 rounded-full p-2">
                 &times;
             </button>
-            <img id="lightbox-img" src="" alt=""
-                class="w-56 h-56 sm:w-96 sm:h-96 object-cover rounded-lg">
-            <h2 id="lightbox-title" class="text-center text-xl mt-4 w-96"></h2>
+            <figure>
+                <img id="lightbox-img" src="" alt=""
+                    class="w-full h-56 sm:w-96 sm:h-96 object-cover rounded-lg">
+                <figcaption id="lightbox-title" class="text-center min-h-12 mt-4 w-full text-gray-700 capitalize">
+                </figcaption>
+            </figure>
             <div class="flex justify-center mt-4">
                 <button id="prev"
                     class="px-4 py-2 bg-white text-black mr-2 flex items-center gap-2 hover:bg-green-100 w-10 h-10 rounded-full">
