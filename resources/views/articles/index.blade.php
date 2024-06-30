@@ -38,13 +38,6 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         placeholder="Cari">
                                 </div>
-                                <!-- Add reset button conditionally -->
-                                @if (request('search') || request('category') || request('sort'))
-                                    <button type="button" id="resetButton"
-                                        class="mt-4 text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                                        Hapus Filter
-                                    </button>
-                                @endif
                             </div>
 
                             <div
@@ -106,14 +99,21 @@
                                     <button type="submit"
                                         class="mt-3 w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-600">Terapkan</button>
                                 </div>
+
+                                <!-- Add reset button conditionally -->
+                                @if (request('search') || request('category') || request('sort'))
+                                    <button type="button" id="resetButton"
+                                        class="mt-4 w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                        Hapus Filter
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </form>
 
-
                 </div>
             </div>
-            <div class="grid gap-8 lg:grid-cols-2">
+            <div class="grid gap-8 grid-cols-1 lg:grid-cols-2">
                 @if (count($data) > 0)
                     @foreach ($data as $article)
                         <x-article-card :article="$article" />
