@@ -12,7 +12,8 @@
                 </p>
             </div>
 
-            <div class=" relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg mb-8">
+            <div
+                class=" relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg @if (count($data) > 0) mb-8 @endif">
                 <div class="bg-white rounded-lg shadow dark:bg-gray-800">
                     <!-- Start coding here -->
 
@@ -136,7 +137,7 @@
             </figure>
             <div class="flex justify-center mt-4">
                 <button id="prev"
-                    class="px-4 py-2 bg-white text-black mr-2 flex items-center gap-2 hover:bg-green-100 w-10 h-10 rounded-full">
+                    class="px-4 py-2 bg-white text-black mr-2 flex items-center gap-2 hover:bg-green-100 w-10 h-10 rounded-full disabled:opacity-50 disabled:cursor-not-allowed">
                     <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -144,7 +145,7 @@
                     </svg>
                 </button>
                 <button id="next"
-                    class="px-4 py-2 bg-white text-black flex items-center gap-2 hover:bg-green-100 w-10 h-10 rounded-full">
+                    class="px-4 py-2 bg-white text-black flex items-center gap-2 hover:bg-green-100 w-10 h-10 rounded-full disabled:opacity-50 disabled:cursor-not-allowed">
                     <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -178,6 +179,9 @@
             lightboxTitle.textContent = item.getAttribute("data-title");
             lightbox.style.display = "flex";
             currentIndex = index;
+
+            // Update button states based on currentIndex
+            updateButtonState();
         }
 
         function closeLightboxFn() {
@@ -193,6 +197,18 @@
             currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
             openLightbox(currentIndex);
         }
+
+        // Update button states based on currentIndex
+        function updateButtonState() {
+            if (galleryItems.length === 1) {
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+            } else {
+                prevBtn.disabled = false;
+                nextBtn.disabled = false;
+            }
+        }
+
 
         galleryItems.forEach((item, index) => {
             item.addEventListener("click", () => openLightbox(index));
