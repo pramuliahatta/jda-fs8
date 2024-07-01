@@ -3,9 +3,9 @@
     <x-slot name="title">Layanan</x-slot>
 
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-        <div class="mx-auto max-w-screen-xl ">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
             <!-- Start coding here -->
-            <div class="mx-auto max-w-screen-sm text-center mb-2 mt-8 lg:mb-8">
+            <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Layanan Desa Kami
                 </h2>
@@ -14,31 +14,49 @@
                     <br />
                     Silahkan unduh formulir adminitrasi warga di sini.
                 </p>
+            </div>
 
-                <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-                    <div
-                        class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                        <div class="w-full md:w-1/2">
-                            <form class="flex items-center" action="{{ route('services') }}" method="get">
+            <div class=" relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg mb-8">
+                <div class="bg-white rounded-lg shadow dark:bg-gray-800">
+                    <!-- Start coding here -->
+
+                    <form id="formulir" action="{{ route('services') }}" method="get">
+                        <div
+                            class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                            <div class="w-full md:w-1/2">
                                 <label for="simple-search" class="sr-only">Cari</label>
                                 <div class="relative w-full">
                                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-700 dark:text-gray-400" fill="currentColor"
-                                            viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-700 dark:text-gray-400"
+                                            fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
                                                 d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                                                 clip-rule="evenodd" />
                                         </svg>
+                                    </div>
+                                    <input type="text" id="simple-search" name="search"
+                                        value="{{ request('search') }}"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        placeholder="Cari">
                                 </div>
-                                <input type="text" id="simple-search" name="search"
-                                class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Cari" required="">
-                                </div>
-                            </form>
+                            </div>
+                            <div
+                                class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                                @if (request('search'))
+                                    <button type="button" id="resetButton"
+                                        class="mt-4 w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                        Hapus Filter
+                                    </button>
+                                @endif
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="overflow-x-auto">
+
+                    </form>
+                </div>
+
+                <div class="overflow-x-auto">
+                    @if (count($data) > 0)
                         <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -74,20 +92,37 @@
                                                     <path fill-rule="evenodd"
                                                         d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z"
                                                         clip-rule="evenodd" />
-                                                </svg>
-
-
-                                                Unduh di sini</a>
+                                                </svg>Unduh di sini</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    <div class="space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
-                        {{ $paginator->links('vendor.pagination.custom') }}
-                    </div>
+                    @endif
                 </div>
             </div>
+
+            @if (count($data) < 1)
+                <div class="px-4">
+                    <x-alert name="Formulir" />
+                </div>
+            @endif
+
+            <div class="space-y-2 md:space-y-0" aria-label="Table navigation">
+                {{ $paginator->links('vendor.pagination.custom') }}
+            </div>
+        </div>
     </section>
 </x-layout>
+<script>
+    document.getElementById('resetButton')?.addEventListener('click', function() {
+        const form = document.getElementById('formulir');
+
+        // Clear all input fields
+        form.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+
+
+        // Submit the form
+        form.submit();
+    });
+</script>

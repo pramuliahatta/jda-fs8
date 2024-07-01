@@ -32,7 +32,12 @@ class ArticleController extends Controller
                         ->orWhere('body', 'like', '%' . $search . '%');
                 });
             }
-            $article = $query->get()->sortByDesc('created_at')->values();
+            $sortOrder = $request->query('sort', 'desc');
+            if ($sortOrder === 'asc') {
+                $article = $query->orderBy('created_at', 'asc')->get();
+            } else {
+                $article = $query->orderBy('created_at', 'desc')->get();
+            }
             // response if success
             return success($article, 'Artikel berhasil ditemukan');
         } catch (\Exception $e) {
@@ -157,9 +162,11 @@ class ArticleController extends Controller
 
             if ($article) {
                 // remove photo in public directory
-                $photoPath = public_path($article->photo);
-                if (file_exists($photoPath)) {
-                    @unlink($photoPath);
+                if ($article->photo != 'upload/article/noimage.jpg') {
+                    $photoPath = public_path($article->photo);
+                    if (file_exists($photoPath)) {
+                        @unlink($photoPath);
+                    }
                 }
                 // remove gallery data in database
                 $article->delete();
