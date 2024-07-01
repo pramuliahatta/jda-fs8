@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\CheckUserIsAdmin;
 
@@ -60,4 +61,4 @@ Route::middleware(['auth', CheckUserIsAdmin::class])->prefix('dashboard')->group
 
     Route::resource('/products', ProductController::class, ['names'=> 'dashboard.products'])->only(['index', 'show', 'destroy']);
 
-});
+})->middleware('auth');

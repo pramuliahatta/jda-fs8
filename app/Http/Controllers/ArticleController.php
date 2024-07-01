@@ -22,7 +22,7 @@ class ArticleController extends Controller
         $apiUrl = env('BASE_URL_API') . "articles";
         // Determine the view and perpage based on route
         $currentPage = request()->get('page', 1);
-        $viewName =  'articles.index';
+        $viewName = 'articles.index';
         $perPage = 12;
         if ($request->route()->getName() == 'dashboard.articles.index') {
             $viewName = 'dashboard.articles.index';
@@ -34,6 +34,7 @@ class ArticleController extends Controller
             $response = $client->get($apiUrl, [
                 'query' => [
                     'category' => $request->input('category'),
+                    'sort' => $request->input('sort'),
                     'search' => $request->input('search'),
                 ]
             ]);
@@ -92,11 +93,11 @@ class ArticleController extends Controller
         } catch (RequestException $e) {
             // If fails from the request, then back and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return back()->withErrors($errorMessage);
+            return back()->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to store articles:' . $e->getMessage());
-            return redirect()->route('dashboard.articles.index')->withErrors('Terjadi kesalahan pada server');
+            return redirect()->route('dashboard.articles.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 
@@ -124,12 +125,13 @@ class ArticleController extends Controller
             if (!$foundArticle) {
                 return redirect()->route($routeName)->with('error', 'Artikel tidak ditemukan');
             }
+            $data = $data->filter(fn($el) => $el["category"] == $foundArticle["category"])->take(4);
             // If success, return view and data
             return view($viewName, ['data' => $data, 'detail' => $foundArticle]);
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return redirect()->route($routeName)->withErrors($errorMessage);
+            return redirect()->route($routeName)->with('error', $errorMessage);
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to get articles data:' . $e->getMessage());
@@ -192,31 +194,6 @@ class ArticleController extends Controller
         } catch (\Exception $e) {
             // Another fails
             Log::error('Failed to store articles:' . $e->getMessage());
-            return redirect()->route('dashboard.articles.index')->with('error', 'Terjadi kesalahan pada server');
-        }
-
-        // Get multipart data from request
-        $multipart = $request->getMultipart();
-        // Define endpoint
-        $apiUrl = env('BASE_URL_API') . "articles/$id";
-
-        try {
-            $response = $client->post($apiUrl, [
-                'headers' => [
-                    'Accept' => 'application/json',
-                ],
-                'multipart' => $multipart,
-            ]);
-            $responseMessage = json_decode($response->getBody(), true)['message'];
-            // If success redirect and send success message
-            return redirect()->route('dashboard.articles.index')->with('success', $responseMessage);
-        } catch (RequestException $e) {
-            // If fails from the request, then back and send error message
-            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
-            return back()->with('error', $errorMessage);
-        } catch (\Exception $e) {
-            // Another fails
-            Log::error('Failed to update article:' . $e->getMessage());
             return redirect()->route('dashboard.articles.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
