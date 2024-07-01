@@ -2,12 +2,12 @@
     <x-slot name="title">Pasar Desa</x-slot>
     <section class="bg-white dark:bg-gray-900">
         <div class="py-16 px-16 mx-auto max-w-screen-md sm:py-16 lg:px-16 ">
-                <x-icon-link route="{{'products.dashboard'}}" text="Kembali" />
+                <x-icon-link route="{{'products.index'}}" text="Kembali" />
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Tambah Produk
                 </h2>
 
-                <form action="{{ route('products.stores') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 
@@ -22,7 +22,7 @@
                {{-- {{dd($imagePaths)}} --}}
                     <x-multi-image 
                     id="photos"
-                    name="photo[]"
+                    name="photos"
                     altText="Gambar Produk"
                     {{-- :imagePaths="$imagePaths" --}}
                     />
@@ -42,7 +42,7 @@
                     <div class="w-full mt-2 mb-2">
 
                         <x-input-field label="Harga" name="price" id="price" placeholder="Masukkan harga produk"
-                        value="{{ old('price', $photo->title ?? '') }}" />
+                        value="{{ old('price', $photo->price ?? '') }}" />
                     <x-error-message field="price" />
                     </div>
                     <div>

@@ -2,28 +2,19 @@
     <x-slot name="title">Pasar Desa</x-slot>
     <section class="bg-white dark:bg-gray-900">
         <div class="py-16 px-16 mx-auto max-w-screen-md lg:py-16 lg:px-16 ">
-                <x-icon-link route="{{'products.dashboard'}}" text="Kembali" />
+                <x-icon-link route="{{'products.index'}}" text="Kembali" />
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Edit Produk
                 </h2>
                 
-                <form action="{{ route('products.updates', 1) }}" method="POST"
+                <form action="{{ route('products.update', $data['id']) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
-                {{-- {{dd($data)}} --}}
-
-                @php
-                    // Extract image paths from the data
-                    $imagePaths = 
-                    array_map(function($photo) {
-                        return $photo['photo'];
-                    }, $data['product_photo']);
-                @endphp
                 
                {{-- {{dd($imagePaths)}} --}}
                     <x-multi-image 
                     id="photos"
-                    name="photo[]"
+                    name="photos"
                     altText="Gambar Produk"
                     :imagePaths="$imagePaths"
                     />

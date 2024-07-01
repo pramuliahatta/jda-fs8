@@ -13,7 +13,7 @@
                                 <!-- Item 1 -->
                                 @foreach($data['product_photo'] as $productPhoto)
                                 <div class="hidden ease-in-out" data-carousel-item>
-                                    <img src="/upload/product/{{ $productPhoto['photo'] }}"
+                                    <img src="/{{ $productPhoto['photo'] }}"
                                         class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                                         alt="">
                                 </div>
@@ -91,9 +91,9 @@
                     <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
                     {{-- description --}}
-                    <p class="mb-6 text-gray-500 dark:text-gray-400">
-                        {{ $data['description'] }}
-                    </p>
+                    <div class="mb-6 text-gray-500 dark:text-gray-400">
+                        {!! $data['description'] !!}
+                    </div>
 
                     <div class="flex justify-between items-center">
 
@@ -163,7 +163,7 @@
             const itemId = button.getAttribute('data-id');
 
             document.getElementById('delete-form').setAttribute('action',
-                `/dashboard/product/${itemId}`);
+                `/dashboard/products/${itemId}`);
         })
     })
 </script>

@@ -9,7 +9,7 @@
 
     <div id="{{ $id }}-preview-container" class="mt-4 flex space-x-2">
         @foreach ($imagePaths as $imagePath)
-            <img src="/{{ asset($imagePath) }}" alt="{{ $altText }}" class="rounded-lg w-32 h-32 object-cover">
+            <img src="/{{ $imagePath }}" alt="{{ $altText }}" class="rounded-lg w-32 h-32 object-cover">
         @endforeach
     </div>
 </div>

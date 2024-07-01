@@ -7,7 +7,7 @@
             </h2>
             <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg mb-4">
 
-                <form id="productForm" action="{{ route('products.dashboard') }}" method="get">
+                <form id="productForm" action="{{ route('products.update') }}" method="get">
                     <div
                         class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div class="w-full md:w-1/2">
@@ -98,7 +98,7 @@
                             <!-- Add reset button conditionally -->
                             @if (request('search') || request('categories'))
                                 <button type="button" id="resetButton"
-                                    class="mt-4 w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                class=" w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                                     Hapus Filter
                                 </button>
                             @endif
@@ -111,7 +111,7 @@
 
             {{-- table products --}}
             <div class="overflow-x-auto">
-                @if (count($data['current_items']) > 0)
+                @if (count($data) > 0)
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -126,7 +126,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data['current_items'] as $index => $product)
+                            @foreach ($data as $index => $product)
                                 <tr class=" border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <th scope="row"
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -227,14 +227,14 @@
             </div>
 
 
-            @if (count($data['current_items']) < 1)
+            @if (count($data) < 1)
                 <div class="">
                     <x-alert name="Produk" />
                 </div>
             @endif
 
             <div class="space-y-3 md:space-y-0 py-4 px-4" aria-label="Table navigation">
-                {{ $data['paginator']->links('vendor.pagination.custom') }}
+                {{ $paginator->links('vendor.pagination.custom') }}
             </div>
         </div>
         
@@ -289,7 +289,7 @@
             const itemId = button.getAttribute('data-id');
 
             document.getElementById('delete-form').setAttribute('action',
-                `/dashboard/products/${itemId}`);
+                `/seller/products/${itemId}`);
         })
     })
 
