@@ -5,7 +5,7 @@
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
         <div class="mx-auto max-w-screen-xl ">
             <!-- Start coding here -->
-            <div class="mx-auto max-w-screen-sm text-center mb-2 mt-8 lg:mb-8">
+            <div class="mx-auto max-w-screen-lg text-center mb-2 mt-8 lg:mb-8">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Layanan Desa Kami
                 </h2>
@@ -74,10 +74,7 @@
                                                     <path fill-rule="evenodd"
                                                         d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z"
                                                         clip-rule="evenodd" />
-                                                </svg>
-
-
-                                                Unduh di sini</a>
+                                                </svg></a>
                                         </td>
                                     </tr>
                                 @endforeach
