@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 
 class StoreProductRequest extends FormRequest
 {
@@ -65,7 +66,7 @@ class StoreProductRequest extends FormRequest
             ],
             [
                 'name'      => 'user_id',
-                'contents'   => $this->validated()['user_id']?? null,
+                'contents'   => (Auth::user()->id?? $this->validated()['user_id']) ?? 1,
             ],
         ];
 
@@ -88,16 +89,19 @@ class StoreProductRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Harap masukan nama produk',
+            'name.required' => 'Harap masukkan nama produk',
             'name.string' => 'Format nama tidak valid',
             'name.max' => 'Nama produk tidak boleh lebih dari 255 karakter',
-            'description.required' => 'Harap masukan deskripsi produk',
+            'description.required' => 'Harap masukkan deskripsi produk',
             'description.string' => 'Format deskripsi tidak valid',
             'category.required' => 'Harap pilih kategori',
             'category.string' => 'Format category tidak valid',
-            'photos.image' => 'Format foto tidak valid',
-            'photos.mimes' => 'Format foto tidak valid',
-            'photos.max' => 'Photo maksimal 2 MB',
+            'price.required' => 'Harap masukkan harga',
+            'photos.required' => 'Harap unggah photo',
+            'photos.max' => 'Maksimal hanya boleh 3 foto',
+            'photos.*.image' => 'Format foto tidak valid',
+            'photos.*.mimes' => 'Format foto tidak valid',
+            'photos.*.max' => 'Ukuran maksimal foto 2 MB',
         ];
     }
 

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -15,57 +19,69 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        // $pageSize = $request->input('pageSize', 10); // Default page size
+        try {
+            // get all data in database
+            $query =  User::query();
+            if ($request->has('search')) {
+                $search = $request->query('search');
 
-        // $users = User::paginate($pageSize);
-        $search = $request->input('search', null);
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                });
+            }
 
-        $query = User::query();
-
-        if (!empty($search)) {
-            $query->where('name', 'like', '%' . $search . '%');
+            $user = $query->get()->sortByDesc('updated_at')->values();
+            // response if success
+            return success($user, 'Pengguna berhasil ditemukan');
+        } catch (\Exception $e) {
+            Log::error("Failed to get user data:" . $e->getMessage());
+            return fails('Gagal mendapatkan data pengguna', 500);
         }
 
-        $users = $query->get();
+        // // $pageSize = $request->input('pageSize', 10); // Default page size
 
-        return success($users, 'Data fetched successfully');
+        // // $users = User::paginate($pageSize);
+        // $search = $request->input('search', null);
+
+        // $query = User::query();
+
+        // if (!empty($search)) {
+        //     $query->where('name', 'like', '%' . $search . '%');
+        // }
+
+        // $users = $query->get();
+
+        // return success($users, 'Data fetched successfully');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:4|max:255',
-            'phone_number' => 'required|unique:users|min:7|max:20',
-            'email' => 'required|unique:users|email:dns',
-            'password' => 'required|min:4|confirmed',
-        ]);
 
-        if ($validator->fails()) {
-            return fails($validator->errors(), 422);
+        $validatedData = $request->validated();
+        try {
+            // Get validated data from request
+            $validatedData = $request->validated();
+
+            // store user data in database
+            User::create([
+                'name' => $validatedData['name'],
+                'phone_number' => $validatedData['phone_number'],
+                'email' => $validatedData['email'],
+                'role' => 'member',
+                'password' => Hash::make($validatedData['password']),
+            ]);
+
+            return success(null, 'Pengguna berhasil ditambahkan');
+        } catch (ValidationException $e) {
+            return fails($e->errors(), 422);
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to store user:' . $e->getMessage());
+            return fails('Gagal menambahkan pengguna', 500);
         }
-
-        // $user = new User;
-        // $user->name = $request->post('name');
-        // $user->phone_number = $request->post('phone_number');
-        // $user->email = $request->post('email');
-        // $user->role = 'member';
-        // $user->password = Hash::make('12345');
-
-        $storeData = User::create([
-            'name' => $request->name,
-            'phone_number' => $request->phone_number,
-            'email' => $request->email,
-            'role' => 'member',
-            'password' => Hash::make($request->password),
-        ]);
-        if ($storeData) {
-            return success(null, 'Pengguna berhasil ditambah');
-        }
-
-        return fails('Pengguna gagal ditambah', 400);
     }
 
     /**
@@ -73,72 +89,69 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::find($id);
-        if($user) {
-            return success($user, 'Data fetched successfully');
-        }
+        try {
+            // find data in database
+            $user = User::find($id);
 
-        return fails('Failed to fetch data', 400);
+            if ($user) {
+                // response if success
+                return success($user, 'Pengguna berhasil ditemukan');
+            }
+            // response if fails
+            return fails('Pengguna tidak ditemukan', 404);
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to get user data:' . $e->getMessage());
+            return fails('Gagal mendapatkan data produk', 500);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:4|max:255',
-            'phone_number' => 'required|min:7|max:20',
-            'email' => 'required|email:dns',
-            'password' => 'nullable|min:4|confirmed',
-        ]);
+        try {
+            // find data in database
+            $user = User::find($id);
+            if (!$user) {
+                // response if not found
+                return fails('Pengguna tidak ditemukan', 404);
+            }
+            // Get data from request
+            $validatedData = $request->validated();
 
-        if ($validator->fails()) {
-            return fails($validator->errors(), 422);
-        }
+            // store user data in database
+            $user->update([
+                    'name' => $validatedData['name'],
+                ]);
+            
+            if($user->phone_number != $validatedData['phone_number']) {
+                $user->update([
+                    'phone_number' => $validatedData['phone_number'],
+                ]);
+            }
 
-        $user = User::find($id);
-
-        // $user = new User;
-        // $user->name = $request->post('name');
-        // $user->phone_number = $request->post('phone_number');
-        // $user->email = $request->post('email');
-        // $user->role = 'member';
-        // $user->password = Hash::make('12345');
-
-        // return $request;
-
-        $updatedData = User::where('id', $id)
-            ->update([
-                'name' => $request->name,
-            ]);
-        
-        if($user->phone_number != $request->phone_number) {
-            $updatedData = User::where('id', $id)
-            ->update([
-                'phone_number' => $request->phone_number,
-            ]);
-        }
-
-        if($user->email != $request->email) {
-            $updatedData = User::where('id', $id)
-            ->update([
-                'email' => $request->email,
-            ]);
-        }
-        
-        if(!is_null($request->password)) {
-            $updatedData = User::where('id', $id)
-            ->update([
-                'password' => Hash::make($request->password),
-            ]);
-        }
-        
-        if ($updatedData) {
+            if($user->email != $validatedData['email']) {
+                $user->update([
+                    'email' => $validatedData['email'],
+                ]);
+            }
+            
+            if(!is_null($validatedData['password'])) {
+                $user->update([
+                    'password' => Hash::make($validatedData['password']),
+                ]);
+            }
+            // response if success
             return success(null, 'Pengguna berhasil diubah');
+        } catch (ValidationException $e) {
+            return fails($e->errors(), 422);
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to update user:' . $e->getMessage());
+            return fails('Gagal mengubah produk', 500);
         }
-
-        return fails('Pengguna gagal diubah', 400);
     }
 
     /**
@@ -146,12 +159,31 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::destroy($id);
-        if($user) {
-            return success(null, 'Pengguna berhasil dihapus');
+        try {
+            // find data in database
+            $user = User::find($id);
+
+            if ($user) {
+                // remove users data in database
+                $user->delete();
+                // response if success
+                return success(null, 'Pengguna berhasil dihapus');
+            }
+
+            // response if fails find
+            return fails('Pengguna tidak ditemukan', 404);
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to delete users:' . $e->getMessage());
+            return fails('Gagal menghapus pengguna', 500);
         }
 
-        return fails('Pengguna gagal dihapus', 400);
+        // $user = User::destroy($id);
+        // if($user) {
+        //     return success(null, 'Pengguna berhasil dihapus');
+        // }
+
+        // return fails('Pengguna gagal dihapus', 400);
     }
 
     public function authenticate(Request $request) {
@@ -175,10 +207,10 @@ class UserController extends Controller
         if ($user == null || !Hash::check($password, $user->password)) {
             return fails('Gagal Masuk', 422);
         }
-        // $request->session()->regenerate();
-        // $user = Auth::user();
 
-        $token = $user->createToken(uniqid())->plainTextToken;
+        $request->session()->regenerate();
+
+        $token = $user->createToken('authToken')->plainTextToken;
 
         return success($token, 'Berhasil Masuk');
 

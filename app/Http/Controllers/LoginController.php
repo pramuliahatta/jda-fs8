@@ -26,16 +26,9 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             //buat session baru
             $user = User::where('email', $request->email)->first();
-            $token = $user->createToken('authToken')->plainTextToken;
+            // $token = $user->createToken('authToken')->plainTextToken;
 
-            // Example of storing the token in a database table
-            $user->tokens()->create([
-                'token' => $token,
-                'name' => 'authToken',
-                'last_used_at' => now(),
-            ]);
-
-            $request->session()->regenerate();
+            // $request->session()->regenerate();
             
             //jika user admin maka arahkan user ke menu dashboard, jika user adalah pengguna biasa maka arahkan user ke halaman awal
             if (Auth::user()->role == 'admin') {

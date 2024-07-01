@@ -6,7 +6,7 @@
                     Edit Produk
                 </h2>
                 
-                <form action="{{ route('products.update', 1) }}" method="POST"
+                <form action="{{ route('products.update', $data['id']) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
 

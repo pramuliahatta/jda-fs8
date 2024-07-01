@@ -63,7 +63,7 @@
                                 Rp. {{ number_format($product['price'], 0, ',', '.') }}
                             </td>
                             <td class="px-4 py-3 max-w-[12rem] truncate">
-                                {{ $product['description'] }}
+                                {!! $product['description'] !!}
                             </td>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <button id="{{ $product['id'] }}-dropdown-botton"
@@ -168,7 +168,7 @@
             const itemId = button.getAttribute('data-id');
 
             document.getElementById('delete-form').setAttribute('action',
-                `/dashboard/product/${itemId}`);
+                `/dashboard/products/${itemId}`);
         })
     })
 </script>

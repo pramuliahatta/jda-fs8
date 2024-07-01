@@ -95,9 +95,9 @@
                     <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
                     {{-- description --}}
-                    <p class="mb-6 text-gray-700 dark:text-gray-700">
+                    <div class="mb-6 text-gray-700 dark:text-gray-700">
                         {!! $data['description'] !!}
-                    </p>
+                    </div>
 
                     {{-- <p class="text-gray-700 dark:text-gray-700">
                         Two Thunderbolt USB 4 ports and up to two USB 3 ports. Ultrafast

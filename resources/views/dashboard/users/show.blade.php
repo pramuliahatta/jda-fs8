@@ -48,7 +48,7 @@
             <div class="flex items-center space-x-3 sm:space-x-4">
                 <a href="{{ route(
                     'dashboard.users.edit',
-                    1,
+                    $data['id']
                     // $id
                 ) }}"
                     type="button"
