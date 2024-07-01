@@ -20,8 +20,8 @@
                         <input type="text" id="simple-search" name="search"
                             class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Cari" required="">
-                        @foreach ($data['categories'] as $categories)
-                            <input name="categories[]" type="hidden" value="{{ $categories }}">
+                        @foreach ($categories as $category)
+                            <input name="categories[]" type="hidden" value="{{ $category }}">
                         @endforeach
                     </div>
                 </form>
@@ -88,21 +88,8 @@
                             <div id="{{ $product['id'] }}-dropdown"
                                     class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                     <ul class="py-1 text-sm" aria-labelledby="{{ $product['id'] }}-dropdown-button">
-                                        <li>
-                                            <a href="{{ route('products.edit', $product['id']) }}"
-                                                class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
-                                                <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                                    viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                    <path
-                                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                                                </svg>
-                                                Ubah
-                                            </a>
-                                        </li>
                                     <li>
-                                        <a href="{{ route('products.preview', $product['id']) }}"
+                                        <a href="{{ route('products.show', $product['id']) }}"
                                             class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                             <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                 viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">

@@ -190,8 +190,13 @@ class ProductController extends Controller
             $fetchData = $client->get($apiUrl);
             $response = json_decode($fetchData->getBody(), true);
             $data = $response['data'];
+            $imagePaths = [];
+            foreach($data['product_photo'] as $imagePath) {
+                $imagePaths[] = $imagePath['photo'];
+            }
+
             // If success, return view and data
-            return view('products.edit', ['data' => $data]);
+            return view('products.edit', ['data' => $data, 'imagePaths' => $imagePaths]);
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];

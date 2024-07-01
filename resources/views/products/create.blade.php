@@ -22,7 +22,7 @@
                {{-- {{dd($imagePaths)}} --}}
                     <x-multi-image 
                     id="photos"
-                    name="photo[]"
+                    name="photos"
                     altText="Gambar Produk"
                     {{-- :imagePaths="$imagePaths" --}}
                     />

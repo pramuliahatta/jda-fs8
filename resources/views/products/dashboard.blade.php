@@ -7,7 +7,7 @@
             <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
                 <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
                     <div class="w-full md:w-1/2">
-                        <form method="GET" action="{{ route('products.dashboard') }}" class="flex items-center">
+                        <form method="GET" action="{{ route('products.index') }}" class="flex items-center">
                             <label for="simple-search" class="sr-only">Cari</label>
                             <div class="relative w-full">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -21,8 +21,8 @@
                                 <input type="text" id="simple-search" name="search"
                                     class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Cari" required="">
-                                @foreach ($data['categories'] as $categories)
-                                    <input name="categories[]" type="hidden" value="{{ $categories }}">
+                                @foreach ($categories as $category)
+                                    <input name="categories[]" type="hidden" value="{{ $category }}">
                                 @endforeach
                             </div>
                         </form>
