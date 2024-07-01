@@ -6,13 +6,36 @@
             </h2>
             <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
                 <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
+                    <div class="w-full md:w-1/2">
+                        <form method="GET" action="{{ route('products.dashboard') }}" class="flex items-center">
+                            <label for="simple-search" class="sr-only">Cari</label>
+                            <div class="relative w-full">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-700 dark:text-gray-400" fill="currentColor"
+                                        viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                            </div>
+                                <input type="text" id="simple-search" name="search"
+                                    class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    placeholder="Cari" required="">
+                                @foreach ($data['categories'] as $categories)
+                                    <input name="categories[]" type="hidden" value="{{ $categories }}">
+                                @endforeach
+                            </div>
+                        </form>
+                    </div>
                     {{-- add product button --}}
                     <div class="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-end lg:justify-end md:space-y-0 md:space-x-3">
                         <a href="{{route('products.create')}}"
-                            class="flex items-center justify-end px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                            <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
-                            </svg>
+                        class="flex items-center justify-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-primary-800">
+                        <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                        </svg>
                             Tambah Produk
                         </a>
                     </div>
@@ -20,22 +43,24 @@
                 <div class="overflow-x-auto">
 
                     {{-- table products --}}
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-4 py-3 text-center">No</th>
-                                <th scope="col" class="px-4 py-3 text-center">Nama Produk</th>
-                                <th scope="col" class="px-4 py-3 text-center">Kategori</th>
-                                <th scope="col" class="px-4 py-3 text-center">Harga</th>
-                                <th scope="col" class="px-4 py-3 text-center">Deskripsi</th>
-                                <th scope="col" class="px-4 py-3 text-center"><span class="sr-only">Actions</span></th>
+                                <th scope="col" class="px-4 py-3 ">No</th>
+                                <th scope="col" class="px-4 py-3 ">Nama Produk</th>
+                                <th scope="col" class="px-4 py-3 ">Kategori</th>
+                                <th scope="col" class="px-4 py-3 ">Harga</th>
+                                <th scope="col" class="px-4 py-3 ">Deskripsi</th>
+                                <th scope="col" class="px-4 py-3 "><span class="sr-only">Actions</span></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($data['current_items'] as $index => $product)
                             <tr class=" border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="px-4 py-2">
-                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 ">{{ $index+1 }}</span>
+                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 ">
+                                        {{ $index+1 }}</span>
                                 </td>
 
                                 <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -50,14 +75,15 @@
 
                                 </th>
                                 <td class="px-4 py-2">
-                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{ $product['category'] }}</span>
+                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">
+                                        {{ $product['category'] }}</span>
                                 </td>
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="flex items-center">
                                         Rp. {{ number_format($product['price'], 0, ',', '.') }}
                                     </div>
                                 </td>
-                                <td class="px-4 py-2 font-small text-gray-700 break-words dark:text-white ">
+                                <td class="px-4 py-2 font-small text-gray-700 break-words dark:text-white px-4 py-3 max-w-[12rem] truncate">
                                     {{ $product['description'] }}
                                 </td>
                                 <td class="px-4 py-3 flex items-center justify-end">
@@ -119,7 +145,8 @@
                     </tbody>
                     </table>
                 </div>
-                <div class="space-y-3 md:space-y-0 py-4" aria-label="Table navigation">
+                </div>
+                <div class="space-y-3 md:space-y-0 py-4 px-4" aria-label="Table navigation">
                     {{ $data['paginator']->links('vendor.pagination.custom') }}
                 </div>
             </div>

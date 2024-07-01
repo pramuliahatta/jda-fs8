@@ -17,7 +17,14 @@ Route::get('/about', function () {
     return view('about.index');
 })->name('about');
 
-Route::get('/services', [FileController::class, 'index'])->name('services');
+
+Route::prefix('services')->group(function(){
+    Route::get('/forms', [FileController::class, 'index'])->name('services');
+    Route::get('/puskesos', function () {
+        return view('services.puskesos');
+    })->name('puskesos');
+});
+
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.detail');
