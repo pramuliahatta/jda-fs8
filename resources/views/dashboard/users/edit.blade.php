@@ -15,13 +15,13 @@
                     <div>
                         <x-input-field label="Nama" name="name" id="name" placeholder="Masukkan nama"
                             value="{{ old('name', $data['name'] ?? '') }}" />
-                        <x-error-message field="title" />
+                        <x-error-message field="name" />
                     </div>
 
                     <div>
                         <x-input-field label="Email" name="email" id="email" placeholder="Masukkan email"
                             value="{{ old('email', $data['email'] ?? '') }}" />
-                        <x-error-message field="title" />
+                        <x-error-message field="email" />
                     </div>
 
                     <div>

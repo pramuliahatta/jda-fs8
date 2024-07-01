@@ -60,7 +60,9 @@
 
 
                 {{-- name of product --}}
+                
                 <div class="mt-6 sm:mt-8 lg:mt-0">
+                    <x-icon-link route="{{'products'}}" text="Kembali" />
                     <h1 class="text-4xl font-bold text-gray-900 dark:text-white capitalize">
                         {{ $data['name'] }}
                     </h1>
@@ -74,7 +76,7 @@
                     {{-- seller contact --}}
 
                     <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8 capitalize">
-                        <a href="https://wa.me/{{ $data['user']['phone_number'] }}?text={{ $data['text'] }}"
+                        <a href="https://wa.me/{{ $data['user']['phone_number'] }}?text={{ $automatedText }}"
                             target="_blank" title=""
                             class="text-white mt-4 sm:mt-0 bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
 
@@ -95,15 +97,11 @@
                     <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
                     {{-- description --}}
-                    <p class="mb-6 text-gray-700 dark:text-gray-700">
-                        {{ $data['description'] }}
-                    </p>
+                    <div class="mb-6 text-gray-700 dark:text-gray-700">
+                        {!! $data['description'] !!}
+                    </div>
 
-                    {{-- <p class="text-gray-700 dark:text-gray-700">
-                        Two Thunderbolt USB 4 ports and up to two USB 3 ports. Ultrafast
-                        Wi-Fi 6 and Bluetooth 5.0 wireless. Color matched Magic Mouse with
-                        Magic Keyboard or Magic Keyboard with Touch ID.
-                    </p> --}}
+                   
                 </div>
             </div>
         </div>

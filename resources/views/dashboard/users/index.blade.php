@@ -148,7 +148,7 @@
         </div>
 
         <div class="space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
-            {{ $data['paginated_users']->links('vendor.pagination.custom') }}
+            {{ $paginator->links('vendor.pagination.custom') }}
         </div>
 
     </x-dashboard-section>

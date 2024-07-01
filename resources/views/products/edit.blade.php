@@ -2,17 +2,36 @@
     <x-slot name="title">Pasar Desa</x-slot>
     <section class="bg-white dark:bg-gray-900">
         <div class="py-16 px-16 mx-auto max-w-screen-md lg:py-16 lg:px-16 ">
+                <x-icon-link route="{{'products.dashboard'}}" text="Kembali" />
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Edit Produk
                 </h2>
                 
-                <form action="{{ route('products.updates', 1) }}" method="POST"
+                <form action="{{ route('products.update', $data['id']) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
+                {{-- {{dd($data)}} --}}
 
-                <input type="hidden" name="user_id" value="5">
+                @php
+                    // Extract image paths from the data
+                    $imagePaths = 
+                    array_map(function($photo) {
+                        return $photo['photo'];
+                    }, $data['product_photo']);
+                @endphp
+                
+               {{-- {{dd($imagePaths)}} --}}
+                    <x-multi-image 
+                    id="photos"
+                    name="photo[]"
+                    altText="Gambar Produk"
+                    :imagePaths="$imagePaths"
+                    />
+                    {{-- <x-error-message field="photos" /> --}}
+                    {{-- {{dd($data['product_photo'][0]['photo'])}} --}}
+                {{-- <input type="hidden" name="user_id" value="5">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar Produk</label>
-                <input id="photos" name="photos[]" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" multiple required>
+                <input id="photos" name="photos[]" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" multiple required> --}}
                 
 
                     <div class="w-full mt mb-2">
