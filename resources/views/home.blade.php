@@ -59,12 +59,10 @@
     <section class="bg-white dark:bg-gray-900">
         <div
             class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-            <img class="w-full dark:hidden rounded-lg"
-                src="https://images.pexels.com/photos/6457521/pexels-photo-6457521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt="dashboard image">
-            <img class="w-full hidden dark:block rounded-lg"
-                src="https://images.pexels.com/photos/6457521/pexels-photo-6457521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt="dashboard image">
+            <img class="w-full h-96 object-cover dark:hidden rounded-lg" src="{{ asset('img/static/civils.jpg') }}"
+                alt="civils-service">
+            <img class="w-full h-96 object-cover hidden dark:block rounded-lg"
+                src="{{ asset('img/static/civils.jpg') }}" alt="civils-service">
             <div class="mt-4 md:mt-0">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Layanan Masyarakat
@@ -112,12 +110,10 @@
                     </svg>
                 </a>
             </div>
-            <img class="w-full dark:hidden rounded-lg"
-                src="https://images.pexels.com/photos/6457521/pexels-photo-6457521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt="dashboard image">
-            <img class="w-full hidden dark:block rounded-lg"
-                src="https://images.pexels.com/photos/6457521/pexels-photo-6457521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt="dashboard image">
+            <img class="w-full h-96 object-cover dark:hidden rounded-lg" src="{{ asset('img/static/socials.jpg') }}"
+                alt="socials-service">
+            <img class="w-full h-96 object-cover hidden dark:block rounded-lg"
+                src="{{ asset('img/static/socials.jpg') }}" alt="socials-service">
         </div>
     </section>
     {{-- SOCIAL SERVICES SECTION END --}}
@@ -214,12 +210,10 @@
 
             </div>
             <div class="grid grid-cols-2 gap-4 mt-8">
-                <img class="w-full rounded-lg"
-                    src="https://images.pexels.com/photos/4197987/pexels-photo-4197987.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    alt="traditional-food">
-                <img class="mt-4 w-full lg:mt-10 rounded-lg"
-                    src="https://images.pexels.com/photos/5090650/pexels-photo-5090650.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    alt="handcraft">
+                <img class="w-full h-96 object-cover rounded-lg" src="{{ asset('img/static/produk1.jpeg') }}"
+                    alt="jangkir">
+                <img class="mt-4 w-full h-96 object-cover lg:mt-10 rounded-lg"
+                    src="{{ asset('img/static/produk2.jpeg') }}" alt="rengginang">
             </div>
         </div>
     </section>
