@@ -19,7 +19,7 @@
                 </svg>
                 <span class="sr-only">Toggle sidebar</span>
             </button>
-            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <a href="{{ route('dashboard.articles.index') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg"
                     class="h-12" alt="logo" />
                 <span class="self-center hidden xl:block text-xs font-semibold whitespace-nowrap dark:text-white">
@@ -165,7 +165,7 @@
                 <svg class="w-8 h-8 text-gray-800 dark:text-white" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                     viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-width="2"
+                    <path stroke="currentColor" stroke-width="1"
                         d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 </svg>
             </button>
@@ -173,6 +173,12 @@
             <div class="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
                 id="dropdown">
                 <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
+                    <li>
+                        <a href="{{ route('home') }}"
+                            class="w-full text-left block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            Home
+                        </a>
+                    </li>
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

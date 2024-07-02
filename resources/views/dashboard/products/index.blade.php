@@ -54,7 +54,7 @@
                                 <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
                                     <li class="flex items-center">
                                         <input id="makanan" name="categories[]" type="checkbox" value="Makanan"
-                                            {{ isset($data['categories']) ? (in_array('Makanan', $data['categories']) ? 'checked' : '') : '' }}
+                                            {{ isset($categories) ? (in_array('Makanan', $categories) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                         <label for="makanan"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -63,7 +63,7 @@
                                     </li>
                                     <li class="flex items-center">
                                         <input id="pakaian" name="categories[]" type="checkbox" value="Pakaian"
-                                            {{ isset($data['categories']) ? (in_array('Pakaian', $data['categories']) ? 'checked' : '') : '' }}
+                                            {{ isset($categories) ? (in_array('Pakaian', $categories) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                         <label for="pakaian"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -72,7 +72,7 @@
                                     </li>
                                     <li class="flex items-center">
                                         <input id="minuman" name="categories[]" type="checkbox" value="Minuman"
-                                            {{ isset($data['categories']) ? (in_array('Minuman', $data['categories']) ? 'checked' : '') : '' }}
+                                            {{ isset($categories) ? (in_array('Minuman', $categories) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                         <label for="minuman"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -81,7 +81,7 @@
                                     </li>
                                     <li class="flex items-center">
                                         <input id="elektronik" name="categories[]" type="checkbox" value="Elektronik"
-                                            {{ isset($data['categories']) ? (in_array('Elektronik', $data['categories']) ? 'checked' : '') : '' }}
+                                            {{ isset($categories) ? (in_array('Elektronik', $categories) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                         <label for="elektronik"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -279,7 +279,7 @@
             const itemId = button.getAttribute('data-id');
 
             document.getElementById('delete-form').setAttribute('action',
-                `/dashboard/product/${itemId}`);
+                `/dashboard/products/${itemId}`);
 
 
         })

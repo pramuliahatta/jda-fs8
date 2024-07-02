@@ -50,7 +50,7 @@
         </div>
 
         <div class="overflow-x-auto">
-            @if (count($data['current_item']) > 0)
+            @if (count($data) > 0)
                 <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -64,7 +64,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data['current_item'] as $index => $user)
+                        @foreach ($data as $index => $user)
                             <tr class="border-b dark:border-gray-700">
                                 <th scope="row"
                                     class="px-4 py-3 font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">
@@ -140,7 +140,7 @@
                 </table>
             @endif
 
-            @if (count($data['current_item']) < 1)
+            @if (count($data) < 1)
                 <div class="px-4">
                     <x-alert name="Pengguna" />
                 </div>
@@ -155,7 +155,7 @@
     <!-- End block -->
 
 
-    @if (count($data['current_item']) > 0)
+    @if (count($data) > 0)
         <!-- Delete modal -->
         <div id="deleteModal" tabindex="-1" aria-hidden="true"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">

@@ -10,6 +10,7 @@ use App\Models\ProductPhoto;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -20,19 +21,24 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => fake()->name(),
-            'email' => fake()->userName().'@gmail.com',
-            'phone_number' => fake()->unique()->phoneNumber(),
+            'name' => 'Hendra',
+            'email' => 'hendra@gmail.com',
+            'phone_number' => 6281214891719,
             'email_verified_at' => now(),
             'password' => Hash::make('12345'),
             'role' => 'admin',
         ]);
-        User::factory(19)->create();
-        Article::factory(30)->create();
-        Product::factory(30)->create();
-        ProductPhoto::factory(50)->create();
-        Gallery::factory(30)->create();
-        File::factory(30)->create();
+
+        $path = database_path('seeders/jda_fs8.sql');
+        $sql = file_get_contents($path);
+
+        DB::unprepared($sql);
+        // User::factory(19)->create();
+        // Article::factory(30)->create();
+        // Product::factory(30)->create();
+        // ProductPhoto::factory(50)->create();
+        // Gallery::factory(30)->create();
+        // File::factory(30)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',

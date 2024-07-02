@@ -56,7 +56,7 @@
                                 </svg>
                             </button>
                             <div id="filterDropdown"
-                                class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                                class="hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700" style="z-index: 1000">
                                 <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
                                     Kategori
                                 </h6>
@@ -89,12 +89,12 @@
                                         </label>
                                     </li>
                                     <li class="flex items-center">
-                                        <input id="elektronik" name="categories[]" type="checkbox" value="Elektronik"
-                                            {{ isset($data['categories']) ? (in_array('Elektronik', $data['categories']) ? 'checked' : '') : '' }}
+                                        <input id="lainnya" name="categories[]" type="checkbox" value="Lainnya"
+                                            {{ isset($data['categories']) ? (in_array('Lainnya', $data['categories']) ? 'checked' : '') : '' }}
                                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                        <label for="elektronik"
+                                        <label for="lainnya"
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            Elektronik
+                                            Lainnya
                                         </label>
                                     </li>
                                 </ul>

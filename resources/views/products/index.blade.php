@@ -18,7 +18,7 @@
                 <div
                     class="flex flex-col items-center justify-between p-3 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                     <div class="w-full md:w-1/2">
-                        <form id ="productForm" method="GET" action="{{ route('products') }}"
+                        <form id="productForm" method="GET" action="{{ route('products') }}"
                             class="flex items-center">
                             <label for="simple-search" class="sr-only">Cari</label>
                             <div class="relative w-full">
@@ -95,12 +95,12 @@
                                         </li>
                                         <li class="flex items-center">
                                             <input id="elektronik" name="categories[]" type="checkbox"
-                                                value="Elektronik"
-                                                {{ isset($categories) ? (in_array('Elektronik', $categories) ? 'checked' : '') : '' }}
+                                                value="Lainnya"
+                                                {{ isset($categories) ? (in_array('Lainnya', $categories) ? 'checked' : '') : '' }}
                                                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                             <label for="elektronik"
                                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                Elektronik
+                                                Lainnya
                                             </label>
                                         </li>
                                     </ul>
@@ -109,10 +109,10 @@
                                         Terapkan</button>
                                 </div>
                                 @if (request('search') || request('categories') )
-                                <button type="button" id="resetButton"
+                                <a type="button" id="resetButton" href="{{ route('products') }}"
                                     class=" w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                                     Hapus Filter
-                                </button>
+                            </a>
                             @endif
                             
                         </div>
@@ -156,7 +156,7 @@
                                         $categoryClass = 'bg-green-100 text-green-600';
                                     } elseif ($product['category'] == 'Pakaian') {
                                         $categoryClass = 'bg-gray-200 text-gray-600';
-                                    } elseif ($product['category'] == 'Elektronik') {
+                                    } elseif ($product['category'] == 'Lainnya') {
                                         $categoryClass = 'bg-yellow-200 text-yellow-600';
                                     }
                                 @endphp
@@ -215,6 +215,4 @@
         // Submit the form
         form.submit();
     });
-
-   
 </script>

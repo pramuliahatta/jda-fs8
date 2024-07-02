@@ -1,5 +1,5 @@
 <div class="mx-auto max-w-screen-xl text-center">
-    <a href="#" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
+    <a href="{{ route('home') }}" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
         <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg" class="mr-3 h-12"
             alt="logo" />
         <span class="self-center text-left text-xs font-semibold whitespace-nowrap dark:text-white">
