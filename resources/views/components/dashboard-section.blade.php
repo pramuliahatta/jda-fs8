@@ -1,4 +1,4 @@
-<section class="p-4 md:ml-64 h-auto pt-20 antialiased">
+<section class="p-4 overflow-x-hidden md:ml-64 h-auto pt-20 antialiased">
     <div class="relative w-full min-h-full">
         <!-- Modal content -->
         @if (request()->routeIs($route))

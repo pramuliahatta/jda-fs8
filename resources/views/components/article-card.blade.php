@@ -1,6 +1,6 @@
 @php
     $categoryClass = $article['category'] == 'Acara' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600';
-    
+
 @endphp
 
 <article class="p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -29,13 +29,12 @@
     </p>
     <div class="flex justify-between items-center">
         <div class="hidden md:flex items-center space-x-4">
-            <img class="w-7 h-7 rounded-full"
-                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                alt="Jese Leos avatar" />
+            <img class="w-7 h-7 bg-green-400 rounded-full"
+                src="{{ asset('img/static/Lambang_Kabupaten_Majalengka.svg') }}" alt="profile-photo" />
             <span class="font-medium dark:text-white">Admin</span>
         </div>
         <a href="{{ route('articles.detail', $article['id']) }}"
-            class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
+            class="inline-flex items-center font-medium text-green-400 dark:text-primary-500 hover:underline">
             Baca Selengkapnya
             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
