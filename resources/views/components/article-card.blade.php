@@ -1,5 +1,6 @@
 @php
     $categoryClass = $article['category'] == 'Acara' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600';
+    
 @endphp
 
 <article class="p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">

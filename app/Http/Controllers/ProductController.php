@@ -106,6 +106,8 @@ class ProductController extends Controller
         $client = new Client();
         $apiUrl = env('BASE_URL_API') . "products";
 
+        
+
         try {
             // Store data using API
             $response = $client->post($apiUrl, [
