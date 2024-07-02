@@ -6,14 +6,14 @@
             <header class="mb-4 lg:mb-6 not-format">
                 <address class="flex items-center mb-6 not-italic">
                     <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                        <img class="mr-4 w-16 h-16 rounded-full"
-                            src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
+                        <img class="mr-4 w-16 h-16 bg-green-400 rounded-full"
+                            src="{{ asset('img/static/Lambang_Kabupaten_Majalengka.svg') }}" alt="profile-photo">
                         <div>
                             <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">
-                                Hendra, S.Pd
+                                Admin
                             </a>
                             <p class="text-base text-gray-700 dark:text-gray-400">
-                                Kepala Desa Cidadap
+                                Pemerintah Desa Cidadap
                             </p>
                             <p class="text-base text-gray-700 dark:text-gray-400">
                                 <time pubdate datetime="2024-06-12" title="June 12th, 2024">
@@ -96,10 +96,10 @@
             </p>
         </article>
 
-        <div class="flex justify-between items-center">
-            <div class="flex items-center space-x-3 sm:space-x-4 mt-4">
+        <div class="flex gap-4 justify-center items-center">
+            <div class="flex items-center space-x-3 sm:space-x-4">
                 <a href="{{ route('dashboard.articles.edit', $detail['id']) }}" type="button"
-                    class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    class="text-white inline-flex items-center bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                     <svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
