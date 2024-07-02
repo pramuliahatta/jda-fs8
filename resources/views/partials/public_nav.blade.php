@@ -47,7 +47,8 @@
             <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                 <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">Beranda</x-nav-link>
                 <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">Tentang Kami</x-nav-link>
-                {{-- <x-nav-link href="{{ route('services') }}" :active="request()->routeIs('services')">Layanan</x-nav-link> --}}
+
+                {{-- Dropdown Navigation Link --}}
                 <li>
                     <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
                         class="{{ request()->routeIs('services') || request()->routeIs('puskesos') ? 'block py-2 pr-4 pl-3 text-white rounded bg-green-500 lg:bg-transparent lg:text-green-500 lg:p-0 dark:text-white' : 'block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700' }} flex items-center justify-between w-full py-2 px-3"
@@ -74,6 +75,7 @@
                         </ul>
                     </div>
                 </li>
+
                 <x-nav-link href="{{ route('products') }}" :active="request()->routeIs('products') || request()->routeIs('products.*')">Pasar Desa</x-nav-link>
                 <x-nav-link href="{{ route('gallery') }}" :active="request()->routeIs('gallery')">Galeri</x-nav-link>
                 <x-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles')">Artikel</x-nav-link>
