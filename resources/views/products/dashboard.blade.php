@@ -7,7 +7,7 @@
             </h2>
             <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg mb-4">
 
-                <form id="productForm" action="{{ route('products.update') }}" method="get">
+                <form id="productForm" action="{{ route('products.index') }}" method="get">
                     <div
                         class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div class="w-full md:w-1/2">
@@ -28,7 +28,17 @@
                         </div>
 
                         <div
-                            class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                            class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center md:space-x-3 flex-shrink-0 justify-end">
+                            <a href="{{ route('products.create') }}"
+                                class="flex items-center justify-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-primary-800">
+                                <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path clip-rule="evenodd" fill-rule="evenodd"
+                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                                </svg>
+                                Tambah Produk
+                            </a>
+
                             <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
                                 class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-500 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                                 type="button">
@@ -91,19 +101,21 @@
                                 <button type="submit"
                                     class="mt-3 w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-600">
                                     Terapkan</button>
-
-
                             </div>
-
-                            <!-- Add reset button conditionally -->
-                            @if (request('search') || request('categories'))
-                                <button type="button" id="resetButton"
-                                class=" w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                                    Hapus Filter
-                                </button>
-                            @endif
-
+                            <div
+                                class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 px-4 ">
+                                <div class="w-full md:w-full">
+                                    <!-- Add reset button conditionally -->
+                                    @if (request('search') || request('categories'))
+                                        <button type="button" id="resetButton"
+                                            class=" w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                            Hapus Filter
+                                        </button>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
+
                 </form>
             </div>
 
@@ -138,10 +150,9 @@
                                         @foreach ($product['product_photo'] as $productPhoto)
                                             @if ($loop->first)
                                                 <img src="/{{ $productPhoto['photo'] }}" alt="productPhoto"
-                                                    class="w-8 h-8 rounded-lg object-cover">
+                                                    class="w-auto h-8 mr-3">
                                             @endif
                                         @endforeach
-
                                     </td>
 
                                     <td scope="row" class="px-4 py-3 max-w-[12rem] truncate">
@@ -157,7 +168,7 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-3 max-w-[12rem] truncate">
-                                        {{ \Illuminate\Support\Str::limit(strip_tags($product['description'])) }}
+                                        {!! \Illuminate\Support\Str::limit(strip_tags($product['description'])) !!}
 
                                     </td>
                                     <td class="px-4 py-3 flex items-center justify-end">
@@ -190,7 +201,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('products.preview', $product['id']) }}"
+                                                    <a href="{{ route('products.show', $product['id']) }}"
                                                         class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                         <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                             viewbox="0 0 20 20" fill="currentColor"
@@ -228,7 +239,7 @@
 
 
             @if (count($data) < 1)
-                <div class="">
+                <div class="px-4">
                     <x-alert name="Produk" />
                 </div>
             @endif
@@ -237,7 +248,7 @@
                 {{ $paginator->links('vendor.pagination.custom') }}
             </div>
         </div>
-        
+
     </section>
     <!-- Delete modal -->
     <div id="deleteModal" tabindex="-1" aria-hidden="true"
