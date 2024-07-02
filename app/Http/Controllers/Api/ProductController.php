@@ -37,7 +37,7 @@ class ProductController extends Controller
 
                 $query->where(function ($q) use ($user) {
                     $q->where('user_id', $user);
-                });
+                    });
             }
 
             if ($request->has('categories')) {

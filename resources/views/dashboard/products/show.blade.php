@@ -70,7 +70,7 @@
 
                     {{-- seller contact --}}
                     <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8 capitalize">
-                        <a href="https://wa.me/{{ $data['user']['phone_number'] }}?text={{ $data['text'] }}"
+                        <a href="https://wa.me/{{ $data['user']['phone_number'] }}?text={{ $automatedText }}"
                             target="_blank" title=""
                             class="text-white mt-4 sm:mt-0 bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
 
