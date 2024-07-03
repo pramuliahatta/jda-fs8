@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\ProductPhoto;
+use App\Models\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
@@ -28,6 +30,7 @@ class ProductController extends Controller
         $currentPage = request()->get('page', 1);
         $search = $request->input('search', null);
         $categories = $request->input('categories', []);
+        $user = null;
 
         $perPage = 12;
         $viewName = 'products.index';
@@ -36,6 +39,7 @@ class ProductController extends Controller
             $perPage = 10;
             if(Route::current()->getName() == 'products.index') {
                 $viewName = 'products.dashboard';
+                $user = Auth::user()->id;
             }
             if(Route::current()->getName() == 'dashboard.products.index') {
                 $viewName = 'dashboard.products.index';
@@ -48,6 +52,7 @@ class ProductController extends Controller
                 'query' => [
                     'search' => $search,
                     'categories' => $categories,
+                    'user' => $user,
                 ]
             ]);
             $response = json_decode($fetchData->getBody(), true);
@@ -101,6 +106,8 @@ class ProductController extends Controller
         $client = new Client();
         $apiUrl = env('BASE_URL_API') . "products";
 
+        
+
         try {
             // Store data using API
             $response = $client->post($apiUrl, [
@@ -139,6 +146,9 @@ class ProductController extends Controller
             $viewName = 'dashboard.products.show';
             $routeName = 'dashboard.products.index';
         }
+
+        // $user = User::find(Auth::user()->id);
+        // $token = $user->tokens()->latest()->first();
 
         try {
             // Get the data from the API
@@ -182,8 +192,13 @@ class ProductController extends Controller
             $fetchData = $client->get($apiUrl);
             $response = json_decode($fetchData->getBody(), true);
             $data = $response['data'];
+            $imagePaths = [];
+            foreach($data['product_photo'] as $imagePath) {
+                $imagePaths[] = $imagePath['photo'];
+            }
+
             // If success, return view and data
-            return view('products.edit', ['data' => $data]);
+            return view('products.edit', ['data' => $data, 'imagePaths' => $imagePaths]);
         } catch (RequestException $e) {
             // If fails from the request API, then redirect and send error message
             $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
@@ -198,93 +213,29 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, product $product)
+    public function update(UpdateProductRequest $request, product $product)
     {
-        // Validate the request
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category' => 'required|string',
-            'price' => 'required',
-            'user_id' => 'required',
-            'photos' => 'array|max:3',
-            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-
-        // Initialize Guzzle client
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        // Define endpoint
         $client = new Client();
-
-        // Prepare files for multipart upload
-        $files = [];
-        if($request->hasFile('photos')) {
-            if(sizeOf($request->file('photos')) > 0) {
-                foreach ($request->file('photos') as $file) {
-                    $files[] = [
-                        'name' => 'photos[]',
-                        'contents' => fopen($file->getPathname(), 'r'),
-                        'filename' => $file->getClientOriginalName(),
-                        'headers'  => [
-                            'Content-Type' => 'multipart/form-data'
-                        ],
-                    ];
-                }
-            }
-        }
-
-        $multipart = array_merge($files, [
-                    [
-                        'name' => '_method',
-                        'contents' => 'PUT',
-                    ],
-                    [
-                        'name' => 'name',
-                        'contents' => $validatedData['name'],
-                    ],
-                    [
-                        'name' => 'description',
-                        'contents' => $validatedData['description'],
-                    ],
-                    [
-                        'name' => 'category',
-                        'contents' => $validatedData['category'],
-                    ],
-                    [
-                        'name' => 'price',
-                        'contents' => $validatedData['price'],
-                    ],
-                    [
-                        'name' => 'user_id',
-                        'contents' => $validatedData['user_id'],
-                    ],
-                ]
-            );
+        $apiUrl = env('BASE_URL_API') . "products/" . $product->id;
 
         try {
-            // Send POST request using Guzzle client
-            $response = $client->post('http://127.0.0.1:8001/api/products/' . $product->id, [
+            $response = $client->post($apiUrl, [
                 'multipart' => $multipart,
             ]);
-            
-            // Handle successful response
-            $statusCode = $response->getStatusCode();
-            $responseData = json_decode($response->getBody()->getContents(), true);
-            // dd($responseData);
-
-            if ($statusCode === 200) {
-                $data = $responseData['data']; // Assuming API returns 'data' key in response
-                return redirect()->intended(route('products.index', compact('data')));
-            } else {
-                // Handle unsuccessful response
-                return back()->with('error', 'Failed to create product: ' . $statusCode);
-            }
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('products.index')->with('success', $responseMessage);
         } catch (RequestException $e) {
-            // Guzzle request exception handling
-            Log::error('Failed to send POST request to API: ' . $e->getMessage());
-            return back()->with('error', 'Failed to communicate with API: ' . $e->getMessage());
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->with('error', $errorMessage);
         } catch (\Exception $e) {
-            // Other exceptions handling
-            Log::error('Failed to communicate with API: ' . $e->getMessage());
-            return back()->with('error', 'Failed to communicate with API: ' . $e->getMessage());
+            // Another fails
+            Log::error('Failed to update products:' . $e->getMessage());
+            return redirect()->route('products.index')->with('error', 'Terjadi kesalahan pada server');
         }
     }
 
@@ -293,44 +244,30 @@ class ProductController extends Controller
      */
     public function destroy(product $product)
     {
+        // Define endpoint
         $client = new Client();
+        $apiUrl = env('BASE_URL_API') . "products/" . $product->id;
 
-        // dd($product->id);
-        try {
-            // Send POST request using Guzzle client
-            $response = $client->delete('http://127.0.0.1:8001/api/products/' . $product->id);
-            
-            // Handle successful response
-            $statusCode = $response->getStatusCode();
-            $responseData = json_decode($response->getBody()->getContents(), true);
-            // dd($responseData);
-
-            if ($statusCode === 200) {
-                $data = $responseData['data']; // Assuming API returns 'data' key in response
-                if(Route::current()->getName() == 'dashboard.products.destroy') {
-                    return redirect()->intended(route('dashboard.products.index', compact('data')));    
-                }
-                return redirect()->intended(route('products.index', compact('data')));
-            } else {
-                // Handle unsuccessful response
-                return back()->with('error', 'Failed to create product: ' . $statusCode);
-            }
-        } catch (RequestException $e) {
-            // Guzzle request exception handling
-            Log::error('Failed to send POST request to API: ' . $e->getMessage());
-            return back()->with('error', 'Failed to communicate with API: ' . $e->getMessage());
-        } catch (\Exception $e) {
-            // Other exceptions handling
-            Log::error('Failed to communicate with API: ' . $e->getMessage());
-            return back()->with('error', 'Failed to communicate with API: ' . $e->getMessage());
+        $routeName = 'products.index';
+        // $viewName = 'products.destroy';
+        if(Route::current()->getName() == 'dashboard.products.destroy') {
+            // $viewName = 'products.show';
+            $routeName = 'dashboard.products.index';
         }
 
-        // Delete associated photos
-        // $fetchData = Http::delete('http://127.0.0.1:8001/api/products/' . $product->id, [
-        //     'method' => 'DELETE',
-        // ]);
-        // $response = $fetchData->json();
-        // $data = $response['data'];
-        // return redirect()->intended(route('products.index', compact('data')));
+        try {
+            $response = $client->delete($apiUrl);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route($routeName)->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route($routeName)->with('error', $errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to delete products:' . $e->getMessage());
+            return redirect()->route($routeName)->with('error', 'Terjadi kesalahan pada server');
+        }
     }
 }

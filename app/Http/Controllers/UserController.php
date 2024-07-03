@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -16,48 +21,50 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        // $page = $request->input('page', 1);
+        $client = new Client();
+        $apiUrl = env('BASE_URL_API') . "users";
 
-        // Define the number of items per page
-        $perPage = 10;
-
-        // Determine the current page
         $currentPage = request()->get('page', 1);
         $search = $request->input('search', null);
 
-        $fetchData = Http::get('http://127.0.0.1:8001/api/users', [
-                'search' => $search,
+        $perPage = 10;
+        $viewName = 'dashboard.users.index';
+
+        try {
+            // Get data from the API
+            $fetchData = $client->get($apiUrl, [
+                'query' => [
+                    'search' => $search,
+                ]
             ]);
-        $response = $fetchData->json();
-        // dd($data);
-        $users = collect($response['data']);
+            $response = json_decode($fetchData->getBody(), true);
 
-        // Slice the users collection to get the items to display in the current page
-        $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
-
-        // Create the paginator
-        $paginatedUsers = new LengthAwarePaginator(
-            $currentPageItems,
-            $users->count(),
-            $perPage,
-            $currentPage,
-            [
-                'path' => request()->url(),
-                'query' => request()->query(),
-            ],
-        );
-
-        $data = [
-            'current_item' => $currentPageItems,
-            'paginated_users' => $paginatedUsers,
-        ];
-
-        //cek nama route, jika 'dashboard.users.index' ke dashboard admin menu user, jika bukan ke login
-        if (Route::current()->getName() == 'dashboard.users.index') {
-            return view('dashboard.users.index', compact('data'));
+            $data = collect($response['data']);
+            $currentPageItems = $data->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            
+            $paginator = new LengthAwarePaginator(
+                $currentPageItems,
+                count($data),
+                $perPage,
+                $currentPage,
+                [
+                    'path' => request()->url(),
+                    'query' => request()->query(),
+                ]
+            );
+        } catch (\Exception $e) {
+            // If fail data is empty and log error
+            Log::error('Failed to get user data:' . $e->getMessage());
+            $currentPageItems = [];
+            $paginator = [];
         }
 
-        return view('home', compact('data'));
+        // Return view and data ($data for data | $pageLinks for link url, label, & isActive | 
+        // $pageInfo for showing information)
+        return view($viewName, [
+            'data' => $currentPageItems, 
+            'paginator' => $paginator,
+        ]);
     }
 
     /**
@@ -72,56 +79,31 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        // dd($request);
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        // Define endpoint
+        $client = new Client();
+        $apiUrl = env('BASE_URL_API') . "users";
 
-        //memvalidasi data yang diisi pada tampilan create
-        $validatedData = $request->validate([
-            'name' => [
-                'required',
-                'min:4',
-                'max:255',
-            ],
-            'phone_number' => [
-                'required',
-                'unique:users',
-                'min:7',
-                'max:20',
-            ],
-            'email' => [
-                'required',
-                'unique:users',
-                'email:dns'
-            ],
-            'password' => [
-                'required',
-                'min:4',
-                'confirmed',
-            ],
-            'password_confirmation' => [
-                'required',
-                'min:4',
-            ],
-        ]);
-
-        if ($validatedData) {
-            $fetchData = Http::post('http://127.0.0.1:8001/api/users', $validatedData);
-            $response = $fetchData->json();
-            if ($response['status'] == true) {
-                return redirect()->intended(route('dashboard.users.index'))->with('success', $response['message']);
-            }
+        try {
+            // Store data using API
+            $response = $client->post($apiUrl, [
+                'multipart' => $multipart,
+            ]);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.users.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->with('error', $errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to store users:' . $e->getMessage());
+            return redirect()->route('dashboard.users.index')->with('error', 'Terjadi kesalahan pada server');
         }
-
-        return back()->with('error', 'Error.');
-
-        //menambah data ke user dengan data yang sudah divalidasi. jika sukses kembalikan pesan sukses, jika tidak kembalikan pesan error.
-        // $storeData = User::create($validatedData);
-        // if ($storeData) {
-        //     return back()->with('success', 'User added successfully');
-        // }
-
-        // return back()->with('error', 'Error.');
     }
 
     /**
@@ -129,12 +111,35 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $fetchData = Http::get('http://127.0.0.1:8001/api/users/' . $user->id);
-        if ($fetchData->successful()) {
-            $response = $fetchData->json();
+        // Define endpoint
+        $client = new Client();
+        $apiUrl = env('BASE_URL_API') . "users/" . $user->id;
+
+        $routeName = 'dashboard.users.show';
+        $viewName = 'dashboard.users.show';
+
+        // $user = User::find(Auth::user()->id);
+        // $token = $user->tokens()->latest()->first();
+
+        try {
+            // Get the data from the API
+            $fetchData = $client->get($apiUrl);
+            $response = json_decode($fetchData->getBody(), true);
             $data = $response['data'];
+
+            // If success, return view and data
+            return view($viewName, [
+                'data' => $data,
+            ]);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route($routeName)->with('error', $errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to get users data:' . $e->getMessage());
+            return redirect()->route($routeName)->with('error', 'Terjadi kesalahan pada server');
         }
-        return view('dashboard.users.show', compact('data'));
     }
 
     /**
@@ -142,55 +147,55 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $fetchData = Http::get('http://127.0.0.1:8001/api/users/' . $user->id);
-        $response = $fetchData->json();
-        $data = $response['data'];
-        return view('dashboard.users.edit', compact('data'));
+        // Define endpoint
+        $client = new Client();
+        $apiUrl = env('BASE_URL_API') . "users/" . $user->id;
+
+        try {
+            // Get the data from the API
+            $fetchData = $client->get($apiUrl);
+            $response = json_decode($fetchData->getBody(), true);
+            $data = $response['data'];
+            // If success, return view and data
+            return view('dashboard.users.edit', ['data' => $data]);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route('dashboard.users.index')->with('error', $errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to get users data:' . $e->getMessage());
+            return redirect()->route('dashboard.users.index')->with('error', 'Terjadi kesalahan pada server');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //pengecekan data dari form yang diisi oleh user
-        $validatedData = $request->validate([
-            'name' => [
-                'required',
-                'min:4',
-                'max:255',
-            ],
-            'phone_number' => [
-                'required',
-                'min:7',
-                'max:20',
-            ],
-            'email' => [
-                'required',
-                'email:dns'
-            ],
-            'password' => [
-                'nullable',
-                'min:4',
-                'max:20',
-                'confirmed',
-            ],
-            'password_confirmation' => [
-                'nullable',
-                'min:4',
-            ],
-        ]);
+        // Get multipart data from request
+        $multipart = $request->getMultipart();
+        // Define endpoint
+        $client = new Client();
+        $apiUrl = env('BASE_URL_API') . "users/" . $user->id;
 
-        if ($validatedData) {
-            $fetchData = Http::put('http://127.0.0.1:8001/api/users/' . $user->id, $validatedData);
-            $response = $fetchData->json();
-            // dd($response);
-            if ($response['status'] == true) {
-                return redirect()->intended(route('dashboard.users.index'))->with('success', $response['message']);
-            }
+        try {
+            $response = $client->post($apiUrl, [
+                'multipart' => $multipart,
+            ]);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route('dashboard.users.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->with('error', $errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to update users:' . $e->getMessage());
+            return redirect()->route('dashboard.users.index')->with('error', 'Terjadi kesalahan pada server');
         }
-
-        return back()->with('error', 'Error.');
     }
 
     /**
@@ -198,12 +203,26 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $fetchData = Http::delete('http://127.0.0.1:8001/api/users/' . $user->id);
-        $response = $fetchData->json();
-        if ($response['status'] == true) {
-            return back()->with('success', $response['message']);
+        // Define endpoint
+        $client = new Client();
+        $apiUrl = env('BASE_URL_API') . "users/" . $user->id;
+
+        $routeName = 'dashboard.users.index';
+
+        try {
+            $response = $client->delete($apiUrl);
+            $responseMessage = json_decode($response->getBody(), true)['message'];
+            // If success redirect and send success message
+            return redirect()->route($routeName)->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request API, then redirect and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return redirect()->route($routeName)->with('error', $errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to delete users:' . $e->getMessage());
+            return redirect()->route($routeName)->with('error', 'Terjadi kesalahan pada server');
         }
-        return back()->with('error', 'Error.');
     }
 
     public function adminCheck(User $user)

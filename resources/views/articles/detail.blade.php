@@ -11,7 +11,7 @@
     <aside aria-label="Related articles" class="py-8 lg:py-24 bg-green-50 dark:bg-gray-800">
         <div class="px-4 mx-auto max-w-screen-xl">
             <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Artikel Terkait</h2>
-            <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($data as $article)
                     @if ($article['id'] != $detail['id'])
                         <article class="max-w-xs">

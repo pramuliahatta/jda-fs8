@@ -22,7 +22,7 @@ class GalleryController extends Controller
         $apiUrl = env('BASE_URL_API') . "galleries";
         // Determine the view and perpage based on route
         $currentPage = request()->get('page', 1);
-        $viewName =  'gallery.index';
+        $viewName = 'gallery.index';
         $perPage = 12;
         if ($request->route()->getName() == 'dashboard.gallery.index') {
             $viewName = 'dashboard.gallery.index';
@@ -37,6 +37,7 @@ class GalleryController extends Controller
                     'sort' => $request->input('sort'),
                 ]
             ]);
+
             $content = json_decode($response->getBody(), true);
             $data = collect($content['data']);
             $currentPageItems = $data->slice(($currentPage - 1) * $perPage, $perPage)->all();

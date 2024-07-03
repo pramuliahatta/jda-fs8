@@ -15,14 +15,20 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/about', function () {
     return view('about.index');
 })->name('about');
 
-Route::get('/services', [FileController::class, 'index'])->name('services');
+
+Route::prefix('services')->group(function () {
+    Route::get('/forms', [FileController::class, 'index'])->name('services');
+    Route::get('/puskesos', function () {
+        return view('services.puskesos');
+    })->name('puskesos');
+});
+
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.detail');
@@ -46,47 +52,17 @@ Route::middleware(['auth', CheckUserIsAdmin::class])->prefix('dashboard')->group
         return view('dashboard.index');
     })->name('dashboard.index');
 
-    Route::get('/articles', [ArticleController::class, 'index'])->name('dashboard.articles.index');
-    Route::get('/articles/create', [ArticleController::class, 'create'])->name('dashboard.articles.create');
-    Route::post('/articles/create', [ArticleController::class, 'store'])->name('dashboard.articles.store');
-    Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('dashboard.articles.show');
-    Route::get('/articles/{id}/edit/', [ArticleController::class, 'edit'])->name('dashboard.articles.edit');
-    Route::post('/articles/{id}/edit/', [ArticleController::class, 'update'])->name('dashboard.articles.update');
-    Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('dashboard.articles.destroy');
+    Route::resource('/articles', ArticleController::class, ['names' => 'dashboard.articles'])->except('update');
+    Route::post('/articles/{id}', [ArticleController::class, 'update'])->name('dashboard.articles.update');
 
-    Route::get('/gallery', [GalleryController::class, 'index'])->name('dashboard.gallery.index');
-    Route::get('/gallery/create', [GalleryController::class, 'create'])->name('dashboard.gallery.create');
-    Route::post('/gallery', [GalleryController::class, 'store'])->name('dashboard.gallery.store');
-    Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('dashboard.gallery.show');
-    Route::get('/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('dashboard.gallery.edit');
+    Route::resource('/forms', FileController::class, ['names' => 'dashboard.forms'])->except('update');
+    Route::post('/forms/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
+
+    Route::resource('/gallery', GalleryController::class, ['names' => 'dashboard.gallery'])->except('update');
     Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('dashboard.gallery.update');
-    Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('dashboard.gallery.destroy');
 
-    Route::get('/forms', [FileController::class, 'index'])->name('dashboard.forms.index');
-    Route::get('/forms/create', [FileController::class, 'create'])->name('dashboard.forms.create');
-    Route::get('/forms/{id}/edit', [FileController::class, 'edit'])->name('dashboard.forms.edit');
-    Route::post('/forms/create', [FileController::class, 'store'])->name('dashboard.forms.store');
-    Route::get('/forms/{id}', [FileController::class, 'show'])->name('dashboard.forms.show');
-    Route::post('/forms/edit/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
-    Route::delete('/forms/{id}', [FileController::class, 'destroy'])->name('dashboard.forms.destroy');
-
-    Route::get('/users', [UserController::class, 'index'])->name('dashboard.users.index');
-    Route::get('/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
-    Route::post('/users', [UserController::class, 'store'])->name('dashboard.users.store');
-    Route::get('/users/{user}', [UserController::class, 'show'])->name('dashboard.users.show');
-    Route::get('/users/{user}/edit/', [UserController::class, 'edit'])->name('dashboard.users.edit');
+    Route::resource('/users', UserController::class, ['names' => 'dashboard.users'])->except('update');
     Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
-    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroys');
 
-    Route::get('/product', [ProductController::class, 'index'])->name('dashboard.products.index');
-    Route::get('/product/{product}', [ProductController::class, 'show'])->name('dashboard.products.show');
-    Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('dashboard.products.destroy');
-
-    Route::get('/products', [ProductController::class, 'index'])->name('products.dashboard');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.stores');
-    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.preview');
-    Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.updates');
-    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroys');
+    Route::resource('/products', ProductController::class, ['names' => 'dashboard.products'])->only(['index', 'show', 'destroy']);
 })->middleware('auth');

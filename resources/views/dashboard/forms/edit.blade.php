@@ -8,7 +8,7 @@
                 <h2 class="text-xl font-bold text-gray-900 dark:text-white">Ubah File</h2>
             </div>
             <!-- Modal body -->
-            <form action="{{ route('dashboard.forms.edit', $data['id']) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('dashboard.forms.update', $data['id']) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>

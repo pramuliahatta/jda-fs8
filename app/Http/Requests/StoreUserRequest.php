@@ -78,6 +78,7 @@ class StoreUserRequest extends FormRequest
         return [
             'name.required' => 'Harap masukan nama pengguna',
             'name.string' => 'Format nama tidak valid',
+            'name.min' => 'Nama tidak boleh kurang dari 4 karakter',
             'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
             'phone_number.required' => 'Harap masukan nomor telepon',
             'phone_number.unique' => 'Nomor telepon sudah terdaftar',

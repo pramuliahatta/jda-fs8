@@ -2,18 +2,30 @@
     <x-slot name="title">Pasar Desa</x-slot>
     <section class="bg-white dark:bg-gray-900">
         <div class="py-16 px-16 mx-auto max-w-screen-md sm:py-16 lg:px-16 ">
+            <x-icon-link route="{{ 'products.index' }}" text="Kembali" />
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                 Tambah Produk
             </h2>
 
             <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar
-                    Produk</label>
-                <input id="photos" name="photos[]" type="file"
-                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                    multiple required>
 
+
+                {{-- @php
+                    // Extract image paths from the data
+                    $imagePaths = 
+                    array_map(function($photo) {
+                        return $photo['photo'];
+                    }, $data['product_photo']);
+                @endphp --}}
+
+                {{-- {{dd($imagePaths)}} --}}
+                <x-multi-image id="photos" name="photos" altText="Gambar Produk" {{-- :imagePaths="$imagePaths" --}} />
+
+                {{-- <input type="hidden" name="user_id" value="5">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar Produk</label>
+                <input id="photos" name="photos[]" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" multiple required>
+                 --}}
 
 
 
@@ -24,21 +36,21 @@
                 </div>
                 <div class="w-full mt-2 mb-2">
 
-                    <x-input-field label="Harga" name="price" id="price"
-                        placeholder="Masukkan harga produk (contoh: 10000)"
-                        value="{{ old('price', $product->name ?? '') }}" />
+                    <x-input-field type="number" label="Harga" name="price" id="price"
+                        placeholder="Masukkan harga produk" value="{{ old('price', $photo->price ?? '') }}" />
                     <x-error-message field="price" />
                 </div>
                 <div>
                     <label for="category"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
-                    <select required name="category" id="category"
+                    <select name="category" id="category"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        <option value="" selected disabled>Pilih Kategori</option>
+                        <option disabled selected value="">Pilih Kategori</option>
                         <option value="Pakaian">Pakaian</option>
                         <option value="Makanan">Makanan</option>
                         <option value="Minuman">Minuman</option>
-                        <option value="Elektronik">Elektronik</option>
+                        <option value="Kerajinan">Kerajinan</option>
+                        <option value="Lainnya">Lainnya</option>
                     </select>
                 </div>
                 <div class="sm:col-span-2 mt-2 mb-2">

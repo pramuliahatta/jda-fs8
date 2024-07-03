@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\ProductPhoto;
 use Illuminate\Http\Request;
@@ -29,6 +30,14 @@ class ProductController extends Controller
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', '%' . $search . '%');
                 });
+            }
+
+            if ($request->has('user')) {
+                $user = $request->query('user');
+
+                $query->where(function ($q) use ($user) {
+                    $q->where('user_id', $user);
+                    });
             }
 
             if ($request->has('categories')) {
@@ -62,7 +71,7 @@ class ProductController extends Controller
                 'description' => $validatedData['description'],
                 'category' => $validatedData['category'],
                 'price' => $validatedData['price'],
-                'user_id' => (Auth::user()->id?? $validatedData['user_id']) ?? 1, 
+                'user_id' => $validatedData['user_id'], 
             ]);
 
             // store photo in public directory
@@ -111,67 +120,65 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProductRequest $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category' => 'required|string',
-            'price' => 'required',
-            'photos' => 'array|max:3',
-            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
 
-        if ($validator->fails()) {
-            return fails($validator->errors(), 422);
-        }
+        try {
+            // find data in database
+            $product = Product::find($id);
+            if (!$product) {
+                // response if not found
+                return fails('Produk tidak ditemukan', 404);
+            }
+            // Get data from request
+            $validatedData = $request->validated();
 
-        $product = Product::find($id);
+            // store product data in database
+            $updatedData = $product
+                ->update([
+                    'name' => $validatedData['name'],
+                    'description' => $validatedData['description'],
+                    'category' => $validatedData['category'],
+                    'price' => $validatedData['price'],
+                ]);
 
-        $updatedData = $product
-            ->update([
-                'name' => $request->name,
-                'description' => $request->description,
-                'category' => $request->category,
-                'price' => $request->price,
-            ]);
+            $productPhoto = false;
 
-        $productPhoto = false;
+            if($request->hasFile('photos')) {
+                // if(sizeOf($request->file('photos')) > 0) {
 
-        if($request->hasFile('photos')) {
-            if(sizeOf($request->file('photos')) > 0) {
-
-                foreach ($product->productPhoto as $productPhoto) {
-                    if (File::exists(public_path('upload/product'), basename($productPhoto->photo))){
-                        unlink(public_path('upload/product/') . basename($productPhoto->photo));
+                    foreach ($product->productPhoto as $productPhoto) {
+                        if (File::exists(public_path('upload/product'), basename($productPhoto->photo))){
+                            unlink(public_path('upload/product/') . basename($productPhoto->photo));
+                        }
+                        $productPhoto->delete();
                     }
-                    $productPhoto->delete();
-                }
-    
-                foreach ($request->file('photos') as $file) {
-                    // Store the file and get the photo
-                    $uploadedFile = $file;
-                    $uploadedFileName = generateUniqueString('product_photos', 'photo', $uploadedFile->getClientOriginalExtension());
-                    $uploadedFile->move(public_path('upload/product'), $uploadedFileName);
-    
-                    // Save the file photo in the database
-                    $productPhoto = ProductPhoto::create([
-                        'product_id' => $product->id,
-                        'photo' => 'upload/product/' . $uploadedFileName,
-                    ]);
-                }
-    
-                if($productPhoto) {
-                    return success(null, 'Produk berhasil diubah');
-                }
-            } 
-        }
+        
+                    foreach ($validatedData['photos'] as $file) {
+                        // Store the file and get the photo
+                        $uploadedFile = $file;
+                        $uploadedFileName = generateUniqueString('product_photos', 'photo', $uploadedFile->getClientOriginalExtension());
+                        $uploadedFile->move(public_path('upload/product'), $uploadedFileName);
+        
+                        // Save the file photo in the database
+                        $productPhoto = ProductPhoto::create([
+                            'product_id' => $product->id,
+                            'photo' => 'upload/product/' . $uploadedFileName,
+                        ]);
+                    }
+        
+                // } 
+            }
 
-        if($updatedData) {
+            // response if success
             return success(null, 'Produk berhasil diubah');
+        } catch (ValidationException $e) {
+            return fails($e->errors(), 422);
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to update product:' . $e->getMessage());
+            return fails('Gagal mengubah produk', 500);
         }
-
-        return fails('Produk gagal diubah', 400);
     }
 
     /**
@@ -179,24 +186,30 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = Product::find($id);
+        try {
+            // find data in database
+            $product = Product::find($id);
 
-        if(!$product) {
-            return fails('Produk tidak ditemukan', 400);
-        }
-
-        foreach ($product->productPhoto as $productPhoto) {
-            if (File::exists(public_path('upload/product/'), basename($productPhoto->photo))){
-                unlink(public_path('upload/product/') . basename($productPhoto->photo));
+            if ($product) {
+                // remove photo in public directory
+                foreach ($product->productPhoto as $productPhoto) {
+                    if (File::exists(public_path('upload/product/'), basename($productPhoto->photo))){
+                        unlink(public_path('upload/product/') . basename($productPhoto->photo));
+                    }
+                    $productPhoto->delete();
+                }
+                // remove products data in database
+                $product->delete();
+                // response if success
+                return success(null, 'Produk berhasil dihapus');
             }
-            $productPhoto->delete();
-        }
 
-        $deleteData = $product->delete();
-
-        if($deleteData) {
-            return success(null, 'Produk berhasil dihapus');
+            // response if fails find
+            return fails('Produk tidak ditemukan', 404);
+        } catch (\Exception $e) {
+            // response if fails
+            Log::error('Failed to delete products:' . $e->getMessage());
+            return fails('Gagal menghapus produk', 500);
         }
-        return fails('Produk gagal dihapus', 400);
     }
 }

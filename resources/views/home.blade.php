@@ -59,12 +59,10 @@
     <section class="bg-white dark:bg-gray-900">
         <div
             class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-            <img class="w-full dark:hidden rounded-lg"
-                src="https://images.pexels.com/photos/6457521/pexels-photo-6457521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt="dashboard image">
-            <img class="w-full hidden dark:block rounded-lg"
-                src="https://images.pexels.com/photos/6457521/pexels-photo-6457521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt="dashboard image">
+            <img class="w-full h-96 object-cover dark:hidden rounded-lg" src="{{ asset('img/static/civils.jpg') }}"
+                alt="civils-service">
+            <img class="w-full h-96 object-cover hidden dark:block rounded-lg"
+                src="{{ asset('img/static/civils.jpg') }}" alt="civils-service">
             <div class="mt-4 md:mt-0">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Layanan Masyarakat
@@ -88,6 +86,38 @@
     </section>
     {{-- PUBLIC SERVICES SECTION END --}}
 
+    {{-- SOCIAL SERVICES SECTION --}}
+    <section class="bg-white dark:bg-gray-900">
+        <div
+            class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+            <div class="mt-4 md:mt-0">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+                    Puskesos: Layanan Sosial
+                </h2>
+                <p class="mb-6 font-light text-gray-700 md:text-lg dark:text-gray-400">
+                    Melalui Puskesos (Pusat Kesejahteraan Sosial) Pemerintah Desa Cidadap berkomitmen untuk memberikan
+                    berbagai layanan sosial yang bertujuan
+                    meningkatkan kesejahteraan dan kualitas hidup masyarakat.
+                </p>
+                <a href="{{ route('puskesos') }}"
+                    class="inline-flex items-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
+                    Pelajari Lebih Lanjut
+                    <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </div>
+            <img class="w-full h-96 object-cover dark:hidden rounded-lg" src="{{ asset('img/static/socials.jpg') }}"
+                alt="socials-service">
+            <img class="w-full h-96 object-cover hidden dark:block rounded-lg"
+                src="{{ asset('img/static/socials.jpg') }}" alt="socials-service">
+        </div>
+    </section>
+    {{-- SOCIAL SERVICES SECTION END --}}
+
     {{-- NEWS SECTION --}}
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -101,111 +131,10 @@
                     pengunjung.
                 </p>
             </div>
-            <div class="grid gap-8 lg:grid-cols-2">
+            <div class="grid gap-8 grid-cols-1 lg:grid-cols-2">
                 @foreach ($dataBerita as $article)
                     <x-article-card :article="$article" />
-
-                    {{-- <article
-                        class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        <a href="#">
-                            <img class="mb-4 rounded-lg h-56 w-full object-cover" src="{{ $article['photo'] }}"
-                                alt="{{ $article['title'] }}">
-                        </a>
-                        <div class="flex justify-between items-center mb-2 text-gray-700">
-                            <span
-                                class="bg-green-100 text-green-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-                                <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z">
-                                    </path>
-                                </svg>
-                                Berita
-                            </span>
-                            <span class="text-sm">14 days ago</span>
-                        </div>
-                        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <a href="#">
-                                {{ $article['title'] }}
-                            </a>
-                        </h2>
-                        <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
-                            {{ $article['body'] }}
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center space-x-4">
-                                <img class="w-7 h-7 rounded-full"
-                                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                                    alt="Jese Leos avatar" />
-                                <span class="font-medium dark:text-white">
-                                    Jese Leos
-                                </span>
-                            </div>
-                            <a href="{{ route('articles.detail', $article['id']) }}"
-                                class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
-                                Baca Selengkapnya
-                                <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </article> --}}
                 @endforeach
-
-                {{-- <article
-                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                        <img class="mb-4 rounded-lg h-56 w-full object-cover"
-                            src="https://images.pexels.com/photos/713644/pexels-photo-713644.jpeg?auto=compress&cs=tinysrgb&w=600"
-                            alt="festivals">
-                    </a>
-                    <div class="flex justify-between items-center mb-2 text-gray-700">
-                        <span
-                            class="bg-green-100 text-green-600 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-                            <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z">
-                                </path>
-                            </svg>
-                            Berita
-                        </span>
-                        <span class="text-sm">14 days ago</span>
-                    </div>
-                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        <a href="#">
-                            Festival Budaya Tahunan
-                        </a>
-                    </h2>
-                    <p class="mb-5 font-light text-gray-700 dark:text-gray-400">
-                        Festival budaya tahunan Desa Cidadap akan diselenggarakan bulan depan. Acara ini akan
-                        menampilkan berbagai pertunjukan seni tradisional, pameran kerajinan tangan, dan bazar makanan
-                        khas daerah.
-                    </p>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-4">
-                            <img class="w-7 h-7 rounded-full"
-                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                                alt="Bonnie Green avatar" />
-                            <span class="font-medium dark:text-white">
-                                Bonnie Green
-                            </span>
-                        </div>
-                        <a href="#"
-                            class="inline-flex items-center font-medium text-green-500 dark:text-primary-500 hover:underline">
-                            Baca Selengkapnya
-                            <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </article> --}}
             </div>
             <div class="flex justify-end my-8">
                 <a href="{{ route('articles') }}"
@@ -235,7 +164,7 @@
                     kegiatan-kegiatan kami dan rasakan kebersamaan serta kekayaan budaya desa.
                 </p>
             </div>
-            <div class="grid gap-8 lg:grid-cols-2">
+            <div class="grid gap-8 grid-cols-1 lg:grid-cols-2">
                 @foreach ($dataAcara as $article)
                     <x-article-card :article="$article" />
                 @endforeach
@@ -272,8 +201,8 @@
                 <a href="{{ route('products') }}"
                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-200 dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-600">
                     Kunjungi Sekarang
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 14 10">
+                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M1 5h12m0 0L9 1m4 4L9 9" />
                     </svg>
@@ -281,12 +210,10 @@
 
             </div>
             <div class="grid grid-cols-2 gap-4 mt-8">
-                <img class="w-full rounded-lg"
-                    src="https://images.pexels.com/photos/4197987/pexels-photo-4197987.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    alt="traditional-food">
-                <img class="mt-4 w-full lg:mt-10 rounded-lg"
-                    src="https://images.pexels.com/photos/5090650/pexels-photo-5090650.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    alt="handcraft">
+                <img class="w-full h-96 object-cover rounded-lg" src="{{ asset('img/static/produk1.jpeg') }}"
+                    alt="jangkir">
+                <img class="mt-4 w-full h-96 object-cover lg:mt-10 rounded-lg"
+                    src="{{ asset('img/static/produk2.jpeg') }}" alt="rengginang">
             </div>
         </div>
     </section>
