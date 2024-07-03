@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'Hendra',
-            'email' => 'hendra@gmail.com',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
             'phone_number' => 6281214891719,
             'email_verified_at' => now(),
             'password' => Hash::make('12345'),
@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         $sql = file_get_contents($path);
 
         DB::unprepared($sql);
+
         // User::factory(19)->create();
         // Article::factory(30)->create();
         // Product::factory(30)->create();

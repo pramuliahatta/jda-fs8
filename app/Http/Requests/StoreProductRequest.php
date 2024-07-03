@@ -29,7 +29,7 @@ class StoreProductRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'category' => 'required|string',
-            'price' => 'required',
+            'price' => 'required|numeric|gte:0',
             'user_id' => 'nullable',
             'photos' => 'required|array|max:3',
             'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -97,6 +97,8 @@ class StoreProductRequest extends FormRequest
             'category.required' => 'Harap pilih kategori',
             'category.string' => 'Format category tidak valid',
             'price.required' => 'Harap masukkan harga',
+            'price.numeric' => 'Harga hanya boleh diisi dengan angka',
+            'price.gte' => 'Harga harus lebih dari 0',
             'photos.required' => 'Harap unggah photo',
             'photos.max' => 'Maksimal hanya boleh 3 foto',
             'photos.*.image' => 'Format foto tidak valid',
