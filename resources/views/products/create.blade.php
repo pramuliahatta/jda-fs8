@@ -49,7 +49,6 @@
                         <option value="Pakaian">Pakaian</option>
                         <option value="Makanan">Makanan</option>
                         <option value="Minuman">Minuman</option>
-                        <option value="Kerajinan">Kerajinan</option>
                         <option value="Lainnya">Lainnya</option>
                     </select>
                 </div>

@@ -34,7 +34,7 @@
                     id="user-dropdown">
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
-                            <a href="{{ Auth::user()->role == 'admin' ? route('dashboard.products.index') : route('products.index') }}"
+                            <a href="{{ Auth::user()->role == 'admin' ? route('dashboard.articles.index') : route('products.index') }}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
                         </li>
                         <li>
@@ -90,8 +90,7 @@
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                             <li>
                                 <a href="{{ route('services') }}"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Layanan
-                                    Masyarakat</a>
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Formulir</a>
                             </li>
                             <li>
                                 <a href="{{ route('puskesos') }}"
@@ -103,7 +102,7 @@
 
                 <x-nav-link href="{{ route('products') }}" :active="request()->routeIs('products') || request()->routeIs('products.*')">Pasar Desa</x-nav-link>
                 <x-nav-link href="{{ route('gallery') }}" :active="request()->routeIs('gallery')">Galeri</x-nav-link>
-                <x-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles')">Artikel</x-nav-link>
+                <x-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles') || request()->routeIs('articles.*')">Artikel</x-nav-link>
                 <x-nav-link href="{{ route('contact') }}" :active="request()->routeIs('contact')">Kontak Kami</x-nav-link>
             </ul>
         </div>

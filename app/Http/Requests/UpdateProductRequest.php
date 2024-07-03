@@ -29,7 +29,7 @@ class UpdateProductRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'category' => 'required|string',
-            'price' => 'required',
+            'price' => 'required|numeric|gte:0',
             'user_id' => 'nullable',
             'photos' => 'nullable|array|max:3',
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -101,6 +101,8 @@ class UpdateProductRequest extends FormRequest
             'category.required' => 'Harap pilih kategori',
             'category.string' => 'Format category tidak valid',
             'price.required' => 'Harap masukkan harga',
+            'price.numeric' => 'Harga hanya boleh diisi dengan angka',
+            'price.gte' => 'Harga harus lebih dari 0',
             'photos.max' => 'Maksimal hanya boleh 3 foto',
             'photos.*.image' => 'Format foto tidak valid',
             'photos.*.mimes' => 'Format foto tidak valid',

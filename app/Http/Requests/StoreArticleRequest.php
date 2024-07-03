@@ -28,7 +28,7 @@ class StoreArticleRequest extends FormRequest
             'title'     => 'required|string|max:255',
             'body'      => 'required|string',
             'category'  => 'required|string',
-            'photo'     => 'nullable|mimes:jpeg,jpg,png|max:2048'
+            'photo'     => 'required|mimes:jpeg,jpg,png|max:2048'
         ];
     }
 
@@ -82,6 +82,7 @@ class StoreArticleRequest extends FormRequest
             'body.string' => 'Format body tidak valid',
             'category.required' => 'Harap pilih kategori',
             'category.string' => 'Format category tidak valid',
+            'photo.required' => 'Harap masukan photo',
             'photo.image' => 'Format photo tidak valid',
             'photo.mimes' => 'Format photo tidak valid',
             'photo.max' => 'Photo maksimal 2 MB',
