@@ -6,8 +6,8 @@
         // CKEDITOR.replace('{{ $id }}');
         CKEDITOR.replace('{{ $id }}', {
             // language: 'id',
-            uiColor: '#9AB8F3'
-            , toolbar: [{
+            // uiColor: '#9AB8F3'
+            toolbar: [{
                     name: 'clipboard'
                     , items: ['Undo', 'Redo']
                 }

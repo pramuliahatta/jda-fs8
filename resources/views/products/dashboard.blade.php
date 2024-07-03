@@ -44,25 +44,25 @@
                                 </h6>
                                 <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
                                     <li class="flex items-center">
-                                        <input id="makanan" name="categories[]" type="checkbox" value="Makanan" {{ isset($data['categories']) ? (in_array('Makanan', $data['categories']) ? 'checked' : '') : '' }} class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                        <input id="makanan" name="categories[]" type="checkbox" value="Makanan" {{ isset($categories) ? (in_array('Makanan', $categories) ? 'checked' : '') : '' }} class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                         <label for="makanan" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                             Makanan
                                         </label>
                                     </li>
                                     <li class="flex items-center">
-                                        <input id="pakaian" name="categories[]" type="checkbox" value="Pakaian" {{ isset($data['categories']) ? (in_array('Pakaian', $data['categories']) ? 'checked' : '') : '' }} class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                        <input id="pakaian" name="categories[]" type="checkbox" value="Pakaian" {{ isset($categories) ? (in_array('Pakaian', $categories) ? 'checked' : '') : '' }} class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                         <label for="pakaian" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                             Pakaian
                                         </label>
                                     </li>
                                     <li class="flex items-center">
-                                        <input id="minuman" name="categories[]" type="checkbox" value="Minuman" {{ isset($data['categories']) ? (in_array('Minuman', $data['categories']) ? 'checked' : '') : '' }} class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                        <input id="minuman" name="categories[]" type="checkbox" value="Minuman" {{ isset($categories) ? (in_array('Minuman', $categories) ? 'checked' : '') : '' }} class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                         <label for="minuman" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                             Minuman
                                         </label>
                                     </li>
                                     <li class="flex items-center">
-                                        <input id="lainnya" name="categories[]" type="checkbox" value="Lainnya" {{ isset($data['categories']) ? (in_array('Lainnya', $data['categories']) ? 'checked' : '') : '' }} class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                        <input id="lainnya" name="categories[]" type="checkbox" value="Lainnya" {{ isset($categories) ? (in_array('Lainnya', $categories) ? 'checked' : '') : '' }} class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                         <label for="lainnya" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                             Lainnya
                                         </label>
@@ -75,9 +75,9 @@
                                 <div class="w-full md:w-full">
                                     <!-- Add reset button conditionally -->
                                     @if (request('search') || request('categories'))
-                                    <button type="button" id="resetButton" class=" w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                    <a href="{{ route('products.index') }}" type="button" id="resetButton" class=" w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                                         Hapus Filter
-                                    </button>
+                                    </a>
                                     @endif
                                 </div>
                             </div>
