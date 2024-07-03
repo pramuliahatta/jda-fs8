@@ -22,7 +22,7 @@ Route::get('/about', function () {
 })->name('about');
 
 
-Route::prefix('services')->group(function(){
+Route::prefix('/services')->group(function(){
     Route::get('/forms', [FileController::class, 'index'])->name('services');
     Route::get('/puskesos', function () {
         return view('services.puskesos');
@@ -46,7 +46,7 @@ Route::get('/contact', function () {
 })->name('contact');
 
 //Dashboard Routes
-Route::middleware(['auth', CheckUserIsAdmin::class])->prefix('dashboard')->group(function () {
+Route::middleware(['auth', CheckUserIsAdmin::class])->prefix('/dashboard')->group(function () {
 
     Route::get('/', function () {
         return view('dashboard.index');

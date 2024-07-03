@@ -185,7 +185,7 @@
         })
     })
 
-    document.getElementById('resetButton') ? .addEventListener('click', function() {
+    document.getElementById('resetButton')?.addEventListener('click', function() {
         const form = document.getElementById('forms');
 
         // Clear all input fields

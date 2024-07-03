@@ -194,7 +194,7 @@
         })
     })
 
-    document.getElementById('resetButton') ? .addEventListener('click', function() {
+    document.getElementById('resetButton')?.addEventListener('click', function() {
         const form = document.getElementById('galleryForm');
 
         // Clear all input fields

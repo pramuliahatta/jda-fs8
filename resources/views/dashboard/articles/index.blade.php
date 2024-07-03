@@ -108,7 +108,7 @@
                         </td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">{{ $item['category'] }}</td>
                         <td class="px-4 py-3 max-w-[12rem] truncate">
-                            {{ \Illuminate\Support\Str::limit(strip_tags($item['body'])) }}</td>
+                            {!! \Illuminate\Support\Str::limit(strip_tags($item['body'])) !!}</td>
                         <td class="px-4 py-3 flex items-center justify-end">
                             <button id="{{ $item['id'] }}-dropdown-button" data-dropdown-toggle="{{ $item['id'] }}-dropdown" class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -203,13 +203,14 @@
     document.querySelectorAll('.delete-button').forEach(button => {
         button.addEventListener('click', () => {
             const itemId = button.getAttribute('data-id');
+            // console.log(itemId);
 
             document.getElementById('delete-form').setAttribute('action'
                 , `/dashboard/articles/${itemId}`);
         })
-    })
+    });
 
-    document.getElementById('resetButton') ? .addEventListener('click', function() {
+    document.getElementById('resetButton')?.addEventListener('click', function() {
         const form = document.getElementById('articlesForm');
 
         // Clear all input fields

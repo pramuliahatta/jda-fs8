@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         try {
             // get all data in database
-            $query =  User::query();
+            $query =  User::where('role', '!=', 'admin');
             if ($request->has('search')) {
                 $search = $request->query('search');
 
