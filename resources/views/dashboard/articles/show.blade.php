@@ -3,7 +3,7 @@
     <x-dashboard-section route='dashboard.articles.index'>
         <x-article :detail="$detail" />
 
-        <div class="flex gap-4 justify-center items-center">
+        <div class="flex gap-4 justify-center items-center mt-4">
             <div class="flex items-center space-x-3 sm:space-x-4">
                 <a href="{{ route('dashboard.articles.edit', $detail['id']) }}" type="button"
                     class="text-white inline-flex items-center bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
