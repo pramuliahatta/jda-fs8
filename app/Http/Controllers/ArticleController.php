@@ -79,10 +79,13 @@ class ArticleController extends Controller
         // Define endpoint
         $apiUrl = env('BASE_URL_API') . "articles";
 
+        $apiToken = session()->get('api_token');
+
         try {
             // Store data using API
             $response = $client->post($apiUrl, [
                 'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
                     'Accept' => 'application/json',
                 ],
                 'multipart' => $multipart,
@@ -176,10 +179,13 @@ class ArticleController extends Controller
         // Define endpoint
         $apiUrl = env('BASE_URL_API') . "articles/$id";
 
+        $apiToken = session()->get('api_token');
+
         try {
             // Store data using API
             $response = $client->post($apiUrl, [
                 'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
                     'Accept' => 'application/json',
                 ],
                 'multipart' => $multipart,
@@ -206,8 +212,14 @@ class ArticleController extends Controller
         // Define endpoint
         $apiUrl = env('BASE_URL_API') . "articles/$id";
 
+        $apiToken = session()->get('api_token');
+
         try {
-            $response = $client->delete($apiUrl);
+            $response = $client->delete($apiUrl, [
+                'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
+                ],
+            ]);
             $responseMessage = json_decode($response->getBody(), true)['message'];
             // If success redirect and send success message
             return redirect()->route('dashboard.articles.index')->with('success', $responseMessage);

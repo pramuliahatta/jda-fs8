@@ -116,9 +116,11 @@
         @endif
         </div>
 
+        @if (count($data) > 0)
         <div class="space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
             {{ $paginator->links('vendor.pagination.custom') }}
         </div>
+        @endif
 
     </x-dashboard-section>
     <!-- End block -->
