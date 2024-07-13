@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -22,22 +25,41 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        //cek jika email dan password sesuai dengan apa yang ada di database
-        if (Auth::attempt($credentials)) {
-            //buat session baru
-            $user = User::where('email', $request->email)->first();
-            // $token = $user->createToken('authToken')->plainTextToken;
+        $formData = [
+            'email' => $credentials['email'],
+            'password' => $credentials['password'],
+        ];
 
-            // $request->session()->regenerate();
-            
-            //jika user admin maka arahkan user ke menu dashboard, jika user adalah pengguna biasa maka arahkan user ke halaman awal
-            if (Auth::user()->role == 'admin') {
-                return redirect()->intended(route('dashboard.articles.index'));
+        $client = new Client();
+        $apiUrl = env('BASE_URL_API') . "login";
+
+        try {
+            // Store data using API
+            $fetchData = $client->post($apiUrl, [
+                'form_params' => $formData,
+            ]);
+            $response = json_decode($fetchData->getBody(), true);
+            $token = $response['data'];
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+                session()->put('api_token', $token);
+                if (Auth::user()->role == 'admin') {
+                    return redirect()->intended(route('dashboard.articles.index'));
+                }
+                return redirect()->intended(route('products.index'));
             }
-            return redirect()->intended(route('products.index'));
+            // $responseMessage = json_decode($response->getBody(), true)['message'];
+            // // If success redirect and send success message
+            // return redirect()->route('products.index')->with('success', $responseMessage);
+        } catch (RequestException $e) {
+            // If fails from the request, then back and send error message
+            $errorMessage = json_decode($e->getResponse()->getBody(), true)['message'];
+            return back()->with('error', $errorMessage);
+        } catch (\Exception $e) {
+            // Another fails
+            Log::error('Failed to authenticate:' . $e->getMessage());
+            return back()->with('error', 'Terjadi kesalahan pada server');
         }
-
-        return back()->with('error', 'Gagal Masuk');
     }
 
     public function logout()

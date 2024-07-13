@@ -106,11 +106,14 @@ class ProductController extends Controller
         $client = new Client();
         $apiUrl = env('BASE_URL_API') . "products";
 
-        
+        $apiToken = session()->get('api_token');
 
         try {
             // Store data using API
             $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
+                ],
                 'multipart' => $multipart,
             ]);
             $responseMessage = json_decode($response->getBody(), true)['message'];
@@ -221,8 +224,13 @@ class ProductController extends Controller
         $client = new Client();
         $apiUrl = env('BASE_URL_API') . "products/" . $product->id;
 
+        $apiToken = session()->get('api_token');
+
         try {
             $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
+                ],
                 'multipart' => $multipart,
             ]);
             $responseMessage = json_decode($response->getBody(), true)['message'];
@@ -255,8 +263,14 @@ class ProductController extends Controller
             $routeName = 'dashboard.products.index';
         }
 
+        $apiToken = session()->get('api_token');
+
         try {
-            $response = $client->delete($apiUrl);
+            $response = $client->delete($apiUrl, [
+                'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
+                ],
+            ]);
             $responseMessage = json_decode($response->getBody(), true)['message'];
             // If success redirect and send success message
             return redirect()->route($routeName)->with('success', $responseMessage);

@@ -30,9 +30,21 @@ class UserController extends Controller
         $perPage = 10;
         $viewName = 'dashboard.users.index';
 
+        // $apiToken = null;
+        // if(session()->has('api_token')) {
+        //     $apiToken = session()->get('api_token');
+        // } else {
+        //     dd(false);
+        // }
+        
+        $apiToken = session()->get('api_token');
+
         try {
             // Get data from the API
             $fetchData = $client->get($apiUrl, [
+                'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
+                ],
                 'query' => [
                     'search' => $search,
                 ]
@@ -87,9 +99,14 @@ class UserController extends Controller
         $client = new Client();
         $apiUrl = env('BASE_URL_API') . "users";
 
+        $apiToken = session()->get('api_token');
+
         try {
             // Store data using API
             $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
+                ],
                 'multipart' => $multipart,
             ]);
             $responseMessage = json_decode($response->getBody(), true)['message'];
@@ -121,9 +138,15 @@ class UserController extends Controller
         // $user = User::find(Auth::user()->id);
         // $token = $user->tokens()->latest()->first();
 
+        $apiToken = session()->get('api_token');
+
         try {
             // Get the data from the API
-            $fetchData = $client->get($apiUrl);
+            $fetchData = $client->get($apiUrl, [
+                'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
+                ],
+            ]);
             $response = json_decode($fetchData->getBody(), true);
             $data = $response['data'];
 
@@ -151,9 +174,15 @@ class UserController extends Controller
         $client = new Client();
         $apiUrl = env('BASE_URL_API') . "users/" . $user->id;
 
+        $apiToken = session()->get('api_token');
+
         try {
             // Get the data from the API
-            $fetchData = $client->get($apiUrl);
+            $fetchData = $client->get($apiUrl, [
+                'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
+                ],
+            ]);
             $response = json_decode($fetchData->getBody(), true);
             $data = $response['data'];
             // If success, return view and data
@@ -180,8 +209,13 @@ class UserController extends Controller
         $client = new Client();
         $apiUrl = env('BASE_URL_API') . "users/" . $user->id;
 
+        $apiToken = session()->get('api_token');
+
         try {
             $response = $client->post($apiUrl, [
+                'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
+                ],
                 'multipart' => $multipart,
             ]);
             $responseMessage = json_decode($response->getBody(), true)['message'];
@@ -209,8 +243,14 @@ class UserController extends Controller
 
         $routeName = 'dashboard.users.index';
 
+        $apiToken = session()->get('api_token');
+
         try {
-            $response = $client->delete($apiUrl);
+            $response = $client->delete($apiUrl, [
+                'headers' => [
+                    'Authorization' => 'Bearer '. $apiToken,
+                ],
+            ]);
             $responseMessage = json_decode($response->getBody(), true)['message'];
             // If success redirect and send success message
             return redirect()->route($routeName)->with('success', $responseMessage);
