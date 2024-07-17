@@ -10,7 +10,7 @@
             <!-- Modal body -->
             <form id="user-form" action="{{ route('dashboard.users.store') }}" method="POST">
                 @csrf
-                <div class="grid gap-4 mb-4 grid-cols-1">
+                <div class="grid gap-4 mb-8 grid-cols-1">
                     <div>
                         <x-input-field label="Nama" name="name" id="name" placeholder="Masukkan nama"
                             value="{{ old('name', $data['name'] ?? '') }}" />

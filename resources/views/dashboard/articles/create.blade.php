@@ -10,7 +10,7 @@
             <!-- Modal body -->
             <form action="{{ route('dashboard.articles.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="grid gap-4 mb-4 grid-cols-1">
+                <div class="grid gap-4 mb-8 grid-cols-1">
                     <div>
                         <x-input-field label="Judul" name="title" id="title" placeholder="Masukkan judul artikel"
                             value="{{ old('title', $article['photo'] ?? '') }}" />
