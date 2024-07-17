@@ -177,13 +177,6 @@ class UserController extends Controller
             Log::error('Failed to delete users:' . $e->getMessage());
             return fails('Gagal menghapus pengguna', 500);
         }
-
-        // $user = User::destroy($id);
-        // if($user) {
-        //     return success(null, 'Pengguna berhasil dihapus');
-        // }
-
-        // return fails('Pengguna gagal dihapus', 400);
     }
 
     public function authenticate(Request $request) {
@@ -198,8 +191,8 @@ class UserController extends Controller
             return fails($validator->errors(), 422);
         }
 
-        $email = $request->post("email");
-        $password = $request->post("password");
+        $email = $request->input('email');
+        $password = $request->input('password');
 
         //cek jika email dan password sesuai dengan apa yang ada di database
 
@@ -208,11 +201,7 @@ class UserController extends Controller
             return fails('Gagal Masuk', 422);
         }
 
-        $request->session()->regenerate();
-
         $token = $user->createToken('authToken')->plainTextToken;
-
         return success($token, 'Berhasil Masuk');
-
     }
 }
