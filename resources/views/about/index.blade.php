@@ -18,8 +18,8 @@
                         class=" mb-8 text-2xl font-bold tracking-tight leading-none md:text-4xl xl:text-4xl dark:text-white">
                         Sambutan Kepala Desa</h3>
 
-                    <div class="flex flex-col-reverse lg:flex-row justify-between items-start gap-8">
-                        <div>
+                    <div class="flex flex-col lg:flex-row justify-between items-start gap-8">
+                        <div class="w-full lg:w-1/2">
                             <p
                                 class="max-w-3xl mb-2 font-light text-gray-900 lg:mb-2 md:text-lg lg:text-lg dark:text-gray-400 text-justify">
                                 Salam sejahtera bagi kita semua
@@ -58,7 +58,7 @@
                             </p>
                         </div>
                         <div class="mx-auto lg:mt-0 lg:col-span-5 lg:flex items-center ">
-                            <img class="rounded-lg shadow-lg w-min h-min object-cover "
+                            <img class="rounded-lg shadow-lg w-full object-cover "
                                 src="{{ asset('img\static\about\Kades.jpg') }}" alt="Foto Kepala Desa">
                         </div>
                     </div>
