@@ -65,7 +65,7 @@ class StoreFileRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Harap masukan nama file',
+            'name.required' => 'Harap masukkan nama file',
             'name.string' => 'Format nama tidak valid',
             'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
             'file.required' => 'Harap unggah file',

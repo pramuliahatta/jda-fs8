@@ -80,14 +80,14 @@ class UpdateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Harap masukan nama pengguna',
+            'name.required' => 'Harap masukkan nama pengguna',
             'name.string' => 'Format nama tidak valid',
             'name.min' => 'Nama tidak boleh kurang dari 4 karakter',
             'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
-            'phone_number.required' => 'Harap masukan nomor telepon',
+            'phone_number.required' => 'Harap masukkan nomor telepon',
             'phone_number.min' => 'Nomor telepon tidak boleh kurang dari 7 karakter',
             'phone_number.max' => 'Nomor telepon tidak boleh lebih dari 20 karakter',
-            'email.required' => 'Harap pilih kategori',
+            'email.required' => 'Harap masukkan email',
             'email.email' => 'Format email tidak valid',
             'password.min' => 'Kata sandi tidak boleh kurang dari 4 karakter',
             'password.confirmed' => 'Kata sandi harus sama dengan konfirmasi kata sandi',

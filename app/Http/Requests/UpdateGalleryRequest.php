@@ -69,7 +69,7 @@ class UpdateGalleryRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Harap masukan judul',
+            'title.required' => 'Harap masukkan judul',
             'title.string' => 'Format judul tidak valid',
             'title.max' => 'Judul tidak boleh lebih dari 255 karakter',
             'photo.image' => 'Format photo tidak valid',
