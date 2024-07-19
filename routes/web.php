@@ -22,7 +22,7 @@ Route::get('/about', function () {
 })->name('about');
 
 
-Route::prefix('/services')->group(function(){
+Route::prefix('/services')->group(function () {
     Route::get('/forms', [FileController::class, 'index'])->name('services');
     Route::get('/puskesos', function () {
         return view('services.puskesos');
@@ -52,18 +52,17 @@ Route::middleware(['auth', CheckUserIsAdmin::class])->prefix('/dashboard')->grou
         return view('dashboard.index');
     })->name('dashboard.index');
 
-    Route::resource('/articles', ArticleController::class, ['names'=> 'dashboard.articles'])->except('update');
+    Route::resource('/articles', ArticleController::class, ['names' => 'dashboard.articles'])->except('update');
     Route::post('/articles/{id}', [ArticleController::class, 'update'])->name('dashboard.articles.update');
 
-    Route::resource('/forms', FileController::class, ['names'=> 'dashboard.forms'])->except('update');
+    Route::resource('/forms', FileController::class, ['names' => 'dashboard.forms'])->except('update');
     Route::post('/forms/{id}', [FileController::class, 'update'])->name('dashboard.forms.update');
 
-    Route::resource('/gallery', GalleryController::class, ['names'=> 'dashboard.gallery'])->except('update');
+    Route::resource('/gallery', GalleryController::class, ['names' => 'dashboard.gallery'])->except('update');
     Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('dashboard.gallery.update');
 
-    Route::resource('/users', UserController::class, ['names'=> 'dashboard.users'])->except('update');
+    Route::resource('/users', UserController::class, ['names' => 'dashboard.users'])->except('update');
     Route::post('/users/{user}', [UserController::class, 'update'])->name('dashboard.users.update');
 
-    Route::resource('/products', ProductController::class, ['names'=> 'dashboard.products'])->only(['index', 'show', 'destroy']);
-
+    Route::resource('/products', ProductController::class, ['names' => 'dashboard.products'])->only(['index', 'show', 'destroy']);
 })->middleware('auth');

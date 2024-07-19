@@ -53,10 +53,11 @@ INSERT INTO `files` (`id`, `created_at`, `updated_at`, `name`, `file`) VALUES
 	(1, '2024-07-01 22:00:41', '2024-07-01 22:00:41', 'FORMULIR-F-15 KARTU KELUARGA BARU', 'upload/file/1719896441.pdf'),
 	(2, '2024-07-01 22:01:05', '2024-07-01 22:01:05', 'FORMULIR-KK-F-16 PERUBAHAN KARU KELUARGA', 'upload/file/1719896465.pdf'),
 	(3, '2024-07-01 22:01:19', '2024-07-01 22:01:19', 'SURAT KET DOMISILI', 'upload/file/1719896479.pdf'),
-	(4, '2024-07-01 22:02:10', '2024-07-01 22:02:10', 'SURAT KET PENGHASILAN ORANG TUA 1', 'upload/file/1719896530.pdf'),
-	(5, '2024-07-01 22:02:46', '2024-07-01 22:02:46', 'SURAT KET TIDAK MAMPU', 'upload/file/1719896566.pdf'),
-	(6, '2024-07-01 22:03:05', '2024-07-01 22:03:05', 'SURAT KET USAHA', 'upload/file/1719896585.pdf'),
-	(7, '2024-07-01 22:03:22', '2024-07-01 22:03:22', 'SURAT PENGANTAR SKCK', 'upload/file/1719896602.pdf');
+	(4, '2024-07-01 22:02:10', '2024-07-01 22:02:10', 'SURAT KET KEMATIAN DARI DESA', 'upload/file/1721402272.pdf'),
+	(5, '2024-07-01 22:02:30', '2024-07-01 22:02:30', 'SURAT KET PENGHASILAN ORANG TUA 1', 'upload/file/1719896530.pdf'),
+	(6, '2024-07-01 22:02:46', '2024-07-01 22:02:46', 'SURAT KET TIDAK MAMPU', 'upload/file/1719896566.pdf'),
+	(7, '2024-07-01 22:03:05', '2024-07-01 22:03:05', 'SURAT KET USAHA', 'upload/file/1719896585.pdf'),
+	(8, '2024-07-01 22:03:22', '2024-07-01 22:03:22', 'SURAT PENGANTAR SKCK', 'upload/file/1719896602.pdf');
 
 -- Dumping data for table jda_fs8.galleries: ~10 rows (approximately)
 INSERT INTO `galleries` (`id`, `created_at`, `updated_at`, `title`, `photo`) VALUES
