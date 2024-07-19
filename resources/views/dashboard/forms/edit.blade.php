@@ -10,7 +10,7 @@
             <!-- Modal body -->
             <form action="{{ route('dashboard.forms.update', $data['id']) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="grid gap-4 mb-4 grid-cols-1">
+                <div class="grid gap-4 mb-8 grid-cols-1">
                     <div>
                         <x-input-field label="Jenis Formulir" name="name" id="file"
                             placeholder="Masukkan jenis formulir" value="{{ old('file', $data['name'] ?? '') }}" />

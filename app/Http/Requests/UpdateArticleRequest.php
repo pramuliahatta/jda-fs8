@@ -79,10 +79,10 @@ class UpdateArticleRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Harap masukan judul artikel',
+            'title.required' => 'Harap masukkan judul artikel',
             'title.string' => 'Format judul tidak valid',
             'title.max' => 'Judul tidak boleh lebih dari 255 karakter',
-            'body.required' => 'Harap masukan body artikel',
+            'body.required' => 'Harap masukkan body artikel',
             'body.string' => 'Format body tidak valid',
             'category.required' => 'Harap pilih kategori',
             'category.string' => 'Format category tidak valid',

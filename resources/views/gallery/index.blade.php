@@ -78,7 +78,7 @@
                                     </ul>
 
                                     <button type="submit"
-                                        class="mt-3 w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-600">Terapkan</button>
+                                        class="mt-3 w-full font-medium bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-600">Terapkan</button>
                                 </div>
 
                                 <!-- Add reset button conditionally -->

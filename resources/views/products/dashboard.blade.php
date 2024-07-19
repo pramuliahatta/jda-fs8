@@ -99,7 +99,7 @@
                                     </li>
                                 </ul>
                                 <button type="submit"
-                                    class="mt-3 w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-600">
+                                    class="mt-3 w-full bg-green-500 font-medium text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-600">
                                     Terapkan</button>
                             </div>
                             <div
@@ -122,8 +122,8 @@
 
 
             {{-- table products --}}
-            <div class="overflow-x-auto min-h-56">
-                @if (count($data) > 0)
+            @if (count($data) > 0)
+                <div class="overflow-x-auto min-h-56">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -150,7 +150,7 @@
                                         @foreach ($product['product_photo'] as $productPhoto)
                                             @if ($loop->first)
                                                 <img src="/{{ $productPhoto['photo'] }}" alt="productPhoto"
-                                                    class="w-auto h-8 mr-3">
+                                                    class="w-8 h-8 rounded-lg object-cover">
                                             @endif
                                         @endforeach
                                     </td>
@@ -234,8 +234,8 @@
                             @endforeach
                         </tbody>
                     </table>
-                @endif
-            </div>
+                </div>
+            @endif
 
 
             @if (count($data) < 1)
@@ -248,6 +248,7 @@
                 {{ $paginator->links('vendor.pagination.custom') }}
             </div>
         </div>
+
     </section>
     <!-- Delete modal -->
     <div id="deleteModal" tabindex="-1" aria-hidden="true"

@@ -5,30 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Title' }} - Pemerintah Desa Cidadap</title>
-    <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg">
+    <link rel="icon" type="image/svg+xml"
+        href="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lambang_Kabupaten_Majalengka.svg">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 </head>
 
 <body>
     @unless (request()->routeIs('login'))
-    @include('partials.header')
+        @include('partials.header')
     @endunless
 
     <main>
         <div id="alert-message" class="w-full flex justify-center shadow-md">
             @if (session('success'))
-            <div class="p-4 mt-8 w-4/4 top-0 z-50 fixed text-sm text-green-800 rounded-lg shadow-md bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-                <span class="font-medium">Berhasil!</span>
-                {{ session('success') }}
-            </div>
+                <div class="p-4 mt-8 w-4/4 top-0 z-50 fixed text-sm text-green-800 rounded-lg shadow-md bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                    role="alert">
+                    <span class="font-medium">Berhasil!</span>
+                    {{ session('success') }}
+                </div>
             @endif
 
             @if (session('error'))
-            <div id="alert-message" class="p-4 mt-8 w-4/4 top-0 z-50 fixed text-sm text-red-800 rounded-lg shadow-md bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                <span class="font-medium">Upps!</span>
-                {{ session('error') }}
-            </div>
+                <div id="alert-message"
+                    class="p-4 mt-8 w-4/4 top-0 z-50 fixed text-sm text-red-800 rounded-lg shadow-md bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                    role="alert">
+                    <span class="font-medium">Upps!</span>
+                    {{ session('error') }}
+                </div>
             @endif
         </div>
 
@@ -36,9 +40,9 @@
     </main>
 
     @unless (request()->routeIs('login'))
-    <footer>
-        @include('partials.footer')
-    </footer>
+        <footer>
+            @include('partials.footer')
+        </footer>
     @endunless
 
     <script>
@@ -52,7 +56,6 @@
                 }, 5000);
             }
         });
-
     </script>
 </body>
 
