@@ -66,7 +66,7 @@ class StoreProductRequest extends FormRequest
             ],
             [
                 'name'      => 'user_id',
-                'contents'   => (Auth::user()->id?? $this->validated()['user_id']) ?? 1,
+                'contents'   => (Auth::user()->id ?? $this->validated()['user_id']) ?? 1,
             ],
         ];
 
