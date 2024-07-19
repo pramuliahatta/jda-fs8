@@ -59,9 +59,9 @@
 
                 </div>
 
-                <img class="w-full md:w-96 h-96 object-cover dark:hidden rounded-lg"
+                <img class="w-full md:w-96 h-96 object-cover dark:hidden rounded-lg mb-8"
                     src="{{ asset('img\static\about\Kades.jpg') }}" alt="Foto Kepala Desa">
-                <img class="w-full md:w-96 h-96 object-cover hidden dark:block rounded-lg"
+                <img class="w-full md:w-96 h-96 object-cover hidden dark:block rounded-lg mb-8"
                     src="{{ asset('img\static\about\Kades.jpg') }}" alt="Foto Kepala Desa">
             </div>
 
