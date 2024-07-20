@@ -175,7 +175,7 @@
                     <li>
                         <a href="{{ route('home') }}"
                             class="w-full text-left block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                            Home
+                            Beranda
                         </a>
                     </li>
                     <li>
@@ -189,7 +189,7 @@
                             @csrf
                             <button type="submit"
                                 class="w-full text-left block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                Log out
+                                Keluar
                             </button>
                         </form>
                     </li>
