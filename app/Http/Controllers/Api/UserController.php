@@ -123,22 +123,22 @@ class UserController extends Controller
 
             // store user data in database
             $user->update([
-                    'name' => $validatedData['name'],
-                ]);
-            
-            if($user->phone_number != $validatedData['phone_number']) {
+                'name' => $validatedData['name'],
+            ]);
+
+            if ($user->phone_number != $validatedData['phone_number']) {
                 $user->update([
                     'phone_number' => $validatedData['phone_number'],
                 ]);
             }
 
-            if($user->email != $validatedData['email']) {
+            if ($user->email != $validatedData['email']) {
                 $user->update([
                     'email' => $validatedData['email'],
                 ]);
             }
-            
-            if(!is_null($validatedData['password'])) {
+
+            if (!is_null($validatedData['password'])) {
                 $user->update([
                     'password' => Hash::make($validatedData['password']),
                 ]);
@@ -160,6 +160,8 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         try {
+            // check is admin
+            if ($id == 1) return fails('Akses tidak diizinkan', 403);
             // find data in database
             $user = User::find($id);
 
@@ -179,7 +181,8 @@ class UserController extends Controller
         }
     }
 
-    public function authenticate(Request $request) {
+    public function authenticate(Request $request)
+    {
 
         //pengecekan validasi form yang diisi pada form login
         $validator = Validator::make($request->all(), [
