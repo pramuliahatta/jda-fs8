@@ -14,7 +14,7 @@
                     <div>
                         <x-input-field label="Jenis Formulir" name="name" id="file"
                             placeholder="Masukkan jenis formulir" value="{{ old('file', $data['name'] ?? '') }}" />
-                        <x-error-message field="file" />
+                        <x-error-message field="name" />
                     </div>
 
                     <div>
