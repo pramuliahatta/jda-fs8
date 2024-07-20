@@ -239,7 +239,7 @@
 
 
             @if (count($data) < 1)
-                <div class="px-4">
+                <div class="px-4 min-h-56">
                     <x-alert name="Produk" />
                 </div>
             @endif
