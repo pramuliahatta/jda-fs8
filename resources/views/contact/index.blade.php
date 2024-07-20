@@ -33,14 +33,14 @@
                     <div>
                         <h3 class="text-xl font-semibold ">Nomor Telepon:</h3>
                         <span class="block mb-6 font-light text-gray-700 md:text-lg dark:text-gray-400">
-                            +62 123 456 7890
+                            +62 812 1489 1719
                         </span>
                     </div>
 
                     <div>
                         <h3 class="text-xl font-semibold ">Email:</h3>
                         <span class="block mb-6 font-light text-gray-700 md:text-lg dark:text-gray-400">
-                            info@desacidadap.id
+                            info@desacidadap.com
                         </span>
                     </div>
 

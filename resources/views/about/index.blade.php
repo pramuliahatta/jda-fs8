@@ -424,9 +424,7 @@
     <section class="bg-white dark:bg-gray-900">
         <div
             class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-            <img class="mx-auto h-fit w-fit dark:hidden rounded-lg object-cover"
-                src="{{ asset('img\static\about\grafik-batang.png') }}" alt="pie chart usia">
-            <div class="mt-4 md:mt-0">
+            <div class="order-last mt-4 md:mt-0">
                 <h2 class="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Penduduk Desa Cidadap
                 </h2>
@@ -460,6 +458,8 @@
                     </table>
                 </div>
             </div>
+            <img class="order-first mt-8 md:mt-0 mx-auto h-fit w-fit dark:hidden rounded-lg object-cover"
+                src="{{ asset('img\static\about\grafik-batang.png') }}" alt="pie chart usia">
         </div>
     </section>
 
